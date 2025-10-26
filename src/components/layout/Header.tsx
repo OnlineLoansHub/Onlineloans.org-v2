@@ -17,10 +17,9 @@ const Header = () => {
   };
 
   const navigationLinks = [
-    { href: '/', label: 'Home' },
+    { href: '/partner-with-us', label: 'Partner with us' },
     { href: '/about', label: 'About' },
-    { href: '/Partner-with-us', label: 'Partner with us' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/qa', label: 'QA' },
   ];
 
   return (

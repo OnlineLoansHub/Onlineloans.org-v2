@@ -56,17 +56,17 @@
 }
 
 .navLink {
-  text-decoration: none;
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-base);
-  padding: 0.5rem 0;
-  transition: color 0.2s ease;
-  position: relative;
+  color: var(--Primary, #2A3D66);
+  /* 18px/Medium */
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
 
 .navLink:hover {
-  color: var(--color-primary);
+  color: var(--Secondary-1, #5EC189);
 }
 
 .navLink::after {
@@ -76,7 +76,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-primary);
+  background: var(--Secondary-1, #5EC189);
   transition: width 0.3s ease;
 }
 
@@ -217,6 +217,5 @@
 .navLink:focus,
 .mobileMenuButton:focus,
 .mobileNavLink:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  color: var(--Secondary-1, #5EC189);
 }
