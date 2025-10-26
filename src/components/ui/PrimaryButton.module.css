@@ -1,0 +1,68 @@
+/* Base Button Styles */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--border-radius);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  
+  /* Default State */
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 68, 204, 0.2);
+}
+
+/* Hover State */
+.button:hover:not(:disabled) {
+  background: #0033aa;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 68, 204, 0.3);
+}
+
+/* Clicked/Active State */
+.button:active:not(:disabled) {
+  background: #002288;
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 68, 204, 0.4);
+}
+
+/* Disabled State */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 2px 4px rgba(0, 68, 204, 0.2) !important;
+}
+
+/* Focus State */
+.button:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .button {
+    padding: 0.875rem 1.75rem;
+    font-size: var(--font-size-base);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  
+  .button:hover:not(:disabled) {
+    transform: none;
+  }
+}
