@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'OnlineLoans.org - Fast & Secure Online Loans',
+  title: 'Online Loans®',
   description: 'Get approved for personal loans online in minutes. Fast, secure, and trusted by thousands of customers. Apply now for competitive rates.',
   keywords: 'online loans, personal loans, fast approval, secure loans, instant loans',
   openGraph: {
