@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './PrimaryButton.module.css';
+import Image from 'next/image';
 
 interface PrimaryButtonProps {
   children: React.ReactNode;
@@ -9,7 +10,6 @@ interface PrimaryButtonProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
-  href?: string;
 }
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
@@ -18,26 +18,14 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   type = 'button',
   disabled = false,
   className = '',
-  href,
 }) => {
   const baseClasses = [
     styles.button,
     disabled ? styles.disabled : '',
     className,
-  ].filter(Boolean).join(' ');
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={baseClasses}
-        onClick={disabled ? (e) => e.preventDefault() : onClick}
-        aria-disabled={disabled}
-      >
-        {children}
-      </a>
-    );
-  }
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <button
@@ -48,6 +36,14 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       aria-disabled={disabled}
     >
       {children}
+
+      <Image
+        src="/images/icons/features/arrow-right.svg"
+        alt="Arrow right"
+        width={20}
+        height={20}
+        className={styles.arrow}
+      />
     </button>
   );
 };

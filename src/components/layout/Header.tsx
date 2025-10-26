@@ -57,7 +57,9 @@ const Header = () => {
           aria-label="Toggle mobile menu"
           aria-expanded={isMobileMenuOpen}
         >
-          <span className={`${styles.hamburger} ${isMobileMenuOpen ? styles.hamburgerOpen : ''}`}>
+          <span
+            className={`${styles.hamburger} ${isMobileMenuOpen ? styles.hamburgerOpen : ''}`}
+          >
             <span className={styles.hamburgerLine}></span>
             <span className={styles.hamburgerLine}></span>
             <span className={styles.hamburgerLine}></span>
@@ -66,13 +68,15 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation Menu */}
-      <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+      <div
+        className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}
+      >
         <nav className={styles.mobileNav}>
           <ul className={styles.mobileNavList}>
             {navigationLinks.map((link) => (
               <li key={link.href} className={styles.mobileNavItem}>
-                <Link 
-                  href={link.href} 
+                <Link
+                  href={link.href}
                   className={styles.mobileNavLink}
                   onClick={closeMobileMenu}
                 >
@@ -86,10 +90,7 @@ const Header = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div 
-          className={styles.mobileMenuOverlay}
-          onClick={closeMobileMenu}
-        />
+        <div className={styles.mobileMenuOverlay} onClick={closeMobileMenu} />
       )}
     </header>
   );

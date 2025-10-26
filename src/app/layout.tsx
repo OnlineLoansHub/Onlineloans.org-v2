@@ -15,11 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Online Loans®',
-  description: 'Get approved for personal loans online in minutes. Fast, secure, and trusted by thousands of customers. Apply now for competitive rates.',
-  keywords: 'online loans, personal loans, fast approval, secure loans, instant loans',
+  description:
+    'Get approved for personal loans online in minutes. Fast, secure, and trusted by thousands of customers. Apply now for competitive rates.',
+  keywords:
+    'online loans, personal loans, fast approval, secure loans, instant loans',
   openGraph: {
     title: 'OnlineLoans.org - Fast & Secure Online Loans',
-    description: 'Get approved for personal loans online in minutes. Fast, secure, and trusted by thousands of customers.',
+    description:
+      'Get approved for personal loans online in minutes. Fast, secure, and trusted by thousands of customers.',
     type: 'website',
     siteName: 'OnlineLoans.org',
   },
@@ -34,9 +37,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Header />
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
       </body>
     </html>
   );
