@@ -1,0 +1,35 @@
+.link {
+  position: relative;
+  font-weight: 500;
+  color: var(--color-primary);
+
+  &:active {
+    color: var(--color-secondary);
+  }
+}
+
+.active {
+  color: var(--color-secondary);
+}
+
+.withHover:not(.active)::after {
+  content: '';
+
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 0;
+  height: 1px;
+
+  background: var(--color-secondary);
+
+  transition: all 0.2s;
+}
+
+.withHover:hover {
+  &::after {
+    width: 100%;
+  }
+}

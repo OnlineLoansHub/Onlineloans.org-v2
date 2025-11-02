@@ -1,13 +1,5 @@
-import Image from 'next/image';
-import styles from './page.module.css';
-import UIComponentsShowcase from '../components/ui/UIComponentsShowcase';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div>
-      <main>
-        <UIComponentsShowcase />
-      </main>
-    </div>
-  );
+  redirect('/business');
 }

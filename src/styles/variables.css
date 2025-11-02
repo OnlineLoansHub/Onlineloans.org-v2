@@ -1,24 +1,39 @@
 :root {
   /* 🎨 Colors (from Figma / OnlineLoans design) */
-  --color-primary: #0044cc;
-  --color-secondary: #00aeef;
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-danger: #ef4444;
-
+  --color-primary: #2a3d66;
+  --color-secondary: #5ec189;
+  --color-secondary-2: #ffcb66;
+  --color-secondary-3: #f9fafb;
+  --color-secondary-4: #4b5563;
+  --color-info: #a0c3ff;
+  --color-success: #1fa904;
+  --color-warning: #f2b020;
+  --color-error: #d34c4c;
+  --color-black: #000;
+  --color-gray-1: #1f2937;
+  --color-gray-2: #374151;
+  --color-gray-3: #4b5563;
+  --color-gray-4: #6b7280;
+  --color-gray-5: #9ca3af;
+  --color-gray-6: #d1d5db;
+  --color-gray-7: #f3f4f6;
+  --color-white: #fff;
   --color-background: #eff7ff; /* Figma hero background */
-  --color-surface: #ffffff;
+  --color-surface: #fff;
   --color-text-primary: #1e293b;
   --color-text-secondary: #475569;
   --color-border: #e2e8f0;
 
+  /* sizes */
+  --header-height: 88px;
+
   /* 🧱 Layout */
   --container-max-width: 1200px;
   --border-radius: 12px;
-  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 4px 12px rgb(0 0 0 / 5%);
 
   /* 🧩 Typography */
-  --font-family-base: 'TikTok Sans', 'Inter', sans-serif;
+
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
