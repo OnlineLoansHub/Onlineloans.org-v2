@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FocusEvent, useMemo, useState } from 'react';
+import { FocusEvent, useMemo, useState } from 'react';
 
 import { classNames } from '@/shared';
 
@@ -13,12 +13,12 @@ interface AmountInputCardProps {
   onSubmit?: (value: string) => void;
 }
 
-const AmountInputCard: React.FC<AmountInputCardProps> = ({
+const AmountCard = ({
   buttonText = 'See My Offer',
   placeholder = '$ Amount',
   maxAmountLabel = 'Up to $50k',
   onSubmit,
-}) => {
+}: AmountInputCardProps) => {
   const [value, setValue] = useState('');
   const [focused, setFocused] = useState(false);
   const labelValue = useMemo(() => {
@@ -29,7 +29,7 @@ const AmountInputCard: React.FC<AmountInputCardProps> = ({
         </>
       );
 
-    return placeholder;
+    return <span className={cls.amount}>{placeholder}</span>;
   }, [focused, maxAmountLabel, placeholder]);
 
   const handleFocus = () => setFocused(true);
@@ -74,4 +74,4 @@ const AmountInputCard: React.FC<AmountInputCardProps> = ({
   );
 };
 
-export default AmountInputCard;
+export default AmountCard;

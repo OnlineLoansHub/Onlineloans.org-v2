@@ -1,36 +1,36 @@
 'use client';
 
-import { type FC, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { AppLink } from '@/components/ui/AppLink/AppLink';
-import { classNames } from '@/shared';
+import { classNames, URL_CONFIG } from '@/shared';
 
 import cls from './Header.module.scss';
 
 const headerConfig = [
   {
     title: 'Home',
-    path: '/',
-    pathMatch: ['/business', '/personal', '/'],
+    path: URL_CONFIG.main,
+    pathMatch: [URL_CONFIG.business, URL_CONFIG.personal, URL_CONFIG.main],
   },
   {
     title: 'About',
-    path: '/about',
+    path: URL_CONFIG.about,
   },
   {
     title: 'Partner with us',
-    path: '/partner-with-us',
+    path: URL_CONFIG.partner,
   },
   {
     title: 'Contact',
-    path: '/contact',
+    path: URL_CONFIG.contact,
   },
 ];
 
-export const Header: FC = () => {
+export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const path = usePathname();
 
@@ -39,7 +39,11 @@ export const Header: FC = () => {
   return (
     <header className={cls.header}>
       <nav className={classNames(cls.nav)}>
-        <Link href="/" className={cls.logo} onClick={() => setIsOpen(false)}>
+        <Link
+          href={URL_CONFIG.main}
+          className={cls.logo}
+          onClick={() => setIsOpen(false)}
+        >
           <Image
             src="/images/logo/onlineloans-logo.png"
             alt="OnlineLoans.org - Fast & Secure Online Loans"
