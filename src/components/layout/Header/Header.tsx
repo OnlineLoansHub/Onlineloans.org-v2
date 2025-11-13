@@ -58,9 +58,18 @@ export const Header = () => {
           onClick={toggleMenu}
           aria-label="Menu toggle"
         >
-          <span className={cls.burgerItem} />
-          <span className={cls.burgerItem} />
-          <span className={cls.burgerItem} />
+          <Image
+            src={
+              isOpen
+                ? '/images/icons/navbar/close-icon.svg'
+                : '/images/icons/navbar/burger-icon.svg'
+            }
+            alt="burger icon"
+            width={25}
+            height={15}
+            className={cls.logoImage}
+            priority
+          />
         </button>
         <ul className={classNames(cls.navList, { [cls.open]: isOpen })}>
           {headerConfig.map((item) => {

@@ -15,6 +15,7 @@ export const Button: FC<IButtonProps> = ({
   children,
   onClick,
   className = '',
+  disabled,
   ...props
 }) => {
   return (
@@ -24,10 +25,12 @@ export const Button: FC<IButtonProps> = ({
         {
           [cls.primary]: variant === 'primary',
           [cls.secondary]: variant === 'secondary',
+          [cls.disabled]: Boolean(disabled),
         },
         [className]
       )}
       onClick={onClick}
+      disabled={disabled}
       {...props}
     >
       {children}

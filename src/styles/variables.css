@@ -27,6 +27,7 @@
   /* sizes */
   --max-container-width: 1700px;
   --header-height: 88px;
+  --header-height-mobile: 60px;
 
   /* 🧱 Layout */
   --container-max-width: 1200px;

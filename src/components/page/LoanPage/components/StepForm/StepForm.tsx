@@ -10,7 +10,7 @@ import { classNames } from '@/shared';
 
 import { OfferBanner, Steps } from './components';
 import { FORM_CONFIG } from './config';
-import { FormKeys, FormSteps } from './types';
+import { FormKeys } from './types';
 
 import cls from './StepForm.module.scss';
 
@@ -22,20 +22,24 @@ const validators: Partial<Record<FormKeys, (v: unknown) => boolean>> = {
   [FormKeys.phone]: (v) => String(v ?? '').replace(/[^\d]/g, '').length >= 10,
 };
 
-export const StepForm = () => {
+export const StepForm = ({
+  handleFormFilled,
+}: {
+  handleFormFilled: () => void;
+}) => {
   const [formState, setFormState] = useState({
     [FormKeys.amount]: undefined,
     [FormKeys.startMonth]: undefined,
     [FormKeys.startYear]: undefined,
-    [FormKeys.revenue]: 10000,
+    [FormKeys.revenue]: undefined,
     [FormKeys.creditScore]: undefined,
-    [FormKeys.loanFor]: '',
+    [FormKeys.loanFor]: undefined,
     [FormKeys.zipCode]: undefined,
-    [FormKeys.businessName]: '',
-    [FormKeys.firstName]: '',
-    [FormKeys.lastName]: '',
-    [FormKeys.phone]: '',
-    [FormKeys.email]: '',
+    [FormKeys.businessName]: undefined,
+    [FormKeys.firstName]: undefined,
+    [FormKeys.lastName]: undefined,
+    [FormKeys.phone]: undefined,
+    [FormKeys.email]: undefined,
   });
   // const [activeStep, setActiveStep] = useState<FormSteps>(FormSteps.first);
   const [index, setIndex] = useState(0);
@@ -44,13 +48,18 @@ export const StepForm = () => {
 
   const activeConfig = FORM_CONFIG[index];
   const activeStep = activeConfig.step;
+  const isLast = index === FORM_CONFIG.length - 1;
+
+  console.log({ activeConfig, activeStep });
 
   const stepFieldNames = useMemo(() => {
-    return activeConfig.options
+    const fields = activeConfig.options
       .filter(
         (o) => o.type === 'input' || o.type === 'select' || o.type === 'buttons'
       )
       .map((o) => o.name);
+
+    return Array.from(new Set(fields)) as FormKeys[];
   }, [activeConfig]);
 
   const stepValid = useMemo(() => {
@@ -63,6 +72,7 @@ export const StepForm = () => {
         String(v).trim() === ''
       );
       const specific = validators[name]?.(v) ?? true;
+
       return nonEmpty && specific;
     });
   }, [formState, stepFieldNames]);
@@ -71,16 +81,18 @@ export const StepForm = () => {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleBtnClick = (value: string, name: FormKeys) => {
-    setFormState((prev) => ({ ...prev, [name]: value }));
-  };
-
   const goNext = () => {
+    if (isLast) {
+      handleFormFilled();
+      return;
+    }
+
     if (!stepValid) {
       setShake(true);
       window.setTimeout(() => setShake(false), 400);
       return;
     }
+
     setIndex((i) => Math.min(i + 1, FORM_CONFIG.length - 1));
   };
 
@@ -89,7 +101,7 @@ export const StepForm = () => {
   };
 
   return (
-    <div className={classNames(cls.stepForm)}>
+    <>
       <Steps activeStep={activeStep} />
       <div className={cls.formContent}>
         <form className={cls.form}>
@@ -98,14 +110,17 @@ export const StepForm = () => {
             className={classNames(cls.track, { [cls.shake]: shake })}
             style={{ transform: `translateX(-${index * 100}%)` }}
           >
-            {FORM_CONFIG.map((formItem, index) => {
-              const isLast = index === FORM_CONFIG.length - 1;
+            {FORM_CONFIG.map((formItem) => {
+              const dopTitle = formItem?.dopTitle;
+              const title = dopTitle
+                ? `${formItem.title}, ${formState[dopTitle]}!`
+                : formItem.title;
 
               return (
                 <div key={formItem.title} className={cls.formItem}>
                   <div>
                     <div>
-                      <h2 className={cls.formTitle}>{formItem.title}</h2>
+                      <h2 className={cls.formTitle}>{title}</h2>
                       <h3 className={cls.formSubtitle}>{formItem.subtitle}</h3>
                     </div>
                     <div className={cls.formAction}>
@@ -138,10 +153,10 @@ export const StepForm = () => {
                                       type="button"
                                       className={classNames(cls.formInfoBtn, {
                                         [cls.small]: Boolean(item.isSmallTxt),
+                                        [cls.active]:
+                                          v === formState[item.name],
                                       })}
-                                      onClick={() =>
-                                        handleBtnClick(v, item.name)
-                                      }
+                                      onClick={() => handleChange(v, item.name)}
                                     >
                                       {v}
                                     </button>
@@ -164,6 +179,7 @@ export const StepForm = () => {
                                 onChange={(option) =>
                                   handleChange(option, item.name)
                                 }
+                                className={cls.formSelect}
                               />
                             );
 
@@ -171,7 +187,7 @@ export const StepForm = () => {
                             return <p key={item.value}>{item.value}</p>;
 
                           default:
-                            return '';
+                            return null;
                         }
                       })}
                     </div>
@@ -190,11 +206,14 @@ export const StepForm = () => {
                     {formItem.next && (
                       <Button
                         variant="primary"
-                        className={cls.formButtonSubmit}
+                        className={classNames(cls.formButtonSubmit, {
+                          [cls.long]: isLast,
+                        })}
                         type={isLast ? 'submit' : 'button'}
                         onClick={goNext}
+                        disabled={!stepValid}
                       >
-                        Continue
+                        {isLast ? 'See your loan options' : 'Continue'}
                         <Image
                           src={'images/icons/features/arrow-right.svg'}
                           width={24}
@@ -211,6 +230,23 @@ export const StepForm = () => {
         </form>
         <OfferBanner />
       </div>
-    </div>
+      {isLast && (
+        <p className={cls.note}>
+          By tapping or clicking &quot;See Your Loan Options&quot; below, you
+          acknowledge and agree to Fundera’s <button>Terms of Use</button> and{' '}
+          <button>Privacy Policy</button>. You further acknowledge and agree
+          that you are providing express written consent for Fundera to share
+          the information you&apos;ve provided with its partners, and for
+          Fundera and/or its partners to contact you with marketing and other
+          messages via email and/or at the phone number provided via automatic
+          dialing systems, recurring autodialed and prerecorded calls, or
+          SMS/MMS messages (charges may apply), even if my telephone number is
+          listed on a Federal, State, or other jurisdiction Do-Not-Call list.
+          You further acknowledge that consent to these communications is not a
+          condition to utilizing these services. You also certify that the
+          number you have
+        </p>
+      )}
+    </>
   );
 };

@@ -33,6 +33,7 @@ type TOption = TOptionInput | TOptionTxt | TOptionBtn | TOptionSelect;
 
 export interface IFormConfig {
   title: string;
+  dopTitle?: FormKeys;
   subtitle: string;
   step: FormSteps;
   substep: number;

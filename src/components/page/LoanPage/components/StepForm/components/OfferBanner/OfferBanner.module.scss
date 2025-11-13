@@ -10,6 +10,15 @@
   border-radius: 24px;
 
   background: #f6f9ffb2;
+
+  @media (width <= 1200) {
+    max-width: 480px;
+    padding: 28px;
+  }
+
+  @media (width <= 993) {
+    margin: 0 auto;
+  }
 }
 
 .list {
