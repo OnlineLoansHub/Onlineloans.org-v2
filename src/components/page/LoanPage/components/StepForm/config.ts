@@ -1,5 +1,7 @@
 import { FormKeys, FormSteps, IFormConfig } from './types';
 
+import cls from './StepForm.module.scss';
+
 const currentYear = new Date().getFullYear();
 const years = [];
 for (let year = 1950; year <= currentYear; year++) {
@@ -83,6 +85,7 @@ export const FORM_CONFIG: IFormConfig[] = [
     ],
     next: true,
     prev: true,
+    className: cls.step2,
   },
   {
     title: 'My monthly revenue is',
@@ -187,6 +190,7 @@ export const FORM_CONFIG: IFormConfig[] = [
 
     next: true,
     prev: true,
+    className: cls.step2,
   },
   {
     title: 'Found your match',
@@ -211,5 +215,6 @@ export const FORM_CONFIG: IFormConfig[] = [
 
     next: true,
     prev: true,
+    className: cls.formActionLast,
   },
 ];

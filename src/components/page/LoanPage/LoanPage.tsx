@@ -13,7 +13,7 @@ interface IHomePageProps {
 }
 
 export default function LoanPage({ type }: IHomePageProps) {
-  const [isFormFilled, setFormFilled] = useState(false);
+  const [isFormFilled, setFormFilled] = useState(true);
 
   const handleFormFilled = useCallback(() => {
     setFormFilled(true);

@@ -5,6 +5,20 @@
   width: fit-content;
   margin: 0 auto;
   padding: 32px 0;
+
+  @media (width < 1024) {
+    padding: 28px 0;
+  }
+
+  @media (width < 786) {
+    gap: 60px;
+    padding: 20px 0;
+  }
+
+  @media (width <= 567) {
+    gap: 50px;
+    font-size: 12px;
+  }
 }
 
 .listItem {
@@ -26,6 +40,11 @@
     height: 2px;
 
     background: var(--color-secondary);
+
+    @media (width <= 768) {
+      right: calc(-100% - 8px);
+      width: 70px;
+    }
   }
 
   &:nth-child(2)::after {
@@ -39,6 +58,11 @@
     height: 2px;
 
     background: #a1aebe;
+
+    @media (width <= 768) {
+      right: calc(-56% - 8px);
+      width: 70px;
+    }
   }
 
   &.active:nth-child(2)::after {
@@ -59,6 +83,16 @@
     font-weight: 500;
     line-height: 100%;
     color: var(--color-primary);
+
+    @media (width <= 768) {
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+
+    @media (width <= 567) {
+      font-size: 12px;
+    }
   }
 
   &.active .step {
@@ -66,9 +100,21 @@
     color: var(--color-white);
     background-color: var(--color-secondary);
   }
+
+  @media (width <= 768) {
+    gap: unset;
+  }
 }
 
 .title {
   font-size: 18px;
   font-weight: 500;
+
+  @media (width <= 768) {
+    font-size: 14px;
+  }
+
+  @media (width <= 567) {
+    font-size: 12px;
+  }
 }

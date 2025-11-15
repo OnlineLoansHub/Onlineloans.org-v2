@@ -52,6 +52,7 @@ $bg: #fff; // panel bg
     background-image: url('/images/icons/features/onlineloans-shevron.svg');
     background-repeat: no-repeat;
     background-position: center;
+    background-size: contain;
   }
 
   &.active {
@@ -69,17 +70,30 @@ $bg: #fff; // panel bg
 
   &:hover {
     border-color: var(--color-secondary);
-
-    // &:not(.open)::after {
-    //   transform: translateY(-50%) rotate(-180deg);
-    //   background-image: url('/images/icons/features/onlineloans-shevron-active.svg');
-    // }
   }
 
   &:focus-visible {
     border-color: $ring;
     outline: none;
     box-shadow: 0 0 0 3px rgb(92 195 153 / 25%);
+  }
+
+  @media (width < 1024) {
+    font-size: 20px;
+  }
+
+  @media (width < 786) {
+    font-size: 18px;
+
+    &::after {
+      right: 12px;
+      width: 12px;
+      height: 20px;
+    }
+  }
+
+  @media (width < 576) {
+    font-size: 16px;
   }
 }
 
@@ -123,5 +137,17 @@ $bg: #fff; // panel bg
   &.isDisabled {
     cursor: not-allowed;
     color: #9ca3af;
+  }
+
+  @media (width < 1024) {
+    font-size: 20px;
+  }
+
+  @media (width < 786) {
+    font-size: 18px;
+  }
+
+  @media (width < 576) {
+    font-size: 16px;
   }
 }

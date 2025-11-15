@@ -1,0 +1,27 @@
+.note {
+  width: 100%;
+  max-width: 962px;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #11182780;
+
+  button {
+    color: var(--color-secondary);
+    text-decoration: underline;
+  }
+
+  @media (width <= 993) {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  @media (width <= 768) {
+    max-width: 90%;
+  }
+
+  @media (width <= 567) {
+    max-width: 100%;
+  }
+}

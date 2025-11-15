@@ -1,2 +1,3 @@
+export { Note } from './Note/Note';
 export { Steps } from './Steps/Steps';
 export { OfferBanner } from './OfferBanner/OfferBanner';

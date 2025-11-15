@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/Button/Button';
@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/Input/Input';
 import { Select } from '@/components/ui/Select/Select';
 import { classNames } from '@/shared';
 
-import { OfferBanner, Steps } from './components';
+import { Note, OfferBanner, Steps } from './components';
 import { FORM_CONFIG } from './config';
 import { FormKeys } from './types';
 
@@ -41,16 +41,19 @@ export const StepForm = ({
     [FormKeys.phone]: undefined,
     [FormKeys.email]: undefined,
   });
-  // const [activeStep, setActiveStep] = useState<FormSteps>(FormSteps.first);
   const [index, setIndex] = useState(0);
   const [shake, setShake] = useState(false);
+  const [containerHeight, setContainerHeight] = useState<number | 'auto'>(
+    'auto'
+  );
+  const [isMobile, setIsMobile] = useState(false);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const activeConfig = FORM_CONFIG[index];
   const activeStep = activeConfig.step;
+  const activeClass = activeConfig.className || '';
   const isLast = index === FORM_CONFIG.length - 1;
-
-  console.log({ activeConfig, activeStep });
 
   const stepFieldNames = useMemo(() => {
     const fields = activeConfig.options
@@ -100,30 +103,74 @@ export const StepForm = ({
     setIndex((i) => Math.max(i - 1, 0));
   };
 
+  // Update height when step changes or window resizes
+  useEffect(() => {
+    const updateHeight = () => {
+      const isMobile = window.innerWidth <= 993;
+      setIsMobile(isMobile);
+
+      const activeStepElement = stepRefs.current[index];
+      if (activeStepElement && isMobile) {
+        setContainerHeight(activeStepElement.offsetHeight);
+      } else {
+        setContainerHeight('auto');
+      }
+    };
+
+    // Initial height update
+    updateHeight();
+
+    // Add resize listener
+    window.addEventListener('resize', updateHeight);
+
+    // Slight delay to ensure DOM is fully rendered
+    const timeoutId = setTimeout(updateHeight, 50);
+
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+      clearTimeout(timeoutId);
+    };
+  }, [index, formState]);
+
+  console.log({ activeClass });
+
   return (
     <>
       <Steps activeStep={activeStep} />
-      <div className={cls.formContent}>
+      <div className={cls.stepFormWrapper}>
         <form className={cls.form}>
           <div
             ref={trackRef}
             className={classNames(cls.track, { [cls.shake]: shake })}
-            style={{ transform: `translateX(-${index * 100}%)` }}
+            style={{
+              transform: `translateX(-${index * 100}%)`,
+              height:
+                containerHeight === 'auto' ? 'auto' : `${containerHeight}px`,
+            }}
           >
-            {FORM_CONFIG.map((formItem) => {
+            {FORM_CONFIG.map((formItem, formIndex) => {
               const dopTitle = formItem?.dopTitle;
-              const title = dopTitle
-                ? `${formItem.title}, ${formState[dopTitle]}!`
-                : formItem.title;
+              const title =
+                dopTitle && formState[dopTitle]
+                  ? `${formItem.title}, ${formState[dopTitle]}!`
+                  : formItem.title;
 
               return (
-                <div key={formItem.title} className={cls.formItem}>
-                  <div>
+                <div
+                  key={formItem.title}
+                  className={cls.formItem}
+                  ref={(el) => {
+                    stepRefs.current[formIndex] = el;
+                  }}
+                >
+                  <div className={cls.formContent}>
                     <div>
                       <h2 className={cls.formTitle}>{title}</h2>
                       <h3 className={cls.formSubtitle}>{formItem.subtitle}</h3>
                     </div>
-                    <div className={cls.formAction}>
+                    <div
+                      className={classNames(cls.formAction, {}, [activeClass])}
+                    >
                       {formItem.options.map((item) => {
                         switch (item.type) {
                           case 'input':
@@ -184,7 +231,11 @@ export const StepForm = ({
                             );
 
                           case 'txt':
-                            return <p key={item.value}>{item.value}</p>;
+                            return (
+                              <p key={item.value} className={cls.formTxt}>
+                                {item.value}
+                              </p>
+                            );
 
                           default:
                             return null;
@@ -192,11 +243,12 @@ export const StepForm = ({
                       })}
                     </div>
                   </div>
+                  {isLast && isMobile && <Note />}
                   <div className={cls.btnsContainer}>
                     {formItem.prev && (
                       <Button
                         variant="secondary"
-                        className={cls.formButtonBack}
+                        className={cls.formBtn}
                         type={'button'}
                         onClick={goPrev}
                       >
@@ -206,9 +258,13 @@ export const StepForm = ({
                     {formItem.next && (
                       <Button
                         variant="primary"
-                        className={classNames(cls.formButtonSubmit, {
-                          [cls.long]: isLast,
-                        })}
+                        className={classNames(
+                          cls.formBtn,
+                          {
+                            [cls.long]: isLast,
+                          },
+                          [cls.next]
+                        )}
                         type={isLast ? 'submit' : 'button'}
                         onClick={goNext}
                         disabled={!stepValid}
@@ -219,6 +275,7 @@ export const StepForm = ({
                           width={24}
                           height={24}
                           alt={'Continue arrow'}
+                          className={cls.btnImg}
                         />
                       </Button>
                     )}
@@ -230,23 +287,7 @@ export const StepForm = ({
         </form>
         <OfferBanner />
       </div>
-      {isLast && (
-        <p className={cls.note}>
-          By tapping or clicking &quot;See Your Loan Options&quot; below, you
-          acknowledge and agree to Fundera’s <button>Terms of Use</button> and{' '}
-          <button>Privacy Policy</button>. You further acknowledge and agree
-          that you are providing express written consent for Fundera to share
-          the information you&apos;ve provided with its partners, and for
-          Fundera and/or its partners to contact you with marketing and other
-          messages via email and/or at the phone number provided via automatic
-          dialing systems, recurring autodialed and prerecorded calls, or
-          SMS/MMS messages (charges may apply), even if my telephone number is
-          listed on a Federal, State, or other jurisdiction Do-Not-Call list.
-          You further acknowledge that consent to these communications is not a
-          condition to utilizing these services. You also certify that the
-          number you have
-        </p>
-      )}
+      {isLast && !isMobile && <Note />}
     </>
   );
 };

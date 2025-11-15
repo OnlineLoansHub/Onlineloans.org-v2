@@ -9,6 +9,7 @@
   border-radius: 48px;
 
   font-family: var(--font-poppins);
+  font-size: 20px;
   font-weight: 500;
 
   box-shadow: 0 0 12px 0 #0000000a;
@@ -46,5 +47,17 @@
   &.disabled {
     cursor: not-allowed;
     opacity: 0.6;
+  }
+
+  @media (width < 1024) {
+    padding: 16px 48px;
+  }
+
+  @media (width < 786) {
+    font-size: 18px;
+  }
+
+  @media (width < 576) {
+    font-size: 16px;
   }
 }

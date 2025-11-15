@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { Button } from '@/components/ui/Button/Button';
-import { URL_CONFIG } from '@/shared';
+import { classNames, URL_CONFIG } from '@/shared';
 
 import cls from './FinalStep.module.scss';
 
@@ -11,8 +11,8 @@ export const FinalStep = () => {
     <>
       <h2 className={cls.finalTitle}>What to expect next?</h2>
       <ul className={cls.list}>
-        <li className={cls.listItem}>
-          <div className={cls.listItemImgWrapper}>
+        <li className={classNames(cls.listItem, {}, [cls.first])}>
+          <div className={classNames(cls.listItemImgWrapper, {}, [cls.first])}>
             <Image
               src={'images/icons/features/percent.svg'}
               width={50}
@@ -26,8 +26,8 @@ export const FinalStep = () => {
             you to funding options that best fit your specific needs
           </p>
         </li>
-        <li className={cls.listItem}>
-          <div className={cls.listItemImgWrapper}>
+        <li className={classNames(cls.listItem, {}, [cls.first])}>
+          <div className={classNames(cls.listItemImgWrapper, {}, [cls.second])}>
             <Image
               src={'images/icons/features/money.svg'}
               width={50}

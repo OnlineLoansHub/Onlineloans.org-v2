@@ -24,6 +24,7 @@ export const OfferBanner = () => {
                 width={32}
                 height={32}
                 alt={'verified-badge-icon'}
+                className={cls.listItemImg}
               />
               <p>{txt}</p>
             </li>

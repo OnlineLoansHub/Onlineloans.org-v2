@@ -40,6 +40,7 @@ export interface IFormConfig {
   options: TOption[];
   next: boolean;
   prev: boolean;
+  className?: string;
 }
 
 export enum FormKeys {
