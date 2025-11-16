@@ -1,5 +1,7 @@
 import { FormKeys, FormSteps, IFormConfig } from './types';
 
+import cls from './StepForm.module.scss';
+
 const currentYear = new Date().getFullYear();
 const years = [];
 for (let year = 1950; year <= currentYear; year++) {
@@ -83,6 +85,7 @@ export const FORM_CONFIG: IFormConfig[] = [
     ],
     next: true,
     prev: true,
+    className: cls.step2,
   },
   {
     title: 'My monthly revenue is',
@@ -153,7 +156,7 @@ export const FORM_CONFIG: IFormConfig[] = [
     options: [
       {
         type: 'input',
-        placeholder: 'business zip code',
+        placeholder: 'Enter your business zip code',
         name: FormKeys.zipCode,
       },
     ],
@@ -187,9 +190,11 @@ export const FORM_CONFIG: IFormConfig[] = [
 
     next: true,
     prev: true,
+    className: cls.step2,
   },
   {
-    title: 'Found your match, {{name}}!',
+    title: 'Found your match',
+    dopTitle: FormKeys.firstName,
     subtitle: 'Almost done! Please provide final details and that’s it!',
     step: FormSteps.third,
     substep: 2,
@@ -200,7 +205,7 @@ export const FORM_CONFIG: IFormConfig[] = [
         value:
           'We or our lending partners may call you at this number to discuss your personalized loan options',
       },
-      { type: 'input', placeholder: 'email', name: FormKeys.email },
+      { type: 'input', placeholder: 'Email', name: FormKeys.email },
       {
         type: 'txt',
         value:
@@ -210,5 +215,6 @@ export const FORM_CONFIG: IFormConfig[] = [
 
     next: true,
     prev: true,
+    className: cls.formActionLast,
   },
 ];

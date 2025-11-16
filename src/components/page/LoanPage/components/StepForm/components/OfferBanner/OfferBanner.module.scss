@@ -1,7 +1,7 @@
 .offerBanner {
   flex-shrink: 0;
 
-  width: 100%;
+  width: 40%;
   max-width: 558px;
   height: 100%;
   max-height: 552px;
@@ -10,6 +10,27 @@
   border-radius: 24px;
 
   background: #f6f9ffb2;
+
+  @media (width <= 1200) {
+    max-width: 480px;
+    padding: 28px;
+  }
+
+  @media (width <= 993) {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    border-radius: unset;
+  }
+
+  @media (width <= 768) {
+    max-width: 90%;
+    padding: 20px 16px;
+  }
+
+  @media (width <= 567) {
+    max-width: 100%;
+  }
 }
 
 .list {
@@ -26,6 +47,20 @@
 
   font-size: 18px;
   font-weight: 500;
+
+  @media (width <= 768) {
+    font-size: 16px;
+
+    & .listItemImg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  @media (width <= 567) {
+    font-size: 14px;
+    line-height: 16px;
+  }
 }
 
 .bannerImg {

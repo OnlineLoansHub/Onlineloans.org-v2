@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { LoanTypes } from '@/shared/types';
 
-import { Footer, StepForm } from './components';
+import { FinalStep, Footer, StepForm } from './components';
 
 import cls from './LoanPage.module.scss';
 
@@ -13,13 +13,21 @@ interface IHomePageProps {
 }
 
 export default function LoanPage({ type }: IHomePageProps) {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFormFilled, setFormFilled] = useState(true);
+
+  const handleFormFilled = useCallback(() => {
+    setFormFilled(true);
+  }, []);
 
   return (
     <div className={cls.page}>
       <div className={cls.container}>
         <main className={cls.main}>
-          <StepForm />
+          {!isFormFilled ? (
+            <StepForm handleFormFilled={handleFormFilled} />
+          ) : (
+            <FinalStep />
+          )}
         </main>
       </div>
       <Footer />
