@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
+import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
 import { classNames } from '@/shared';
 
@@ -14,6 +15,11 @@ import { FormKeys } from './types';
 
 import cls from './StepForm.module.scss';
 
+interface IStepFormProps {
+  handleFormFilled: () => void;
+  amount: string;
+}
+
 const validators: Partial<Record<FormKeys, (v: unknown) => boolean>> = {
   [FormKeys.amount]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
   [FormKeys.revenue]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
@@ -22,13 +28,11 @@ const validators: Partial<Record<FormKeys, (v: unknown) => boolean>> = {
   [FormKeys.phone]: (v) => String(v ?? '').replace(/[^\d]/g, '').length >= 10,
 };
 
-export const StepForm = ({
-  handleFormFilled,
-}: {
-  handleFormFilled: () => void;
-}) => {
+const GOOGLE_URL = `https://script.google.com/macros/s/AKfycbyDWmr_uDQNNHEwUw-ZGMdRQWuS6EiV22Rt2jvhNQLEJUI-_5AtQ7obGkSyg2II6sJPSQ/exec`;
+
+export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
   const [formState, setFormState] = useState({
-    [FormKeys.amount]: undefined,
+    [FormKeys.amount]: amount,
     [FormKeys.startMonth]: undefined,
     [FormKeys.startYear]: undefined,
     [FormKeys.revenue]: undefined,
@@ -47,6 +51,7 @@ export const StepForm = ({
     'auto'
   );
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -80,12 +85,50 @@ export const StepForm = ({
     });
   }, [formState, stepFieldNames]);
 
+  const onSubmit = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      await fetch(GOOGLE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        },
+        body: new URLSearchParams({
+          [FormKeys.amount]: formState.amount,
+          [FormKeys.startMonth]: formState.startMonth ?? '',
+          [FormKeys.startYear]: formState.startYear ?? '',
+          [FormKeys.revenue]: formState.revenue ?? '',
+          [FormKeys.creditScore]: formState.creditScore ?? '',
+          [FormKeys.loanFor]: formState.loanFor ?? '',
+          [FormKeys.zipCode]: formState.zipCode ?? '',
+          [FormKeys.businessName]: formState.businessName ?? '',
+          [FormKeys.firstName]: formState.firstName ?? '',
+          [FormKeys.lastName]: formState.lastName ?? '',
+          [FormKeys.phone]: formState.phone ?? '',
+          [FormKeys.email]: formState.email ?? '',
+        }).toString(),
+      });
+      // const j = await res.json();
+      // if (!res.ok || j.status !== 'ok') throw new Error(j.message || 'Failed');
+    } catch (e: unknown) {
+      console.error(e);
+      // setErr(e.message || 'Ошибка');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleChange = (value: string | number, name: FormKeys) => {
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
 
-  const goNext = () => {
+  const goNext = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (isLast) {
+      await onSubmit(e);
       handleFormFilled();
       return;
     }
@@ -131,8 +174,6 @@ export const StepForm = ({
       clearTimeout(timeoutId);
     };
   }, [index, formState]);
-
-  console.log({ activeClass });
 
   return (
     <>
@@ -266,7 +307,7 @@ export const StepForm = ({
                           [cls.next]
                         )}
                         type={isLast ? 'submit' : 'button'}
-                        onClick={goNext}
+                        onClick={(e) => goNext(e)}
                         disabled={!stepValid}
                       >
                         {isLast ? 'See your loan options' : 'Continue'}
@@ -288,6 +329,7 @@ export const StepForm = ({
         <OfferBanner />
       </div>
       {isLast && !isMobile && <Note />}
+      {isLoading && <Loader />}
     </>
   );
 };
