@@ -1,0 +1,54 @@
+.fsOverlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: rgb(255 255 255 / 25%);
+}
+
+.fsSpinner {
+  width: var(--fs-size, 64px);
+  height: var(--fs-size, 64px);
+  border: var(--fs-thickness, 6px) solid rgb(255 255 255 / 25%);
+  border-top-color: var(--fs-color, var(--color-secondary));
+  border-right-color: var(--fs-color, var(--color-secondary));
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 5%) inset;
+
+  animation: fs-rotate 0.8s linear infinite;
+}
+
+@keyframes fs-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-spinner {
+    animation: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+
+  white-space: nowrap;
+
+  /* stylelint-disable-next-line property-no-deprecated */
+  clip: rect(0, 0, 0, 0);
+}

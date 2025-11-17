@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 import { LoanTypes } from '@/shared/types';
 
@@ -13,7 +14,9 @@ interface IHomePageProps {
 }
 
 export default function LoanPage({ type }: IHomePageProps) {
-  const [isFormFilled, setFormFilled] = useState(true);
+  const sp = useSearchParams();
+  const amount = sp.get('amount') ?? '';
+  const [isFormFilled, setFormFilled] = useState(false);
 
   const handleFormFilled = useCallback(() => {
     setFormFilled(true);
@@ -24,7 +27,7 @@ export default function LoanPage({ type }: IHomePageProps) {
       <div className={cls.container}>
         <main className={cls.main}>
           {!isFormFilled ? (
-            <StepForm handleFormFilled={handleFormFilled} />
+            <StepForm handleFormFilled={handleFormFilled} amount={amount} />
           ) : (
             <FinalStep />
           )}

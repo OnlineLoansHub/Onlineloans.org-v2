@@ -14,28 +14,36 @@ interface AmountInputCardProps {
   // placeholder?: string;
   // maxAmountLabel?: string;
   type: LoanTypes;
+  handleValueChange: (value: string) => void;
+  value: string;
 }
 
-const AmountCard = ({ type }: AmountInputCardProps) => {
-  const [value, setValue] = useState('');
+const AmountCard = ({
+  type,
+  handleValueChange,
+  value,
+}: AmountInputCardProps) => {
   const [focused, setFocused] = useState(false);
-  const { buttonText, placeholder, maxAmountLabel, href } = useMemo(() => {
-    if (type === LoanTypes.personal) {
+  const { buttonText, placeholder, maxAmountLabel, href, amount } =
+    useMemo(() => {
+      if (type === LoanTypes.personal) {
+        return {
+          buttonText: 'See My Offer',
+          placeholder: '$ Amount',
+          maxAmountLabel: 'Up to $50k',
+          href: URL_CONFIG.businessLoan,
+          amount: value,
+        };
+      }
+
       return {
         buttonText: 'See My Offer',
         placeholder: '$ Amount',
-        maxAmountLabel: 'Up to $50k',
+        maxAmountLabel: 'Up to $1M',
         href: URL_CONFIG.businessLoan,
+        amount: value,
       };
-    }
-
-    return {
-      buttonText: 'See My Offer',
-      placeholder: '$ Amount',
-      maxAmountLabel: 'Up to $1M',
-      href: URL_CONFIG.businessLoan,
-    };
-  }, [type]);
+    }, [type, value]);
 
   const labelValue = useMemo(() => {
     if (!focused)
@@ -72,21 +80,18 @@ const AmountCard = ({ type }: AmountInputCardProps) => {
         <input
           type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => handleValueChange(e.target.value)}
           onFocus={handleFocus}
           onBlur={handleBlur}
           className={cls.input}
           placeholder={focused && !value ? maxAmountLabel : undefined}
         />
       </div>
-      {/* <button
+
+      <AppLink
         className={cls.button}
-        onClick={() => onSubmit?.(value)}
-        type="button"
+        href={{ pathname: href, query: { amount: amount } }}
       >
-        {buttonText}
-      </button> */}
-      <AppLink className={cls.button} href={href}>
         {buttonText}
       </AppLink>
     </div>

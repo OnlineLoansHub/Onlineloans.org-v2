@@ -1,3 +1,6 @@
+'use client';
+
+import { useCallback, useState } from 'react';
 import Image from 'next/image';
 
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
@@ -25,6 +28,12 @@ interface ICreditTabsProps {
 }
 
 export const CreditTabs = ({ type }: ICreditTabsProps) => {
+  const [value, setValue] = useState('');
+
+  const handleValueChange = useCallback((value: string) => {
+    setValue(value);
+  }, []);
+
   return (
     <div className={cls.tabsWrapper}>
       <ul className={cls.tabs}>
@@ -36,14 +45,18 @@ export const CreditTabs = ({ type }: ICreditTabsProps) => {
                 [cls.active]: type === tab.type,
               })}
             >
-              <AppLink href={tab.href} className={cls.link}>
+              <AppLink href={{ pathname: tab.href }} className={cls.link}>
                 {tab.title}
               </AppLink>
             </li>
           );
         })}
       </ul>
-      <AmountInputCard type={type} />
+      <AmountInputCard
+        type={type}
+        handleValueChange={handleValueChange}
+        value={value}
+      />
       <div className={cls.creditNotes}>
         <div className={cls.amountInfo}>
           <p className={cls.note}>
