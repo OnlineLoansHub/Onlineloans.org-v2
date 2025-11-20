@@ -63,7 +63,16 @@
   }
 }
 
-.bannerImg {
-  display: block;
+.bannerImgWrapper {
+  position: relative;
+
+  width: 100%;
+  max-width: 406px;
+  height: 100%;
+  min-height: 216px;
   margin: 0 auto 40px;
+
+  @media (width <= 768) {
+    margin: 0 auto;
+  }
 }

@@ -31,13 +31,14 @@ export const OfferBanner = () => {
           );
         })}
       </ul>
-      <Image
-        src={'images/form/onlineloans-form-image.svg'}
-        width={406}
-        height={216}
-        alt={'happy loan banner'}
-        className={cls.bannerImg}
-      />
+      <div className={cls.bannerImgWrapper}>
+        <Image
+          src={'images/form/onlineloans-form-image.svg'}
+          fill
+          alt={'happy loan banner'}
+          className={cls.bannerImg}
+        />
+      </div>
     </div>
   );
 };
