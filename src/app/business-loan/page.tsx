@@ -6,7 +6,7 @@ import { LoanTypes } from '@/shared/types';
 export default function BusinessLoansPage() {
   return (
     <Suspense fallback={<>...</>}>
-      <LoanPage type={LoanTypes.business} />;
+      <LoanPage type={LoanTypes.business} />
     </Suspense>
   );
 }
