@@ -31,7 +31,25 @@ export const CreditTabs = ({ type }: ICreditTabsProps) => {
   const [value, setValue] = useState('');
 
   const handleValueChange = useCallback((value: string) => {
-    setValue(value);
+    // Remove all non-numeric characters (only allow numbers)
+    const numericValue = value.replace(/[^\d]/g, '');
+    
+    // If empty, set empty string
+    if (!numericValue) {
+      setValue('');
+      return;
+    }
+    
+    // Convert to number and format with commas
+    const number = parseInt(numericValue, 10);
+    if (isNaN(number)) {
+      setValue('');
+      return;
+    }
+    
+    // Format with dollar sign and commas
+    const formatted = `$${number.toLocaleString('en-US')}`;
+    setValue(formatted);
   }, []);
 
   return (
