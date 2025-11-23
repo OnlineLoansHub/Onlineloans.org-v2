@@ -16,7 +16,12 @@
   margin: 0 auto;
   padding: 0 20px;
 
-  @media (width <= 768) {
+  @media (max-width: 768px) {
     padding-bottom: 20px;
   }
+
+  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
+@media (min-width: 1025px) and (max-width: 1600px) {
+  padding: 0 5.25rem 0 5.25rem;
+}
 }
