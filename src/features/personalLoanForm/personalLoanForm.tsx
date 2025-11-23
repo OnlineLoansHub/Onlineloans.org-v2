@@ -4,20 +4,20 @@ import { useCallback, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Stepper } from '@/features/stepper/Stepper';
 import { FinalStep } from '@/features/stepper/components';
-import { getBusinessLoanConfig } from './businessLoanConfig';
+import { getPersonalLoanConfig } from './personalLoanConfig';
 import { LoanTypes } from '@/types';
-import cls from './businessLoanForm.module.scss';
+import cls from './personalLoanForm.module.scss';
 
-interface IHomePageProps {
+interface IPersonalLoanFormProps {
   type: LoanTypes;
 }
 
-export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
+export default function PersonalLoanForm({ type: _type }: IPersonalLoanFormProps) {
   const sp = useSearchParams();
   const amount = sp.get('amount') ?? '';
   const [isFormFilled, setFormFilled] = useState(false);
 
-  const config = useMemo(() => getBusinessLoanConfig(amount), [amount]);
+  const config = useMemo(() => getPersonalLoanConfig(amount), [amount]);
 
   const handleFormFilled = useCallback(() => {
     setFormFilled(true);
@@ -35,3 +35,4 @@ export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
     </div>
   );
 }
+

@@ -1,17 +1,17 @@
 import Image from 'next/image';
 import { classNames } from '@/lib';
-import { STEP_CONFIG } from '../../config';
-import { FormSteps } from '../../types';
+import { FormSteps, IStepConfig } from '../../types';
 import cls from './Steps.module.scss';
 
 interface IStepsProps {
   activeStep: FormSteps;
+  stepConfig: IStepConfig[];
 }
 
-export const Steps = ({ activeStep }: IStepsProps) => {
+export const Steps = ({ activeStep, stepConfig }: IStepsProps) => {
   return (
     <ul className={cls.list}>
-      {STEP_CONFIG.map((data) => {
+      {stepConfig.map((data) => {
         const isActiveItem = data.step <= activeStep;
         const isSuccess = data.step < activeStep;
 

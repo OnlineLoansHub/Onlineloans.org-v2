@@ -21,7 +21,7 @@ export const FinalStep = () => {
           </div>
           <p className={cls.listItemTitle}>More Details</p>
           <p className={cls.listItemTxt}>
-            We’ll ask a few more questions about you and your business to match
+            We'll ask a few more questions about you and your business to match
             you to funding options that best fit your specific needs
           </p>
         </li>
@@ -66,3 +66,4 @@ export const FinalStep = () => {
     </>
   );
 };
+

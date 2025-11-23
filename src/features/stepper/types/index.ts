@@ -7,7 +7,7 @@ export enum FormSteps {
 type TOptionInput = {
   type: 'input';
   placeholder: string;
-  name: FormKeys;
+  name: string;
 };
 
 type TOptionTxt = {
@@ -19,13 +19,13 @@ type TOptionBtn = {
   type: 'buttons';
   values: string[];
   isSmallTxt?: boolean;
-  name: FormKeys;
+  name: string;
 };
 
 type TOptionSelect = {
   type: 'select';
   values: (string | number)[];
-  name: FormKeys;
+  name: string;
   placeholder: string;
 };
 
@@ -33,7 +33,7 @@ type TOption = TOptionInput | TOptionTxt | TOptionBtn | TOptionSelect;
 
 export interface IFormConfig {
   title: string;
-  dopTitle?: FormKeys;
+  dopTitle?: string;
   subtitle: string;
   step: FormSteps;
   substep: number;
@@ -41,6 +41,11 @@ export interface IFormConfig {
   next: boolean;
   prev: boolean;
   className?: string;
+}
+
+export interface IStepConfig {
+  step: FormSteps;
+  title: string;
 }
 
 export enum FormKeys {
@@ -71,4 +76,13 @@ export interface IFormState {
   [FormKeys.lastName]: string;
   [FormKeys.phone]: string;
   [FormKeys.email]: string;
+}
+
+export interface IStepperConfig {
+  formConfig: IFormConfig[];
+  stepConfig: IStepConfig[];
+  initialFormState: Record<string, any>;
+  validators: Partial<Record<string, (v: unknown) => boolean>>;
+  onSubmit: (formData: Record<string, any>) => Promise<void>;
+  currencyFields?: string[]; // Fields that should be formatted as currency
 }

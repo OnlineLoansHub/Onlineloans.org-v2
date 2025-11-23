@@ -8,40 +8,18 @@ import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
 import { classNames } from '@/lib';
 import { Note, OfferBanner, Steps } from './components';
-import { FORM_CONFIG } from './config';
-import { FormKeys } from './types';
+import { IStepperConfig } from './types';
 import cls from './Stepper.module.scss';
 
 interface IStepFormProps {
   handleFormFilled: () => void;
-  amount: string;
+  config: IStepperConfig;
 }
 
-const validators: Partial<Record<FormKeys, (v: unknown) => boolean>> = {
-  [FormKeys.amount]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
-  [FormKeys.revenue]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
-  [FormKeys.zipCode]: (v) => /^\d{5}$/.test(String(v ?? '')),
-  [FormKeys.email]: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v ?? '')),
-  [FormKeys.phone]: (v) => String(v ?? '').replace(/[^\d]/g, '').length >= 10,
-};
-
-const GOOGLE_URL = `https://script.google.com/macros/s/AKfycbyDWmr_uDQNNHEwUw-ZGMdRQWuS6EiV22Rt2jvhNQLEJUI-_5AtQ7obGkSyg2II6sJPSQ/exec`;
-
-export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
-  const [formState, setFormState] = useState({
-    [FormKeys.amount]: amount,
-    [FormKeys.startMonth]: undefined,
-    [FormKeys.startYear]: undefined,
-    [FormKeys.revenue]: '',
-    [FormKeys.creditScore]: undefined,
-    [FormKeys.loanFor]: undefined,
-    [FormKeys.zipCode]: undefined,
-    [FormKeys.businessName]: undefined,
-    [FormKeys.firstName]: undefined,
-    [FormKeys.lastName]: undefined,
-    [FormKeys.phone]: undefined,
-    [FormKeys.email]: undefined,
-  });
+export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
+  const [formState, setFormState] = useState<Record<string, unknown>>(
+    config.initialFormState
+  );
   const [index, setIndex] = useState(0);
   const [shake, setShake] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | 'auto'>(
@@ -51,20 +29,25 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const activeConfig = FORM_CONFIG[index];
-  const activeStep = activeConfig.step;
-  const activeClass = activeConfig.className || '';
-  const isLast = index === FORM_CONFIG.length - 1;
+  // Safety check: ensure formConfig is not empty and index is valid
+  const hasValidConfig = config.formConfig && config.formConfig.length > 0;
+  const activeConfig = hasValidConfig ? config.formConfig[index] : undefined;
+  const safeActiveConfig = activeConfig || config.formConfig[0];
+
+  const activeStep = safeActiveConfig?.step ?? 1;
+  const activeClass = safeActiveConfig?.className || '';
+  const isLast = hasValidConfig ? index === config.formConfig.length - 1 : false;
 
   const stepFieldNames = useMemo(() => {
-    const fields = activeConfig.options
+    if (!safeActiveConfig) return [];
+    const fields = safeActiveConfig.options
       .filter(
         (o) => o.type === 'input' || o.type === 'select' || o.type === 'buttons'
       )
       .map((o) => o.name);
 
-    return Array.from(new Set(fields)) as FormKeys[];
-  }, [activeConfig]);
+    return Array.from(new Set(fields));
+  }, [safeActiveConfig]);
 
   const stepValid = useMemo(() => {
     return stepFieldNames.every((name) => {
@@ -74,11 +57,11 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
         v === null ||
         String(v).trim() === ''
       );
-      const specific = validators[name]?.(v) ?? true;
+      const specific = config.validators[name]?.(v) ?? true;
 
       return nonEmpty && specific;
     });
-  }, [formState, stepFieldNames]);
+  }, [formState, stepFieldNames, config.validators]);
 
   const onSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -87,26 +70,7 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
 
     try {
       setIsLoading(true);
-      await fetch(GOOGLE_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        },
-        body: new URLSearchParams({
-          [FormKeys.amount]: formState.amount,
-          [FormKeys.startMonth]: formState.startMonth ?? '',
-          [FormKeys.startYear]: formState.startYear ?? '',
-          [FormKeys.revenue]: String(formState.revenue ?? '').replace(/[^\d]/g, ''),
-          [FormKeys.creditScore]: formState.creditScore ?? '',
-          [FormKeys.loanFor]: formState.loanFor ?? '',
-          [FormKeys.zipCode]: formState.zipCode ?? '',
-          [FormKeys.businessName]: formState.businessName ?? '',
-          [FormKeys.firstName]: formState.firstName ?? '',
-          [FormKeys.lastName]: formState.lastName ?? '',
-          [FormKeys.phone]: formState.phone ?? '',
-          [FormKeys.email]: formState.email ?? '',
-        }).toString(),
-      });
+      await config.onSubmit(formState);
     } catch (e: unknown) {
       console.error(e);
     } finally {
@@ -123,8 +87,8 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
     return `$${number.toLocaleString('en-US')}`;
   };
 
-  const handleChange = (value: string | number, name: FormKeys) => {
-    if (name === FormKeys.revenue) {
+  const handleChange = (value: string | number, name: string) => {
+    if (config.currencyFields?.includes(name)) {
       const formattedValue = formatCurrency(String(value));
       setFormState((prev) => ({ ...prev, [name]: formattedValue }));
     } else {
@@ -147,7 +111,7 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
       return;
     }
 
-    setIndex((i) => Math.min(i + 1, FORM_CONFIG.length - 1));
+    setIndex((i) => Math.min(i + 1, config.formConfig.length - 1));
   };
 
   const goPrev = () => {
@@ -183,9 +147,14 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
     };
   }, [index, formState]);
 
+  // Early return after all hooks if config is invalid
+  if (!hasValidConfig || !activeConfig) {
+    return null;
+  }
+
   return (
     <>
-      <Steps activeStep={activeStep} />
+      <Steps activeStep={activeStep} stepConfig={config.stepConfig} />
       <div className={cls.stepFormWrapper}>
         <form className={cls.form}>
           <div
@@ -196,11 +165,12 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
                 containerHeight === 'auto' ? 'auto' : `${containerHeight}px`,
             }}
           >
-            {FORM_CONFIG.map((formItem, formIndex) => {
+            {config.formConfig.map((formItem, formIndex) => {
               const dopTitle = formItem?.dopTitle;
+              const dopValue = dopTitle ? formState[dopTitle] : undefined;
               const title =
-                dopTitle && formState[dopTitle]
-                  ? `${formItem.title}, ${formState[dopTitle]}!`
+                dopTitle && dopValue
+                  ? `${formItem.title}, ${String(dopValue)}!`
                   : formItem.title;
 
               return (
@@ -226,7 +196,7 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
                               <Input
                                 key={item.placeholder}
                                 name={item.name}
-                                value={formState[item.name] ?? ''}
+                                value={String(formState[item.name] ?? '')}
                                 placeholder={item.placeholder}
                                 className={classNames(cls.formInput)}
                                 onChange={(option) =>
@@ -249,7 +219,7 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
                                       className={classNames(cls.formInfoBtn, {
                                         [cls.small]: Boolean(item.isSmallTxt),
                                         [cls.active]:
-                                          v === formState[item.name],
+                                          v === String(formState[item.name] ?? ''),
                                       })}
                                       onClick={() => handleChange(v, item.name)}
                                     >
@@ -270,9 +240,9 @@ export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
                                   value: v,
                                   label: v,
                                 }))}
-                                value={formState[item.name]}
-                                onChange={(option) =>
-                                  handleChange(option, item.name)
+                                value={formState[item.name] as string | number | undefined}
+                                onChange={(value) =>
+                                  handleChange(value, item.name)
                                 }
                                 className={cls.formSelect}
                               />
