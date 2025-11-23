@@ -12,38 +12,68 @@ const activeRatingStar =
 const inactiveratingStar =
   '/images/icons/ratings/onlineloans-5-star-rating-icon.svg';
 
-const cards = [
-  {
-    id: 1,
-    rating: 5,
-    source: 'Trustpilot',
-    sourceImgPath: '/images/icons/features/onlineloans-decorative-shape.svg',
-    text: 'I was overwhelmed trying to compare loan offers on my own — OnlineLoans made it so easy for me!',
-    authorName: 'Mirana Marci',
-    authorAlt: 'review author Mirana Marci',
-    authorImgPath: '/images/customers/onlineloans-customer-testimonial-2.png',
-  },
-  {
-    id: 2,
-    rating: 5,
-    source: 'Trustpilot',
-    sourceImgPath: '/images/icons/features/onlineloans-decorative-shape.svg',
-    text: 'I was overwhelmed trying to compare loan offers on my own — OnlineLoans made it so easy for me!',
-    authorName: 'Mirana Marci 2',
-    authorAlt: 'review author Mirana Marci 2',
-    authorImgPath: '/images/customers/onlineloans-customer-testimonial-2.png',
-  },
-  {
-    id: 3,
-    rating: 4,
-    source: 'Google review',
-    sourceImgPath: '/images/icons/social/google-signin-button-icon.svg',
-    text: 'I needed quick funding to cover a gap in my business cash flow, and OnlineLoans came through!',
-    authorName: 'Christian Hudson',
-    authorAlt: 'review author Christian Hudson',
-    authorImgPath: '/images/customers/onlineloans-customer-testimonial-1.png',
-  },
-];
+  const cards = [
+    {
+      id: 1,
+      rating: 5,
+      source: 'Trustpilot',
+      sourceImgPath: '/images/icons/features/onlineloans-decorative-shape.svg',
+      text: 'OnlineLoans helped me compare offers in minutes — the whole process felt effortless.',
+      authorName: 'Mirana Marci',
+      authorAlt: 'review author Mirana Marci',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-2.png',
+    },
+    {
+      id: 2,
+      rating: 5,
+      source: 'Trustpilot',
+      sourceImgPath: '/images/icons/features/onlineloans-decorative-shape.svg',
+      text: 'Fast, simple, and transparent. I found a loan that fit my needs without any pressure.',
+      authorName: 'Daniel Harper',
+      authorAlt: 'review author Daniel Harper',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-3.png',
+    },
+    {
+      id: 3,
+      rating: 4,
+      source: 'Google Review',
+      sourceImgPath: '/images/icons/social/google-signin-button-icon.svg',
+      text: 'Great experience! I received multiple loan options and chose one within the same day.',
+      authorName: 'Christian Hudson',
+      authorAlt: 'review author Christian Hudson',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-1.png',
+    },
+    {
+      id: 4,
+      rating: 5,
+      source: 'Google Review',
+      sourceImgPath: '/images/icons/social/google-signin-button-icon.svg',
+      text: 'Excellent service and smooth process — highly recommended for business owners.',
+      authorName: 'Samantha Lee',
+      authorAlt: 'review author Samantha Lee',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-4.png',
+    },
+    {
+      id: 5,
+      rating: 4,
+      source: 'Facebook Review',
+      sourceImgPath: '/images/icons/social/facebook-icon.svg',
+      text: 'I needed funding for a new project and OnlineLoans connected me with great lenders.',
+      authorName: 'Carlos Martinez',
+      authorAlt: 'review author Carlos Martinez',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-5.png',
+    },
+    {
+      id: 6,
+      rating: 5,
+      source: 'Yelp Review',
+      sourceImgPath: '/images/icons/social/yelp-icon.svg',
+      text: 'Super quick and reliable — got approved for a personal loan in under 24 hours!',
+      authorName: 'Emily Johnson',
+      authorAlt: 'review author Emily Johnson',
+      authorImgPath: '/images/customers/onlineloans-customer-testimonial-6.png',
+    },
+  ];  
 
 export const Reviews = () => {
   return (
