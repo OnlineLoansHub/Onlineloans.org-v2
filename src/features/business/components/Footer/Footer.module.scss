@@ -65,6 +65,17 @@
   height: 16px;
   width: 32px;
   flex-shrink: 0;
+  animation: bounceArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+  0%,
+  100% {
+    transform: translateY(-3);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 .btnImg {
