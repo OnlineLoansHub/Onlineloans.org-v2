@@ -1,0 +1,135 @@
+.finalTitle {
+  margin-top: 70px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+
+  @media (width <= 768) {
+    margin-top: 32px;
+    font-size: 28px;
+  }
+
+  @media (width <= 576) {
+    margin-top: 32px;
+    font-size: 24px;
+  }
+}
+
+.list {
+  display: flex;
+  gap: 70px;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+  max-width: 1094px;
+  margin: 170px auto 150px;
+
+  @media (width <= 768) {
+    flex-direction: column;
+    gap: 140px;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+.listItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 318px;
+  text-align: center;
+
+  @media (width <= 768) {
+    &.first::after,
+    &.second::after {
+      content: '';
+      position: absolute;
+      bottom: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 110px;
+      background-image: url('/images/icons/features/line.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+}
+
+.listItemImgWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  border-bottom-left-radius: unset;
+  background-color: var(--color-secondary);
+
+  &.first::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(100% + 20px);
+    width: 248px;
+    height: 28px;
+    background-image: url('/images/icons/features/arrowTop.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &.second::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: calc(100% + 20px);
+    width: 248px;
+    height: 28px;
+    background-image: url('/images/icons/features/arrowBottom.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  @media (width <= 1024) {
+    &.first::after,
+    &.second::after {
+      left: calc(100% + 15px);
+      width: 180px;
+    }
+  }
+
+  @media (width <= 768) {
+    position: unset;
+
+    &.first::after,
+    &.second::after {
+      content: unset;
+    }
+  }
+}
+
+.listItemTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.listItemTxt {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #11182780;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+}

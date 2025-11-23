@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
-
-import LoanPage from '@/components/page/LoanPage/LoanPage';
-import { LoanTypes } from '@/shared/types';
+import LoanPage from '@/features/business/LoanPage';
+import { LoanTypes } from '@/types';
 
 export default function BusinessLoansPage() {
   return (

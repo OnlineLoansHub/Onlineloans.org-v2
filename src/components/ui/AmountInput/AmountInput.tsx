@@ -1,18 +1,13 @@
 'use client';
 
 import { FocusEvent, useMemo, useState } from 'react';
-
-import { classNames, URL_CONFIG } from '@/shared';
-import { LoanTypes } from '@/shared/types';
-
+import { URL_CONFIG } from '@/config';
+import { classNames } from '@/lib';
+import { LoanTypes } from '@/types';
 import { AppLink } from '../AppLink/AppLink';
-
 import cls from './AmountInput.module.scss';
 
 interface AmountInputCardProps {
-  // buttonText?: string;
-  // placeholder?: string;
-  // maxAmountLabel?: string;
   type: LoanTypes;
   handleValueChange: (value: string) => void;
   value: string;

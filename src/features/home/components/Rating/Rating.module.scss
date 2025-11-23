@@ -1,0 +1,105 @@
+.ratings {
+  display: flex;
+  grid-area: rating;
+  gap: 32px;
+  order: 3;
+
+  @media (width <= 1440px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (width <= 1024) {
+    flex-direction: row;
+    margin: 0 auto;
+  }
+
+  @media (width <= 768px) {
+    flex-direction: column;
+  }
+
+  @media (width <= 576px) {
+    width: 100%;
+  }
+}
+
+.ratingBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 330px;
+  height: 54px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px 0 #0000000a;
+
+  @media (width <= 768px) {
+    width: 100%;
+  }
+
+  &.product {
+    gap: 12px;
+    color: var(--color-white);
+    background: #24273f;
+
+    .productSubtitle {
+      margin-bottom: 3px;
+      font-size: 9px;
+      font-weight: 500;
+      line-height: 100%;
+    }
+
+    .productTitle {
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 100%;
+
+      @media (width <= 1024px) {
+        font-size: 16px;
+      }
+
+      @media (width <= 768px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.rating {
+    background: var(--color-white);
+
+    .ratingImg {
+      margin-right: 4px;
+
+      &:last-child {
+        margin-right: unset;
+      }
+
+      @media (width <= 1440px) {
+        width: 21px;
+        height: 21px;
+      }
+    }
+
+    .ratingTitle {
+      margin-left: 20px;
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 100%;
+
+      @media (width <= 1440px) {
+        font-size: 16px;
+      }
+
+      @media (width <= 768px) {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.ratingMedalImg {
+  @media (width <= 1440px) {
+    width: 18px;
+    height: 24px;
+  }
+}

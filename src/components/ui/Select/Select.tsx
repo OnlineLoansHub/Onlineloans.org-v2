@@ -8,10 +8,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import Image from 'next/image';
-
-import { classNames } from '@/shared';
-
+import { classNames } from '@/lib';
 import cls from './Select.module.scss';
 
 export type Option = {
@@ -56,7 +53,6 @@ export function Select({
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const listRef = useRef<HTMLUListElement | null>(null);
 
   const selectedIndex = useMemo(
     () => options.findIndex((o) => o.value === value),
@@ -70,15 +66,15 @@ export function Select({
       if (!rootRef.current) return;
       if (!rootRef.current.contains(e.target as Node)) setIsOpen(false);
     }
+
     document.addEventListener('mousedown', onDocDown);
+
     return () => document.removeEventListener('mousedown', onDocDown);
   }, []);
 
   function commit(idx: number) {
     const opt = options[idx];
     if (!opt || !opt.value || opt.disabled) return;
-
-    console.log(opt);
 
     onChange(opt.value, opt);
     setIsOpen(false);
@@ -92,6 +88,7 @@ export function Select({
       i = (i + dir + options.length) % options.length;
       if (!options[i].disabled) return i;
     }
+
     return from;
   }
 
@@ -118,33 +115,44 @@ export function Select({
       e.preventDefault();
       setIsOpen(false);
       queueMicrotask(() => buttonRef.current?.focus());
+
       return;
     }
+
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       if (activeIndex != null) commit(activeIndex);
+
       return;
     }
+
     if (e.key === 'ArrowDown') {
       e.preventDefault();
       const start = activeIndex == null ? -1 : activeIndex;
       setActiveIndex(nextEnabled(start, 1));
+
       return;
     }
+
     if (e.key === 'ArrowUp') {
       e.preventDefault();
       const start = activeIndex == null ? 0 : activeIndex;
       setActiveIndex(nextEnabled(start, -1));
+
       return;
     }
+
     if (e.key === 'Home') {
       e.preventDefault();
       setActiveIndex(nextEnabled(-1, 1));
+
       return;
     }
+
     if (e.key === 'End') {
       e.preventDefault();
       setActiveIndex(nextEnabled(0, -1));
+
       return;
     }
   }
@@ -186,7 +194,6 @@ export function Select({
 
       {isOpen && (
         <ul
-          ref={listRef}
           id={listId}
           role="listbox"
           tabIndex={-1}
