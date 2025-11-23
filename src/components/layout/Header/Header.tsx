@@ -4,11 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
-
 import cls from './Header.module.scss';
 
 const headerConfig = [

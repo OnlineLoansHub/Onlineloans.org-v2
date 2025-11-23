@@ -1,8 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import Link, { type LinkProps } from 'next/link';
-
 import { classNames } from '@/lib';
-
 import cls from './AppLink.module.scss';
 
 interface AppLinkProps extends LinkProps {

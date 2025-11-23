@@ -1,14 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import { classNames } from '@/lib';
-
 import cls from './Reviews.module.scss';
-
 import 'swiper/css';
 
 const activeRatingStar =

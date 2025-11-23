@@ -1,7 +1,5 @@
 import Image from 'next/image';
-
 import { classNames } from '@/lib';
-
 import cls from './Rating.module.scss';
 
 export const Rating = () => {

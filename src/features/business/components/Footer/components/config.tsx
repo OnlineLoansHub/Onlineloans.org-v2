@@ -1,7 +1,5 @@
 import Image from 'next/image';
-
 import { classNames } from '@/lib';
-
 import cls from './LenderTable.module.scss';
 
 export const LENDER_TABLE_CONFIG = [

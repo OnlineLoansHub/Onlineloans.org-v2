@@ -1,10 +1,8 @@
 import Image from 'next/image';
-
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { Button } from '@/components/ui/Button/Button';
 import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
-
 import cls from './FinalStep.module.scss';
 
 export const FinalStep = () => {

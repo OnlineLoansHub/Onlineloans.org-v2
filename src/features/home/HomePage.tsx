@@ -1,7 +1,5 @@
 import { LoanTypes } from '@/types';
-
 import { CreditTabs, Legend, Rating, Reviews } from './components';
-
 import cls from './HomePage.module.scss';
 
 interface IHomePageProps {

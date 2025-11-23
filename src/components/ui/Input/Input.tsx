@@ -1,7 +1,5 @@
 import { ChangeEvent, FC, InputHTMLAttributes } from 'react';
-
 import { classNames } from '@/lib';
-
 import cls from './Input.module.scss';
 
 interface IInputProps

@@ -2,17 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
 import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
 import { classNames } from '@/lib';
-
 import { Note, OfferBanner, Steps } from './components';
 import { FORM_CONFIG } from './config';
 import { FormKeys } from './types';
-
 import cls from './StepForm.module.scss';
 
 interface IStepFormProps {
@@ -130,12 +127,14 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
     if (isLast) {
       await onSubmit(e);
       handleFormFilled();
+
       return;
     }
 
     if (!stepValid) {
       setShake(true);
       window.setTimeout(() => setShake(false), 400);
+
       return;
     }
 

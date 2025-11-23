@@ -1,7 +1,5 @@
 import type { ButtonHTMLAttributes, FC } from 'react';
-
 import { classNames } from '@/lib';
-
 import cls from './Button.module.scss';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

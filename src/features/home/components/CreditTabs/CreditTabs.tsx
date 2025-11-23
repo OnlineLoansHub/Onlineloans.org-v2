@@ -2,13 +2,11 @@
 
 import { useCallback, useState } from 'react';
 import Image from 'next/image';
-
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
 import { LoanTypes } from '@/types';
-
 import cls from './CreditTabs.module.scss';
 
 const tabs = [
@@ -38,6 +36,7 @@ export const CreditTabs = ({ type }: ICreditTabsProps) => {
     // If empty, set empty string
     if (!numericValue) {
       setValue('');
+
       return;
     }
 
@@ -45,6 +44,7 @@ export const CreditTabs = ({ type }: ICreditTabsProps) => {
     const number = parseInt(numericValue, 10);
     if (isNaN(number)) {
       setValue('');
+
       return;
     }
 

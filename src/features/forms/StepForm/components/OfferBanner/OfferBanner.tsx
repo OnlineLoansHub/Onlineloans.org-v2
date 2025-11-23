@@ -1,7 +1,5 @@
 import Image from 'next/image';
-
 import { classNames } from '@/lib';
-
 import cls from './OfferBanner.module.scss';
 
 const OFFER_BANNER_CONFIG = [

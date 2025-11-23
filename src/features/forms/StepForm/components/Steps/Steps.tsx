@@ -1,10 +1,7 @@
 import Image from 'next/image';
-
 import { classNames } from '@/lib';
-
 import { STEP_CONFIG } from '../../config';
 import { FormSteps } from '../../types';
-
 import cls from './Steps.module.scss';
 
 interface IStepsProps {

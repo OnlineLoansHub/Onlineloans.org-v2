@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-
 import LoanPage from '@/features/business/LoanPage';
 import { LoanTypes } from '@/types';
 

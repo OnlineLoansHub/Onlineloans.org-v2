@@ -2,11 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-
 import { classNames } from '@/lib';
-
 import { LenderTable } from './components/LenderTable';
-
 import cls from './Footer.module.scss';
 
 export const Footer = () => {

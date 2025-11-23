@@ -2,15 +2,13 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettier from 'eslint-config-prettier/flat';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettier,
-  // Override default ignores of eslint-config-next.
+  // Override default ignores
   globalIgnores([
-    // Default ignores of eslint-config-next:
     '.next/**',
     'out/**',
     'build/**',
@@ -25,47 +23,33 @@ const eslintConfig = defineConfig([
     '.stylelintcache',
   ]),
   {
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-    },
     rules: {
-      // Import sorting
-      'simple-import-sort/imports': [
-        'error',
+      // Max line length
+      'max-len': [
+        'warn',
         {
-          groups: [
-            // React and external packages
-            ['^react', '^@?\\w'],
-            // Internal absolute imports (@/)
-            ['^@/'],
-            // Parent imports
-            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-            // Same-folder imports
-            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-            // SCSS module imports
-            ['\\.module\\.scss$'],
-          ],
+          code: 100,
+          tabWidth: 2,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreRegExpLiterals: true,
         },
       ],
-      'simple-import-sort/exports': 'error',
-      // Remove blank lines between imports, but allow blank line after 'use client'
+      // No padded blocks
+      'padded-blocks': ['error', 'never'],
+      // No multiple empty lines
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
+      // No lines between class members
+      'lines-between-class-members': ['error', 'never'],
+      // Padding between statements
       'padding-line-between-statements': [
         'error',
-        {
-          blankLine: 'never',
-          prev: 'import',
-          next: 'import',
-        },
-        {
-          blankLine: 'always',
-          prev: 'import',
-          next: '*',
-        },
-        {
-          blankLine: 'any',
-          prev: '*',
-          next: 'import',
-        },
+        { blankLine: 'always', prev: '*', next: 'function' },
+        { blankLine: 'always', prev: 'function', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'class' },
+        { blankLine: 'always', prev: 'block-like', next: '*' },
+        { blankLine: 'always', prev: '*', next: 'return' },
       ],
       // TypeScript rules
       '@typescript-eslint/no-unused-vars': [

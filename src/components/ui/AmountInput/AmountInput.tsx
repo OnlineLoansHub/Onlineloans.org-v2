@@ -1,13 +1,10 @@
 'use client';
 
 import { FocusEvent, useMemo, useState } from 'react';
-
 import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
 import { LoanTypes } from '@/types';
-
 import { AppLink } from '../AppLink/AppLink';
-
 import cls from './AmountInput.module.scss';
 
 interface AmountInputCardProps {

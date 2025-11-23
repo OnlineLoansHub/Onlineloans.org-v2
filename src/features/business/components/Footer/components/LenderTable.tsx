@@ -1,10 +1,7 @@
 import Image from 'next/image';
-
 import { Button } from '@/components/ui/Button/Button';
 import { classNames } from '@/lib';
-
 import { LENDER_TABLE_CONFIG } from './config';
-
 import cls from './LenderTable.module.scss';
 
 export const LenderTable = () => {
