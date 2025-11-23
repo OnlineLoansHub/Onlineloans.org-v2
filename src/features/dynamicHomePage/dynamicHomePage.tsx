@@ -27,28 +27,33 @@ export default function DynamicHomePage({ type, title }: IHomePageProps) {
       ? (sessionStorage.getItem(STORAGE_KEY) as LoanTypes | null)
       : null;
 
-    // If no previous type or same type, ensure it's visible
+    // If no previous type or same type, show immediately
     if (!prevType || prevType === type) {
-      if (!isVisible) {
+      // Use requestAnimationFrame to avoid synchronous setState warning
+      requestAnimationFrame(() => {
+        setDisplayTitle(title);
         setIsVisible(true);
-      }
+      });
+
       if (typeof window !== 'undefined') {
         sessionStorage.setItem(STORAGE_KEY, type);
       }
+
       return;
     }
 
     // Type changed - fade in the new title
-    if (!isVisible) {
+    requestAnimationFrame(() => {
+      setDisplayTitle(title);
       requestAnimationFrame(() => {
         setIsVisible(true);
       });
-    }
+    });
     
     if (typeof window !== 'undefined') {
       sessionStorage.setItem(STORAGE_KEY, type);
     }
-  }, [type, title, isVisible]);
+  }, [type, title]);
 
   return (
     <div className={cls.page}>
