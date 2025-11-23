@@ -11,7 +11,7 @@ export const LENDER_TABLE_CONFIG = [
     imgTitleElem: (
       <p className={classNames(cls.imgTitleElem, {}, [cls.imgTitle])}>
         <Image
-          src={'images/table/top-pick-icon.svg'}
+          src={'/images/table/top-pick-icon.svg'}
           alt={'Top Pick icon'}
           width={12}
           height={16}

@@ -1,0 +1,25 @@
+{
+  "name": "OnlineLoans.org - Fast & Secure Online Loans",
+  "short_name": "OnlineLoans",
+  "description": "Get approved for personal and business loans online in minutes. Fast, secure, and trusted by thousands of customers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#eff8ff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo/onlineloans-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo/onlineloans-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

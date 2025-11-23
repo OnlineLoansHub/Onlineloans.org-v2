@@ -13,7 +13,7 @@ export const FinalStep = () => {
         <li className={classNames(cls.listItem, {}, [cls.first])}>
           <div className={classNames(cls.listItemImgWrapper, {}, [cls.first])}>
             <Image
-              src={'images/icons/features/percent.svg'}
+              src={'/images/icons/features/percent.svg'}
               width={50}
               height={50}
               alt={'percent'}
@@ -28,7 +28,7 @@ export const FinalStep = () => {
         <li className={classNames(cls.listItem, {}, [cls.first])}>
           <div className={classNames(cls.listItemImgWrapper, {}, [cls.second])}>
             <Image
-              src={'images/icons/features/money.svg'}
+              src={'/images/icons/features/money.svg'}
               width={50}
               height={50}
               alt={'money'}
@@ -43,7 +43,7 @@ export const FinalStep = () => {
         <li className={cls.listItem}>
           <div className={cls.listItemImgWrapper}>
             <Image
-              src={'images/icons/features/money.svg'}
+              src={'/images/icons/features/money.svg'}
               width={50}
               height={50}
               alt={'money'}

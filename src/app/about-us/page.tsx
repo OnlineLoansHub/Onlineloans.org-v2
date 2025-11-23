@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
 
@@ -15,16 +16,24 @@ export default function About() {
               </div>
               <div className={cls.headerContentRight}>
                 <div className={cls.headerImgWrapper}>
-                  <img
+                  <Image
                     src="/about-page/header_image.jpg"
-                    alt=""
+                    alt="Financial services and loan comparison platform"
                     className={cls.headerImg}
-                    aria-hidden="true"
+                    width={600}
+                    height={400}
+                    priority
                   />
                   <div className={classNames(cls.headerCard, {}, [cls.headerCard1])}>
                     <div className={cls.headerCardTop}>
                       <p className={cls.headerCardTitle}>100,000+</p>
-                      <img src="/about-page/header_people.png" className={cls.headerCardImg} alt="drivers" />
+                      <Image
+                        src="/about-page/header_people.png"
+                        className={cls.headerCardImg}
+                        alt="100,000+ drivers connected with car lenders"
+                        width={60}
+                        height={60}
+                      />
                     </div>
                     <p className={cls.headerCardTxt}>drivers connected with a car lender</p>
                   </div>
@@ -41,10 +50,12 @@ export default function About() {
                       <p className={cls.headerCardTitle}>$22,000+</p>
                       <p className={cls.headerCardTxt}>Health care savings in 2 years</p>
                     </div>
-                    <img
+                    <Image
                       src="/about-page/hand_with_card_2.png"
                       className={cls.headerCardImg2}
-                      alt="hand with card"
+                      alt="Healthcare savings illustration"
+                      width={80}
+                      height={80}
                     />
                   </div>
                 </div>
@@ -53,27 +64,27 @@ export default function About() {
           </div>
         </header>
 
-        <main className={cls.about} id="about us">
+        <main className={cls.about} id="about-us">
           <div className={cls.containerContent}>
             <ul className={cls.aboutList}>
               <li className={classNames(cls.aboutListItem, {}, [cls.aboutListItem1])}>
-                <h3 className={cls.aboutListItemTitle}>Our Commitment to You</h3>
+                <h2 className={cls.aboutListItemTitle}>Our Commitment to You</h2>
                 <p className={cls.aboutListItemTxt}>Our team of researchers, writers, and industry experts aim to provide you with the knowledge and insights needed to make informed and confident financial decisions. We strive to offer you clear and practical advice to make your money decisions simple and stress-free.</p>
               </li>
               <li className={classNames(cls.aboutListItem, {}, [cls.aboutListItem2])}>
-                <h3 className={cls.aboutListItemTitle}>How We Make Money</h3>
+                <h2 className={cls.aboutListItemTitle}>How We Make Money</h2>
                 <p className={cls.aboutListItemTxt}>While Onlineloans.org is a free-to-use service, we earn commissions from our partners by promoting their products or services through affiliate links. The compensation we receive from our partners influences where, how, and in what order they appear on our site.</p>
               </li>
               <li className={classNames(cls.aboutListItem, {}, [cls.aboutListItem3])}>
-                <h3 className={cls.aboutListItemTitle}>Our Process</h3>
+                <h2 className={cls.aboutListItemTitle}>Our Process</h2>
                 <p className={cls.aboutListItemTxt}>Research and Analysis: Our team is dedicated to conducting comprehensive research and analysis on every product or service. We examine specifications, user feedback, expert opinions, and industry trends to provide you with the insights we believe will statistics you make informed decisions.</p>
               </li>
               <li className={classNames(cls.aboutListItem, {}, [cls.aboutListItem4])}>
-                <h3 className={cls.aboutListItemTitle}>Our Values</h3>
+                <h2 className={cls.aboutListItemTitle}>Our Values</h2>
                 <p className={cls.aboutListItemTxt}>Consumer Empowerment: Our goal is to equip consumers with the essential information they need to make informed and confident decisions. Quality: We are committed to excellence in our research and writing, ensuring that we deliver the highest quality content possible. Accessibility: We strive to make our content straightforward and accessible to everyone, regardless of their level of expertise.</p>
               </li>
               <li className={classNames(cls.aboutListItem, {}, [cls.aboutListItem5])}>
-                <h3 className={cls.aboutListItemTitle}>Contact Us</h3>
+                <h2 className={cls.aboutListItemTitle}>Contact Us</h2>
                 <p className={cls.aboutListItemTxt}>We love hearing from our users! If you have any questions, feedback, or suggestions, feel free to reach out to us. Your input helps us improve and serve you better. Email: Contact@onlineloans.org</p>
               </li>
             </ul>

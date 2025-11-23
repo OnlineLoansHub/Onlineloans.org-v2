@@ -26,7 +26,7 @@ export const Steps = ({ activeStep }: IStepsProps) => {
             <p className={classNames(cls.step)}>
               {isSuccess ? (
                 <Image
-                  src={'images/icons/features/onlineloans-check.svg'}
+                  src={'/images/icons/features/onlineloans-check.svg'}
                   width={16}
                   height={12}
                   alt={'Check mark'}

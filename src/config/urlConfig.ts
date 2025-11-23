@@ -1,8 +1,8 @@
 export const URL_CONFIG = {
   main: '/',
-  business: '/business',
-  personal: '/personal',
-  about: '/about',
+  business: '/business-loan',
+  personal: '/personal-loan',
+  about: '/about-us',
   partner: '/partner-with-us',
-  businessLoan: '/business-loan',
+  businessLoan: '/business-loan/apply',
 };

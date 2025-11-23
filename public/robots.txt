@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://onlineloans.org/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+# Crawl-delay: 1
+

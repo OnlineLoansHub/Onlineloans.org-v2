@@ -17,7 +17,7 @@ export const OfferBanner = () => {
             <li key={txt} className={cls.listItem}>
               <Image
                 src={
-                  'images/icons/features/onlineloans-verified-badge-icon.svg'
+                  '/images/icons/features/onlineloans-verified-badge-icon.svg'
                 }
                 width={32}
                 height={32}
@@ -31,7 +31,7 @@ export const OfferBanner = () => {
       </ul>
       <div className={cls.bannerImgWrapper}>
         <Image
-          src={'images/form/onlineloans-form-image.svg'}
+          src={'/images/form/onlineloans-form-image.svg'}
           fill
           alt={'happy loan banner'}
           className={cls.bannerImg}

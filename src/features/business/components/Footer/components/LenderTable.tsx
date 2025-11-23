@@ -79,7 +79,7 @@ export const LenderTable = () => {
                   >
                     Get My Rate
                     <Image
-                      src={'images/icons/features/arrow-right.svg'}
+                      src={'/images/icons/features/arrow-right.svg'}
                       width={24}
                       height={24}
                       alt={'Continue arrow'}

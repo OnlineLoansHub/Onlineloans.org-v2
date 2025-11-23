@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
 
@@ -68,7 +69,13 @@ export default function PartnerWithUs() {
               <div className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperDesktop])}>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard1])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/growth.svg" alt="growth" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/growth.svg"
+                      alt="High ROI growth icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>High ROI at scale</p>
                   <p className={cls.headerCardTxt}>
@@ -77,14 +84,26 @@ export default function PartnerWithUs() {
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard2])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/quality.svg" alt="quality" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/quality.svg"
+                      alt="Top quality traffic icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>Top quality traffic</p>
                   <p className={cls.headerCardTxt}>Large volumes of high-quality leads that turn into long-term customers</p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard3])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/goal.svg" alt="goal" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/goal.svg"
+                      alt="Massive exposure icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>Massive exposure</p>
                   <p className={cls.headerCardTxt}>Reach valuable consumers at the right moment of purchase decisions</p>
@@ -154,7 +173,13 @@ export default function PartnerWithUs() {
               <div className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperMobile])}>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard1])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/growth.svg" alt="growth" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/growth.svg"
+                      alt="High ROI growth icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>High ROI at scale</p>
                   <p className={cls.headerCardTxt}>
@@ -163,14 +188,26 @@ export default function PartnerWithUs() {
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard2])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/quality.svg" alt="quality" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/quality.svg"
+                      alt="Top quality traffic icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>Top quality traffic</p>
                   <p className={cls.headerCardTxt}>Large volumes of high-quality leads that turn into long-term customers</p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard3])}>
                   <div className={cls.headerCardImgWrapper}>
-                    <img src="/partner-with-us/goal.svg" alt="goal" className={cls.headerCardImg} />
+                    <Image
+                      src="/partner-with-us/goal.svg"
+                      alt="Massive exposure icon"
+                      className={cls.headerCardImg}
+                      width={64}
+                      height={64}
+                    />
                   </div>
                   <p className={cls.headerCardTitle}>Massive exposure</p>
                   <p className={cls.headerCardTxt}>Reach valuable consumers at the right moment of purchase decisions</p>
