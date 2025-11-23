@@ -9,24 +9,21 @@ import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
 import cls from './Header.module.scss';
 
-const headerConfig = [
-  {
-    title: 'Home',
-    path: URL_CONFIG.main,
-    pathMatch: [URL_CONFIG.business, URL_CONFIG.personal, URL_CONFIG.main],
-  },
-  {
-    title: 'About',
-    path: URL_CONFIG.about,
-  },
+interface HeaderConfigItem {
+  title: string;
+  path: string;
+  pathMatch?: string[];
+}
+
+const headerConfig: HeaderConfigItem[] = [
   {
     title: 'Partner with us',
     path: URL_CONFIG.partner,
   },
   {
-    title: 'Contact',
-    path: URL_CONFIG.contact,
-  },
+    title: 'About Us',
+    path: URL_CONFIG.about,
+  }
 ];
 
 export const Header = () => {

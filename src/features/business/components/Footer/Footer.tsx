@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import { LenderTable } from './components/LenderTable';
@@ -9,12 +9,26 @@ import cls from './Footer.module.scss';
 export const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const footerRef = useRef<HTMLDivElement>(null);
 
   const isShowTable = useMemo(() => isOpen || isMobile, [isMobile, isOpen]);
 
   const handleClick = () => {
     setIsOpen((prev) => !prev);
   };
+
+  // Smooth scroll to footer when opened on desktop
+  useEffect(() => {
+    if (isOpen && !isMobile && footerRef.current) {
+      // Small delay to ensure the footer content is rendered
+      setTimeout(() => {
+        footerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100);
+    }
+  }, [isOpen, isMobile]);
 
   useEffect(() => {
     const updateHeight = () => {
@@ -38,7 +52,7 @@ export const Footer = () => {
   }, []);
 
   return (
-    <div className={classNames(cls.footer, { [cls.open]: isShowTable })}>
+    <div ref={footerRef} className={classNames(cls.footer, { [cls.open]: isShowTable })}>
       <div className={cls.container}>
         {!isMobile && (
           <button

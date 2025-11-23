@@ -4,7 +4,5 @@ export const URL_CONFIG = {
   personal: '/personal',
   about: '/about',
   partner: '/partner-with-us',
-  contact: '/contact',
-
   businessLoan: '/business-loan',
 };

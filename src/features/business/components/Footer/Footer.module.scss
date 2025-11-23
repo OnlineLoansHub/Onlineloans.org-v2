@@ -5,6 +5,7 @@
   background-color: var(--color-primary);
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease, padding-bottom 0.3s ease;
 
   &.open {
     height: fit-content;
