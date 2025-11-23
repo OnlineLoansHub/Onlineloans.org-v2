@@ -11,14 +11,14 @@ import cls from './CreditTabs.module.scss';
 
 const tabs = [
   {
-    title: 'Personal Loan',
-    type: LoanTypes.personal,
-    href: URL_CONFIG.personal,
-  },
-  {
     title: 'Business Loan',
     type: LoanTypes.business,
     href: URL_CONFIG.business,
+  },
+  {
+    title: 'Personal Loan',
+    type: LoanTypes.personal,
+    href: URL_CONFIG.personal,
   },
 ];
 
