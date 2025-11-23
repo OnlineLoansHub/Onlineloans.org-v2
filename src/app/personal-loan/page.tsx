@@ -13,5 +13,15 @@ export const metadata: Metadata = generateSEOMetadata({
 });
 
 export default function PersonalLoansPage() {
-  return <DynamicHomePage type={LoanTypes.personal} />;
+  return (
+    <DynamicHomePage
+      type={LoanTypes.personal}
+      title={
+        <>
+          Money when you need it. <br />
+          Fast, easy, secure.
+        </>
+      }
+    />
+  );
 }

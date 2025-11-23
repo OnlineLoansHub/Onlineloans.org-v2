@@ -64,6 +64,9 @@
   font-weight: var(--font-weight-bold);
   line-height: normal;
   font-size: var(--title-size-large);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
 
   /* 📱 MOBILE (phones + small tablets) */
 @media (max-width: 768px) {
@@ -84,6 +87,11 @@
 @media (min-width: 1601px) {
   font-size: var(--title-size-large);
 }
+}
+
+.titleVisible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .reviews {
