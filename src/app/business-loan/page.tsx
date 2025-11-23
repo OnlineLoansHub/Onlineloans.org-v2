@@ -18,8 +18,8 @@ export default function BusinessLoansPage() {
       type={LoanTypes.business}
       title={
         <>
-          Financing for <br />
-          small businesses
+          Money when you need it. <br />
+          Fast, easy, secure.
         </>
       }
     />

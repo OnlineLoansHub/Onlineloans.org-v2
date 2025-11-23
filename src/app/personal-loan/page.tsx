@@ -18,7 +18,7 @@ export default function PersonalLoansPage() {
       type={LoanTypes.personal}
       title={
         <>
-          Simple personal loans. <br />
+          Money when you need it. <br />
           Fast, easy, secure.
         </>
       }
