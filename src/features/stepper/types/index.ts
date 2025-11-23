@@ -81,8 +81,8 @@ export interface IFormState {
 export interface IStepperConfig {
   formConfig: IFormConfig[];
   stepConfig: IStepConfig[];
-  initialFormState: Record<string, any>;
+  initialFormState: Record<string, unknown>;
   validators: Partial<Record<string, (v: unknown) => boolean>>;
-  onSubmit: (formData: Record<string, any>) => Promise<void>;
+  onSubmit: (formData: Record<string, unknown>) => Promise<void>;
   currencyFields?: string[]; // Fields that should be formatted as currency
 }
