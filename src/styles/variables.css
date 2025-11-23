@@ -50,6 +50,14 @@
   --bp-mobile: 480px;
   --bp-tablet: 768px;
   --bp-desktop: 1024px;
+  --bp-laptop: 1600px;
+  --bp-large-monitor: 1601px;
+
+  /* 📝 Title Font Sizes */
+  --title-size-mobile: 1.6rem;
+  --title-size-tablet: 2rem;
+  --title-size-laptop: 2.6rem;
+  --title-size-large: 4rem;
 }
 
 /* 🌙 Optional dark mode */

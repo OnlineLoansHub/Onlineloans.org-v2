@@ -28,6 +28,11 @@
     padding: 0 1.25rem 0 1.25rem;
     box-shadow: 0 2px 8px 0 #0000000a;
   }
+
+  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
+@media (min-width: 1025px) and (max-width: 1600px) {
+  padding: 0 5.25rem 0 5.25rem;
+}
 }
 
 .logo {
