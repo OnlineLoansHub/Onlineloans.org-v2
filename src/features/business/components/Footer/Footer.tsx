@@ -57,7 +57,16 @@ export const Footer = () => {
                 />
               </>
             ) : (
-              'Want to explore before deciding?'
+              <div className={cls.footerWrapper}>
+                <span className={cls.btnText}>Want to explore before deciding?</span>
+                <Image
+                  src={'/images/icons/features/form-footer-arrowDown.svg'}
+                  alt={'arrow'}
+                  width={16}
+                  height={32}
+                  className={cls.btnImgFooterArrow}
+                />
+              </div>
             )}
           </button>
         )}

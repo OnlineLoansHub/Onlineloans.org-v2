@@ -2,9 +2,11 @@
   // position: fixed;
   bottom: 0;
   width: 100%;
-  height: 96px;
-  padding: 27px 0;
+  height: 2.63ren;
+  padding: 1.3875rem 0;
   background-color: var(--color-primary);
+  justify-content: center;
+  align-items: center;
 
   &.open {
     height: fit-content;
@@ -42,6 +44,33 @@
     background: #f9fafb;
     box-shadow: 0 0 7.35px 0 #0000000a;
   }
+}
+
+.footerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btnText {
+  color: #FFF;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 1.55rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.btnImgFooterArrow {
+  height: 16px;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.btnImg {
+  width: 1.0625rem;
+  height: 0.625rem;
 }
 
 .footerTitle {
