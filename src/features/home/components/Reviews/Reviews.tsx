@@ -56,8 +56,8 @@ const inactiveratingStar =
     {
       id: 5,
       rating: 4,
-      source: 'Facebook Review',
-      sourceImgPath: '/images/icons/social/facebook-icon.svg',
+      source: 'Google Review',
+      sourceImgPath: '/images/icons/social/google-signin-button-icon.svg',
       text: 'I needed funding for a new project and OnlineLoans connected me with great lenders.',
       authorName: 'Carlos Martinez',
       authorAlt: 'review author Carlos Martinez',
@@ -66,8 +66,8 @@ const inactiveratingStar =
     {
       id: 6,
       rating: 5,
-      source: 'Yelp Review',
-      sourceImgPath: '/images/icons/social/yelp-icon.svg',
+      source: 'Google Review',
+      sourceImgPath: '/images/icons/social/google-signin-button-icon.svg',
       text: 'Super quick and reliable — got approved for a personal loan in under 24 hours!',
       authorName: 'Emily Johnson',
       authorAlt: 'review author Emily Johnson',
