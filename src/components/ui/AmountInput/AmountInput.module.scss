@@ -7,16 +7,13 @@ $left-offset-s: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   width: 100%;
   padding: 10px;
   padding-left: 0;
   border: 2px solid transparent;
   border-radius: $border-radius;
-
   background: #fff;
   box-shadow: 0 0 12px 0 #0000000a;
-
   transition: $transition;
 
   &:hover {
@@ -36,25 +33,20 @@ $left-offset-s: 18px;
 
 .inputContainer {
   position: relative;
-
   display: flex;
   flex: 1;
   flex-direction: row;
-
   font-size: 14px;
 }
 
 .label {
   pointer-events: none;
-
   position: absolute;
   top: 50%;
   left: $left-offset;
   transform: translateY(-50%);
-
   font-size: 20px;
   color: #64757d;
-
   transition: $transition;
 
   .amount {
@@ -81,10 +73,8 @@ $left-offset-s: 18px;
   width: 100%;
   padding: 18px 0 4px $left-offset;
   border: none;
-
   font-family: var(--font-poppins);
   font-size: 20px;
-
   background: transparent;
   outline: none;
 
@@ -100,18 +90,14 @@ $left-offset-s: 18px;
 
 .button {
   cursor: pointer;
-
   margin-left: 16px;
   padding: 20px 24px;
   border: none;
   border-radius: 40px;
-
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
-
   background: var(--color-secondary);
-
   transition: $transition;
 
   &:hover {

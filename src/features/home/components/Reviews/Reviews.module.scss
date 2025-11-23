@@ -6,15 +6,12 @@
   &::before {
     pointer-events: none;
     content: '';
-
     position: absolute;
     z-index: 2;
     top: 0;
     left: 0;
-
     width: 80px;
     height: 100%;
-
     background: linear-gradient(
       270deg,
       rgb(239 247 255 / 0%) 23.46%,
@@ -25,16 +22,13 @@
   &::after {
     pointer-events: none;
     content: '';
-
     position: absolute;
     z-index: 2;
     top: 0;
     right: 0;
     transform: rotate(-180deg);
-
     width: 80px;
     height: 100%;
-
     background: linear-gradient(
       270deg,
       rgb(239 247 255 / 0%) 23.46%,
@@ -63,11 +57,9 @@
   flex-direction: column;
   flex-shrink: 0;
   gap: 12px;
-
   width: 400px;
   padding: 24px;
   border-radius: 24px;
-
   background: var(--color-white);
 
   &:first-child {
@@ -93,7 +85,6 @@
     display: flex;
     gap: 3px;
     align-items: center;
-
     font-size: 16px;
     font-weight: 600;
     line-height: 16px;
@@ -110,7 +101,6 @@
     display: flex;
     gap: 16px;
     align-items: center;
-
     font-size: 16px;
     font-weight: 500;
   }

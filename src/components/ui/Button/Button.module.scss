@@ -1,19 +1,14 @@
 .btn {
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 20px 48px;
   border-radius: 48px;
-
   font-family: var(--font-poppins);
   font-size: 20px;
   font-weight: 500;
-
   box-shadow: 0 0 12px 0 #0000000a;
-
   transition: all 0.2s;
 
   &.primary {

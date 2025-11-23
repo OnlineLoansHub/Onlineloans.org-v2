@@ -1,6 +1,5 @@
 .offerBanner {
   flex-shrink: 0;
-
   width: 40%;
   max-width: 558px;
   height: 100%;
@@ -8,7 +7,6 @@
   padding: 32px;
   border: 1px solid #e4edff;
   border-radius: 24px;
-
   background: #f6f9ffb2;
 
   @media (width <= 1200) {
@@ -44,7 +42,6 @@
   display: flex;
   gap: 12px;
   align-items: center;
-
   font-size: 18px;
   font-weight: 500;
 
@@ -65,7 +62,6 @@
 
 .bannerImgWrapper {
   position: relative;
-
   width: 100%;
   max-width: 406px;
   height: 100%;
