@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import cls from './Rating.module.scss';
 
-export const Rating = () => {
+export const Rating = memo(() => {
   return (
     <div className={cls.ratings}>
       <div className={classNames(cls.ratingBlock, {}, [cls.product])}>
@@ -36,4 +37,6 @@ export const Rating = () => {
       </div>
     </div>
   );
-};
+});
+
+Rating.displayName = 'Rating';

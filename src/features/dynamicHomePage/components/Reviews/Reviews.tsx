@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -75,7 +76,7 @@ const inactiveratingStar =
     },
   ];  
 
-export const Reviews = () => {
+export const Reviews = memo(() => {
   return (
     <div className={cls.wrapper}>
       <Swiper
@@ -148,4 +149,6 @@ export const Reviews = () => {
       </Swiper>
     </div>
   );
-};
+});
+
+Reviews.displayName = 'Reviews';

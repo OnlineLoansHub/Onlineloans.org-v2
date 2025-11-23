@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import cls from './Legend.module.scss';
 
-export const Legend = () => {
+export const Legend = memo(() => {
   return (
     <div className={cls.heros}>
       <div className={cls.herosImages}>
@@ -46,4 +47,6 @@ export const Legend = () => {
       </div>
     </div>
   );
-};
+});
+
+Legend.displayName = 'Legend';

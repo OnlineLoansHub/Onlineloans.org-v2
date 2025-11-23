@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import Image from 'next/image';
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
@@ -26,7 +26,7 @@ interface ICreditTabsProps {
   type: LoanTypes;
 }
 
-export const CreditTabs = ({ type }: ICreditTabsProps) => {
+export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
   const [value, setValue] = useState('');
 
   const handleValueChange = useCallback((value: string) => {
@@ -111,4 +111,9 @@ export const CreditTabs = ({ type }: ICreditTabsProps) => {
       </div>
     </div>
   );
-};
+}, (prevProps, nextProps) => {
+  // Only rerender if type changes
+  return prevProps.type === nextProps.type;
+});
+
+CreditTabs.displayName = 'CreditTabs';
