@@ -1,5 +1,4 @@
 .page {
-  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -12,12 +11,13 @@
   flex: 1 1 auto;
   width: 100%;
   max-width: var(--max-container-width);
-  height: 100%;
+  max-height: calc(100vh - var(--header-height) - 4.32rem);
   margin: 0 auto;
   padding: 0 20px;
 
   @media (max-width: 768px) {
     padding-bottom: 20px;
+    max-height: 100%;
   }
 
   /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
