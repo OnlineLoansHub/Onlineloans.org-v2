@@ -20,13 +20,12 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: var(--max-container-width);
   height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 7.5rem 0 7.5rem;
   background: var(--color-white);
 
   @media (width <= 768px) {
+    padding: 0 1.25rem 0 1.25rem;
     box-shadow: 0 2px 8px 0 #0000000a;
   }
 }
