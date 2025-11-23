@@ -58,6 +58,22 @@
   --title-size-tablet: 2rem;
   --title-size-laptop: 2.6rem;
   --title-size-large: 4rem;
+
+  /* About page specific variables */
+  --main-bg-color: #f8f8f8;
+  --footer-bg-color: #101f30;
+  --header-main-color: #ecfaff;
+  --header-secondary-color: #effdf9;
+  --primary-light-color: #fff;
+  --primary-dark-color: #161616;
+  --primary-dark-color-2: #0e2b56;
+  --secondary-color: #e5e7f1;
+  --secondary-color-2: #161616;
+  --border-raduis: 10px;
+  --primary-btn-color: #1ab59b;
+  --secondary-btn-color: #c1edec;
+  --tikTok: 'TikTok Sans', sans-serif;
+  --roboto-font: 'Roboto', sans-serif;
 }
 
 /* 🌙 Optional dark mode */
