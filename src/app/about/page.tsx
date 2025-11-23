@@ -1,73 +1,12 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
 import { Footer } from '../../features/business/components/Footer/Footer';
 
-const REVIEWS = [
-  {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-    author: 'James Sanches',
-    jobTitle: 'Marketing director',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-    author: 'James Sanches 2',
-    jobTitle: 'Marketing director',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-    author: 'James Sanches 3',
-    jobTitle: 'Marketing director',
-  },
-];
-
-const TOTAL_SLIDE_BLOCKS = 5;
-
 export default function About() {
-  const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [isAutoSliding, setIsAutoSliding] = useState(true);
-
-  // Auto-slide for reviews
-  useEffect(() => {
-    if (!isAutoSliding) return;
-
-    const interval = setInterval(() => {
-      setCurrentReviewIndex((prev) => (prev < REVIEWS.length - 1 ? prev + 1 : 0));
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [isAutoSliding]);
-
-  const handleReviewPrev = useCallback(() => {
-    setCurrentReviewIndex((prev) => (prev > 0 ? prev - 1 : prev));
-    setIsAutoSliding(false);
-    setTimeout(() => setIsAutoSliding(true), 5000);
-  }, []);
-
-  const handleReviewNext = useCallback(() => {
-    setCurrentReviewIndex((prev) => (prev < REVIEWS.length - 1 ? prev + 1 : prev));
-    setIsAutoSliding(false);
-    setTimeout(() => setIsAutoSliding(true), 5000);
-  }, []);
-
-  const handleSlidePrev = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev > 0 ? prev - 1 : prev));
-  }, []);
-
-  const handleSlideNext = useCallback(() => {
-    setCurrentSlideIndex((prev) => (prev < TOTAL_SLIDE_BLOCKS - 1 ? prev + 1 : prev));
-  }, []);
-
-  const handleSlideDotClick = useCallback((index: number) => {
-    setCurrentSlideIndex(index);
-  }, []);
-
   return (
       <div className={cls.container}>
-
         <header className={cls.header}>
           <div className={cls.containerContent}>
             <div className={cls.headerContent}>
