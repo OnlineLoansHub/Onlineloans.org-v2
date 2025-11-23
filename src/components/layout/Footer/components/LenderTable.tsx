@@ -33,7 +33,7 @@ export const LenderTable = () => {
                       on{' '}
                       <Image
                         src={
-                          'images/icons/features/onlineloans-decorative-shape.svg'
+                          '/images/icons/features/onlineloans-decorative-shape.svg'
                         }
                         alt={'onlineloans-decorative-shape'}
                         width={26}
@@ -180,3 +180,4 @@ export const LenderTable = () => {
     </div>
   );
 };
+

@@ -82,3 +82,4 @@ export const LENDER_TABLE_CONFIG = [
     ],
   },
 ];
+

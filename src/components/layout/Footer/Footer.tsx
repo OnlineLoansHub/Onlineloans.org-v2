@@ -88,7 +88,7 @@ export const Footer = () => {
           <>
             <p className={cls.footerTitle}>Want to explore before deciding?</p>
             <p className={cls.footerSubtitle}>
-              That’s okay — you can skip the form for now and browse all
+              That's okay — you can skip the form for now and browse all
               available loan plans. Compare interest rates, terms, and lenders
               side by side.
             </p>
@@ -99,3 +99,4 @@ export const Footer = () => {
     </div>
   );
 };
+
