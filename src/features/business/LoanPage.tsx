@@ -23,13 +23,11 @@ export default function LoanPage({ type: _type }: IHomePageProps) {
   return (
     <div className={cls.page}>
       <div className={cls.container}>
-        <main className={cls.main}>
           {!isFormFilled ? (
             <StepForm handleFormFilled={handleFormFilled} amount={amount} />
           ) : (
             <FinalStep />
           )}
-        </main>
       </div>
       <Footer />
     </div>
