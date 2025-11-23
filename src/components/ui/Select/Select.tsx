@@ -10,7 +10,7 @@ import {
 } from 'react';
 import Image from 'next/image';
 
-import { classNames } from '@/shared';
+import { classNames } from '@/lib';
 
 import cls from './Select.module.scss';
 

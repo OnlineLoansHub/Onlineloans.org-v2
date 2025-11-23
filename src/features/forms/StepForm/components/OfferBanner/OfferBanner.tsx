@@ -1,0 +1,44 @@
+import Image from 'next/image';
+
+import { classNames } from '@/lib';
+
+import cls from './OfferBanner.module.scss';
+
+const OFFER_BANNER_CONFIG = [
+  'It’s completely free to check your options!',
+  'Checking eligibility won’t affect your credit score!',
+  'Information is shared only with verified partners!',
+];
+
+export const OfferBanner = () => {
+  return (
+    <div className={classNames(cls.offerBanner)}>
+      <ul className={cls.list}>
+        {OFFER_BANNER_CONFIG.map((txt) => {
+          return (
+            <li key={txt} className={cls.listItem}>
+              <Image
+                src={
+                  'images/icons/features/onlineloans-verified-badge-icon.svg'
+                }
+                width={32}
+                height={32}
+                alt={'verified-badge-icon'}
+                className={cls.listItemImg}
+              />
+              <p>{txt}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <div className={cls.bannerImgWrapper}>
+        <Image
+          src={'images/form/onlineloans-form-image.svg'}
+          fill
+          alt={'happy loan banner'}
+          className={cls.bannerImg}
+        />
+      </div>
+    </div>
+  );
+};

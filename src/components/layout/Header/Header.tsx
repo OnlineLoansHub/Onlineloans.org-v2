@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { AppLink } from '@/components/ui/AppLink/AppLink';
-import { classNames, URL_CONFIG } from '@/shared';
+import { URL_CONFIG } from '@/config';
+import { classNames } from '@/lib';
 
 import cls from './Header.module.scss';
 

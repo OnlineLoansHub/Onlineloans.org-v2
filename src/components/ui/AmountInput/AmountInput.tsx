@@ -2,8 +2,9 @@
 
 import { FocusEvent, useMemo, useState } from 'react';
 
-import { classNames, URL_CONFIG } from '@/shared';
-import { LoanTypes } from '@/shared/types';
+import { URL_CONFIG } from '@/config';
+import { classNames } from '@/lib';
+import { LoanTypes } from '@/types';
 
 import { AppLink } from '../AppLink/AppLink';
 
