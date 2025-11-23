@@ -1,7 +1,7 @@
 import { LoanTypes } from '@/types';
 import { CreditTabs, Legend, Rating, Reviews } from './components';
 import cls from './HomePage.module.scss';
-
+import { Footer } from '../business/components';
 interface IHomePageProps {
   type: LoanTypes;
 }
@@ -23,6 +23,7 @@ export default function HomePage({ type }: IHomePageProps) {
           <Reviews />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
