@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { StepForm } from '@/features/forms/StepForm/StepForm';
 import { LoanTypes } from '@/types';
-import { FinalStep, Footer } from './components';
+import { FinalStep } from './components';
 import cls from './LoanPage.module.scss';
 
 interface IHomePageProps {
@@ -29,7 +29,6 @@ export default function LoanPage({ type: _type }: IHomePageProps) {
             <FinalStep />
           )}
       </div>
-      <Footer />
     </div>
   );
 }

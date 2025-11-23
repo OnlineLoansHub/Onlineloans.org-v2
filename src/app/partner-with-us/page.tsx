@@ -3,7 +3,6 @@
 import { useState, useCallback } from 'react';
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
-import { Footer } from '../../features/business/components/Footer/Footer';
 
 export default function PartnerWithUs() {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -194,7 +193,6 @@ export default function PartnerWithUs() {
         </div>
       )}
       </div>
-      <Footer />
     </div>
   );
 }

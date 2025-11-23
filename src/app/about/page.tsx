@@ -2,7 +2,6 @@
 
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
-import { Footer } from '../../features/business/components/Footer/Footer';
 
 export default function About() {
   return (
@@ -80,7 +79,6 @@ export default function About() {
             </ul>
           </div>
         </main>
-        <Footer />
       </div>
   );
 }
