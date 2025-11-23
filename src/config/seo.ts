@@ -22,6 +22,7 @@ export const CONTACT_EMAIL = 'contact@onlineloans.org';
  */
 export function getCanonicalUrl(path: string): string {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
+
   return `${SITE_URL}${cleanPath}`;
 }
 

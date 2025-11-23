@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { StepForm } from '@/features/forms/StepForm/StepForm';
+import { StepForm } from '@/features/stepper/StepForm';
 import { LoanTypes } from '@/types';
 import { FinalStep } from './components';
 import cls from './LoanPage.module.scss';

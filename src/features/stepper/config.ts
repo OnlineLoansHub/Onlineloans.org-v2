@@ -1,5 +1,4 @@
 import { FormKeys, FormSteps, IFormConfig } from './types';
-
 import cls from './StepForm.module.scss';
 
 const currentYear = new Date().getFullYear();

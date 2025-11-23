@@ -1,2 +1,2 @@
 export { FinalStep } from './FinalStep/FinalStep';
-export { StepForm } from '@/features/forms/StepForm/StepForm';
+export { StepForm } from '@/features/stepper/StepForm';
