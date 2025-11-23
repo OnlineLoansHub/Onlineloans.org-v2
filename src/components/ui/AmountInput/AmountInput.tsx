@@ -26,7 +26,7 @@ const AmountCard = ({
           buttonText: 'See My Offer',
           placeholder: '$ Amount',
           maxAmountLabel: 'Up to $50k',
-          href: URL_CONFIG.businessLoan,
+          href: URL_CONFIG.personalLoan,
           amount: value,
         };
       }
