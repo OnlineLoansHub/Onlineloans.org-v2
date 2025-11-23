@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import HomePage from '@/features/home/HomePage';
+import DynamicHomePage from '@/features/dynamicHomePage/dynamicHomePage';
 import { LoanTypes } from '@/types';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
@@ -13,5 +13,5 @@ export const metadata: Metadata = generateSEOMetadata({
 });
 
 export default function BusinessLoansPage() {
-  return <HomePage type={LoanTypes.business} />;
+  return <DynamicHomePage type={LoanTypes.business} />;
 }

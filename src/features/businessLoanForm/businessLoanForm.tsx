@@ -2,16 +2,16 @@
 
 import { useCallback, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { StepForm } from '@/features/stepper/StepForm';
+import { Stepper } from '@/features/stepper/Stepper';
 import { LoanTypes } from '@/types';
 import { FinalStep } from './components';
-import cls from './LoanPage.module.scss';
+import cls from './businessLoanForm.module.scss';
 
 interface IHomePageProps {
   type: LoanTypes;
 }
 
-export default function LoanPage({ type: _type }: IHomePageProps) {
+export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
   const sp = useSearchParams();
   const amount = sp.get('amount') ?? '';
   const [isFormFilled, setFormFilled] = useState(false);
@@ -24,7 +24,7 @@ export default function LoanPage({ type: _type }: IHomePageProps) {
     <div className={cls.page}>
       <div className={cls.container}>
           {!isFormFilled ? (
-            <StepForm handleFormFilled={handleFormFilled} amount={amount} />
+            <Stepper handleFormFilled={handleFormFilled} amount={amount} />
           ) : (
             <FinalStep />
           )}

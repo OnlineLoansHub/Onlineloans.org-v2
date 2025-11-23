@@ -1,11 +1,11 @@
 import { LoanTypes } from '@/types';
 import { CreditTabs, Legend, Rating, Reviews } from './components';
-import cls from './HomePage.module.scss';
+import cls from './dynamicHomePage.module.scss';
 interface IHomePageProps {
   type: LoanTypes;
 }
 
-export default function HomePage({ type }: IHomePageProps) {
+export default function DynamicHomePage({ type }: IHomePageProps) {
   return (
     <div className={cls.page}>
       <div className={cls.mainContainer}>

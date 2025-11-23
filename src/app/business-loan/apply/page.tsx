@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import LoanPage from '@/features/business/LoanPage';
+import BusinessLoanForm from '@/features/businessLoanForm/businessLoanForm';
 import { LoanTypes } from '@/types';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = generateSEOMetadata({
 export default function BusinessLoanApplicationPage() {
   return (
     <Suspense fallback={<>...</>}>
-      <LoanPage type={LoanTypes.business} />
+      <BusinessLoanForm type={LoanTypes.business} />
     </Suspense>
   );
 }

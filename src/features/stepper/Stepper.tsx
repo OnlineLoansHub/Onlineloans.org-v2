@@ -10,7 +10,7 @@ import { classNames } from '@/lib';
 import { Note, OfferBanner, Steps } from './components';
 import { FORM_CONFIG } from './config';
 import { FormKeys } from './types';
-import cls from './StepForm.module.scss';
+import cls from './Stepper.module.scss';
 
 interface IStepFormProps {
   handleFormFilled: () => void;
@@ -27,7 +27,7 @@ const validators: Partial<Record<FormKeys, (v: unknown) => boolean>> = {
 
 const GOOGLE_URL = `https://script.google.com/macros/s/AKfycbyDWmr_uDQNNHEwUw-ZGMdRQWuS6EiV22Rt2jvhNQLEJUI-_5AtQ7obGkSyg2II6sJPSQ/exec`;
 
-export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
+export const Stepper = ({ handleFormFilled, amount }: IStepFormProps) => {
   const [formState, setFormState] = useState({
     [FormKeys.amount]: amount,
     [FormKeys.startMonth]: undefined,
