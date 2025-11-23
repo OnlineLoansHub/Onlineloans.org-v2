@@ -32,7 +32,7 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
     [FormKeys.amount]: amount,
     [FormKeys.startMonth]: undefined,
     [FormKeys.startYear]: undefined,
-    [FormKeys.revenue]: undefined,
+    [FormKeys.revenue]: '',
     [FormKeys.creditScore]: undefined,
     [FormKeys.loanFor]: undefined,
     [FormKeys.zipCode]: undefined,
@@ -96,7 +96,7 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
           [FormKeys.amount]: formState.amount,
           [FormKeys.startMonth]: formState.startMonth ?? '',
           [FormKeys.startYear]: formState.startYear ?? '',
-          [FormKeys.revenue]: formState.revenue ?? '',
+          [FormKeys.revenue]: String(formState.revenue ?? '').replace(/[^\d]/g, ''),
           [FormKeys.creditScore]: formState.creditScore ?? '',
           [FormKeys.loanFor]: formState.loanFor ?? '',
           [FormKeys.zipCode]: formState.zipCode ?? '',
@@ -114,8 +114,22 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
     }
   };
 
+  const formatCurrency = (value: string): string => {
+    const numericValue = value.replace(/[^\d]/g, '');
+    if (!numericValue) return '';
+    const number = parseInt(numericValue, 10);
+    if (isNaN(number)) return '';
+
+    return `$${number.toLocaleString('en-US')}`;
+  };
+
   const handleChange = (value: string | number, name: FormKeys) => {
-    setFormState((prev) => ({ ...prev, [name]: value }));
+    if (name === FormKeys.revenue) {
+      const formattedValue = formatCurrency(String(value));
+      setFormState((prev) => ({ ...prev, [name]: formattedValue }));
+    } else {
+      setFormState((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const goNext = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
