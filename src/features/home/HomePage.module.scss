@@ -5,9 +5,11 @@
 
 .mainContainer {
   width: 100%;
-  max-width: var(--max-container-width);
-  margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 7.5rem 0 7.5rem;
+
+  @media (width <= 768px) {
+    padding: 0 1.25rem 0 1.25rem;
+  }
 }
 
 .main {
@@ -44,47 +46,35 @@
 }
 
 .title {
-  grid-area: headline;
-  order: 1;
-  font-size: 64px;
+  color: var(--Primary, #2A3D66);
+  font-family: Poppins;
+  font-style: normal;
   font-weight: 700;
   line-height: normal;
+  font-size: 4rem; /* Default for monitors/desktops */
+}
 
-  @media (width <= 1440px) {
-    font-size: 48px;
-  }
-
-  @media (width <= 1200px) {
-    font-size: 40px;
-  }
-
-  @media (width <= 1024px) {
-    margin: 0 auto;
-    font-size: 36px;
-    text-align: center;
-
-    & br {
-      display: none;
-    }
-  }
-
-  @media (width <= 768px) {
-    font-size: 28px;
-  }
-
-  @media (width <= 576px) {
-    margin: unset;
-    text-align: left;
-
-    & br {
-      display: block;
-    }
-  }
-
-  @media (width <= 425px) {
-    font-size: 26px;
+/* 📱 Mobile (phones + small tablets) */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.6rem;
   }
 }
+
+/* 💻 Laptops (MacBook Air/Pro, Surface, 1080p laptops) */
+@media (min-width: 769px) and (max-width: 1440px) {
+  .title {
+    font-size: 2.6rem;
+  }
+}
+
+/* 🖥️ Monitors (1441px and above — large displays, 1440p, 4K) */
+@media (min-width: 1441px) {
+  .title {
+    font-size: 4rem;
+  }
+}
+
 
 .reviews {
   display: flex;
