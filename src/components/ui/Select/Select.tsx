@@ -53,7 +53,6 @@ export function Select({
 
   const rootRef = useRef<HTMLDivElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const listRef = useRef<HTMLUListElement | null>(null);
 
   const selectedIndex = useMemo(
     () => options.findIndex((o) => o.value === value),
@@ -195,7 +194,6 @@ export function Select({
 
       {isOpen && (
         <ul
-          ref={listRef}
           id={listId}
           role="listbox"
           tabIndex={-1}

@@ -8,9 +8,6 @@ import { AppLink } from '../AppLink/AppLink';
 import cls from './AmountInput.module.scss';
 
 interface AmountInputCardProps {
-  // buttonText?: string;
-  // placeholder?: string;
-  // maxAmountLabel?: string;
   type: LoanTypes;
   handleValueChange: (value: string) => void;
   value: string;

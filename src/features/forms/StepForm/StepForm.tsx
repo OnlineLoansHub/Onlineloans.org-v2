@@ -49,7 +49,6 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
   );
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const trackRef = useRef<HTMLDivElement | null>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const activeConfig = FORM_CONFIG[index];
@@ -70,7 +69,6 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
   const stepValid = useMemo(() => {
     return stepFieldNames.every((name) => {
       const v = formState[name];
-      // default rule: non-empty
       const nonEmpty = !(
         v === undefined ||
         v === null ||
@@ -109,11 +107,8 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
           [FormKeys.email]: formState.email ?? '',
         }).toString(),
       });
-      // const j = await res.json();
-      // if (!res.ok || j.status !== 'ok') throw new Error(j.message || 'Failed');
     } catch (e: unknown) {
       console.error(e);
-      // setErr(e.message || 'Ошибка');
     } finally {
       setIsLoading(false);
     }
@@ -133,7 +128,7 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
 
     if (!stepValid) {
       setShake(true);
-      window.setTimeout(() => setShake(false), 400);
+      setTimeout(() => setShake(false), 400);
 
       return;
     }
@@ -180,7 +175,6 @@ export const StepForm = ({ handleFormFilled, amount }: IStepFormProps) => {
       <div className={cls.stepFormWrapper}>
         <form className={cls.form}>
           <div
-            ref={trackRef}
             className={classNames(cls.track, { [cls.shake]: shake })}
             style={{
               transform: `translateX(-${index * 100}%)`,
