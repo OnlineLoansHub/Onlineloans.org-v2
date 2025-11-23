@@ -1,13 +1,16 @@
 // Component styles
 .container {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  background: #eff8ff;
 }
 
 .containerContent {
   max-width: 1200px;
   width: 100%;
-  height: 100%;
   margin: 0 auto;
+  padding: 0 100px;
 }
 
 .blockTitle {
@@ -21,30 +24,37 @@
 }
 
 .section {
-  padding: 30px 0;
+  padding: 30px 90px;
 }
 
 .header {
+  position: relative;
   width: 100%;
-  height: 100%;
-  background-image: url('/images/bg1.webp');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-height: 500px;
+  background: #eff8ff;
   padding: 110px 90px 60px 90px;
   color: #fff;
   margin-top: -70px;
+  overflow: hidden;
 }
 
 .headerContent {
+  position: relative;
   width: 100%;
   display: flex;
   gap: 23px;
+  align-items: flex-start;
+  z-index: 1;
 }
 
-.headerContentLeft,
+.headerContentLeft {
+  width: 50%;
+  flex-shrink: 0;
+}
+
 .headerContentRight {
   width: 50%;
+  flex-shrink: 0;
 }
 
 .headerTitle {
@@ -81,25 +91,30 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .headerImgWrapper {
   position: relative;
   width: 100%;
-  height: 100%;
   max-width: 582px;
-  max-height: 334px;
+  height: 334px;
   min-height: 334px;
   border-radius: 20px;
-  background-image: url('/about-page/header_image.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  overflow: visible;
 }
 
 .headerImg {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  border-radius: 20px;
+  display: block;
 }
 
 .headerCard {
@@ -110,6 +125,7 @@
   border-radius: 10px;
   color: #161616;
   padding: 10px;
+  z-index: 2;
 }
 
 .headerCardTop {
@@ -148,6 +164,7 @@
 .headerCard1 {
   right: -12px;
   bottom: 7px;
+  width: auto;
 }
 
 .headerCard1 .headerCardTitle {
@@ -157,24 +174,27 @@
 .headerCard2 {
   top: 13px;
   right: -25px;
-  width: 163px;
+  max-width: 180px;
 }
 
 .headerCard3 {
   display: flex;
+  align-items: center;
   bottom: 6px;
   left: -35px;
   width: 216px;
+  max-width: 220px;
   height: 80px;
 }
 
 .headerCard3TxtWrapper {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .logos {
-  padding: 20px 0;
+  padding: 20px 90px;
   background: #f4f4f4;
 }
 
@@ -206,17 +226,18 @@
 }
 
 .logosTitleName::before {
-  content: '';
+  content: '★';
   position: absolute;
   left: -20px;
   top: 50%;
   transform: translateY(-50%);
-  background-image: url('/about-page/star.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
   width: 18px;
   height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: currentColor;
 }
 
 .logoList {
@@ -268,7 +289,7 @@
 }
 
 .about {
-  padding-top: 90px;
+  padding: 90px 90px;
 }
 
 .aboutList {
@@ -325,7 +346,7 @@
 }
 
 .partner {
-  padding: 90px 0;
+  padding: 90px 90px;
 }
 
 .partnerContent {
@@ -409,7 +430,7 @@
 }
 
 .reviews {
-  padding: 80px 0;
+  padding: 80px 90px;
 }
 
 .reviewsContent {
@@ -571,6 +592,7 @@
 
 .explore {
   margin-bottom: 30px;
+  padding: 0 90px;
 }
 
 .exploreWrapper {
@@ -836,12 +858,34 @@
   }
 
   .header {
-    overflow: hidden;
-    padding: 90px 0 60px 0;
+    overflow: visible;
+    padding: 90px 16px 60px 16px;
+  }
+
+  .logos {
+    padding: 20px 16px;
+  }
+
+  .about {
+    padding: 90px 16px;
+  }
+
+  .partner {
+    padding: 90px 16px;
+  }
+
+  .reviews {
+    padding: 80px 16px;
+  }
+
+  .explore {
+    padding: 0 16px;
   }
 
   .headerImgWrapper {
     max-width: 530px;
+    height: 300px;
+    min-height: 300px;
   }
 
   .headerCard1 {
@@ -903,10 +947,23 @@
 
   .logos {
     background: transparent;
+    padding: 20px 16px;
   }
 
   .about {
-    padding-top: 40px;
+    padding: 40px 16px;
+  }
+
+  .partner {
+    padding: 90px 16px;
+  }
+
+  .reviews {
+    padding: 80px 16px;
+  }
+
+  .explore {
+    padding: 0 16px;
   }
 
   .logosWrapper {
@@ -1023,7 +1080,7 @@
   }
 
   .partner {
-    padding: 50px 0;
+    padding: 50px 16px;
   }
 
   .partnerBox {
@@ -1051,7 +1108,7 @@
   }
 
   .reviews {
-    padding: 20px 0;
+    padding: 20px 16px;
   }
 
   .reviewsContent {
@@ -1087,8 +1144,8 @@
 @media (max-width: 576px) {
   .headerImgWrapper {
     max-width: 324px;
-    max-height: 266px;
-    background-position: 38%;
+    height: 266px;
+    min-height: 266px;
   }
 
   .headerCard {
