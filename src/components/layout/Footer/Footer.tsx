@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import { LenderTable } from '@/components/LenderTable/LenderTable';
@@ -10,8 +11,20 @@ export const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const footerRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   const isShowTable = useMemo(() => isOpen || isMobile, [isMobile, isOpen]);
+
+  // Determine loan type based on current route
+  const loanType = useMemo(() => {
+    if (pathname?.includes('/personal-loan')) {
+      return 'personal' as const;
+    }
+    if (pathname?.includes('/business-loan')) {
+      return 'business' as const;
+    }
+    return undefined;
+  }, [pathname]);
 
   const handleClick = () => {
     setIsOpen((prev) => !prev);
@@ -95,7 +108,7 @@ export const Footer = () => {
               available loan plans. Compare interest rates, terms, and lenders
               side by side.
             </p>
-            <LenderTable />
+            <LenderTable loanType={loanType} />
           </>
         )}
       </div>

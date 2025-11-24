@@ -5,6 +5,7 @@ import cls from './LenderTable.module.scss';
 export const LENDER_TABLE_CONFIG = [
   {
     id: 1,
+    loanType: 'business' as const,
     imgSrc: '/images/table/LendingTree-logo.svg',
     alt: 'LendingTree-logo',
     height: 54,
@@ -32,6 +33,7 @@ export const LENDER_TABLE_CONFIG = [
   },
   {
     id: 2,
+    loanType: 'personal' as const,
     imgSrc: '/images/table/Credible-logo.svg',
     alt: 'Credible-logo',
     height: 40,
@@ -53,6 +55,7 @@ export const LENDER_TABLE_CONFIG = [
   },
   {
     id: 3,
+    loanType: 'personal' as const,
     imgSrc: '/images/table/Sofi-logo.svg',
     alt: 'Sofi-logo',
     height: 48,
@@ -68,6 +71,7 @@ export const LENDER_TABLE_CONFIG = [
   },
   {
     id: 4,
+    loanType: 'business' as const,
     imgSrc: '/images/table/LightStream-logo.svg',
     alt: 'LightStream-logo',
     height: 94,

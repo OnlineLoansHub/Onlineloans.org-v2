@@ -1,17 +1,27 @@
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button/Button';
 import { classNames } from '@/lib';
 import { LENDER_TABLE_CONFIG } from './config';
 import cls from './LenderTable.module.scss';
 
-export const LenderTable = () => {
+interface LenderTableProps {
+  loanType?: 'personal' | 'business';
+}
+
+export const LenderTable = ({ loanType }: LenderTableProps) => {
+  const filteredLenders = loanType
+    ? LENDER_TABLE_CONFIG.filter((lender) => lender.loanType === loanType)
+    : LENDER_TABLE_CONFIG;
+
   return (
     <div className={classNames(cls.wrapper)}>
       <ul className={classNames(cls.list)}>
-        {LENDER_TABLE_CONFIG.map((item) => {
+        {filteredLenders.map((item, index) => {
           return (
             <li key={item.title} className={cls.listItem}>
-              <p className={cls.listItemNumber}>{item.id}</p>
+              <p className={cls.listItemNumber}>{index + 1}</p>
               <div className={cls.listItemImgWrapper}>
                 <Image
                   src={item.imgSrc}
