@@ -95,9 +95,9 @@ export const LenderTable = () => {
       <div>
         <div className={cls.infoBlock}>
           <div>
-            <p className={cls.infoBlockTitle}>15,778 visitors</p>
+            <p className={cls.infoBlockTitle}>300+ visitors</p>
             <p className={cls.infoBlockSubtitle}>
-              connected with a leader in the past week
+              connected with a lender in the past week
             </p>
           </div>
           <div className={cls.infoBlockImgWrapper}>
