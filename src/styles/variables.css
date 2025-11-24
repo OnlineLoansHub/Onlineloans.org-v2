@@ -2,8 +2,6 @@
   /* 🎨 Colors (from Figma / OnlineLoans design) */
   --color-primary: #2a3d66;
   --color-secondary: #5ec189;
-  --color-secondary-3: #f9fafb;
-  --color-secondary-4: #4b5563;
   --color-black: #000;
   --color-gray-5: #9ca3af;
   --color-gray-6: #d1d5db;
@@ -26,27 +24,21 @@
   --color-dark-alpha-60: rgba(22, 22, 22, 0.6);
   --color-bg-light-blue: #eff8ff;
   --color-border-light: #f1f2f8;
-  --color-bg-light-gray: #f4f4f4;
   --color-bg-gray: #e5e7f1;
-  --color-bg-blue-light: #e5e7f9;
   --color-bg-blue-medium: #c7cbea;
   --color-bg-blue-medium-2: #b0b6e1;
   --color-bg-blue-medium-3: #9aa1d7;
   --color-bg-blue-medium-4: #858ccc;
-  --color-bg-beige: #f7f5f4;
   --color-border-gray: #a4a4a4;
-  --color-gray-text: #8d969c;
   --color-gray-text-alpha-80: rgba(64, 64, 64, 0.8);
   --color-text-dark-alpha: rgba(17, 24, 39, 0.5);
   --color-orange-light: #ffbc99;
   --color-purple-light: #cabdff;
   --color-green-light: #b5e4ca;
-  --color-text-dark: #151515;
   --color-border-light-gray: #ebebeb;
   --color-secondary-alpha: rgba(94, 193, 137, 0.06);
   --color-green-medium: #5ab180;
   --color-green-dark-2: #399963;
-  --color-text-gray: #64757d;
   --color-border-default: #e9eef5;
   --color-border-hover: #93d1b8;
   --color-ring-active: #5cc399;
@@ -68,7 +60,6 @@
 
   /* About page specific variables */
   --primary-dark-color: #161616;
-  --primary-dark-color-2: #0e2b56;
   --tikTok: 'TikTok Sans', sans-serif;
 }
 
