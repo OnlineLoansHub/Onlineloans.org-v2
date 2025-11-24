@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import Image from 'next/image';
 import { classNames } from '@/lib';
-import { LenderTable } from './components/LenderTable';
+import { LenderTable } from '@/components/LenderTable/LenderTable';
 import cls from './Footer.module.scss';
 
 export const Footer = () => {
