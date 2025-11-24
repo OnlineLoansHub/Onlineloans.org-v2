@@ -1,6 +1,7 @@
 'use client';
 
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
@@ -28,6 +29,33 @@ interface ICreditTabsProps {
 
 export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
   const [value, setValue] = useState('');
+  const pathname = usePathname();
+
+  // Reorder tabs so the tab matching the current route is first
+  const orderedTabs = useMemo(() => {
+    if (pathname?.includes('/personal-loan')) {
+      // Personal Loan first
+      return [...tabs].sort((a, b) => {
+        if (a.type === LoanTypes.personal) return -1;
+        if (b.type === LoanTypes.personal) return 1;
+
+        return 0;
+      });
+    }
+
+    if (pathname?.includes('/business-loan')) {
+      // Business Loan first
+      return [...tabs].sort((a, b) => {
+        if (a.type === LoanTypes.business) return -1;
+        if (b.type === LoanTypes.business) return 1;
+
+        return 0;
+      });
+    }
+
+    // Default: keep original order
+    return tabs;
+  }, [pathname]);
 
   const handleValueChange = useCallback((value: string) => {
     // Remove all non-numeric characters (only allow numbers)
@@ -56,7 +84,7 @@ export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
   return (
     <div className={cls.tabsWrapper}>
       <ul className={cls.tabs}>
-        {tabs.map((tab) => {
+        {orderedTabs.map((tab) => {
           return (
             <li
               key={tab.title}
