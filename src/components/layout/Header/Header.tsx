@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
@@ -52,18 +51,9 @@ export const Header = () => {
           onClick={toggleMenu}
           aria-label="Menu toggle"
         >
-          <Image
-            src={
-              isOpen
-                ? '/images/icons/navbar/close-icon.svg'
-                : '/images/icons/navbar/burger-icon.svg'
-            }
-            alt="burger icon"
-            width={25}
-            height={15}
-            className={cls.logoImage}
-            priority
-          />
+          <span className={cls.burgerLine}></span>
+          <span className={cls.burgerLine}></span>
+          <span className={cls.burgerLine}></span>
         </button>
         <ul className={classNames(cls.navList, { [cls.open]: isOpen })}>
           {headerConfig.map((item) => {
