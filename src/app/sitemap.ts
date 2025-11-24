@@ -7,13 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: `${baseUrl}/business`,
-      lastModified: currentDate,
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/personal`,
+      url: baseUrl,
       lastModified: currentDate,
       changeFrequency: 'daily',
       priority: 1.0,
@@ -21,11 +15,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${baseUrl}/business-loan`,
       lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.8,
+      changeFrequency: 'daily',
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}/business-loan/apply`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/personal-loan`,
+      lastModified: currentDate,
+      changeFrequency: 'daily',
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/personal-loan/apply`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about-us`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -35,12 +47,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/qa`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ];
 }
