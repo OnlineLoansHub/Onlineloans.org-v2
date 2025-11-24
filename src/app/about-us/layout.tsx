@@ -7,7 +7,7 @@ export const metadata: Metadata = generateSEOMetadata({
     'Learn about OnlineLoans.org - your trusted partner for comparing loans, insurance, and investment products. We empower smarter financial choices with transparent, comprehensive comparisons.',
   keywords:
     'about OnlineLoans.org, financial comparison, loan comparison platform, financial services, transparent lending',
-  path: '/about',
+  path: '/about-us',
 });
 
 export default function AboutLayout({
