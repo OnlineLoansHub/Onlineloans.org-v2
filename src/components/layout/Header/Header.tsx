@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
+import Logo from '@/components/ui/Logo/Logo';
 import { URL_CONFIG } from '@/config';
 import { classNames } from '@/lib';
 import cls from './Header.module.scss';
@@ -40,13 +41,11 @@ export const Header = () => {
           className={cls.logo}
           onClick={() => setIsOpen(false)}
         >
-          <Image
-            src="/images/logo/onlineloans-logo.png"
-            alt="OnlineLoans.org - Fast & Secure Online Loans"
-            width={101}
-            height={48}
-            className={cls.logoImage}
-            priority
+          <Logo
+            text="OnlineLoans.org"
+            textColor="var(--color-primary)"
+            fontSize={16}
+            className={cls.logoComponent}
           />
         </Link>
         <button

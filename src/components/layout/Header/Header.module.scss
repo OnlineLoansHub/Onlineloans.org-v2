@@ -36,13 +36,13 @@
 }
 
 .logo {
-  @media (width <= 768px) {
-    width: 60px;
-    height: 28px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 
-    & .logoImage {
-      width: inherit;
-      height: inherit;
+  @media (width <= 768px) {
+    .logoComponent {
+      font-size: 20px !important;
     }
   }
 }
