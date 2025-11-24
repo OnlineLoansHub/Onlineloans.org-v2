@@ -17,12 +17,12 @@ interface HeaderConfigItem {
 
 const headerConfig: HeaderConfigItem[] = [
   {
-    title: 'Partner with us',
-    path: URL_CONFIG.partner,
-  },
-  {
     title: 'About Us',
     path: URL_CONFIG.about,
+  },
+  {
+    title: 'Partner with us',
+    path: URL_CONFIG.partner,
   }
 ];
 
