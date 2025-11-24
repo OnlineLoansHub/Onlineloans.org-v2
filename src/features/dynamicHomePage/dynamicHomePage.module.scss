@@ -70,20 +70,44 @@
 
 
   /* 📱 MOBILE (phones + small tablets) */
-@media (max-width: 768px) {
-  font-size: var(--title-size-mobile);
-  padding-top: 20px;
-}
+  @media (max-width: 430px) {
+    font-size: var(--title-size-mobile-430);
+    padding-top: 20px;
+  }
 
-/* 📟 TABLETS (iPads, mid tablets) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  font-size: var(--title-size-tablet);
-}
+  @media (max-width: 414px) {
+    font-size: var(--title-size-mobile-414);
+  }
 
-/* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
-@media (min-width: 1025px) and (max-width: 1600px) {
-  font-size: var(--title-size-laptop);
-}
+  @media (max-width: 412px) {
+    font-size: var(--title-size-mobile-412);
+  }
+
+  @media (max-width: 390px) {
+    font-size: var(--title-size-mobile-390);
+  }
+
+  @media (max-width: 375px) {
+    font-size: var(--title-size-mobile-375);
+  }
+
+  @media (max-width: 360px) {
+    font-size: var(--title-size-mobile-360);
+  }
+
+  @media (max-width: 320px) {
+    font-size: var(--title-size-mobile-320);
+  }
+
+  /* 📟 TABLETS (iPads, mid tablets) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: var(--title-size-tablet);
+  }
+
+  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
+  @media (min-width: 1025px) and (max-width: 1600px) {
+    font-size: var(--title-size-laptop);
+  }
 
 }
 

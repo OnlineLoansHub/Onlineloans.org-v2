@@ -21,7 +21,14 @@
   --font-weight-bold: 700;
 
   /* 📝 Title Font Sizes */
-  --title-size-mobile: 30px;
+
+  --title-size-mobile-320: 1.5rem;
+  --title-size-mobile-360: 1.77rem;
+  --title-size-mobile-375: 1.8rem;
+  --title-size-mobile-390: 1.9rem;
+  --title-size-mobile-412: 2rem;
+  --title-size-mobile-414: 2rem;
+  --title-size-mobile-430: 2.1rem;
   --title-size-tablet: 1.8rem;
   --title-size-laptop: 3.6rem;
   --title-size-large: 4rem;
