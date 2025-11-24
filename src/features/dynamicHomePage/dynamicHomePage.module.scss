@@ -30,7 +30,7 @@
     'headline tabs'
     'rating tabs';
   grid-template-columns: 5fr 3fr; // две равные колонки
-  gap: 32px 100px;
+  gap: 32px 0px;
   align-items: flex-start;
   height: fit-content;
   padding: 50px 0 80px;
