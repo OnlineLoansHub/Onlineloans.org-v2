@@ -30,6 +30,9 @@ export const Footer = () => {
     }
   }, [isOpen, isMobile]);
 
+  // Track window width to determine if we're on mobile viewport (<= 993px).
+  // Updates isMobile state on mount, window resize, and after a short delay
+  // to ensure DOM is fully rendered.
   useEffect(() => {
     const updateHeight = () => {
       const isMobile = window.innerWidth <= 993;
