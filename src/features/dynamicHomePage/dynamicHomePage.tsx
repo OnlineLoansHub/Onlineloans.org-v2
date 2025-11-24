@@ -5,71 +5,48 @@ import { LoanTypes } from '@/types';
 import { CreditTabs, Legend, Rating, Reviews } from './components';
 import { classNames } from '@/lib';
 import cls from './dynamicHomePage.module.scss';
+
 interface IHomePageProps {
   type: LoanTypes;
   title: ReactNode;
 }
 
-const STORAGE_KEY = 'prevLoanType';
-
 export default function DynamicHomePage({ type, title }: IHomePageProps) {
-  // Check on mount if we should transition (type changed from previous page)
-  const shouldTransitionOnMount = typeof window !== 'undefined' && 
-    sessionStorage.getItem(STORAGE_KEY) !== null &&
-    sessionStorage.getItem(STORAGE_KEY) !== type;
-
-  const [isVisible, setIsVisible] = useState(!shouldTransitionOnMount);
-  const [displayTitle, setDisplayTitle] = useState(title);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Check if there was a previous type stored
-    const prevType = typeof window !== 'undefined' 
-      ? (sessionStorage.getItem(STORAGE_KEY) as LoanTypes | null)
-      : null;
-
-    // If no previous type or same type, show immediately
-    if (!prevType || prevType === type) {
-      // Use requestAnimationFrame to avoid synchronous setState warning
+    // Defer ALL state changes outside the effect tick
+    Promise.resolve().then(() => {
+      // Reset visibility
+      setIsVisible(false);
+  
       requestAnimationFrame(() => {
-        setDisplayTitle(title);
-        setIsVisible(true);
-      });
-
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem(STORAGE_KEY, type);
-      }
-
-      return;
-    }
-
-    // Type changed - fade in the new title
-    requestAnimationFrame(() => {
-      setDisplayTitle(title);
-      requestAnimationFrame(() => {
+        // Force browser to apply the "hidden" state
+        document.body.getBoundingClientRect();
+  
+        // Animate back in
         setIsVisible(true);
       });
     });
-    
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem(STORAGE_KEY, type);
-    }
-  }, [type, title]);
+  }, [title, type]);
 
   return (
     <div className={cls.page}>
       <div className={cls.mainContainer}>
         <main className={cls.main}>
           <h1
-            key={type}
+            key={title?.toString()}
             className={classNames(cls.title, {
               [cls.titleVisible]: isVisible,
             })}
           >
-            {displayTitle}
+            {title}
           </h1>
+
           <Rating />
           <CreditTabs type={type} />
         </main>
+
         <div className={cls.reviews}>
           <Legend />
           <Reviews />
