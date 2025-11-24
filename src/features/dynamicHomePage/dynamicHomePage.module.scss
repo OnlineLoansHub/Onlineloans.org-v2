@@ -102,4 +102,8 @@
     flex-direction: column;
     gap: 48px;
   }
+
+  @media (width <= 768px) {
+   display: none;
+  }
 }
