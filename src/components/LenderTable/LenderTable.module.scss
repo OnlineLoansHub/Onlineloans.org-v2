@@ -37,7 +37,7 @@
   gap: 24px;
   margin-bottom: 24px;
   padding: 24px;
-  border: 1px solid var(--color-gray-6);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
 
   &:last-child {
@@ -94,7 +94,7 @@
   color: var(--color-white);
   text-align: center;
   white-space: nowrap;
-  background: var(--color-green-dark);
+  background: var(--color-secondary);
 
   @media (width <= 576) {
     max-width: 108px;
@@ -106,13 +106,13 @@
 
 .imgTitleElem2 {
   padding: 9px 14px;
-  border: 1px solid var(--color-green-dark);
+  border: 1px solid var(--color-secondary);
   border-radius: 8px;
   font-size: 14px;
   line-height: 20px;
   color: var(--color-secondary);
   text-align: center;
-  background: var(--color-green-dark-alpha);
+  background: rgba(94, 193, 137, 0.06);
 
   @media (width <= 993) {
     font-size: 12px;
@@ -196,7 +196,7 @@ $imgTitleHeight: 40px;
   margin-bottom: 16px;
   font-size: 20px;
   font-weight: 400;
-  color: var(--color-text-muted);
+  color: rgba(0, 0, 0, 0.6);
 
   @media (width <= 993) {
     display: none;
@@ -355,7 +355,7 @@ $imgTitleHeight: 40px;
 
 .listItemTableItemTitle {
   font-size: 20px;
-  color: var(--color-gray-5);
+  color: var(--color-gray-medium);
   text-align: center;
 
   @media (width <= 1200) {
@@ -418,7 +418,7 @@ $imgTitleHeight: 40px;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5em;
-  color: var(--color-text-muted);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .infoBlockImgWrapper {
@@ -456,7 +456,7 @@ $imgTitleHeight: 40px;
   font-weight: 400;
   line-height: 100%;
   line-height: 1.5em;
-  color: var(--color-text-muted);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .advantagesListItem {

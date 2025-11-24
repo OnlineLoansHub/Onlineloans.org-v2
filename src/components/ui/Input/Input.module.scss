@@ -14,7 +14,7 @@ $transition: all 0.25s ease;
   transition: $transition;
 
   &::placeholder {
-    color: var(--color-gray-5);
+    color: var(--color-gray-medium);
   }
 
   &:hover,

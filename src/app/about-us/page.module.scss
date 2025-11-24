@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  background: var(--color-bg-light-blue);
+  background: var(--color-gray-light);
 }
 
 .containerContent {
@@ -31,7 +31,7 @@
   position: relative;
   width: 100%;
   min-height: 500px;
-  background: var(--color-bg-light-blue);
+  background: var(--color-gray-light);
   padding: 110px 90px 60px 90px;
   color: var(--color-white);
   margin-top: -70px;
@@ -120,7 +120,7 @@
 .headerCard {
   position: absolute;
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid var(--color-border);
   box-shadow: 0px 0px 4px 0px var(--color-black-alpha-26);
   border-radius: 10px;
   color: var(--color-primary);
@@ -195,7 +195,7 @@
 
 .logos {
   padding: 20px 90px;
-  background: var(--color-gray-7);
+  background: var(--color-gray-light);
 }
 
 .logosWrapper {
@@ -207,7 +207,7 @@
 .logosTitleWrapper {
   max-width: 242px;
   padding-right: 20px;
-  border-right: 1px solid var(--color-border-gray);
+  border-right: 1px solid var(--color-border);
 }
 
 .logosTitle {
@@ -308,26 +308,26 @@
 }
 
 .aboutListItem1 {
-  background: var(--color-bg-gray);
+  background: var(--color-border);
 }
 
 .aboutListItem2 {
-  background: var(--color-bg-blue-medium);
+  background: rgba(42, 61, 102, 0.8);
   margin-top: -15px;
 }
 
 .aboutListItem3 {
-  background: var(--color-bg-blue-medium-2);
+  background: rgba(42, 61, 102, 0.7);
   margin-top: -15px;
 }
 
 .aboutListItem4 {
-  background: var(--color-bg-blue-medium-3);
+  background: rgba(42, 61, 102, 0.6);
   margin-top: -15px;
 }
 
 .aboutListItem5 {
-  background: var(--color-bg-blue-medium-4);
+  background: rgba(42, 61, 102, 0.5);
   margin-top: -15px;
 }
 
@@ -358,7 +358,7 @@
   display: flex;
   gap: 90px;
   padding: 20px;
-  background: var(--color-bg-gray);
+  background: var(--color-border);
   border-radius: 20px;
   margin-bottom: 30px;
 }
@@ -406,7 +406,7 @@
   display: flex;
   padding: 20px 0;
   border-radius: 20px;
-  background: var(--color-bg-gray);
+  background: var(--color-border);
 }
 
 .partnerListItem {
@@ -469,7 +469,7 @@
   font-weight: 700;
   font-size: 11px;
   line-height: 11px;
-  color: var(--color-gray-muted);
+  color: var(--color-gray-medium);
 }
 
 .reviewsRatingTxtWrapper {
@@ -499,7 +499,7 @@
   display: flex;
   max-width: 477px;
   width: 100%;
-  background: var(--color-gray-7);
+  background: var(--color-gray-light);
   border-radius: 20px;
   overflow: hidden;
   touch-action: pan-y;
@@ -545,7 +545,7 @@
 }
 
 .reviewsListItemJobTitle {
-  color: var(--color-gray-dark);
+  color: var(--color-gray-medium);
 }
 
 .reviewBtns {
@@ -596,7 +596,7 @@
 }
 
 .exploreWrapper {
-  background: var(--color-bg-gray);
+  background: var(--color-border);
   padding: 40px;
   border-radius: 16px;
   color: var(--color-white);
@@ -755,7 +755,7 @@
   padding: 60px 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-blue-dark);
+  background-color: var(--color-primary);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -782,7 +782,7 @@
 }
 
 .footerTxtSmall {
-  color: var(--color-gray-light);
+  color: var(--color-gray-medium);
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 15px;
@@ -980,7 +980,7 @@
   }
 
   .logosTitle {
-    color: var(--color-dark-alpha-60);
+    color: rgba(22, 22, 22, 0.6);
   }
 
   .logosTitleName {
@@ -1029,7 +1029,7 @@
     padding: 16px;
     border-right: unset;
     border-radius: 16px;
-    border-bottom: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .exploreWrapper {

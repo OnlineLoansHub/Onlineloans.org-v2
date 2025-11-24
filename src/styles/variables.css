@@ -1,48 +1,16 @@
 :root {
-  /* 🎨 Colors (from Figma / OnlineLoans design) */
-  --color-primary: #2a3d66;
-  --color-secondary: #5ec189;
+  /* 🎨 Core Colors - 10 Total */
+  /* Primary Colors */
+  --color-primary: #2a3d66; /* Main brand blue */
+  --color-secondary: #2a3d66; /* Main green */
   --color-black: #000;
-  --color-gray-5: #9ca3af;
-  --color-gray-6: #d1d5db;
-  --color-gray-7: #f3f4f6;
   --color-white: #fff;
-
-  /* Additional colors for module files */
-  --color-green-dark: #2c8955;
-  --color-green-dark-alpha: #2c89550f;
-  --color-black-alpha-10: rgba(0, 0, 0, 0.1);
-  --color-black-alpha-15: rgba(0, 0, 0, 0.15);
-  --color-black-alpha-26: rgba(0, 0, 0, 0.26);
-  --color-text-muted: rgba(0, 0, 0, 0.6);
-  --color-gray-muted: #6a6a6a;
-  --color-gray-dark: #4c4c4c;
-  --color-gray-light: #cfcaca;
-  --color-gray-medium: #868685;
-  --color-blue-dark: #172b54;
-  --color-dark-blue-2: #24273f;
-  --color-dark-alpha-60: rgba(22, 22, 22, 0.6);
-  --color-bg-light-blue: #eff8ff;
-  --color-border-light: #f1f2f8;
-  --color-bg-gray: #e5e7f1;
-  --color-bg-blue-medium: #c7cbea;
-  --color-bg-blue-medium-2: #b0b6e1;
-  --color-bg-blue-medium-3: #9aa1d7;
-  --color-bg-blue-medium-4: #858ccc;
-  --color-border-gray: #a4a4a4;
-  --color-gray-text-alpha-80: rgba(64, 64, 64, 0.8);
-  --color-text-dark-alpha: rgba(17, 24, 39, 0.5);
-  --color-orange-light: #ffbc99;
-  --color-purple-light: #cabdff;
-  --color-green-light: #b5e4ca;
-  --color-border-light-gray: #ebebeb;
-  --color-secondary-alpha: rgba(94, 193, 137, 0.06);
-  --color-green-medium: #5ab180;
-  --color-green-dark-2: #399963;
-  --color-border-default: #e9eef5;
-  --color-border-hover: #93d1b8;
-  --color-ring-active: #5cc399;
-  --color-text-placeholder: #6b7280;
+  --color-gray-dark: #161616; /* Dark text/surfaces */
+  --color-gray-medium: #9ca3af; /* Medium gray text/borders */
+  --color-gray-light: #f3f4f6; /* Light backgrounds */
+  --color-border: #e5e7f1; /* Borders */
+  --color-accent-orange: #ffbc99;
+  --color-accent-purple: #cabdff;
 
   /* sizes */
   --max-container-width: 1700px;
@@ -59,7 +27,5 @@
   --title-size-large: 4rem;
 
   /* About page specific variables */
-  --primary-dark-color: #161616;
   --tikTok: 'TikTok Sans', sans-serif;
 }
-

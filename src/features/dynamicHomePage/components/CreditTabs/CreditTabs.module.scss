@@ -36,7 +36,7 @@
   position: relative;
   font-size: 18px;
   font-weight: 500;
-  color: var(--color-gray-5);
+  color: var(--color-gray-medium);
 
   .link {
     color: inherit;
@@ -72,7 +72,7 @@
     display: flex;
     gap: 48px;
     font-size: 16px;
-    color: var(--color-gray-5);
+    color: var(--color-gray-medium);
 
     @media (width <= 1440) {
       gap: 30px;
@@ -105,7 +105,7 @@
   margin: 0 auto;
   font-size: 10px;
   line-height: 100%;
-  color: var(--color-gray-text-alpha-80);
+  color: rgba(64, 64, 64, 0.8);
 
   @media (width <= 768) {
     max-width: unset;

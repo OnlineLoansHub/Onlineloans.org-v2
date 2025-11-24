@@ -46,7 +46,7 @@ $left-offset-s: 18px;
   left: $left-offset;
   transform: translateY(-50%);
   font-size: 20px;
-  color: var(--color-gray-5);
+  color: var(--color-gray-medium);
   transition: $transition;
 
   .amount {
@@ -101,11 +101,11 @@ $left-offset-s: 18px;
   transition: $transition;
 
   &:hover {
-    background-color: var(--color-green-medium);
+    background-color: var(--color-secondary);
   }
 
   &:active {
-    background-color: var(--color-green-dark-2);
+    background-color: var(--color-secondary);
   }
 
   @media (width <= 1440px) {
