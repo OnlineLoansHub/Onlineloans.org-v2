@@ -4,13 +4,28 @@
 }
 
 .logoText {
-  font-size: 16px;
+  font-size: var(--logo-size-desktop);
   font-weight: 600;
   color: var(--color-primary);
   position: relative;
   display: inline-block;
   letter-spacing: 0.05em;
   /* text-shadow: 0 2px 10px rgba(42, 61, 102, 0.2); */
+
+  /* 📱 MOBILE (phones + small tablets) */
+  @media (max-width: 768px) {
+    font-size: var(--logo-size-mobile);
+  }
+
+  /* 📟 TABLETS (iPads, mid tablets) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: var(--logo-size-tablet);
+  }
+
+  /* 💻 LAPTOPS (small desktops) */
+  @media (min-width: 1025px) and (max-width: 1440px) {
+    font-size: var(--logo-size-laptop);
+  }
 }
 
 .letter {

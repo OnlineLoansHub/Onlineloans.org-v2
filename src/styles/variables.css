@@ -26,6 +26,12 @@
   --title-size-laptop: 3.6rem;
   --title-size-large: 4rem;
 
+  /* 🎯 Logo Font Sizes */
+  --logo-size-mobile: 17px;
+  --logo-size-tablet: 20px;
+  --logo-size-desktop: 20px;
+  --logo-size-desktop: 20px;
+
   /* About page specific variables */
   --tikTok: 'TikTok Sans', sans-serif;
 }

@@ -13,7 +13,7 @@ interface LogoProps {
 export default function Logo({
   text = 'OnlineLoans.org',
   textColor = 'var(--color-primary)',
-  fontSize = 32,
+  fontSize,
   className = '',
 }: LogoProps) {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -101,7 +101,7 @@ export default function Logo({
         className={`${styles.logoText} ${isComplete ? styles.complete : ''}`}
         style={{
           color: textColor,
-          fontSize: `${fontSize}px`,
+          ...(fontSize && { fontSize: `${fontSize}px` }),
           fontFamily: 'Playwrite CU, cursive',
         }}
       />

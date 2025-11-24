@@ -44,7 +44,6 @@ export const Header = () => {
           <Logo
             text="OnlineLoans.org"
             textColor="var(--color-primary)"
-            fontSize={16}
             className={cls.logoComponent}
           />
         </Link>
