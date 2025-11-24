@@ -39,8 +39,9 @@
 
   &.product {
     gap: 12px;
-    color: var(--color-white);
-    background: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-white);
+    border: 0.1px solid var(--color-primary);
 
     .productSubtitle {
       margin-bottom: 3px;
@@ -66,6 +67,7 @@
 
   &.rating {
     background: var(--color-white);
+    border: 0.1px solid var(--color-primary);
 
     .ratingImg {
       margin-right: 4px;
