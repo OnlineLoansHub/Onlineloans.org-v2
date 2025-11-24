@@ -2,27 +2,13 @@
   /* 🎨 Colors (from Figma / OnlineLoans design) */
   --color-primary: #2a3d66;
   --color-secondary: #5ec189;
-  --color-secondary-2: #ffcb66;
   --color-secondary-3: #f9fafb;
   --color-secondary-4: #4b5563;
-  --color-info: #a0c3ff;
-  --color-success: #1fa904;
-  --color-warning: #f2b020;
-  --color-error: #d34c4c;
   --color-black: #000;
-  --color-gray-1: #1f2937;
-  --color-gray-2: #374151;
-  --color-gray-3: #4b5563;
-  --color-gray-4: #6b7280;
   --color-gray-5: #9ca3af;
   --color-gray-6: #d1d5db;
   --color-gray-7: #f3f4f6;
   --color-white: #fff;
-  --color-background: #eff7ff; /* Figma hero background */
-  --color-surface: #fff;
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #475569;
-  --color-border: #e2e8f0;
 
   /* Additional colors for module files */
   --color-green-dark: #2c8955;
@@ -49,7 +35,6 @@
   --color-bg-beige: #f7f5f4;
   --color-border-gray: #a4a4a4;
   --color-gray-text: #8d969c;
-  --color-gray-text-alpha: rgba(64, 64, 64, 0.5);
   --color-gray-text-alpha-80: rgba(64, 64, 64, 0.8);
   --color-text-dark-alpha: rgba(17, 24, 39, 0.5);
   --color-orange-light: #ffbc99;
@@ -57,7 +42,6 @@
   --color-green-light: #b5e4ca;
   --color-text-dark: #151515;
   --color-border-light-gray: #ebebeb;
-  --color-black-alpha-5: rgba(0, 0, 0, 0.05);
   --color-secondary-alpha: rgba(94, 193, 137, 0.06);
   --color-green-medium: #5ab180;
   --color-green-dark-2: #399963;
@@ -66,36 +50,14 @@
   --color-border-hover: #93d1b8;
   --color-ring-active: #5cc399;
   --color-text-placeholder: #6b7280;
-  --color-gray-5-alpha: rgba(156, 163, 175, 1);
 
   /* sizes */
   --max-container-width: 1700px;
   --header-height: 88px;
   --header-height-mobile: 60px;
 
-  /* 🧱 Layout */
-  --container-max-width: 1200px;
-  --border-radius: 12px;
-  --shadow-soft: 0 4px 12px rgb(0 0 0 / 5%);
-
   /* 🧩 Typography */
-
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
   --font-weight-bold: 700;
-
-  /* 📱 Breakpoints */
-  --bp-mobile: 480px;
-  --bp-tablet: 768px;
-  --bp-desktop: 1024px;
-  --bp-laptop: 1600px;
-  --bp-large-monitor: 1601px;
 
   /* 📝 Title Font Sizes */
   --title-size-mobile: 1.6rem;
@@ -104,28 +66,8 @@
   --title-size-large: 4rem;
 
   /* About page specific variables */
-  --main-bg-color: #f8f8f8;
-  --footer-bg-color: #101f30;
-  --header-main-color: #ecfaff;
-  --header-secondary-color: #effdf9;
-  --primary-light-color: #fff;
   --primary-dark-color: #161616;
   --primary-dark-color-2: #0e2b56;
-  --secondary-color: #e5e7f1;
-  --secondary-color-2: #161616;
-  --border-raduis: 10px;
-  --primary-btn-color: #1ab59b;
-  --secondary-btn-color: #c1edec;
   --tikTok: 'TikTok Sans', sans-serif;
-  --roboto-font: 'Roboto', sans-serif;
 }
 
-/* 🌙 Optional dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0f172a;
-    --color-surface: #1e293b;
-    --color-text-primary: #f1f5f9;
-    --color-text-secondary: #94a3b8;
-  }
-}
