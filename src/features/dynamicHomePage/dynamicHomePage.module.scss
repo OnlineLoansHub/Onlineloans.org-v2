@@ -88,10 +88,6 @@
   font-size: var(--title-size-laptop);
 }
 
-/* 🖥️ LARGE MONITORS (1601px and up) */
-@media (min-width: 1601px) {
-  font-size: var(--title-size-large);
-}
 }
 
 .titleVisible {
