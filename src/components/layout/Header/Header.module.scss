@@ -83,7 +83,11 @@
 }
 
 .navLink {
-  font-size: 1.125rem;
+  font-size: 1rem; /* 16px */
+
+  @media (width <= 768px) {
+    font-size: 1.125rem; /* Keep original size on mobile */
+  }
 }
 
 .burger {
