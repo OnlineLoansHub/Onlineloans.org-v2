@@ -18,6 +18,16 @@ export default function Logo({
 }: LogoProps) {
   const logoRef = useRef<HTMLDivElement>(null);
   const [isComplete, setIsComplete] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
+
+  // Trigger animation every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimationKey((prev) => prev + 1);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (!logoRef.current) return;
@@ -30,6 +40,10 @@ export default function Logo({
     requestAnimationFrame(() => {
       setIsComplete(false);
     });
+
+    // Reset font to cursive for the animation
+    logoElement.style.fontFamily = 'Playwrite CU, cursive';
+    logoElement.style.fontStyle = 'normal';
 
     const letters = text.split('');
     // Find where "org" starts in the text
@@ -65,7 +79,7 @@ export default function Logo({
     }, totalDuration * 1000);
 
     return () => clearTimeout(timeout);
-  }, [text]);
+  }, [text, animationKey]);
 
   useEffect(() => {
     // Load fonts dynamically (only once)
