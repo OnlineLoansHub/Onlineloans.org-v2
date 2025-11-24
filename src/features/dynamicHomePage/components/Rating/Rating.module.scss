@@ -3,6 +3,7 @@
   grid-area: rating;
   gap: 32px;
   order: 3;
+ 
 
   @media (width <= 1440px) {
     flex-direction: column;
