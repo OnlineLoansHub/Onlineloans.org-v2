@@ -12,7 +12,7 @@ $left-offset-s: 18px;
   padding-left: 0;
   border: 2px solid transparent;
   border-radius: $border-radius;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: 0 0 12px 0 #0000000a;
   transition: $transition;
 
@@ -46,7 +46,7 @@ $left-offset-s: 18px;
   left: $left-offset;
   transform: translateY(-50%);
   font-size: 20px;
-  color: #64757d;
+  color: var(--color-text-gray);
   transition: $transition;
 
   .amount {
@@ -95,17 +95,17 @@ $left-offset-s: 18px;
   border: none;
   border-radius: 40px;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-white);
   white-space: nowrap;
   background: var(--color-secondary);
   transition: $transition;
 
   &:hover {
-    background-color: #5ab180;
+    background-color: var(--color-green-medium);
   }
 
   &:active {
-    background-color: #399963;
+    background-color: var(--color-green-dark-2);
   }
 
   @media (width <= 1440px) {

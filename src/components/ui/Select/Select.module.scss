@@ -1,10 +1,10 @@
 /* app/components/controlled-select.scss */
 
-$border: #e9eef5; // default field border
-$hover: #93d1b8; // hover border
-$ring: #5cc399; // active/open ring
-$muted: #6b7280; // placeholder
-$bg: #fff; // panel bg
+$border: var(--color-border-default); // default field border
+$hover: var(--color-border-hover); // hover border
+$ring: var(--color-ring-active); // active/open ring
+$muted: var(--color-text-placeholder); // placeholder
+$bg: var(--color-white); // panel bg
 
 .select {
   position: relative;
@@ -20,7 +20,7 @@ $bg: #fff; // panel bg
   justify-content: space-between;
   width: 100%;
   padding: 16px 20px;
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--color-border-light-gray);
   border-radius: 12px;
   font-size: 24px;
   font-weight: 500;
@@ -117,12 +117,12 @@ $bg: #fff; // panel bg
 
   &.isSelectred,
   &.isActive {
-    background: #5ec1890a;
+    background: var(--color-secondary-alpha);
   }
 
   &.isDisabled {
     cursor: not-allowed;
-    color: #9ca3af;
+    color: var(--color-gray-5);
   }
 
   @media (width < 1024) {

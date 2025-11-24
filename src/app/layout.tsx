@@ -1,10 +1,10 @@
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import { Header } from '@/components/layout/Header/Header';
 import { Footer } from '@/components/layout/Footer/Footer';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/seo/StructuredData';
-import { generateMetadata as generateSEOMetadata, SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/config/seo';
 import '@/styles/index.css';
 
 const poppins = Poppins({

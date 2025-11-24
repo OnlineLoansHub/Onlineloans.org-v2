@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;
   max-width: 100%;
-  background: #eff8ff;
+  background: var(--color-bg-light-blue);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -26,9 +26,9 @@
 // Header
 .header {
   width: 100%;
-  background: #eff8ff;
+  background: var(--color-bg-light-blue);
   padding: 130px 90px 60px 90px;
-  color: #fff;
+  color: var(--color-white);
   margin-top: -70px;
   overflow: visible;
   flex-shrink: 0;
@@ -52,7 +52,7 @@
   font-size: 46px;
   line-height: 54px;
   animation: header-title 0.5s forwards;
-  color: #0e2b56;
+  color: var(--primary-dark-color-2);
   margin-bottom: 20px;
 }
 
@@ -68,7 +68,7 @@
 }
 
 .headerTxt {
-  color: #000000;
+  color: var(--color-black);
   font-weight: 500;
   font-size: 18px;
   line-height: 25px;
@@ -90,7 +90,7 @@
   width: 100%;
   border-radius: 20px;
   padding: 60px 80px;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: 0px 0px 17px 3px #0e2b561a;
   overflow: hidden;
 }
@@ -99,7 +99,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 32px;
-  color: #000;
+  color: var(--color-black);
   text-align: center;
 }
 
@@ -113,9 +113,9 @@
 .headerInput {
   width: 100%;
   padding: 12px 16px;
-  background: #ffffff;
-  color: #868685;
-  border: 1px solid #868685;
+  background: var(--color-white);
+  color: var(--color-gray-medium);
+  border: 1px solid var(--color-gray-medium);
   font-weight: 400;
   font-size: 16px;
   line-height: 100%;
@@ -126,11 +126,11 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
-  color: #fff;
-  background: #0e2b56;
+  color: var(--color-white);
+  background: var(--primary-dark-color-2);
   border-radius: 10px;
   padding: 13px 10px;
-  border: 1px solid #0e2b56;
+  border: 1px solid var(--primary-dark-color-2);
   cursor: pointer;
   transition: opacity 0.2s;
 
@@ -160,8 +160,8 @@
 .loaderSpinner {
   width: 36px;
   height: 36px;
-  border: 3px solid #f3f3f3;
-  border-top: 2px solid #0e2b56;
+  border: 3px solid var(--color-gray-7);
+  border-top: 2px solid var(--primary-dark-color-2);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   display: inline-block;
@@ -189,7 +189,7 @@
   display: flex;
   flex-direction: column;
   width: calc(100% / 3);
-  color: #000;
+  color: var(--color-black);
 }
 
 .headerCardImgWrapper {
@@ -243,7 +243,7 @@
   width: 100%;
   border-radius: 20px;
   padding: 60px;
-  background: #fff;
+  background: var(--color-white);
   box-shadow: 0px 0px 17px 3px #0e2b561a;
 }
 
@@ -253,7 +253,7 @@
   font-size: 32px;
   line-height: 38px;
   margin-bottom: 10px;
-  color: #000;
+  color: var(--color-black);
 }
 
 .formModalSubtitle {
@@ -262,16 +262,16 @@
   font-size: 18px;
   line-height: 25px;
   margin-bottom: 34px;
-  color: #000;
+  color: var(--color-black);
 }
 
 .formModalBtn {
   width: 100%;
-  color: #fff;
+  color: var(--color-white);
   padding: 13px 10px;
-  background: #0e2b56;
+  background: var(--primary-dark-color-2);
   border-radius: 10px;
-  border: 1px solid #0e2b56;
+  border: 1px solid var(--primary-dark-color-2);
   font-family: var(--tikTok);
   font-weight: 500;
   font-size: 16px;
@@ -340,7 +340,7 @@
     width: 100%;
     flex-shrink: 0;
     padding: 15px 13px;
-    background: #ffffff33;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     align-items: center;
     scroll-snap-align: center;

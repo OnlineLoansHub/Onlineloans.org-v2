@@ -24,6 +24,50 @@
   --color-text-secondary: #475569;
   --color-border: #e2e8f0;
 
+  /* Additional colors for module files */
+  --color-green-dark: #2c8955;
+  --color-green-dark-alpha: #2c89550f;
+  --color-black-alpha-10: rgba(0, 0, 0, 0.1);
+  --color-black-alpha-15: rgba(0, 0, 0, 0.15);
+  --color-black-alpha-26: rgba(0, 0, 0, 0.26);
+  --color-text-muted: rgba(0, 0, 0, 0.6);
+  --color-gray-muted: #6a6a6a;
+  --color-gray-dark: #4c4c4c;
+  --color-gray-light: #cfcaca;
+  --color-gray-medium: #868685;
+  --color-blue-dark: #172b54;
+  --color-dark-alpha-60: rgba(22, 22, 22, 0.6);
+  --color-bg-light-blue: #eff8ff;
+  --color-border-light: #f1f2f8;
+  --color-bg-light-gray: #f4f4f4;
+  --color-bg-gray: #e5e7f1;
+  --color-bg-blue-light: #e5e7f9;
+  --color-bg-blue-medium: #c7cbea;
+  --color-bg-blue-medium-2: #b0b6e1;
+  --color-bg-blue-medium-3: #9aa1d7;
+  --color-bg-blue-medium-4: #858ccc;
+  --color-bg-beige: #f7f5f4;
+  --color-border-gray: #a4a4a4;
+  --color-gray-text: #8d969c;
+  --color-gray-text-alpha: rgba(64, 64, 64, 0.5);
+  --color-gray-text-alpha-80: rgba(64, 64, 64, 0.8);
+  --color-text-dark-alpha: rgba(17, 24, 39, 0.5);
+  --color-orange-light: #ffbc99;
+  --color-purple-light: #cabdff;
+  --color-green-light: #b5e4ca;
+  --color-text-dark: #151515;
+  --color-border-light-gray: #ebebeb;
+  --color-black-alpha-5: rgba(0, 0, 0, 0.05);
+  --color-secondary-alpha: rgba(94, 193, 137, 0.06);
+  --color-green-medium: #5ab180;
+  --color-green-dark-2: #399963;
+  --color-text-gray: #64757d;
+  --color-border-default: #e9eef5;
+  --color-border-hover: #93d1b8;
+  --color-ring-active: #5cc399;
+  --color-text-placeholder: #6b7280;
+  --color-gray-5-alpha: rgba(156, 163, 175, 1);
+
   /* sizes */
   --max-container-width: 1700px;
   --header-height: 88px;

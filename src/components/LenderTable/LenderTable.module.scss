@@ -94,7 +94,7 @@
   color: var(--color-white);
   text-align: center;
   white-space: nowrap;
-  background: #2c8955;
+  background: var(--color-green-dark);
 
   @media (width <= 576) {
     max-width: 108px;
@@ -106,13 +106,13 @@
 
 .imgTitleElem2 {
   padding: 9px 14px;
-  border: 1px solid #2c8955;
+  border: 1px solid var(--color-green-dark);
   border-radius: 8px;
   font-size: 14px;
   line-height: 20px;
   color: var(--color-secondary);
   text-align: center;
-  background: #2c89550f;
+  background: var(--color-green-dark-alpha);
 
   @media (width <= 993) {
     font-size: 12px;
@@ -185,7 +185,7 @@ $imgTitleHeight: 40px;
   margin-bottom: 8px;
   font-size: 24px;
   font-weight: 600;
-  color: #000;
+  color: var(--color-black);
 
   @media (width <= 993) {
     display: none;
@@ -196,7 +196,7 @@ $imgTitleHeight: 40px;
   margin-bottom: 16px;
   font-size: 20px;
   font-weight: 400;
-  color: #0009;
+  color: var(--color-text-muted);
 
   @media (width <= 993) {
     display: none;
@@ -222,7 +222,7 @@ $imgTitleHeight: 40px;
   font-size: 17px;
   font-weight: 500;
   line-height: 26px;
-  color: #000;
+  color: var(--color-black);
 }
 
 .listItemRating {
@@ -297,7 +297,7 @@ $imgTitleHeight: 40px;
   min-width: 110px;
   // max-width: 183px;
   padding: 0 32px;
-  border-right: 1px solid #0000001f;
+  border-right: 1px solid var(--color-black-alpha-15);
   white-space: nowrap;
 
   &:first-child {
@@ -337,7 +337,7 @@ $imgTitleHeight: 40px;
   font-size: 24px;
   font-weight: 500;
   line-height: 1em;
-  color: #000;
+  color: var(--color-black);
   text-align: center;
 
   @media (width <= 1200) {
@@ -398,7 +398,7 @@ $imgTitleHeight: 40px;
   // max-height: 144px;
   margin-bottom: 24px;
   padding: 20px;
-  border: 1px solid #0000001a;
+  border: 1px solid var(--color-black-alpha-10);
   border-radius: 12px;
 
   @media (width <= 1440) {
@@ -418,7 +418,7 @@ $imgTitleHeight: 40px;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5em;
-  color: #0009;
+  color: var(--color-text-muted);
 }
 
 .infoBlockImgWrapper {
@@ -435,7 +435,7 @@ $imgTitleHeight: 40px;
   max-width: 414px;
   height: fit-content;
   padding: 20px;
-  border: 1px solid #0000001a;
+  border: 1px solid var(--color-black-alpha-10);
   border-radius: 12px;
 
   @media (width <= 1440) {
@@ -448,7 +448,7 @@ $imgTitleHeight: 40px;
   font-size: 24px;
   font-weight: 600;
   line-height: 1.5em;
-  color: #000;
+  color: var(--color-black);
 }
 
 .advantagesSubtitle {
@@ -456,7 +456,7 @@ $imgTitleHeight: 40px;
   font-weight: 400;
   line-height: 100%;
   line-height: 1.5em;
-  color: #0009;
+  color: var(--color-text-muted);
 }
 
 .advantagesListItem {
@@ -465,8 +465,8 @@ $imgTitleHeight: 40px;
   align-items: center;
   justify-content: space-between;
   padding: 24px 0;
-  border-bottom: 1px solid #0000001a;
-  color: #000;
+  border-bottom: 1px solid var(--color-black-alpha-10);
+  color: var(--color-black);
 
   &:last-child {
     padding-bottom: 20px;

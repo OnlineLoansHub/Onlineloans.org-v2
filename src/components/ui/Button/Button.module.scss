@@ -17,11 +17,11 @@
     background-color: var(--color-secondary);
 
     &:hover {
-      background-color: #5ab180;
+      background-color: var(--color-green-medium);
     }
 
     &:active {
-      background-color: #399963;
+      background-color: var(--color-green-dark-2);
     }
   }
 
@@ -30,12 +30,12 @@
     color: var(--color-secondary);
 
     &:hover {
-      background-color: #5ec1891a;
+      background-color: var(--color-secondary-alpha);
     }
 
     &:active {
       color: var(--color-white);
-      background-color: #399963;
+      background-color: var(--color-green-dark-2);
     }
   }
 

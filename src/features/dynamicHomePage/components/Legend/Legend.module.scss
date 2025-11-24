@@ -27,17 +27,17 @@
   border-radius: 50%;
 
   &:nth-child(1) {
-    background-color: #ffbc99;
+    background-color: var(--color-orange-light);
   }
 
   &:nth-child(2) {
     margin-left: -15px;
-    background-color: #cabdff;
+    background-color: var(--color-purple-light);
   }
 
   &:nth-child(3) {
     margin-left: -15px;
-    background-color: #b5e4ca;
+    background-color: var(--color-green-light);
   }
 
   & .heroImg {
@@ -50,7 +50,7 @@
   font-size: 56px;
   font-weight: 500;
   line-height: 100%;
-  color: #151515;
+  color: var(--color-text-dark);
 
   &.herosTitleMobile {
     display: none;
@@ -78,7 +78,7 @@
 .herosTxt {
   font-size: 15px;
   line-height: 150%;
-  color: #404040cc;
+  color: var(--color-gray-text-alpha-80);
 
   @media (width <= 768) {
     text-align: center;

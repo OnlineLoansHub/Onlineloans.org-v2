@@ -229,7 +229,7 @@ const validators: Partial<Record<string, (v: unknown) => boolean>> = {
 };
 
 export const getBusinessLoanConfig = (amount: string = ''): IStepperConfig => {
-  const initialFormState: Record<string, any> = {
+  const initialFormState: Record<string, unknown> = {
     [FormKeys.amount]: amount,
     [FormKeys.startMonth]: undefined,
     [FormKeys.startYear]: undefined,
@@ -244,7 +244,7 @@ export const getBusinessLoanConfig = (amount: string = ''): IStepperConfig => {
     [FormKeys.email]: undefined,
   };
 
-  const onSubmit = async (formData: Record<string, any>) => {
+  const onSubmit = async (formData: Record<string, unknown>) => {
     await fetch(GOOGLE_URL, {
       method: 'POST',
       headers: {

@@ -60,13 +60,17 @@ export default function PartnerWithUs() {
         <div className={cls.containerContent}>
           <div className={cls.headerContent}>
             <div className={cls.headerContentLeft}>
-              <h1 className={cls.headerTitle}>Unlock smarter financial growth with Online Loans</h1>
+              <h1 className={cls.headerTitle}>
+                Unlock smarter financial growth with Online Loans
+              </h1>
               <p className={cls.headerTxt}>
-                Online Loans is a comparison marketplace that showcases leading financial brands across key sectors,
-                including lending, banking, personal finance, and insurance.
+                Online Loans is a comparison marketplace that showcases leading financial brands
+                across key sectors, including lending, banking, personal finance, and insurance.
               </p>
 
-              <div className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperDesktop])}>
+              <div
+                className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperDesktop])}
+              >
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard1])}>
                   <div className={cls.headerCardImgWrapper}>
                     <Image
@@ -79,7 +83,8 @@ export default function PartnerWithUs() {
                   </div>
                   <p className={cls.headerCardTitle}>High ROI at scale</p>
                   <p className={cls.headerCardTxt}>
-                    Smart marketing abilities and competitive payouts enable unmatched conversion rates
+                    Smart marketing abilities and competitive payouts enable unmatched conversion
+                    rates
                   </p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard2])}>
@@ -93,7 +98,9 @@ export default function PartnerWithUs() {
                     />
                   </div>
                   <p className={cls.headerCardTitle}>Top quality traffic</p>
-                  <p className={cls.headerCardTxt}>Large volumes of high-quality leads that turn into long-term customers</p>
+                  <p className={cls.headerCardTxt}>
+                    Large volumes of high-quality leads that turn into long-term customers
+                  </p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard3])}>
                   <div className={cls.headerCardImgWrapper}>
@@ -106,7 +113,9 @@ export default function PartnerWithUs() {
                     />
                   </div>
                   <p className={cls.headerCardTitle}>Massive exposure</p>
-                  <p className={cls.headerCardTxt}>Reach valuable consumers at the right moment of purchase decisions</p>
+                  <p className={cls.headerCardTxt}>
+                    Reach valuable consumers at the right moment of purchase decisions
+                  </p>
                 </div>
               </div>
             </div>
@@ -170,7 +179,9 @@ export default function PartnerWithUs() {
                 )}
               </form>
 
-              <div className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperMobile])}>
+              <div
+                className={classNames(cls.headerCardsWrapper, {}, [cls.headerCardsWrapperMobile])}
+              >
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard1])}>
                   <div className={cls.headerCardImgWrapper}>
                     <Image
@@ -183,7 +194,8 @@ export default function PartnerWithUs() {
                   </div>
                   <p className={cls.headerCardTitle}>High ROI at scale</p>
                   <p className={cls.headerCardTxt}>
-                    Smart marketing abilities and competitive payouts enable unmatched conversion rates
+                    Smart marketing abilities and competitive payouts enable unmatched conversion
+                    rates
                   </p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard2])}>
@@ -197,7 +209,9 @@ export default function PartnerWithUs() {
                     />
                   </div>
                   <p className={cls.headerCardTitle}>Top quality traffic</p>
-                  <p className={cls.headerCardTxt}>Large volumes of high-quality leads that turn into long-term customers</p>
+                  <p className={cls.headerCardTxt}>
+                    Large volumes of high-quality leads that turn into long-term customers
+                  </p>
                 </div>
                 <div className={classNames(cls.headerCard, {}, [cls.headerCard3])}>
                   <div className={cls.headerCardImgWrapper}>
@@ -210,7 +224,9 @@ export default function PartnerWithUs() {
                     />
                   </div>
                   <p className={cls.headerCardTitle}>Massive exposure</p>
-                  <p className={cls.headerCardTxt}>Reach valuable consumers at the right moment of purchase decisions</p>
+                  <p className={cls.headerCardTxt}>
+                    Reach valuable consumers at the right moment of purchase decisions
+                  </p>
                 </div>
               </div>
             </div>
@@ -219,7 +235,10 @@ export default function PartnerWithUs() {
       </header>
 
       {isModalVisible && (
-        <div className={classNames(cls.formModalWrapper, {}, [cls.visible])} onClick={handleModalClose}>
+        <div
+          className={classNames(cls.formModalWrapper, {}, [cls.visible])}
+          onClick={handleModalClose}
+        >
           <div className={cls.formModal} onClick={(e) => e.stopPropagation()}>
             <p className={cls.formModalTitle}>Thank you for your trust!</p>
             <p className={cls.formModalSubtitle}>We will contact you soon</p>

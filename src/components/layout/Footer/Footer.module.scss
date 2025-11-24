@@ -39,8 +39,8 @@
     padding: 8px 24px;
     border: 1px solid var(--color-gray-6);
     border-radius: 30px;
-    color: #6c6c6c;
-    background: #f9fafb;
+    color: var(--color-gray-muted);
+    background: var(--color-secondary-3);
     box-shadow: 0 0 7.35px 0 #0000000a;
   }
 }
@@ -52,7 +52,7 @@
 }
 
 .btnText {
-  color: #FFF;
+  color: var(--color-white);
   text-align: center;
   font-family: Poppins;
   font-size: 1.55rem;
@@ -112,7 +112,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: 1.5em;
-  color: #2a3d6699;
+  color: rgba(42, 61, 102, 0.6);
   text-align: center;
 
   @media (width <= 1024) {
