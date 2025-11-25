@@ -20,9 +20,11 @@ export const Footer = () => {
     if (pathname?.includes('/personal-loan')) {
       return 'personal' as const;
     }
+
     if (pathname?.includes('/business-loan')) {
       return 'business' as const;
     }
+
     return undefined;
   }, [pathname]);
 
@@ -71,10 +73,7 @@ export const Footer = () => {
     <div ref={footerRef} className={classNames(cls.footer, { [cls.open]: isShowTable })}>
       <div className={cls.container}>
         {!isMobile && (
-          <button
-            onClick={handleClick}
-            className={classNames(cls.btn, { [cls.open]: isOpen })}
-          >
+          <button onClick={handleClick} className={classNames(cls.btn, { [cls.open]: isOpen })}>
             {isOpen ? (
               <>
                 Hide
@@ -104,9 +103,8 @@ export const Footer = () => {
           <>
             <p className={cls.footerTitle}>Want to explore before deciding?</p>
             <p className={cls.footerSubtitle}>
-              That's okay — you can skip the form for now and browse all
-              available loan plans. Compare interest rates, terms, and lenders
-              side by side.
+              That's okay — you can skip the form for now and browse all available loan plans.
+              Compare interest rates, terms, and lenders side by side.
             </p>
             <LenderTable loanType={loanType} />
           </>
@@ -115,4 +113,3 @@ export const Footer = () => {
     </div>
   );
 };
-
