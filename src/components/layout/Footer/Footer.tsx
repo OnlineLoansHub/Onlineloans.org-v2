@@ -51,7 +51,7 @@ export const Footer = () => {
             />
           </Link>
           <p className={cls.copyright}>
-            Copyright © 2009-2025 Natural Intelligence Ltd. All Rights Reserved.
+            Copyright © 2009-2025 OnlineLoans.Org Ltd All Rights Reserved.
           </p>
           <p className={cls.termsText}>
             By using our content, products & services you agree to our{' '}
@@ -64,20 +64,6 @@ export const Footer = () => {
             </AppLink>
             .
           </p>
-          <p className={cls.companyInfo}>
-            OnlineLoans.org is a dba of Natural Intelligence Technologies Inc. NMLS # 2084135
-          </p>
-          <div className={cls.additionalLinks}>
-            <AppLink href="/mortgage-licenses" className={cls.additionalLink}>
-              Mortgage Licenses
-            </AppLink>
-            <AppLink href="/nmls-consumer-access" className={cls.additionalLink}>
-              NMLS Consumer Access
-            </AppLink>
-            <AppLink href="/do-not-sell" className={cls.additionalLink}>
-              Don't Sell My Personal Information
-            </AppLink>
-          </div>
         </div>
         <div className={cls.rightColumn}>
           <nav className={cls.topNav}>
@@ -102,8 +88,8 @@ export const Footer = () => {
               listings on this site DO NOT imply endorsement.
             </p>
             <p className={cls.legalParagraph}>
-              We are not an investment adviser, loan provider, or a broker and we do not offer
-              loans or mortgages directly to end users, but only allows users to match with lending
+              We are not an investment adviser, loan provider, or a broker and we do not offer loans
+              or mortgages directly to end users, but only allows users to match with lending
               partners and platforms that may extend a loan. All loan approval decisions and terms
               are determined by the loan providers at the time of your application with them. Any
               matching request submitted through our website does not constitute a loan application
@@ -132,14 +118,14 @@ export const Footer = () => {
             <h3 className={cls.disclosureTitle}>Advertising Disclosure</h3>
             <p className={cls.legalParagraph}>
               This site is a free online resource that strives to offer helpful content and
-              comparison features to our visitors. We accept advertising compensation from
-              companies that appear on the site, which may impact the location and order in which
-              brands (and/or their products) are presented, and may also impact the score that is
-              assigned to it. Company listings on this page DO NOT imply endorsement. We do not
-              feature all providers on the market. Except as expressly set forth in our Terms of
-              Use, all representations and warranties regarding the information presented on this
-              page are disclaimed. The information, including pricing, which appears on this site
-              is subject to change at any time.
+              comparison features to our visitors. We accept advertising compensation from companies
+              that appear on the site, which may impact the location and order in which brands
+              (and/or their products) are presented, and may also impact the score that is assigned
+              to it. Company listings on this page DO NOT imply endorsement. We do not feature all
+              providers on the market. Except as expressly set forth in our Terms of Use, all
+              representations and warranties regarding the information presented on this page are
+              disclaimed. The information, including pricing, which appears on this site is subject
+              to change at any time.
             </p>
           </div>
         </div>
