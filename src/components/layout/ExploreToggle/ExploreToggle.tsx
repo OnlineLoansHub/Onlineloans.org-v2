@@ -5,12 +5,12 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import { LenderTable } from '@/components/LenderTable/LenderTable';
-import cls from './Footer.module.scss';
+import cls from './ExploreToggle.module.scss';
 
-export const Footer = () => {
+export const ExploreToggle = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const footerRef = useRef<HTMLDivElement>(null);
+  const exploreToggleRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   const isShowTable = useMemo(() => isOpen || isMobile, [isMobile, isOpen]);
@@ -32,12 +32,12 @@ export const Footer = () => {
     setIsOpen((prev) => !prev);
   };
 
-  // Smooth scroll to footer when opened on desktop
+  // Smooth scroll to explore toggle when opened on desktop
   useEffect(() => {
-    if (isOpen && !isMobile && footerRef.current) {
-      // Small delay to ensure the footer content is rendered
+    if (isOpen && !isMobile && exploreToggleRef.current) {
+      // Small delay to ensure the content is rendered
       setTimeout(() => {
-        footerRef.current?.scrollIntoView({
+        exploreToggleRef.current?.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
@@ -70,7 +70,10 @@ export const Footer = () => {
   }, []);
 
   return (
-    <div ref={footerRef} className={classNames(cls.footer, { [cls.open]: isShowTable })}>
+    <div
+      ref={exploreToggleRef}
+      className={classNames(cls.exploreToggle, { [cls.open]: isShowTable })}
+    >
       <div className={cls.container}>
         {!isMobile && (
           <button onClick={handleClick} className={classNames(cls.btn, { [cls.open]: isOpen })}>

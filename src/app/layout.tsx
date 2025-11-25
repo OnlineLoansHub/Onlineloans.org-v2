@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import { Header } from '@/components/layout/Header/Header';
-import { Footer } from '@/components/layout/Footer/Footer';
+import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/config/seo';
@@ -46,7 +46,7 @@ export default function RootLayout({
         <SkipToContent />
         <Header />
         <main id="main-content" className="main-container">{children}</main>
-        <Footer />
+        <ExploreToggle />
       </body>
     </html>
   );
