@@ -110,7 +110,7 @@ export default function ArticlePage() {
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Email submitted:', email);
+    // TODO: Implement form submission logic
     setEmail('');
   };
 
@@ -123,7 +123,9 @@ export default function ArticlePage() {
     <section id="loan" className={cls.section}>
       <div className={cls.containerContent}>
         <div>
-          <h3 className={classNames(cls.blockTitle, cls.loanTitle)}>What is a personal loan?</h3>
+          <h3 className={classNames(cls.blockTitle, {}, [cls.loanTitle])}>
+            What is a personal loan?
+          </h3>
 
           <div className={cls.loanInfo}>
             <p>22 January 2025</p>
@@ -693,7 +695,7 @@ export default function ArticlePage() {
               </div>
             </div>
 
-            <div className={classNames(cls.loanArticleRightBlock, cls.loanArticlePerf)}>
+            <div className={classNames(cls.loanArticleRightBlock, {}, [cls.loanArticlePerf])}>
               <Image src="/images/article/speed.png" alt="" width={40} height={40} />
               <p className={cls.loanArticleRightBlockTitle}>Article performance</p>
               <p className={cls.loanArticleRightBlockSubtitle}>Data from Ahrefs</p>
@@ -719,7 +721,7 @@ export default function ArticlePage() {
               <p className={cls.loanArticleRightBlockNumbers}>285</p>
             </div>
 
-            <div className={classNames(cls.loanArticleRightBlock, cls.loanArticleContact)}>
+            <div className={classNames(cls.loanArticleRightBlock, {}, [cls.loanArticleContact])}>
               <Image src="/images/article/mail.png" alt="" width={40} height={40} />
               <p className={cls.loanArticleRightBlockTitle}>Contact a personal loan agent</p>
               <p className={cls.loanArticleRightBlockTxt}>

@@ -2,12 +2,12 @@
   width: 100%;
   padding: 35px 0;
   background-color: var(--color-article-bg);
+  display: block;
 }
 
 .containerContent {
   max-width: 1200px;
   width: 100%;
-  height: 100%;
   margin: 0 auto;
   padding: 0 10px;
 }
@@ -45,30 +45,29 @@
 .loanContent {
   display: flex;
   justify-content: space-between;
-  gap: 30px;
-  overflow: clip;
+  gap: 10px;
+  align-items: stretch;
 }
 
 .loanLeftPart {
   position: sticky;
-  top: 10px;
-  flex: 0 0 25%;
-  max-width: 25%;
-  height: fit-content;
+  top: 20px;
+  width: 25%;
+  height: max-content;
+  align-self: flex-start;
 }
 
 .loanCenterPart {
-  flex: 0 0 40%;
-  max-width: 40%;
+  width: 40%;
 }
 
 .loanRightPart {
   position: sticky;
-  top: 10px;
-  flex: 0 0 20%;
-  max-width: 20%;
+  top: 20px;
+  width: 20%;
   font-family: 'Inter', sans-serif;
-  height: fit-content;
+  height: max-content;
+  align-self: flex-start;
 }
 
 .loanShareMobile {
@@ -81,13 +80,13 @@
   align-items: center;
   margin-top: 15px;
   margin-bottom: 30px;
+}
 
-  button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
+.loanShareImages button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .loanShareImg {
@@ -130,17 +129,17 @@
   padding: 0px 5px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
 
-  &:hover {
-    color: #0f6056;
-  }
+.loanContentsListItem:hover {
+  color: #0f6056;
+}
 
-  &.active {
-    font-weight: 700;
-    padding-left: 15px;
-    color: #0f6056;
-    border-left: 2px solid #0f6056;
-  }
+.loanContentsListItem.active {
+  font-weight: 700;
+  padding-left: 15px;
+  color: #0f6056;
+  border-left: 2px solid #0f6056;
 }
 
 .loanArticle {
@@ -280,21 +279,19 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
 
-  p:first-child {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 100%;
-  }
+.loanAuthorName p:first-child {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+}
 
-  p:last-child {
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    line-height: 100%;
-    vertical-align: middle;
-    color: #bbbaba;
-  }
+.loanAuthorName p:last-child {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #bbbaba;
 }
 
 .loanAuthorImg {
@@ -308,11 +305,11 @@
   font-size: 14px;
   padding-left: 15px;
   border-left: 1px solid #0d767f;
+}
 
-  a {
-    text-decoration: underline;
-    color: inherit;
-  }
+.loanAuthorAbout a {
+  text-decoration: underline;
+  color: inherit;
 }
 
 .loanArticleRightBlock {
@@ -326,13 +323,11 @@
 .loanArticleRightBlockTitle {
   font-weight: 700;
   font-size: 22px;
-  line-height: 100%;
 }
 
 .loanArticleRightBlockSubtitle {
   font-weight: 500;
   font-size: 14px;
-  line-height: 100%;
   color: #696868;
   margin-top: 5px;
   margin-bottom: 20px;
@@ -354,12 +349,11 @@
   display: inline-flex;
   cursor: pointer;
   margin-left: 5px;
+}
 
-  img {
-    width: 10px;
-    height: 10px;
-    vertical-align: middle;
-  }
+.tooltip img {
+  width: 10px;
+  height: 10px;
 }
 
 .tooltipText {
@@ -382,18 +376,17 @@
     visibility 0.2s ease;
   font-size: 13px;
   line-height: 1.4;
-  font-family: Arial, sans-serif;
+}
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -6px;
-    border-width: 6px;
-    border-style: solid;
-    border-color: #000 transparent transparent transparent;
-  }
+.tooltipText::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltipText {
@@ -404,20 +397,17 @@
 .loanArticleRightBlockNumbers {
   font-weight: 700;
   font-size: 30px;
-  line-height: 100%;
   color: #0d767f;
   margin: 5px 0 12px 0;
 }
 
-.loanArticleContact {
-  .loanArticleRightBlockTitle {
-    margin-bottom: 15px;
-    margin-top: 10px;
-  }
+.loanArticleContact .loanArticleRightBlockTitle {
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
 
-  .loanArticleRightBlockTxt {
-    margin-bottom: 20px;
-  }
+.loanArticleContact .loanArticleRightBlockTxt {
+  margin-bottom: 20px;
 }
 
 .loanArticleRightBlockInput {
@@ -433,7 +423,7 @@
   width: 100%;
 }
 
-// Responsive styles
+/* Responsive */
 @media (max-width: 992px) {
   .loanContent {
     gap: 8px;
@@ -446,19 +436,9 @@
   .loanRightPart {
     width: 25%;
   }
-
-  .loanArticleContact {
-    .primaryBtn {
-      min-width: unset;
-    }
-  }
 }
 
 @media (max-width: 768px) {
-  .section {
-    background-color: var(--color-article-bg);
-  }
-
   .loanContent {
     flex-direction: column;
   }
@@ -466,15 +446,11 @@
   .loanLeftPart,
   .loanRightPart {
     position: unset;
-    flex: none;
-    max-width: none;
     width: 50%;
     margin: 0 auto;
   }
 
   .loanCenterPart {
-    flex: none;
-    max-width: none;
     width: 80%;
     margin: 0 auto;
   }
@@ -487,7 +463,6 @@
   .loanAuthorWrapperMobile {
     width: 80%;
     margin: 0 auto;
-    gap: 15px;
     display: flex;
     flex-direction: column;
     background: #fff;
@@ -513,8 +488,6 @@
   .loanAuthorWrapperMobile,
   .loanLeftPart,
   .loanRightPart {
-    flex: none;
-    max-width: none;
     width: 100%;
   }
 
@@ -537,12 +510,10 @@
 
   .loanAction {
     gap: 25px;
-    align-items: center;
     flex-direction: column;
   }
 
   .loanActionTitle {
     text-align: center;
-    margin: 0 auto;
   }
 }
