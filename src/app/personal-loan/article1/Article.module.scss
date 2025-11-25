@@ -23,10 +23,6 @@
   margin-bottom: 20px;
 }
 
-.loanTitle {
-  // Additional styles if needed
-}
-
 .loanInfo {
   display: flex;
   gap: 25px;
@@ -75,10 +71,6 @@
   height: fit-content;
 }
 
-.loanShare {
-  // Share section container
-}
-
 .loanShareMobile {
   display: none;
 }
@@ -109,10 +101,6 @@
   line-height: 100%;
   text-transform: uppercase;
   margin-bottom: 15px;
-}
-
-.loanContents {
-  // Table of contents container
 }
 
 .loanContentsTitle {
@@ -421,10 +409,6 @@
   margin: 5px 0 12px 0;
 }
 
-.loanArticlePerf {
-  // Additional styles if needed
-}
-
 .loanArticleContact {
   .loanArticleRightBlockTitle {
     margin-bottom: 15px;
@@ -482,11 +466,15 @@
   .loanLeftPart,
   .loanRightPart {
     position: unset;
+    flex: none;
+    max-width: none;
     width: 50%;
     margin: 0 auto;
   }
 
   .loanCenterPart {
+    flex: none;
+    max-width: none;
     width: 80%;
     margin: 0 auto;
   }
@@ -525,6 +513,8 @@
   .loanAuthorWrapperMobile,
   .loanLeftPart,
   .loanRightPart {
+    flex: none;
+    max-width: none;
     width: 100%;
   }
 
