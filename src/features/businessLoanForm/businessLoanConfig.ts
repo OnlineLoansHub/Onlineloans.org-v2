@@ -214,7 +214,7 @@ const FORM_CONFIG: IFormConfig[] = [
 const validators: Partial<Record<string, (v: unknown) => boolean>> = {
   [FormKeys.amount]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
   [FormKeys.revenue]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
-  [FormKeys.zipCode]: (v) => /^\d{5}$/.test(String(v ?? '')),
+  [FormKeys.zipCode]: (v) => /^(\d{5}|\d{9}|\d{5}-\d{4})$/.test(String(v ?? '')),
   [FormKeys.email]: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v ?? '')),
   [FormKeys.phone]: (v) => validateUSPhone(String(v ?? '')).valid,
 };

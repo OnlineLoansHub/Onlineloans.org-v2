@@ -222,7 +222,7 @@ const validators: Partial<Record<string, (v: unknown) => boolean>> = {
   [PersonalFormKeys.amount]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
   [PersonalFormKeys.annualIncome]: (v) =>
     Number(String(v).replace(/[^\d.]/g, '')) > 0,
-  [PersonalFormKeys.zipCode]: (v) => /^\d{5}$/.test(String(v ?? '')),
+  [PersonalFormKeys.zipCode]: (v) => /^(\d{5}|\d{9}|\d{5}-\d{4})$/.test(String(v ?? '')),
   [PersonalFormKeys.email]: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v ?? '')),
   [PersonalFormKeys.phone]: (v) => validateUSPhone(String(v ?? '')).valid,
 };
