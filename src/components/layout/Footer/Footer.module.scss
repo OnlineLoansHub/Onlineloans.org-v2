@@ -1,5 +1,6 @@
 .footer {
   width: 100%;
+  margin-top: 100px;
   padding: 3rem 0;
   background-color: var(--color-primary);
   color: var(--color-white);
@@ -12,7 +13,7 @@
   width: 100%;
   max-width: var(--max-container-width);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 17rem;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -21,7 +22,12 @@
 
   @media (max-width: 768px) {
     gap: 2rem;
-    padding: 0 16px;
+    padding: 0 1.25rem 0 1.25rem;
+  }
+
+  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
+  @media (min-width: 1025px) and (max-width: 1600px) {
+    padding: 0 5.25rem 0 5.25rem;
   }
 }
 
