@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button/Button';
-import { classNames } from '@/lib';
 import { LENDER_TABLE_CONFIG } from './config';
 import cls from './LenderTable.module.scss';
 
@@ -10,184 +9,223 @@ interface LenderTableProps {
   loanType?: 'personal' | 'business';
 }
 
+const getRatingText = (rating: string): string => {
+  const num = parseFloat(rating);
+  if (num >= 9.0) return 'Excellent';
+  if (num >= 8.0) return 'Good';
+  if (num >= 7.0) return 'Fair';
+
+  return 'Average';
+};
+
 export const LenderTable = ({ loanType }: LenderTableProps) => {
   const filteredLenders = loanType
     ? LENDER_TABLE_CONFIG.filter((lender) => lender.loanType === loanType)
     : LENDER_TABLE_CONFIG;
 
   return (
-    <div className={classNames(cls.wrapper)}>
-      <ul className={classNames(cls.list)}>
-        {filteredLenders.map((item, index) => {
-          return (
-            <li key={item.title} className={cls.listItem}>
-              <p className={cls.listItemNumber}>{index + 1}</p>
-              <div className={cls.listItemImgWrapper}>
-                <Image
-                  src={item.imgSrc}
-                  alt={item.alt}
-                  fill
-                  className={cls.listItemImg}
-                />
-                {item.imgTitleElem}
-              </div>
-              <div className={cls.listItemContent}>
-                <div className={cls.listItemContentTop}>
-                  <div>
-                    <p className={cls.listItemTitle}>{item.title}</p>
-                    <p className={cls.listItemSubtitle}>{item.subtitle}</p>
-                    <p className={cls.listItemReview}>
-                      <span className={cls.listItemReviewNumber}>
-                        {item.reviewsNumber} reviews
-                      </span>{' '}
-                      on{' '}
-                      <Image
-                        src={
-                          '/images/icons/features/onlineloans-decorative-shape.svg'
-                        }
-                        alt={'onlineloans-decorative-shape'}
-                        width={26}
-                        height={24}
-                        className={cls.listItemReviewStar}
-                      />{' '}
-                      <span className={cls.listItemReviewBold}>Trustpilot</span>
-                    </p>
-                  </div>
-                  <p className={cls.listItemRating}>
-                    {item.rating}
-                    <Image
-                      src={'/images/table/rating-star.svg'}
-                      alt={'onlineloans rating-star'}
-                      width={26}
-                      height={24}
-                      className={cls.listItemRatingStar}
-                    />
-                  </p>
+    <div className={cls.wrapper}>
+      <div className={cls.mainContent}>
+        <ul className={cls.list}>
+          {filteredLenders.map((item, index) => (
+            <li key={item.id} className={cls.card}>
+              {/* Rank Badge */}
+              <div className={cls.rankBadge}>{index + 1}</div>
+
+              {/* Image Section */}
+              <div className={cls.imageSection}>
+                <div className={cls.imageContainer}>
+                  <Image
+                    src={item.imgSrc}
+                    alt={item.alt}
+                    width={300}
+                    height={200}
+                    className={cls.logo}
+                    priority={index === 0}
+                    unoptimized
+                  />
                 </div>
-                <div className={cls.listItemContentBottom}>
-                  <ul className={cls.listItemTable}>
-                    {item.table.map((tableItem) => {
-                      return (
-                        <li
-                          key={tableItem.id}
-                          className={cls.listItemTableItem}
-                        >
-                          <p className={cls.listItemTableItemValue}>
-                            {tableItem.value}
-                          </p>
-                          <p className={cls.listItemTableItemTitle}>
-                            {tableItem.title}
-                          </p>
+              </div>
+
+              {/* Content Section */}
+              <div className={cls.contentSection}>
+                {/* Top Row: Title & Rating */}
+                <div className={cls.topRow}>
+                  <div className={cls.titleGroup}>
+                    <h3 className={cls.title}>{item.title}</h3>
+                    <p className={cls.subtitle}>{item.subtitle}</p>
+                    <div className={cls.reviews}>
+                      <span className={cls.reviewCount}>{item.reviewsNumber} reviews</span>
+                      {' by '}
+                      <Image
+                        src="/images/icons/features/onlineloans-decorative-shape.svg"
+                        alt="Trustpilot"
+                        width={20}
+                        height={18}
+                        className={cls.trustpilotIcon}
+                      />{' '}
+                      <span className={cls.trustpilotText}>Trustpilot</span>
+                    </div>
+                  </div>
+                  <div className={cls.ratingGroup}>
+                    <div className={cls.rating}>
+                      <span className={cls.ratingValue}>{item.rating}</span>
+                      <div className={cls.stars}>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Image
+                            key={star}
+                            src="/images/table/rating-star.svg"
+                            alt="Star"
+                            width={20}
+                            height={18}
+                            className={cls.starIcon}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <span className={cls.ratingText}>{getRatingText(item.rating)}</span>
+                  </div>
+                </div>
+
+                {/* Bottom Row: Metrics & Button */}
+                <div className={cls.bottomRow}>
+                  <ul className={cls.metrics}>
+                    {/* Desktop: Show only Time in Business and Monthly Revenue, with button replacing Min. Credit Score */}
+                    {item.table
+                      .filter((metric) => metric.title !== 'Min. Credit Score')
+                      .map((metric) => (
+                        <li key={metric.id} className={cls.metricItem}>
+                          <span className={cls.metricValue}>{metric.value}</span>
+                          <span className={cls.metricLabel}>{metric.title}</span>
                         </li>
-                      );
-                    })}
+                      ))}
+                    <li className={cls.metricItemButton}>
+                      <Button variant="primary" onClick={() => {}} className={cls.ctaButton}>
+                        Get My Rate
+                        <Image
+                          src="/images/icons/features/arrow-right.svg"
+                          width={20}
+                          height={20}
+                          alt="Arrow"
+                          className={cls.arrowIcon}
+                        />
+                      </Button>
+                    </li>
+                    {/* Mobile: Show all metrics including Min. Credit Score */}
+                    {item.table
+                      .filter((metric) => metric.title === 'Min. Credit Score')
+                      .map((metric) => (
+                        <li key={metric.id} className={cls.metricItemMobile}>
+                          <span className={cls.metricValue}>{metric.value}</span>
+                          <span className={cls.metricLabel}>{metric.title}</span>
+                        </li>
+                      ))}
                   </ul>
-                  <Button
-                    variant="primary"
-                    onClick={() => {}}
-                    className={cls.listItemBtn}
-                  >
+                  <Button variant="primary" onClick={() => {}} className={cls.ctaButtonMobile}>
                     Get My Rate
                     <Image
-                      src={'/images/icons/features/arrow-right.svg'}
-                      width={24}
-                      height={24}
-                      alt={'Continue arrow'}
-                      className={cls.btnImg}
+                      src="/images/icons/features/arrow-right.svg"
+                      width={20}
+                      height={20}
+                      alt="Arrow"
+                      className={cls.arrowIcon}
                     />
                   </Button>
                 </div>
               </div>
             </li>
-          );
-        })}
-      </ul>
-      <div>
-        <div className={cls.infoBlock}>
-          <div>
-            <p className={cls.infoBlockTitle}>300+ visitors</p>
-            <p className={cls.infoBlockSubtitle}>
-              connected with a lender in the past week
+          ))}
+        </ul>
+      </div>
+
+      {/* Sidebar - Desktop Only */}
+      <aside className={cls.sidebar}>
+        {/* Trusted Users Block */}
+        <div className={cls.sidebarBlock}>
+          <div className={cls.sidebarBlockContent}>
+            <p className={cls.sidebarBlockTitle}>4,495 people</p>
+            <p className={cls.sidebarBlockSubtitle}>
+              trusted OnlineLoans.org to find a lender last week
             </p>
           </div>
-          <div className={cls.infoBlockImgWrapper}>
+          <div className={cls.sidebarBlockIcon}>
             <Image
-              src={'/images/table/cash.png'}
-              alt={'image casg'}
+              src="/images/table/cash.png"
+              alt="People icon"
               width={130}
               height={120}
-              className={cls.infoBlockImg}
+              className={cls.sidebarIcon}
             />
           </div>
         </div>
-        <div className={cls.advantagesBlock}>
-          <p className={cls.advantagesTitle}>OnlineLoans Total Score</p>
-          <p className={cls.advantagesSubtitle}>
-            Our product scores consist of a combination of the following 3
-            components:
+
+        {/* Total Score Explanation */}
+        <div className={cls.sidebarBlock}>
+          <h3 className={cls.scoreTitle}>OnlineLoans Total Score</h3>
+          <p className={cls.scoreSubtitle}>
+            Our product scores consist of a combination of the following 3 components:
           </p>
-          <ul className={cls.advantagesList}>
-            <li className={cls.advantagesListItem}>
-              <p className={cls.advantagesListItemTxt}>
+          <ul className={cls.scoreList}>
+            <li className={cls.scoreItem}>
+              <div className={cls.scoreItemContent}>
                 <Image
-                  src={'/images/table/material-symbols_star-outline.svg'}
-                  alt={'image casg'}
+                  src="/images/table/material-symbols_star-outline.svg"
+                  alt="Popularity"
                   width={32}
                   height={32}
-                  className={cls.advantagesImg}
+                  className={cls.scoreIcon}
                 />
-                Popularity
-              </p>
+                <span className={cls.scoreItemText}>Popularity</span>
+              </div>
               <Image
-                src={'/images/table/arrow.svg'}
-                alt={'image casg'}
+                src="/images/table/arrow.svg"
+                alt="Arrow"
                 width={12}
                 height={24}
-                className={cls.advantagesImgArrow}
+                className={cls.scoreArrow}
               />
             </li>
-            <li className={cls.advantagesListItem}>
-              <p className={cls.advantagesListItemTxt}>
+            <li className={cls.scoreItem}>
+              <div className={cls.scoreItemContent}>
                 <Image
-                  src={'/images/table/mdi_like-outline.svg'}
-                  alt={'image casg'}
+                  src="/images/table/mdi_like-outline.svg"
+                  alt="Brand Reputation"
                   width={32}
                   height={32}
-                  className={cls.advantagesImg}
+                  className={cls.scoreIcon}
                 />
-                Brand Reputation
-              </p>
+                <span className={cls.scoreItemText}>Brand Reputation</span>
+              </div>
               <Image
-                src={'/images/table/arrow.svg'}
-                alt={'image casg'}
+                src="/images/table/arrow.svg"
+                alt="Arrow"
                 width={12}
                 height={24}
-                className={cls.advantagesImgArrow}
+                className={cls.scoreArrow}
               />
             </li>
-            <li className={cls.advantagesListItem}>
-              <p className={cls.advantagesListItemTxt}>
+            <li className={cls.scoreItem}>
+              <div className={cls.scoreItemContent}>
                 <Image
-                  src={'/images/table/mdi_tick-circle-outline.svg'}
-                  alt={'image casg'}
+                  src="/images/table/mdi_tick-circle-outline.svg"
+                  alt="Features & Benefits"
                   width={32}
                   height={32}
-                  className={cls.advantagesImg}
+                  className={cls.scoreIcon}
                 />
-                Features & Benefits
-              </p>
+                <span className={cls.scoreItemText}>Features & Benefits</span>
+              </div>
               <Image
-                src={'/images/table/arrow.svg'}
-                alt={'image casg'}
+                src="/images/table/arrow.svg"
+                alt="Arrow"
                 width={12}
                 height={24}
-                className={cls.advantagesImgArrow}
+                className={cls.scoreArrow}
               />
             </li>
           </ul>
         </div>
-      </div>
+      </aside>
     </div>
   );
 };
-

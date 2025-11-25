@@ -20,9 +20,17 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--max-container-width);
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 17rem;
+
+  @media (width <= 768px) {
+    padding: 0 1.25rem;
+  }
+
+  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
+  @media (min-width: 1025px) and (max-width: 1600px) {
+    padding: 0 5.25rem;
+  }
 }
 
 .btn {
