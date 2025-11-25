@@ -138,10 +138,14 @@ $imgTitleHeight: 40px;
   justify-content: center;
   width: 100%;
   min-width: 140px;
-  max-width: 215px;
+  max-width: 180px;
   min-height: 0;
   margin-top: $imgTitleHeight * -1;
   // margin-top: 16px;
+
+  @media (width > 993) {
+    max-width: 160px;
+  }
 
   .imgTitle {
     position: absolute;
@@ -483,4 +487,3 @@ $imgTitleHeight: 40px;
 .advantagesImgArrow {
   transform: rotate(-180deg);
 }
-
