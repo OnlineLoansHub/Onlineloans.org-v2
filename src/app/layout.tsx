@@ -5,6 +5,8 @@ import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/config/seo';
+import { ExploreToggleProvider } from '@/contexts/ExploreToggleContext';
+import { FooterWrapper } from '@/components/layout/Footer/FooterWrapper';
 import '@/styles/index.css';
 
 const poppins = Poppins({
@@ -42,11 +44,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.variable}>
-        <DefaultStructuredData />
-        <SkipToContent />
-        <Header />
-        <main id="main-content" className="main-container">{children}</main>
-        <ExploreToggle />
+        <ExploreToggleProvider>
+          <DefaultStructuredData />
+          <SkipToContent />
+          <Header />
+          <main id="main-content" className="main-container">
+            {children}
+          </main>
+          <ExploreToggle />
+          <FooterWrapper />
+        </ExploreToggleProvider>
       </body>
     </html>
   );

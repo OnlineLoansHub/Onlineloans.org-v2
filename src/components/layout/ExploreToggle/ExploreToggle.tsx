@@ -1,15 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { classNames } from '@/lib';
 import { LenderTable } from '@/components/LenderTable/LenderTable';
+import { useExploreToggle } from '@/contexts/ExploreToggleContext';
 import cls from './ExploreToggle.module.scss';
 
 export const ExploreToggle = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const { isOpen, isMobile, setIsOpen } = useExploreToggle();
   const exploreToggleRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -29,7 +29,7 @@ export const ExploreToggle = () => {
   }, [pathname]);
 
   const handleClick = () => {
-    setIsOpen((prev) => !prev);
+    setIsOpen(!isOpen);
   };
 
   // Smooth scroll to explore toggle when opened on desktop
@@ -44,30 +44,6 @@ export const ExploreToggle = () => {
       }, 100);
     }
   }, [isOpen, isMobile]);
-
-  // Track window width to determine if we're on mobile viewport (<= 993px).
-  // Updates isMobile state on mount, window resize, and after a short delay
-  // to ensure DOM is fully rendered.
-  useEffect(() => {
-    const updateHeight = () => {
-      const isMobile = window.innerWidth <= 993;
-      setIsMobile(isMobile);
-    };
-
-    // Initial height update
-    updateHeight();
-
-    // Add resize listener
-    window.addEventListener('resize', updateHeight);
-
-    // Slight delay to ensure DOM is fully rendered
-    const timeoutId = setTimeout(updateHeight, 50);
-
-    return () => {
-      window.removeEventListener('resize', updateHeight);
-      clearTimeout(timeoutId);
-    };
-  }, []);
 
   return (
     <div
