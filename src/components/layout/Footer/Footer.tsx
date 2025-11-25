@@ -10,7 +10,7 @@ interface FooterLinkItem {
   title: string;
   path: string;
 }
-
+// back to footer
 const topNavLinks: FooterLinkItem[] = [
   {
     title: 'About Us',
