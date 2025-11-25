@@ -62,6 +62,13 @@ const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) =>
     return !isNaN(number) && number > 0;
   }, [value]);
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isValidAmount) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   return (
     <div
       className={classNames(cls.card, {
@@ -88,15 +95,13 @@ const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) =>
         />
       </div>
 
-      {isValidAmount ? (
-        <AppLink className={cls.button} href={{ pathname: href, query: { amount: amount } }}>
-          {buttonText}
-        </AppLink>
-      ) : (
-        <button type="button" className={classNames(cls.button, {}, [cls.buttonDisabled])} disabled>
-          {buttonText}
-        </button>
-      )}
+      <AppLink
+        className={cls.button}
+        href={{ pathname: href, query: { amount: amount } }}
+        onClick={handleLinkClick}
+      >
+        {buttonText}
+      </AppLink>
     </div>
   );
 };
