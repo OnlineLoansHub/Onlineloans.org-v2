@@ -13,32 +13,27 @@ interface AmountInputCardProps {
   value: string;
 }
 
-const AmountCard = ({
-  type,
-  handleValueChange,
-  value,
-}: AmountInputCardProps) => {
+const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) => {
   const [focused, setFocused] = useState(false);
-  const { buttonText, placeholder, maxAmountLabel, href, amount } =
-    useMemo(() => {
-      if (type === LoanTypes.personal) {
-        return {
-          buttonText: 'See My Offer',
-          placeholder: '$ Amount',
-          maxAmountLabel: 'Up to $50k',
-          href: URL_CONFIG.personalLoan,
-          amount: value,
-        };
-      }
-
+  const { buttonText, placeholder, maxAmountLabel, href, amount } = useMemo(() => {
+    if (type === LoanTypes.personal) {
       return {
         buttonText: 'See My Offer',
         placeholder: '$ Amount',
-        maxAmountLabel: 'Up to $1M',
-        href: URL_CONFIG.businessLoan,
+        maxAmountLabel: 'Up to $50k',
+        href: URL_CONFIG.personalLoan,
         amount: value,
       };
-    }, [type, value]);
+    }
+
+    return {
+      buttonText: 'See My Offer',
+      placeholder: '$ Amount',
+      maxAmountLabel: 'Up to $1M',
+      href: URL_CONFIG.businessLoan,
+      amount: value,
+    };
+  }, [type, value]);
 
   const labelValue = useMemo(() => {
     if (!focused)
@@ -56,6 +51,16 @@ const AmountCard = ({
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (!e.target.value) setFocused(false);
   };
+
+  const isValidAmount = useMemo(() => {
+    if (!value || value.trim() === '') return false;
+    // Extract numeric value from formatted string (remove $ and commas)
+    const numericValue = value.replace(/[^\d.]/g, '');
+    if (!numericValue) return false;
+    const number = parseFloat(numericValue);
+
+    return !isNaN(number) && number > 0;
+  }, [value]);
 
   return (
     <div
@@ -83,12 +88,15 @@ const AmountCard = ({
         />
       </div>
 
-      <AppLink
-        className={cls.button}
-        href={{ pathname: href, query: { amount: amount } }}
-      >
-        {buttonText}
-      </AppLink>
+      {isValidAmount ? (
+        <AppLink className={cls.button} href={{ pathname: href, query: { amount: amount } }}>
+          {buttonText}
+        </AppLink>
+      ) : (
+        <button type="button" className={classNames(cls.button, {}, [cls.buttonDisabled])} disabled>
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 };

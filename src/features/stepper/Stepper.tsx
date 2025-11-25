@@ -17,17 +17,14 @@ interface IStepFormProps {
 }
 
 export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
-  const [formState, setFormState] = useState<Record<string, unknown>>(
-    config.initialFormState
-  );
+  const [formState, setFormState] = useState<Record<string, unknown>>(config.initialFormState);
   const [index, setIndex] = useState(0);
   const [shake, setShake] = useState(false);
-  const [containerHeight, setContainerHeight] = useState<number | 'auto'>(
-    'auto'
-  );
+  const [containerHeight, setContainerHeight] = useState<number | 'auto'>('auto');
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const shouldAutoAdvanceRef = useRef(false);
 
   // Safety check: ensure formConfig is not empty and index is valid
   const hasValidConfig = config.formConfig && config.formConfig.length > 0;
@@ -41,9 +38,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const stepFieldNames = useMemo(() => {
     if (!safeActiveConfig) return [];
     const fields = safeActiveConfig.options
-      .filter(
-        (o) => o.type === 'input' || o.type === 'select' || o.type === 'buttons'
-      )
+      .filter((o) => o.type === 'input' || o.type === 'select' || o.type === 'buttons')
       .map((o) => o.name);
 
     return Array.from(new Set(fields));
@@ -52,20 +47,14 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const stepValid = useMemo(() => {
     return stepFieldNames.every((name) => {
       const v = formState[name];
-      const nonEmpty = !(
-        v === undefined ||
-        v === null ||
-        String(v).trim() === ''
-      );
+      const nonEmpty = !(v === undefined || v === null || String(v).trim() === '');
       const specific = config.validators[name]?.(v) ?? true;
 
       return nonEmpty && specific;
     });
   }, [formState, stepFieldNames, config.validators]);
 
-  const onSubmit = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const onSubmit = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
 
     try {
@@ -87,13 +76,45 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     return `$${number.toLocaleString('en-US')}`;
   };
 
+  const checkStepValid = (state: Record<string, unknown>, fieldNames: string[]): boolean => {
+    return fieldNames.every((name) => {
+      const v = state[name];
+      const nonEmpty = !(v === undefined || v === null || String(v).trim() === '');
+      const specific = config.validators[name]?.(v) ?? true;
+
+      return nonEmpty && specific;
+    });
+  };
+
   const handleChange = (value: string | number, name: string) => {
-    if (config.currencyFields?.includes(name)) {
-      const formattedValue = formatCurrency(String(value));
-      setFormState((prev) => ({ ...prev, [name]: formattedValue }));
-    } else {
-      setFormState((prev) => ({ ...prev, [name]: value }));
-    }
+    // Check if this is a button click before updating state
+    const currentConfig = config.formConfig[index];
+    const isButtonClick = currentConfig?.options.some(
+      (o) => o.type === 'buttons' && o.name === name
+    );
+
+    setFormState((prev) => {
+      const newState = config.currencyFields?.includes(name)
+        ? { ...prev, [name]: formatCurrency(String(value)) }
+        : { ...prev, [name]: value };
+
+      // Mark for auto-advance if it's a button click
+      if (isButtonClick && !isLast && currentConfig) {
+        // Get field names for current question
+        const currentStepFields = currentConfig.options
+          .filter((o) => o.type === 'input' || o.type === 'select' || o.type === 'buttons')
+          .map((o) => o.name);
+        const uniqueFields = Array.from(new Set(currentStepFields));
+
+        // Check if question would be valid with new state
+        const wouldBeValid = checkStepValid(newState, uniqueFields);
+        shouldAutoAdvanceRef.current = wouldBeValid;
+      } else {
+        shouldAutoAdvanceRef.current = false;
+      }
+
+      return newState;
+    });
   };
 
   const goNext = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -117,6 +138,28 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const goPrev = () => {
     setIndex((i) => Math.max(i - 1, 0));
   };
+
+  // Reset auto-advance flag when index changes
+  useEffect(() => {
+    shouldAutoAdvanceRef.current = false;
+  }, [index]);
+
+  // Auto-advance when button is clicked and step becomes valid
+  useEffect(() => {
+    if (shouldAutoAdvanceRef.current && !isLast && stepValid) {
+      shouldAutoAdvanceRef.current = false;
+      // Use a small delay to ensure smooth transition
+      const timeoutId = setTimeout(() => {
+        setIndex((i) => {
+          const nextIndex = Math.min(i + 1, config.formConfig.length - 1);
+
+          return nextIndex;
+        });
+      }, 150);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formState, stepValid, isLast, config.formConfig.length]);
 
   // Update height when step changes or window resizes
   useEffect(() => {
@@ -161,17 +204,14 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
             className={classNames(cls.track, { [cls.shake]: shake })}
             style={{
               transform: `translateX(-${index * 100}%)`,
-              height:
-                containerHeight === 'auto' ? 'auto' : `${containerHeight}px`,
+              height: containerHeight === 'auto' ? 'auto' : `${containerHeight}px`,
             }}
           >
             {config.formConfig.map((formItem, formIndex) => {
               const dopTitle = formItem?.dopTitle;
               const dopValue = dopTitle ? formState[dopTitle] : undefined;
               const title =
-                dopTitle && dopValue
-                  ? `${formItem.title}, ${String(dopValue)}!`
-                  : formItem.title;
+                dopTitle && dopValue ? `${formItem.title}, ${String(dopValue)}!` : formItem.title;
 
               return (
                 <div
@@ -186,9 +226,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                       <h2 className={cls.formTitle}>{title}</h2>
                       <h3 className={cls.formSubtitle}>{formItem.subtitle}</h3>
                     </div>
-                    <div
-                      className={classNames(cls.formAction, {}, [activeClass])}
-                    >
+                    <div className={classNames(cls.formAction, {}, [activeClass])}>
                       {formItem.options.map((item) => {
                         switch (item.type) {
                           case 'input':
@@ -199,9 +237,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                                 value={String(formState[item.name] ?? '')}
                                 placeholder={item.placeholder}
                                 className={classNames(cls.formInput)}
-                                onChange={(option) =>
-                                  handleChange(option, item.name)
-                                }
+                                onChange={(option) => handleChange(option, item.name)}
                               />
                             );
 
@@ -218,8 +254,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                                       type="button"
                                       className={classNames(cls.formInfoBtn, {
                                         [cls.small]: Boolean(item.isSmallTxt),
-                                        [cls.active]:
-                                          v === String(formState[item.name] ?? ''),
+                                        [cls.active]: v === String(formState[item.name] ?? ''),
                                       })}
                                       onClick={() => handleChange(v, item.name)}
                                     >
@@ -241,9 +276,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                                   label: v,
                                 }))}
                                 value={formState[item.name] as string | number | undefined}
-                                onChange={(value) =>
-                                  handleChange(value, item.name)
-                                }
+                                onChange={(value) => handleChange(value, item.name)}
                                 className={cls.formSelect}
                               />
                             );

@@ -16,9 +16,7 @@ export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
   const sp = useSearchParams();
   const amount = sp.get('amount') ?? '';
   const [isFormFilled, setFormFilled] = useState(false);
-
   const config = useMemo(() => getBusinessLoanConfig(amount), [amount]);
-
   const handleFormFilled = useCallback(() => {
     setFormFilled(true);
   }, []);
@@ -26,11 +24,11 @@ export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
   return (
     <div className={cls.page}>
       <div className={cls.container}>
-          {!isFormFilled ? (
-            <Stepper handleFormFilled={handleFormFilled} config={config} />
-          ) : (
-            <FinalStep />
-          )}
+        {!isFormFilled ? (
+          <Stepper handleFormFilled={handleFormFilled} config={config} />
+        ) : (
+          <FinalStep />
+        )}
       </div>
     </div>
   );

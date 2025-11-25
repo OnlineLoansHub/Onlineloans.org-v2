@@ -1,5 +1,6 @@
 import { FormSteps, IFormConfig, IStepperConfig, IStepConfig } from '../stepper/types';
 import cls from '../stepper/Stepper.module.scss';
+import { validateUSPhone } from '@/lib/validateUSPhone';
 
 const GOOGLE_URL = `https://script.google.com/macros/s/AKfycbyDWmr_uDQNNHEwUw-ZGMdRQWuS6EiV22Rt2jvhNQLEJUI-_5AtQ7obGkSyg2II6sJPSQ/exec`;
 
@@ -223,7 +224,7 @@ const validators: Partial<Record<string, (v: unknown) => boolean>> = {
     Number(String(v).replace(/[^\d.]/g, '')) > 0,
   [PersonalFormKeys.zipCode]: (v) => /^\d{5}$/.test(String(v ?? '')),
   [PersonalFormKeys.email]: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v ?? '')),
-  [PersonalFormKeys.phone]: (v) => String(v ?? '').replace(/[^\d]/g, '').length >= 10,
+  [PersonalFormKeys.phone]: (v) => validateUSPhone(String(v ?? '')).valid,
 };
 
 export const getPersonalLoanConfig = (amount: string = ''): IStepperConfig => {

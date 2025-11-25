@@ -1,9 +1,10 @@
 import { FormKeys, FormSteps, IFormConfig, IStepperConfig, IStepConfig } from '../stepper/types';
 import cls from '../stepper/Stepper.module.scss';
+import { validateUSPhone } from '@/lib/validateUSPhone';
 
 const currentYear = new Date().getFullYear();
 const years: number[] = [];
-for (let year = 1950; year <= currentYear; year++) {
+for (let year = currentYear; year >= 1950; year--) {
   years.push(year);
 }
 
@@ -39,14 +40,7 @@ const FORM_CONFIG: IFormConfig[] = [
       {
         type: 'buttons',
         name: FormKeys.amount,
-        values: [
-          '$10,000',
-          '$25,000',
-          '$50,000',
-          '$100,000',
-          '$200,000',
-          '$300,000',
-        ],
+        values: ['$10,000', '$25,000', '$50,000', '$100,000', '$200,000', '$300,000'],
       },
     ],
     next: true,
@@ -93,9 +87,7 @@ const FORM_CONFIG: IFormConfig[] = [
     subtitle: 'Take an average of your last few months.',
     step: FormSteps.first,
     substep: 3,
-    options: [
-      { type: 'input', placeholder: 'Monthly revenue', name: FormKeys.revenue },
-    ],
+    options: [{ type: 'input', placeholder: 'Monthly revenue', name: FormKeys.revenue }],
     next: true,
     prev: true,
   },
@@ -125,8 +117,7 @@ const FORM_CONFIG: IFormConfig[] = [
   },
   {
     title: 'What will you use this loan for?',
-    subtitle:
-      'This helps us match you to the right funding options for your business.',
+    subtitle: 'This helps us match you to the right funding options for your business.',
     step: FormSteps.first,
     substep: 5,
     options: [
@@ -225,7 +216,7 @@ const validators: Partial<Record<string, (v: unknown) => boolean>> = {
   [FormKeys.revenue]: (v) => Number(String(v).replace(/[^\d.]/g, '')) > 0,
   [FormKeys.zipCode]: (v) => /^\d{5}$/.test(String(v ?? '')),
   [FormKeys.email]: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v ?? '')),
-  [FormKeys.phone]: (v) => String(v ?? '').replace(/[^\d]/g, '').length >= 10,
+  [FormKeys.phone]: (v) => validateUSPhone(String(v ?? '')).valid,
 };
 
 export const getBusinessLoanConfig = (amount: string = ''): IStepperConfig => {
@@ -276,4 +267,3 @@ export const getBusinessLoanConfig = (amount: string = ''): IStepperConfig => {
     currencyFields: [FormKeys.amount, FormKeys.revenue],
   };
 };
-
