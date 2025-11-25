@@ -11,6 +11,7 @@
   --color-border: #e5e7f1; /* Borders */
   --color-accent-orange: #ffbc99;
   --color-accent-purple: #cabdff;
+  --color-article-bg: #f8f8f8; /* Article background color */
 
   /* sizes */
   --max-container-width: 1700px;
