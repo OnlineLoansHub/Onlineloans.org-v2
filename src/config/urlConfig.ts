@@ -6,4 +6,8 @@ export const URL_CONFIG = {
   partner: '/partner-with-us',
   businessLoan: '/business-loan/apply',
   personalLoan: '/personal-loan/apply',
+  cookiePolicy: '/cookie-policy',
+  termsOfUse: '/terms-of-use',
+  privacyPolicy: '/privacy-policy',
+  contact: '/contact',
 };

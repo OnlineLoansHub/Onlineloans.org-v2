@@ -18,11 +18,11 @@ const topNavLinks: FooterLinkItem[] = [
   },
   {
     title: 'Cookie Policy',
-    path: '/cookie-policy',
+    path: URL_CONFIG.cookiePolicy,
   },
   {
     title: 'Terms Of Use',
-    path: '/terms-of-use',
+    path: URL_CONFIG.termsOfUse,
   },
   {
     title: 'Partner With Us',
@@ -30,11 +30,11 @@ const topNavLinks: FooterLinkItem[] = [
   },
   {
     title: 'Privacy Policy',
-    path: '/privacy-policy',
+    path: URL_CONFIG.privacyPolicy,
   },
   {
     title: 'Contact',
-    path: '/contact',
+    path: URL_CONFIG.contact,
   },
 ];
 
@@ -55,11 +55,11 @@ export const Footer = () => {
           </p>
           <p className={cls.termsText}>
             By using our content, products & services you agree to our{' '}
-            <AppLink href="/terms-of-use" className={cls.inlineLink}>
+            <AppLink href={URL_CONFIG.termsOfUse} className={cls.inlineLink}>
               Terms of Use
             </AppLink>{' '}
             and{' '}
-            <AppLink href="/privacy-policy" className={cls.inlineLink}>
+            <AppLink href={URL_CONFIG.privacyPolicy} className={cls.inlineLink}>
               Privacy Policy
             </AppLink>
             .
