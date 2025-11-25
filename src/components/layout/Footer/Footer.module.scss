@@ -51,6 +51,11 @@
   @media (max-width: 768px) {
     font-size: 20px;
   }
+
+  // Override all letter colors to white in footer (including the green "org" part)
+  :global(span) {
+    color: var(--color-white) !important;
+  }
 }
 
 .copyright {
