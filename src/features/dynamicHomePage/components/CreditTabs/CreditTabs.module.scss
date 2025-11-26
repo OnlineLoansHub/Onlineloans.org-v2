@@ -67,27 +67,31 @@
   gap: 24px;
   align-items: left;
   padding-top: 24px;
+
+  @media (width <= 576px) {
+    padding-top: 12px;
+  }
 }
 .amountInfo {
-    display: flex;
-    gap: 48px;
-    font-size: 16px;
-    color: var(--color-gray-medium);
+  display: flex;
+  gap: 48px;
+  font-size: 16px;
+  color: var(--color-gray-medium);
 
-    @media (width <= 1440) {
-      gap: 30px;
-    }
-
-    @media (width <= 768) {
-      font-size: 12px;
-    }
-
-    @media (width <= 576) {
-      gap: 20px;
-      justify-content: space-between;
-      width: 100%;
-    }
+  @media (width <= 1440) {
+    gap: 30px;
   }
+
+  @media (width <= 768) {
+    font-size: 12px;
+  }
+
+  @media (width <= 576) {
+    gap: 8px;
+
+    width: 100%;
+  }
+}
 
 .note {
   display: flex;
@@ -107,6 +111,5 @@
 
   @media (width <= 768) {
     max-width: unset;
-
   }
 }
