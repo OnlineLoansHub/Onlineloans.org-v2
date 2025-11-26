@@ -146,6 +146,7 @@ export default function PartnerWithUs() {
                     placeholder="Your phone number"
                     name="phone"
                     type="tel"
+                    inputMode="numeric"
                     value={formData.phone}
                     onChange={handleInputChange}
                     required

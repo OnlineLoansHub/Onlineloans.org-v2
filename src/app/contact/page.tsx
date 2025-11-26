@@ -136,6 +136,7 @@ export default function Contact() {
                     </label>
                     <input
                       type="tel"
+                      inputMode="numeric"
                       id="phone"
                       name="phone"
                       className={cls.input}

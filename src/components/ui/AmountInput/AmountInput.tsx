@@ -86,6 +86,7 @@ const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) =>
         </label>
         <input
           type="text"
+          inputMode="numeric"
           value={value}
           onChange={(e) => handleValueChange(e.target.value)}
           onFocus={handleFocus}

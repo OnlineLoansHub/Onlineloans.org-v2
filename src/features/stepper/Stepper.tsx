@@ -229,7 +229,17 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                     <div className={classNames(cls.formAction, {}, [activeClass])}>
                       {formItem.options.map((item) => {
                         switch (item.type) {
-                          case 'input':
+                          case 'input': {
+                            // Fields that require numeric input
+                            const numericFields = [
+                              'amount',
+                              'revenue',
+                              'annualIncome',
+                              'zipCode',
+                              'phone',
+                            ];
+                            const isNumeric = numericFields.includes(item.name);
+
                             return (
                               <Input
                                 key={item.placeholder}
@@ -238,8 +248,10 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                                 placeholder={item.placeholder}
                                 className={classNames(cls.formInput)}
                                 onChange={(option) => handleChange(option, item.name)}
+                                inputMode={isNumeric ? 'numeric' : undefined}
                               />
                             );
+                          }
 
                           case 'buttons':
                             return (
