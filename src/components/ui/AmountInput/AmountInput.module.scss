@@ -84,7 +84,7 @@ $left-offset-s: 18px;
   }
 
   @media (width <= 576) {
-    font-size: 14px;
+    font-size: 16px; /* Minimum 16px to prevent iOS zoom on focus */
   }
 }
 
