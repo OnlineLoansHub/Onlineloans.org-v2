@@ -14,7 +14,7 @@ export const SITE_KEYWORDS =
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/logo/onlineloans-logo.png`;
 
 // Contact information
-export const CONTACT_EMAIL = 'contact@onlineloans.org';
+export const CONTACT_EMAIL = 'business@onlineloans.org';
 
 /**
  * Generate canonical URL for a given path

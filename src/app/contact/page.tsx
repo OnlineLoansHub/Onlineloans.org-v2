@@ -64,8 +64,8 @@ export default function Contact() {
 
             <div className={cls.infoItem}>
               <h3 className={cls.infoTitle}>Email</h3>
-              <a href="mailto:contact@onlineloans.org" className={cls.infoLink}>
-                contact@onlineloans.org
+              <a href="mailto:business@onlineloans.org" className={cls.infoLink}>
+                business@onlineloans.org
               </a>
             </div>
 
@@ -192,4 +192,3 @@ export default function Contact() {
     </div>
   );
 }
-

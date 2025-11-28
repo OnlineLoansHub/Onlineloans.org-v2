@@ -75,12 +75,12 @@ export default function PrivacyPolicy() {
               providers who perform services on our behalf.
             </li>
             <li>
-              <strong>Legal Requirements:</strong> We may disclose information if required by law
-              or in response to valid requests by public authorities.
+              <strong>Legal Requirements:</strong> We may disclose information if required by law or
+              in response to valid requests by public authorities.
             </li>
             <li>
-              <strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale
-              of assets, your information may be transferred.
+              <strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of
+              assets, your information may be transferred.
             </li>
           </ul>
         </section>
@@ -132,8 +132,8 @@ export default function PrivacyPolicy() {
         <section className={cls.section}>
           <h2 className={cls.sectionTitle}>Changes to This Privacy Policy</h2>
           <p className={cls.paragraph}>
-            We may update our Privacy Policy from time to time. We will notify you of any changes
-            by posting the new Privacy Policy on this page and updating the &quot;Last Updated&quot;
+            We may update our Privacy Policy from time to time. We will notify you of any changes by
+            posting the new Privacy Policy on this page and updating the &quot;Last Updated&quot;
             date.
           </p>
         </section>
@@ -142,8 +142,8 @@ export default function PrivacyPolicy() {
           <h2 className={cls.sectionTitle}>Contact Us</h2>
           <p className={cls.paragraph}>
             If you have any questions about this Privacy Policy, please contact us at{' '}
-            <a href="mailto:contact@onlineloans.org" className={cls.link}>
-              contact@onlineloans.org
+            <a href="mailto:business@onlineloans.org" className={cls.link}>
+              business@onlineloans.org
             </a>
             .
           </p>
@@ -152,4 +152,3 @@ export default function PrivacyPolicy() {
     </div>
   );
 }
-

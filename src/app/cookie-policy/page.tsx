@@ -91,8 +91,8 @@ export default function CookiePolicy() {
           <h2 className={cls.sectionTitle}>Contact Us</h2>
           <p className={cls.paragraph}>
             If you have any questions about our use of cookies, please contact us at{' '}
-            <a href="mailto:contact@onlineloans.org" className={cls.link}>
-              contact@onlineloans.org
+            <a href="mailto:business@onlineloans.org" className={cls.link}>
+              business@onlineloans.org
             </a>
             .
           </p>

@@ -331,7 +331,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **Website:** [onlineloans.org](https://onlineloans.org)
-- **Email:** contact@onlineloans.org
+- **Email:** business@onlineloans.org
 - **GitHub:** [@yourusername](https://github.com/yourusername)
 
 ## 🙏 Acknowledgments
