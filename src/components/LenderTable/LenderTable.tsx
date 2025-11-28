@@ -101,7 +101,7 @@ export const LenderTable = ({ loanType }: LenderTableProps) => {
                       ))}
                     <li className={cls.metricItemButton}>
                       <Button variant="primary" onClick={() => {}} className={cls.ctaButton}>
-                        Get My Rate
+                        Learn More
                         <Image
                           src="/images/icons/features/arrow-right.svg"
                           width={20}
@@ -122,7 +122,7 @@ export const LenderTable = ({ loanType }: LenderTableProps) => {
                       ))}
                   </ul>
                   <Button variant="primary" onClick={() => {}} className={cls.ctaButtonMobile}>
-                    Get My Rate
+                    Learn More
                     <Image
                       src="/images/icons/features/arrow-right.svg"
                       width={20}
