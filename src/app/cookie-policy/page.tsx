@@ -21,35 +21,29 @@ export default function CookiePolicy() {
         <section className={cls.section}>
           <h2 className={cls.sectionTitle}>How We Use Cookies</h2>
           <p className={cls.paragraph}>
-            OnlineLoans.org uses cookies to enhance your browsing experience, analyze site traffic,
-            and personalize content. We use both session cookies (which expire when you close your
-            browser) and persistent cookies (which remain on your device until deleted or expired).
+            OnlineLoans.org uses cookies primarily through third-party services to analyze website
+            traffic and improve user experience. We use Google Analytics and Google Search Console
+            to understand how visitors interact with our website and to monitor site performance.
           </p>
         </section>
 
         <section className={cls.section}>
           <h2 className={cls.sectionTitle}>Types of Cookies We Use</h2>
           <div className={cls.subsection}>
-            <h3 className={cls.subsectionTitle}>Essential Cookies</h3>
-            <p className={cls.paragraph}>
-              These cookies are necessary for the website to function properly. They enable core
-              functionality such as security, network management, and accessibility.
-            </p>
-          </div>
-          <div className={cls.subsection}>
             <h3 className={cls.subsectionTitle}>Analytics Cookies</h3>
             <p className={cls.paragraph}>
-              These cookies help us understand how visitors interact with our website by collecting
-              and reporting information anonymously. This helps us improve our website&apos;s
-              performance and user experience.
+              We use Google Analytics to collect and analyze information about how visitors use our
+              website. These cookies help us understand website traffic patterns, user behavior, and
+              site performance. The information collected is aggregated and anonymous, helping us
+              improve our website&apos;s functionality and user experience.
             </p>
           </div>
           <div className={cls.subsection}>
-            <h3 className={cls.subsectionTitle}>Marketing Cookies</h3>
+            <h3 className={cls.subsectionTitle}>Google Search Console</h3>
             <p className={cls.paragraph}>
-              These cookies are used to track visitors across websites to display relevant
-              advertisements. They may also be used to limit the number of times you see an
-              advertisement.
+              We use Google Search Console to monitor and maintain our website&apos;s presence in
+              Google search results. This service helps us understand how our site appears in search
+              and identify opportunities for improvement.
             </p>
           </div>
         </section>
@@ -57,10 +51,22 @@ export default function CookiePolicy() {
         <section className={cls.section}>
           <h2 className={cls.sectionTitle}>Third-Party Cookies</h2>
           <p className={cls.paragraph}>
-            Some cookies are placed by third-party services that appear on our pages. We use
-            third-party services for analytics, advertising, and social media integration. These
-            third parties may use cookies to collect information about your online activities across
-            different websites.
+            We use third-party services, specifically Google Analytics and Google Search Console,
+            which may place cookies on your device. These services use cookies to collect
+            information about your online activities on our website. Google may use this data in
+            accordance with their own privacy policies.
+          </p>
+          <p className={cls.paragraph}>
+            For more information about how Google uses cookies and data, please visit{' '}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cls.link}
+            >
+              Google&apos;s Privacy Policy
+            </a>
+            .
           </p>
         </section>
 
@@ -70,11 +76,20 @@ export default function CookiePolicy() {
             You can control and manage cookies in various ways. Most browsers allow you to refuse or
             accept cookies, and to delete cookies that have already been set. However, please note
             that blocking or deleting cookies may impact your ability to use certain features of our
-            website.
+            website and may affect the accuracy of our analytics.
           </p>
           <p className={cls.paragraph}>
             To manage cookies in your browser, please refer to your browser&apos;s help section or
-            settings menu.
+            settings menu. You can also opt out of Google Analytics by installing the{' '}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cls.link}
+            >
+              Google Analytics Opt-out Browser Add-on
+            </a>
+            .
           </p>
         </section>
 
