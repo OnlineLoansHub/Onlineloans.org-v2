@@ -6,9 +6,9 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.onlinel
 // Site-wide constants
 export const SITE_NAME = 'OnlineLoans.org';
 export const SITE_DESCRIPTION =
-  'Get approved for personal and business loans online in minutes. Fast, secure, and trusted by thousands of customers. Compare rates and apply now.';
+  'Compare and apply for personal and business loans online. Get approved in minutes with competitive rates from top lenders. Fast, secure, and trusted by thousands of customers.';
 export const SITE_KEYWORDS =
-  'online loans, personal loans, business loans, fast approval, secure loans, instant loans, loan comparison, financial services';
+  'online loans, personal loans, business loans, fast approval, secure loans, instant loans, loan comparison, financial services, unsecured loans, debt consolidation, small business loans, SBA loans, loan application, best loan rates, compare loans, quick loans, emergency loans, bad credit loans, loan marketplace';
 
 // Default Open Graph image
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/logo/onlineloans-logo.png`;
@@ -43,6 +43,9 @@ export function generateMetadata({
   path = '',
   image,
   type = 'website',
+  author,
+  publishedTime,
+  modifiedTime,
 }: {
   title: string;
   description: string;
@@ -50,6 +53,9 @@ export function generateMetadata({
   path?: string;
   image?: string;
   type?: 'website' | 'article';
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }): Metadata {
   // Ensure canonical URL is always a full absolute URL
   const canonicalUrl = path ? getCanonicalUrl(path) : SITE_URL;
@@ -81,29 +87,48 @@ export function generateMetadata({
       ? ogImage
       : getCanonicalUrl(ogImage);
 
+  // Build OpenGraph object
+  const openGraphBase: Metadata['openGraph'] = {
+    title: fullTitle,
+    description: cleanDescription,
+    url: canonicalUrl,
+    siteName: SITE_NAME,
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: cleanTitle,
+      },
+    ],
+    locale: 'en_US',
+    type,
+  };
+
+  // Add article-specific fields if type is article
+  const openGraph: Metadata['openGraph'] =
+    type === 'article' && (publishedTime || modifiedTime || author)
+      ? {
+          ...openGraphBase,
+          type: 'article',
+          ...(publishedTime && { publishedTime }),
+          ...(modifiedTime && { modifiedTime }),
+          ...(author && { authors: [author] }),
+        }
+      : openGraphBase;
+
   return {
     title: fullTitle,
     description: cleanDescription,
     keywords: cleanKeywords,
+    authors: author ? [{ name: author }] : undefined,
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        'en-US': canonicalUrl,
+      },
     },
-    openGraph: {
-      title: fullTitle,
-      description: cleanDescription,
-      url: canonicalUrl,
-      siteName: SITE_NAME,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: cleanTitle,
-        },
-      ],
-      locale: 'en_US',
-      type,
-    },
+    openGraph,
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
@@ -125,6 +150,9 @@ export function generateMetadata({
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     },
   };
 }
@@ -154,6 +182,7 @@ export const websiteSchema = {
   '@type': 'WebSite',
   name: SITE_NAME,
   url: SITE_URL,
+  description: SITE_DESCRIPTION,
   potentialAction: {
     '@type': 'SearchAction',
     target: {
@@ -163,3 +192,51 @@ export const websiteSchema = {
     'query-input': 'required name=search_term_string',
   },
 };
+
+/**
+ * Financial Product schema for loan products
+ */
+export function getFinancialProductSchema({
+  name,
+  description,
+  interestRate,
+  loanAmount,
+  loanTerm,
+}: {
+  name: string;
+  description: string;
+  interestRate?: string;
+  loanAmount?: string;
+  loanTerm?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FinancialProduct',
+    name,
+    description,
+    provider: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+    },
+    ...(interestRate && { interestRate }),
+    ...(loanAmount && { loanAmount }),
+    ...(loanTerm && { loanTerm }),
+  };
+}
+
+/**
+ * BreadcrumbList schema generator
+ */
+export function getBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: getCanonicalUrl(item.url),
+    })),
+  };
+}

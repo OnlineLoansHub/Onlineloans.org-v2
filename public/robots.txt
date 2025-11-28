@@ -2,8 +2,12 @@
 User-agent: *
 Allow: /
 
+# Disallow admin and private areas (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
 # Sitemap
-Sitemap: https://onlineloans.org/sitemap.xml
+Sitemap: https://www.onlineloans.org/sitemap.xml
 
 # Crawl-delay (optional, adjust as needed)
 # Crawl-delay: 1
