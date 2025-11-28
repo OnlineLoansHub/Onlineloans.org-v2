@@ -1,9 +1,9 @@
 'use client';
 
 import { memo, useCallback, useMemo, useState } from 'react';
-import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
+import { Select, type Option } from '@/components/ui/Select/Select';
 import { classNames } from '@/lib';
 import { LoanTypes } from '@/types';
 import cls from './CreditTabs.module.scss';
@@ -19,6 +19,15 @@ const tabs = [
   },
 ];
 
+const insuranceOptions = [
+  { value: 'car-insurance', label: 'Car insurance' },
+  { value: 'pet-insurance', label: 'Pet insurance' },
+  { value: 'life-insurance', label: 'Life insurance' },
+  { value: 'travel-insurance', label: 'Travel insurance' },
+  { value: 'renters-insurance', label: 'Renters insurance' },
+  { value: 'business-insurance', label: 'Business insurance' },
+];
+
 interface ICreditTabsProps {
   type?: LoanTypes;
 }
@@ -26,39 +35,33 @@ interface ICreditTabsProps {
 export const CreditTabs = memo(
   ({ type }: ICreditTabsProps) => {
     const [value, setValue] = useState('');
-    const pathname = usePathname();
     // Local state to track which tab user clicked (defaults to prop or business)
     const [selectedType, setSelectedType] = useState<LoanTypes>(type ?? LoanTypes.business);
+    const [selectedInsurance, setSelectedInsurance] = useState<string | number>('');
     const activeType = selectedType;
 
-    // Reorder tabs so the tab matching the current route is first
+    // Always keep Business Loan first, Personal Loan second (fixed order)
     const orderedTabs = useMemo(() => {
-      if (pathname?.includes('/personal-loan')) {
-        // Personal Loan first
-        return [...tabs].sort((a, b) => {
-          if (a.type === LoanTypes.personal) return -1;
-          if (b.type === LoanTypes.personal) return 1;
-
-          return 0;
-        });
-      }
-
-      if (pathname?.includes('/business-loan')) {
-        // Business Loan first
-        return [...tabs].sort((a, b) => {
-          if (a.type === LoanTypes.business) return -1;
-          if (b.type === LoanTypes.business) return 1;
-
-          return 0;
-        });
-      }
-
-      // Default: keep original order
+      // Business Loan first, Personal Loan second - fixed order
       return tabs;
-    }, [pathname]);
+    }, []);
 
     const handleTabClick = useCallback((tabType: LoanTypes) => {
       setSelectedType(tabType);
+    }, []);
+
+    const handleInsuranceChange = useCallback((value: string | number, _option: Option) => {
+      setSelectedInsurance(value);
+      // For insurance dropdown, we don't change the loan type
+      // This is just for display/navigation purposes
+    }, []);
+
+    // Convert insurance options to Select options format
+    const insuranceSelectOptions: Option[] = useMemo(() => {
+      return insuranceOptions.map((option) => ({
+        value: option.value,
+        label: option.label,
+      }));
     }, []);
 
     const handleValueChange = useCallback((value: string) => {
@@ -88,20 +91,44 @@ export const CreditTabs = memo(
     return (
       <div className={cls.tabsWrapper}>
         <ul className={cls.tabs}>
-          {orderedTabs.map((tab) => {
-            return (
-              <li
-                key={tab.title}
-                className={classNames(cls.tabItem, {
-                  [cls.active]: activeType === tab.type,
-                })}
-              >
-                <button type="button" onClick={() => handleTabClick(tab.type)} className={cls.link}>
-                  {tab.title}
-                </button>
-              </li>
-            );
+          {orderedTabs.map((tab, index) => {
+            // First two tabs render as buttons
+            if (index < 2) {
+              return (
+                <li
+                  key={tab.title}
+                  className={classNames(cls.tabItem, {
+                    [cls.active]: activeType === tab.type,
+                  })}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleTabClick(tab.type)}
+                    className={cls.link}
+                  >
+                    {tab.title}
+                  </button>
+                </li>
+              );
+            }
+
+            // This shouldn't happen with current tabs array, but keeping for safety
+            return null;
           })}
+          {/* Third tab - Insurance dropdown */}
+          <li key="insurance" className={cls.tabItem}>
+            <div className={cls.dropdownWrapper}>
+              <Select
+                name="insurance-type"
+                value={selectedInsurance}
+                onChange={handleInsuranceChange}
+                options={insuranceSelectOptions}
+                placeholder="Insurance"
+                className={cls.selectContainer}
+                buttonClassName={cls.selectButtonInsurance}
+              />
+            </div>
+          </li>
         </ul>
         <AmountInputCard type={activeType} handleValueChange={handleValueChange} value={value} />
         <div className={cls.creditNotes}>
