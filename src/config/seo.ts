@@ -10,8 +10,8 @@ export const SITE_DESCRIPTION =
 export const SITE_KEYWORDS =
   'online loans, personal loans, business loans, fast approval, secure loans, instant loans, loan comparison, financial services, unsecured loans, debt consolidation, small business loans, SBA loans, loan application, best loan rates, compare loans, quick loans, emergency loans, bad credit loans, loan marketplace';
 
-// Default Open Graph image
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/images/logo/onlineloans-logo.png`;
+// Default Open Graph image (1200x630px for optimal social sharing)
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 // Contact information
 export const CONTACT_EMAIL = 'business@onlineloans.org';
