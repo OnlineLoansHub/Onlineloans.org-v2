@@ -18,6 +18,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.onlineloans.org'),
   ...generateSEOMetadata({
     title: 'Online Loans®',
     description:

@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 
 // Base URL - can be overridden with environment variable
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://onlineloans.org';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.onlineloans.org';
 
 // Site-wide constants
 export const SITE_NAME = 'OnlineLoans.org';
@@ -19,10 +18,18 @@ export const CONTACT_EMAIL = 'contact@onlineloans.org';
 
 /**
  * Generate canonical URL for a given path
+ * Always returns a FULL ABSOLUTE URL
  */
 export function getCanonicalUrl(path: string): string {
+  // If path is already a full URL, return it
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+
+  // Ensure path starts with /
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
 
+  // Always return full absolute URL
   return `${SITE_URL}${cleanPath}`;
 }
 
@@ -44,28 +51,54 @@ export function generateMetadata({
   image?: string;
   type?: 'website' | 'article';
 }): Metadata {
-  const url = path ? getCanonicalUrl(path) : SITE_URL;
-  const ogImage = image || DEFAULT_OG_IMAGE;
-  const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  // Ensure canonical URL is always a full absolute URL
+  const canonicalUrl = path ? getCanonicalUrl(path) : SITE_URL;
+
+  // Ensure image URL is absolute
+  const ogImage = image
+    ? image.startsWith('http://') || image.startsWith('https://')
+      ? image
+      : getCanonicalUrl(image)
+    : DEFAULT_OG_IMAGE;
+
+  // Clean title - prevent double branding
+  // Remove any existing SITE_NAME from title to avoid duplication
+  const cleanTitle = title.replace(/\s*\|\s*OnlineLoans\.org/gi, '').trim();
+  const fullTitle =
+    cleanTitle.includes(SITE_NAME) || cleanTitle.endsWith('®')
+      ? cleanTitle
+      : `${cleanTitle} | ${SITE_NAME}`;
+
+  // Clean and validate description
+  const cleanDescription = description.trim();
+
+  // Clean keywords
+  const cleanKeywords = keywords?.trim() || SITE_KEYWORDS;
+
+  // Ensure OG image URL is absolute
+  const ogImageUrl =
+    ogImage.startsWith('http://') || ogImage.startsWith('https://')
+      ? ogImage
+      : getCanonicalUrl(ogImage);
 
   return {
     title: fullTitle,
-    description,
-    keywords: keywords || SITE_KEYWORDS,
+    description: cleanDescription,
+    keywords: cleanKeywords,
     alternates: {
-      canonical: url,
+      canonical: canonicalUrl,
     },
     openGraph: {
       title: fullTitle,
-      description,
-      url,
+      description: cleanDescription,
+      url: canonicalUrl,
       siteName: SITE_NAME,
       images: [
         {
-          url: ogImage,
+          url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: cleanTitle,
         },
       ],
       locale: 'en_US',
@@ -74,8 +107,13 @@ export function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
-      description,
-      images: [ogImage],
+      description: cleanDescription,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: cleanTitle,
+        },
+      ],
     },
     robots: {
       index: true,
@@ -125,4 +163,3 @@ export const websiteSchema = {
     'query-input': 'required name=search_term_string',
   },
 };
-
