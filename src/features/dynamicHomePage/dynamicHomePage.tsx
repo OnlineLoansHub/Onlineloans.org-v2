@@ -7,7 +7,7 @@ import { classNames } from '@/lib';
 import cls from './dynamicHomePage.module.scss';
 
 interface IHomePageProps {
-  type: LoanTypes;
+  type?: LoanTypes;
   title: ReactNode;
 }
 
@@ -44,7 +44,7 @@ export default function DynamicHomePage({ type, title }: IHomePageProps) {
           </h1>
 
           <Rating />
-          <CreditTabs type={type} />
+          <CreditTabs type={type ?? LoanTypes.business} />
         </main>
 
         <div className={cls.reviews}>

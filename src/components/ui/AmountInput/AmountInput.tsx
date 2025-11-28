@@ -8,15 +8,16 @@ import { AppLink } from '../AppLink/AppLink';
 import cls from './AmountInput.module.scss';
 
 interface AmountInputCardProps {
-  type: LoanTypes;
+  type?: LoanTypes;
   handleValueChange: (value: string) => void;
   value: string;
 }
 
 const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) => {
   const [focused, setFocused] = useState(false);
+  const loanType = type ?? LoanTypes.business;
   const { buttonText, placeholder, maxAmountLabel, href, amount } = useMemo(() => {
-    if (type === LoanTypes.personal) {
+    if (loanType === LoanTypes.personal) {
       return {
         buttonText: 'See My Offer',
         placeholder: '$ Amount',
@@ -33,7 +34,7 @@ const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) =>
       href: URL_CONFIG.businessLoan,
       amount: value,
     };
-  }, [type, value]);
+  }, [loanType, value]);
 
   const labelValue = useMemo(() => {
     if (!focused)

@@ -24,12 +24,13 @@ const tabs = [
 ];
 
 interface ICreditTabsProps {
-  type: LoanTypes;
+  type?: LoanTypes;
 }
 
 export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
   const [value, setValue] = useState('');
   const pathname = usePathname();
+  const activeType = type ?? LoanTypes.business;
 
   // Reorder tabs so the tab matching the current route is first
   const orderedTabs = useMemo(() => {
@@ -89,7 +90,7 @@ export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
             <li
               key={tab.title}
               className={classNames(cls.tabItem, {
-                [cls.active]: type === tab.type,
+                [cls.active]: activeType === tab.type,
               })}
             >
               <AppLink href={{ pathname: tab.href }} className={cls.link}>
@@ -100,7 +101,7 @@ export const CreditTabs = memo(({ type }: ICreditTabsProps) => {
         })}
       </ul>
       <AmountInputCard
-        type={type}
+        type={activeType}
         handleValueChange={handleValueChange}
         value={value}
       />
