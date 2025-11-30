@@ -34,7 +34,7 @@ body {
 .main-container {
   display: flex;
   flex-direction: column;
-  flex: 1; /* This is what makes it stretch */
+  flex: 1 0 auto; /* Grow to fill space, don't shrink, auto basis - maintains content height when ExploreToggle expands */
   min-height: 0; /* Prevents overflow issues inside flex */
   overflow-x: hidden;
   overflow-y: visible;
