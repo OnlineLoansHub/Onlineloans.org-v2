@@ -26,13 +26,14 @@ export const ImpressionTracker = () => {
             return;
           }
         }
-
+        
         // Get current URL with all query parameters as referrer
         const currentUrl =
           typeof window !== 'undefined'
             ? `${document.referrer || window.location.origin}${window.location.pathname}${window.location.search}`
             : '';
-
+        console.log('referrer', document.referrer);
+        console.log('currentUrl', currentUrl);
         // Create new impression
         const response = await axios.post(
           API_URL,
