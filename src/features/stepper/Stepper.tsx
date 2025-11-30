@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
@@ -10,18 +9,25 @@ import { Select } from '@/components/ui/Select/Select';
 import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
 import { ConfettiCelebration } from '@/components/ConfettiCelebration/ConfettiCelebration';
 import { classNames } from '@/lib';
-// import { Note, OfferBanner, Steps } from './components';
 import { OfferBanner, Steps } from './components';
 import { IStepperConfig, FormKeys } from './types';
 import cls from './Stepper.module.scss';
 
+export interface IFinalStepData {
+  firstName: string;
+  loanAmount: string;
+  advisorName: string;
+  advisorName2: string;
+  avatarUrl: string;
+  avatarUrl2: string;
+}
+
 interface IStepFormProps {
-  handleFormFilled: () => void;
+  handleFormFilled: (data: IFinalStepData) => void;
   config: IStepperConfig;
 }
 
 export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
-  const router = useRouter();
   const [formState, setFormState] = useState<Record<string, unknown>>(config.initialFormState);
   const [index, setIndex] = useState(0);
   const [shake, setShake] = useState(false);
@@ -73,10 +79,10 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
       await config.onSubmit(formState);
 
-      // Redirect to "What Happens Next" page after successful submission
+      // Pass form data to FinalStep after successful submission
       if (isLast) {
-        // Extract form data for the next page
-        const firstName = String(formState.firstName || formState[FormKeys.firstName] || '');
+        // Extract form data
+        const firstName = String(formState.firstName || formState[FormKeys.firstName] || 'there');
         const loanAmount = formState.amount || formState[FormKeys.amount] || '';
 
         // Map advisor images to their names
@@ -97,20 +103,16 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
         // Clean up loan amount (remove $ and commas)
         const cleanAmount = String(loanAmount).replace(/[^\d.]/g, '');
 
-        // Build query parameters
-        const params = new URLSearchParams({
-          firstName: firstName || 'there',
-          loanAmount: cleanAmount || '0',
-          advisorName: advisor1.name,
-          advisorName2: advisor2.name,
-          avatarUrl: advisor1.image,
-          avatarUrl2: advisor2.image,
-        });
-
-        // Wait for confetti animation to complete, then redirect
+        // Wait for confetti animation to complete, then call handleFormFilled with data
         setTimeout(() => {
-          router.push(`/thank-you?${params.toString()}`);
-          handleFormFilled();
+          handleFormFilled({
+            firstName: firstName || 'there',
+            loanAmount: cleanAmount || '0',
+            advisorName: advisor1.name,
+            advisorName2: advisor2.name,
+            avatarUrl: advisor1.image,
+            avatarUrl2: advisor2.image,
+          });
         }, 2500);
       }
     } catch (e: unknown) {
@@ -371,7 +373,6 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                       })}
                     </div>
                   </div>
-                  {/* {isLast && isMobile && <Note />} */}
                   <div className={cls.btnsContainer}>
                     {formItem.prev && (
                       <Button
@@ -415,7 +416,6 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
         </form>
         <OfferBanner />
       </div>
-      {/* {isLast && !isMobile && <Note />} */}
       {isLoading && <Loader />}
     </>
   );

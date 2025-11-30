@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { formatAmount } from '@/lib';
 import cls from './AdvisorCard.module.scss';
 
 interface IAdvisorCardProps {
@@ -18,14 +19,6 @@ export const AdvisorCard = ({
   avatarUrl2,
   advisorName2,
 }: IAdvisorCardProps) => {
-  const formatAmount = (amount: number | string): string => {
-    if (typeof amount === 'string') {
-      return amount;
-    }
-
-    return `$${amount.toLocaleString('en-US')}`;
-  };
-
   return (
     <div className={cls.card}>
       <div className={cls.avatarWrapper}>
@@ -77,7 +70,7 @@ export const AdvisorCard = ({
       <div className={cls.content}>
         <p className={cls.role}>Licensed Loan Specialist</p>
         <p className={cls.message}>
-          We will contact you shortly to go over your best options for the{' '}
+          We will contact you shortly to go over your best options for the $
           {formatAmount(loanAmount)} you requested.
         </p>
       </div>

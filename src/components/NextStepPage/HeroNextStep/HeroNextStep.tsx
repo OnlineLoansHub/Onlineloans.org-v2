@@ -1,5 +1,6 @@
 'use client';
 
+import { formatAmount } from '@/lib';
 import cls from './HeroNextStep.module.scss';
 
 interface IHeroNextStepProps {
@@ -8,18 +9,10 @@ interface IHeroNextStepProps {
 }
 
 export const HeroNextStep = ({ firstName, loanAmount }: IHeroNextStepProps) => {
-  const formatAmount = (amount: number | string): string => {
-    if (typeof amount === 'string') {
-      return amount;
-    }
-
-    return `$${amount.toLocaleString('en-US')}`;
-  };
-
   return (
     <div className={cls.hero}>
       <h1 className={cls.title}>
-        Thanks, {firstName}! We&apos;re reviewing your request for {formatAmount(loanAmount)}.
+        Thanks, {firstName}! We&apos;re reviewing your request for ${formatAmount(loanAmount)}.
       </h1>
       <p className={cls.subtitle}>
         Your advisor is preparing your personalized loan options. Stay close to your phone.
@@ -27,4 +20,3 @@ export const HeroNextStep = ({ firstName, loanAmount }: IHeroNextStepProps) => {
     </div>
   );
 };
-

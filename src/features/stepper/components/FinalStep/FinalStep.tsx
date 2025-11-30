@@ -1,69 +1,53 @@
-import Image from 'next/image';
+'use client';
+
+import {
+  HeroNextStep,
+  AdvisorCard,
+  NextStepsTimeline,
+  TrustBadges,
+} from '@/components/NextStepPage';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
-import { Button } from '@/components/ui/Button/Button';
-import { URL_CONFIG } from '@/config';
-import { classNames } from '@/lib';
 import cls from './FinalStep.module.scss';
 
-export const FinalStep = () => {
+interface IFinalStepProps {
+  firstName: string;
+  loanAmount: number | string;
+  advisorName: string;
+  advisorName2: string;
+  avatarUrl: string;
+  avatarUrl2: string;
+}
+
+export const FinalStep = ({
+  firstName,
+  loanAmount,
+  advisorName,
+  advisorName2,
+  avatarUrl,
+  avatarUrl2,
+}: IFinalStepProps) => {
   return (
-    <>
-      <h2 className={cls.finalTitle}>What to expect next?</h2>
-      <ul className={cls.list}>
-        <li className={classNames(cls.listItem, {}, [cls.first])}>
-          <div className={classNames(cls.listItemImgWrapper, {}, [cls.first])}>
-            <Image
-              src={'/images/icons/features/percent.svg'}
-              width={50}
-              height={50}
-              alt={'percent'}
-            />
-          </div>
-          <p className={cls.listItemTitle}>More Details</p>
-          <p className={cls.listItemTxt}>
-            We'll ask a few more questions about you and your business to match
-            you to funding options that best fit your specific needs
+    <div className={cls.page}>
+      <div className={cls.container}>
+        <HeroNextStep firstName={firstName} loanAmount={loanAmount} />
+        <AdvisorCard
+          advisorName={advisorName}
+          advisorName2={advisorName2}
+          loanAmount={loanAmount}
+          avatarUrl={avatarUrl}
+          avatarUrl2={avatarUrl2}
+        />
+        <NextStepsTimeline />
+        <TrustBadges />
+        <div className={cls.ctaSection}>
+          <p className={cls.ctaMessage}>
+            Keep your phone close — your advisor will reach out shortly.
           </p>
-        </li>
-        <li className={classNames(cls.listItem, {}, [cls.first])}>
-          <div className={classNames(cls.listItemImgWrapper, {}, [cls.second])}>
-            <Image
-              src={'/images/icons/features/money.svg'}
-              width={50}
-              height={50}
-              alt={'money'}
-            />
-          </div>
-          <p className={cls.listItemTitle}>Advisory Help</p>
-          <p className={cls.listItemTxt}>
-            Your dedicated advisor will walk through your funding options and
-            apply to lending partners on your behalf
-          </p>
-        </li>
-        <li className={cls.listItem}>
-          <div className={cls.listItemImgWrapper}>
-            <Image
-              src={'/images/icons/features/money.svg'}
-              width={50}
-              height={50}
-              alt={'money'}
-            />
-          </div>
-          <p className={cls.listItemTitle}>Review Offers</p>
-          <p className={cls.listItemTxt}>
-            Review personalized offers with top rates and terms on your
-            dashboard
-          </p>
-        </li>
-      </ul>
-      <div className={cls.btnWrapper}>
-        <AppLink href={URL_CONFIG.business}>
-          <Button variant="primary" onClick={() => {}}>
-            Go to Homepage
-          </Button>
-        </AppLink>
+          <AppLink href="/contact" className={cls.updateLink}>
+            Update your application details
+          </AppLink>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
-
