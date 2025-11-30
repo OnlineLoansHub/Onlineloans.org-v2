@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import {
   HeroNextStep,
   AdvisorCard,
@@ -7,6 +8,7 @@ import {
   TrustBadges,
 } from '@/components/NextStepPage';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
+import { ConfettiCelebration } from '@/components/ConfettiCelebration/ConfettiCelebration';
 import cls from './FinalStep.module.scss';
 
 interface IFinalStepProps {
@@ -26,8 +28,21 @@ export const FinalStep = ({
   avatarUrl,
   avatarUrl2,
 }: IFinalStepProps) => {
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  // Trigger confetti animation when FinalStep mounts
+  useEffect(() => {
+    // Confetti will run for 2.5 seconds, then hide
+    const timer = setTimeout(() => {
+      setShowConfetti(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={cls.page}>
+      <ConfettiCelebration isActive={showConfetti} duration={2500} />
       <div className={cls.container}>
         <HeroNextStep firstName={firstName} loanAmount={loanAmount} />
         <AdvisorCard

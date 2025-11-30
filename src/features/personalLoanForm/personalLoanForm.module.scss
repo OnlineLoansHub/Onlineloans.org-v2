@@ -14,6 +14,8 @@
   max-height: calc(100vh - var(--header-height) - 4.32rem);
   margin: 0 auto;
   padding: 0 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     padding-bottom: 20px;
@@ -21,8 +23,15 @@
   }
 
   /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
-@media (min-width: 1025px) and (max-width: 1600px) {
-  padding: 0 5.25rem 0 5.25rem;
+  @media (min-width: 1025px) and (max-width: 1600px) {
+    padding: 0 5.25rem 0 5.25rem;
+  }
 }
+
+/* When FinalStep is displayed, remove height constraints from container */
+.containerFinalStep {
+  max-height: none !important;
+  overflow-y: visible !important;
+  height: auto !important;
 }
 

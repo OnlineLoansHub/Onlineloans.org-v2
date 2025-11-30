@@ -1,10 +1,25 @@
 .page {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #f8f9fa 0%, var(--color-white) 100%);
+  width: 100%;
   padding: 60px 0 80px;
+  height: auto;
+  min-height: auto;
+  max-height: none;
+  overflow: visible;
+  animation: fadeIn 0.5s ease-in-out;
 
   @media (width <= 768px) {
     padding: 20px 0 40px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

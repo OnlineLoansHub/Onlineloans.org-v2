@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/Input/Input';
 import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
 import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
-import { ConfettiCelebration } from '@/components/ConfettiCelebration/ConfettiCelebration';
+import { ErrorModal } from '@/components/ui/ErrorModal/ErrorModal';
 import { classNames } from '@/lib';
 import { OfferBanner, Steps } from './components';
 import { IStepperConfig, FormKeys } from './types';
@@ -34,7 +34,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const [containerHeight, setContainerHeight] = useState<number | 'auto'>('auto');
   const [_isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [showError, setShowError] = useState(false);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const shouldAutoAdvanceRef = useRef(false);
 
@@ -71,15 +71,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
     try {
       setIsLoading(true);
+      setShowError(false);
 
-      // Trigger confetti when form is submitted on the last step
-      if (isLast) {
-        setShowConfetti(true);
-      }
-
+      // Submit form data to server
       await config.onSubmit(formState);
 
-      // Pass form data to FinalStep after successful submission
+      // If submission succeeds and it's the last step, transition to FinalStep
       if (isLast) {
         // Extract form data
         const firstName = String(formState.firstName || formState[FormKeys.firstName] || 'there');
@@ -103,20 +100,20 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
         // Clean up loan amount (remove $ and commas)
         const cleanAmount = String(loanAmount).replace(/[^\d.]/g, '');
 
-        // Wait for confetti animation to complete, then call handleFormFilled with data
-        setTimeout(() => {
-          handleFormFilled({
-            firstName: firstName || 'there',
-            loanAmount: cleanAmount || '0',
-            advisorName: advisor1.name,
-            advisorName2: advisor2.name,
-            avatarUrl: advisor1.image,
-            avatarUrl2: advisor2.image,
-          });
-        }, 2500);
+        // Smooth transition to FinalStep (no delay)
+        handleFormFilled({
+          firstName: firstName || 'there',
+          loanAmount: cleanAmount || '0',
+          advisorName: advisor1.name,
+          advisorName2: advisor2.name,
+          avatarUrl: advisor1.image,
+          avatarUrl2: advisor2.image,
+        });
       }
     } catch (e: unknown) {
       console.error(e);
+      // Show error modal on failure
+      setShowError(true);
     } finally {
       setIsLoading(false);
     }
@@ -198,17 +195,6 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     shouldAutoAdvanceRef.current = false;
   }, [index]);
 
-  // Reset confetti after animation completes
-  useEffect(() => {
-    if (showConfetti) {
-      const timer = setTimeout(() => {
-        setShowConfetti(false);
-      }, 2500);
-
-      return () => clearTimeout(timer);
-    }
-  }, [showConfetti]);
-
   // Auto-advance when button is clicked and step becomes valid
   useEffect(() => {
     if (shouldAutoAdvanceRef.current && !isLast && stepValid) {
@@ -262,7 +248,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
   return (
     <>
-      <ConfettiCelebration isActive={showConfetti} duration={2500} />
+      <ErrorModal
+        isVisible={showError}
+        onClose={() => setShowError(false)}
+        title="Submission Failed"
+        message="We encountered an error while submitting your application. Please check your connection and try again."
+      />
       <Steps activeStep={activeStep} stepConfig={config.stepConfig} />
       <TopProgressBar currentStep={index + 1} totalSteps={config.formConfig.length} />
       <div className={cls.stepFormWrapper}>

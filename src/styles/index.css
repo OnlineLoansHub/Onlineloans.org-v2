@@ -31,7 +31,7 @@ body {
 
 .main-container {
   overflow-x: hidden;
-  
+  overflow-y: visible;
   flex: 1;
   min-height: 0;
 }

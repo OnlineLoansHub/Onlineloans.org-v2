@@ -23,7 +23,7 @@ export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
 
   return (
     <div className={cls.page}>
-      <div className={cls.container}>
+      <div className={`${cls.container} ${formData ? cls.containerFinalStep : ''}`}>
         {!formData ? (
           <Stepper handleFormFilled={handleFormFilled} config={config} />
         ) : (
