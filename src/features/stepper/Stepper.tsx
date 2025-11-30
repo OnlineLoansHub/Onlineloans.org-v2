@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button/Button';
 import { Input } from '@/components/ui/Input/Input';
 import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
+import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
 import { classNames } from '@/lib';
 import { Note, OfferBanner, Steps } from './components';
 import { IStepperConfig } from './types';
@@ -198,6 +199,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   return (
     <>
       <Steps activeStep={activeStep} stepConfig={config.stepConfig} />
+      <TopProgressBar currentStep={index + 1} totalSteps={config.formConfig.length} />
       <div className={cls.stepFormWrapper}>
         <form className={cls.form}>
           <div
