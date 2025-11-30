@@ -16,7 +16,14 @@ export default function BusinessLoanForm({ type: _type }: IHomePageProps) {
   const sp = useSearchParams();
   const amount = sp.get('amount') ?? '';
   const [formData, setFormData] = useState<IFinalStepData | null>(null);
-  const config = useMemo(() => getBusinessLoanConfig(amount), [amount]);
+  const config = useMemo(() => {
+    const loanConfig = getBusinessLoanConfig(amount);
+
+    return {
+      ...loanConfig,
+      formName: 'business-loan',
+    };
+  }, [amount]);
   const handleFormFilled = useCallback((data: IFinalStepData) => {
     setFormData(data);
   }, []);

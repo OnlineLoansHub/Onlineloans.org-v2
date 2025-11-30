@@ -9,6 +9,7 @@ import { Select } from '@/components/ui/Select/Select';
 import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
 import { ErrorModal } from '@/components/ui/ErrorModal/ErrorModal';
 import { classNames } from '@/lib';
+import { patchImpressionForm } from '@/lib/impression';
 import { OfferBanner, Steps } from './components';
 import { IStepperConfig, FormKeys } from './types';
 import cls from './Stepper.module.scss';
@@ -72,6 +73,28 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     try {
       setIsLoading(true);
       setShowError(false);
+
+      // Patch impression with last step data before submitting
+      if (isLast) {
+        const currentStep = index + 1; // Step number (1-based)
+        const question = activeConfig?.title || '';
+        
+        // Get all answers for current step fields and combine them
+        const answers = stepFieldNames
+          .map((fieldName) => {
+            const value = formState[fieldName];
+            return value !== undefined && value !== null ? String(value).trim() : '';
+          })
+          .filter((answer) => answer !== '')
+          .join(', ');
+
+        await patchImpressionForm({
+          stepNumber: currentStep,
+          question,
+          answer: answers || '',
+          formName: config.formName,
+        });
+      }
 
       // Submit form data to server
       await config.onSubmit(formState);
@@ -183,6 +206,26 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
       return;
     }
 
+    // Patch impression with current step data before moving to next step
+    const currentStep = index + 1; // Step number (1-based)
+    const question = activeConfig?.title || '';
+    
+    // Get all answers for current step fields and combine them
+    const answers = stepFieldNames
+      .map((fieldName) => {
+        const value = formState[fieldName];
+        return value !== undefined && value !== null ? String(value).trim() : '';
+      })
+      .filter((answer) => answer !== '')
+      .join(', ');
+
+    await patchImpressionForm({
+      stepNumber: currentStep,
+      question,
+      answer: answers || '',
+      formName: config.formName,
+    });
+
     setIndex((i) => Math.min(i + 1, config.formConfig.length - 1));
   };
 
@@ -200,7 +243,27 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     if (shouldAutoAdvanceRef.current && !isLast && stepValid) {
       shouldAutoAdvanceRef.current = false;
       // Use a small delay to ensure smooth transition
-      const timeoutId = setTimeout(() => {
+      const timeoutId = setTimeout(async () => {
+        // Patch impression with current step data before auto-advancing
+        const currentStep = index + 1; // Step number (1-based)
+        const question = activeConfig?.title || '';
+        
+        // Get all answers for current step fields and combine them
+        const answers = stepFieldNames
+          .map((fieldName) => {
+            const value = formState[fieldName];
+            return value !== undefined && value !== null ? String(value).trim() : '';
+          })
+          .filter((answer) => answer !== '')
+          .join(', ');
+
+        await patchImpressionForm({
+          stepNumber: currentStep,
+          question,
+          answer: answers || '',
+          formName: config.formName,
+        });
+        
         setIndex((i) => {
           const nextIndex = Math.min(i + 1, config.formConfig.length - 1);
 
@@ -210,7 +273,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
       return () => clearTimeout(timeoutId);
     }
-  }, [formState, stepValid, isLast, config.formConfig.length]);
+  }, [formState, stepValid, isLast, config.formConfig.length, index, activeConfig, stepFieldNames, config.formName]);
 
   // Update height when step changes or window resizes
   useEffect(() => {

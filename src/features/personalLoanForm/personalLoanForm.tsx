@@ -17,7 +17,13 @@ export default function PersonalLoanForm({ type: _type }: IPersonalLoanFormProps
   const amount = sp.get('amount') ?? '';
   const [formData, setFormData] = useState<IFinalStepData | null>(null);
 
-  const config = useMemo(() => getPersonalLoanConfig(amount), [amount]);
+  const config = useMemo(() => {
+    const loanConfig = getPersonalLoanConfig(amount);
+    return {
+      ...loanConfig,
+      formName: 'personal-loan',
+    };
+  }, [amount]);
 
   const handleFormFilled = useCallback((data: IFinalStepData) => {
     setFormData(data);

@@ -85,4 +85,5 @@ export interface IStepperConfig {
   validators: Partial<Record<string, (v: unknown) => boolean>>;
   onSubmit: (formData: Record<string, unknown>) => Promise<void>;
   currencyFields?: string[]; // Fields that should be formatted as currency
+  formName?: string; // Form name for impression tracking (e.g., 'personal-loan' or 'business-loan')
 }
