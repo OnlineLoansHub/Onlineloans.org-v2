@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import axios from 'axios';
 import cls from './page.module.scss';
 
 export default function Contact() {
@@ -28,11 +29,8 @@ export default function Contact() {
       setIsLoading(true);
 
       try {
-        // Replace with your actual form submission endpoint
-        await fetch('/api/contact', {
-          method: 'POST',
+        await axios.post('https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/contact', formData, {
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
         });
         setIsSubmitted(true);
         setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
