@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 import { classNames } from '@/lib';
 import cls from './page.module.scss';
 
@@ -29,21 +30,15 @@ export default function PartnerWithUs() {
       setIsLoading(true);
 
       try {
-        await fetch(
-          `https://script.google.com/macros/s/AKfycbwATv2Pfnoqx5m4sXuZHbR1HbJ1RMTNvUJtv_LCM2-bD_MFagFQju2A5UvRJpc8eQOI/exec`,
-          {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-          }
-        );
+        await axios.post('https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/partner', formData, {
+          headers: { 'Content-Type': 'application/json' },
+        });
+        setFormData({ name: '', email: '', phone: '', site: '', company: '' });
+        setIsModalVisible(true);
       } catch (error) {
         console.error('Form submission error:', error);
       } finally {
         setIsLoading(false);
-        setFormData({ name: '', email: '', phone: '', site: '', company: '' });
-        setIsModalVisible(true);
       }
     },
     [formData]
