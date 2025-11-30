@@ -30,7 +30,7 @@ export const ImpressionTracker = () => {
         // Get current URL with all query parameters as referrer
         const currentUrl =
           typeof window !== 'undefined'
-            ? `${window.location.origin}${window.location.pathname}${window.location.search}`
+            ? `${document.referrer || window.location.origin}${window.location.pathname}${window.location.search}`
             : '';
 
         // Create new impression
