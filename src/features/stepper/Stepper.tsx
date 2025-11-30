@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/Input/Input';
 import { Loader } from '@/components/ui/Loader/Loader';
 import { Select } from '@/components/ui/Select/Select';
 import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
+import { ConfettiCelebration } from '@/components/ConfettiCelebration/ConfettiCelebration';
 import { classNames } from '@/lib';
 import { Note, OfferBanner, Steps } from './components';
 import { IStepperConfig } from './types';
@@ -24,6 +25,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const [containerHeight, setContainerHeight] = useState<number | 'auto'>('auto');
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
   const shouldAutoAdvanceRef = useRef(false);
 
@@ -60,6 +62,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
     try {
       setIsLoading(true);
+
+      // Trigger confetti when form is submitted on the last step
+      if (isLast) {
+        setShowConfetti(true);
+      }
+
       await config.onSubmit(formState);
     } catch (e: unknown) {
       console.error(e);
@@ -145,6 +153,17 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     shouldAutoAdvanceRef.current = false;
   }, [index]);
 
+  // Reset confetti after animation completes
+  useEffect(() => {
+    if (showConfetti) {
+      const timer = setTimeout(() => {
+        setShowConfetti(false);
+      }, 2500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showConfetti]);
+
   // Auto-advance when button is clicked and step becomes valid
   useEffect(() => {
     if (shouldAutoAdvanceRef.current && !isLast && stepValid) {
@@ -198,6 +217,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
   return (
     <>
+      <ConfettiCelebration isActive={showConfetti} duration={2500} />
       <Steps activeStep={activeStep} stepConfig={config.stepConfig} />
       <TopProgressBar currentStep={index + 1} totalSteps={config.formConfig.length} />
       <div className={cls.stepFormWrapper}>
