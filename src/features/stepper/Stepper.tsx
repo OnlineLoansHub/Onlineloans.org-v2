@@ -9,7 +9,8 @@ import { Select } from '@/components/ui/Select/Select';
 import { TopProgressBar } from '@/components/TopProgressBar/TopProgressBar';
 import { ConfettiCelebration } from '@/components/ConfettiCelebration/ConfettiCelebration';
 import { classNames } from '@/lib';
-import { Note, OfferBanner, Steps } from './components';
+// import { Note, OfferBanner, Steps } from './components';
+import { OfferBanner, Steps } from './components';
 import { IStepperConfig } from './types';
 import cls from './Stepper.module.scss';
 
@@ -328,7 +329,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
                       })}
                     </div>
                   </div>
-                  {isLast && isMobile && <Note />}
+                  {/* {isLast && isMobile && <Note />} */}
                   <div className={cls.btnsContainer}>
                     {formItem.prev && (
                       <Button
@@ -372,7 +373,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
         </form>
         <OfferBanner />
       </div>
-      {isLast && !isMobile && <Note />}
+      {/* {isLast && !isMobile && <Note />} */}
       {isLoading && <Loader />}
     </>
   );

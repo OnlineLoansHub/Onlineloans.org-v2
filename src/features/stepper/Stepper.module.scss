@@ -263,9 +263,11 @@
   display: flex;
   gap: 12px;
   white-space: nowrap;
+  border-radius: 12px;
 
   &.long {
     width: unset;
+    font-size: 14px;
   }
 
   @media (width <= 1200) {
