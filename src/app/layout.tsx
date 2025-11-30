@@ -8,6 +8,7 @@ import { DefaultStructuredData } from '@/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/config/seo';
 import { ExploreToggleProvider } from '@/contexts/ExploreToggleContext';
 import { FooterWrapper } from '@/components/layout/Footer/FooterWrapper';
+import { ImpressionTracker } from '@/components/analytics/ImpressionTracker';
 import '@/styles/index.css';
 
 const poppins = Poppins({
@@ -67,6 +68,7 @@ export default function RootLayout({
           `}
         </Script>
         <ExploreToggleProvider>
+          <ImpressionTracker />
           <DefaultStructuredData />
           <SkipToContent />
           <Header />
