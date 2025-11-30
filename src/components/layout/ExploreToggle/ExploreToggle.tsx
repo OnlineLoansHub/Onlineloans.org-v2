@@ -32,18 +32,19 @@ export const ExploreToggle = () => {
     setIsOpen(!isOpen);
   };
 
+  // Removed scrollIntoView to prevent main content from disappearing
   // Smooth scroll to explore toggle when opened on desktop
-  useEffect(() => {
-    if (isOpen && !isMobile && exploreToggleRef.current) {
-      // Small delay to ensure the content is rendered
-      setTimeout(() => {
-        exploreToggleRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 100);
-    }
-  }, [isOpen, isMobile]);
+  // useEffect(() => {
+  //   if (isOpen && !isMobile && exploreToggleRef.current) {
+  //     // Small delay to ensure the content is rendered
+  //     setTimeout(() => {
+  //       exploreToggleRef.current?.scrollIntoView({
+  //         behavior: 'smooth',
+  //         block: 'end',
+  //       });
+  //     }, 100);
+  //   }
+  // }, [isOpen, isMobile]);
 
   return (
     <div

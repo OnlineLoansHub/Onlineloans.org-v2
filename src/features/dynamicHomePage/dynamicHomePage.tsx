@@ -31,7 +31,7 @@ export default function DynamicHomePage({ type, title }: IHomePageProps) {
   }, [title, type]);
 
   return (
-    <div className={cls.page}>
+    
       <div className={cls.mainContainer}>
         <main className={cls.main}>
           <h1
@@ -52,6 +52,6 @@ export default function DynamicHomePage({ type, title }: IHomePageProps) {
           <Reviews />
         </div>
       </div>
-    </div>
+   
   );
 }
