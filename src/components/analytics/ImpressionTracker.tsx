@@ -41,7 +41,7 @@ export const ImpressionTracker = () => {
           {
             headers: {
               'Content-Type': 'application/json',
-              Referer: currentUrl,
+              'X-Referrer': currentUrl,
             },
           }
         );
