@@ -16,7 +16,7 @@ body {
   line-height: 120%; /* 120% */
   color: var(--color-primary);
   letter-spacing: -0.2px;
-  background: var(--color-white);
+  background: var(--color-gray-light);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
