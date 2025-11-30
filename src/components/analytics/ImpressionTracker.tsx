@@ -27,12 +27,21 @@ export const ImpressionTracker = () => {
           }
         }
 
+        // Get current URL with all query parameters as referrer
+        const currentUrl =
+          typeof window !== 'undefined'
+            ? `${window.location.origin}${window.location.pathname}${window.location.search}`
+            : '';
+
         // Create new impression
         const response = await axios.post(
           API_URL,
           {},
           {
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              Referer: currentUrl,
+            },
           }
         );
 
