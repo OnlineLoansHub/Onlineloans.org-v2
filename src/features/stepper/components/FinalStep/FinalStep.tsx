@@ -39,7 +39,7 @@ export const FinalStep = ({
     // Confetti will run for 2.5 seconds, then hide
     const timer = setTimeout(() => {
       setShowConfetti(false);
-    }, 2500);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -65,7 +65,7 @@ export const FinalStep = ({
           width={windowSize.width}
           height={windowSize.height}
           recycle={false}
-          numberOfPieces={2000}
+          numberOfPieces={1000}
           gravity={0.3}
           initialVelocityY={20}
         />
