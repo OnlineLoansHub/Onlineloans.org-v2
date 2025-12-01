@@ -180,6 +180,36 @@
   }
 }
 
+/* Logo Image Optimization for Responsive Images */
+.header-logo-img {
+  width: auto;
+  height: auto;
+  max-width: 188px;
+  max-height: 48px;
+  display: block;
+  image-rendering: auto;
+}
+
+/* Desktop: Use larger logo */
+@media (min-width: 769px) {
+  .header-logo-img {
+    max-width: 188px;
+    height: auto;
+  }
+}
+
+/* Mobile: Slightly smaller logo */
+@media (max-width: 768px) {
+  .logo-wrapper.width-188px {
+    max-width: 150px;
+  }
+  
+  .header-logo-img {
+    max-width: 150px;
+    height: auto;
+  }
+}
+
 /* Footer Styles */
 .site-footer {
   background-color: #1c2c45;
