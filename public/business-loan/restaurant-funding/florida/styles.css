@@ -1,0 +1,8 @@
+.wf-force-outline-none[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.w-webflow-badge {
+  display: none !important;
+}
+
