@@ -240,7 +240,185 @@
         </div>
       </div>
     </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="faq-container">
+        <div class="faq-header">
+          <div class="faq-accent-line"></div>
+          <h2 class="faq-title">Frequently Asked Questions</h2>
+          <p class="faq-subtitle">Get answers to common questions about restaurant funding in Florida</p>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Does applying affect my credit?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>No. Our initial application uses a soft credit check that does not impact your credit score. Only when you accept a specific lender's offer will a hard credit check be performed, and you'll be notified beforehand.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">How fast can I get money?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Most restaurant owners receive funding within 24-48 hours after approval. Some lenders offer same-day funding for qualified applicants. The speed depends on your application completeness and the lender you choose.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">What are typical rates for Florida restaurant loans?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Rates vary based on credit score, revenue, time in business, and loan type. Working capital loans typically range from 8-25% APR, while equipment financing may be lower. We match you with lenders offering competitive rates for your profile.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Can I get funded with bad credit?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Many of our lenders work with restaurant owners who have lower credit scores. Higher revenue, longer time in business, or collateral can offset credit concerns. We'll match you with lenders who specialize in your situation.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Do seasonal restaurants qualify?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. Florida's tourism-driven economy creates seasonal revenue patterns that lenders understand. We work with lenders who consider annual revenue averages and peak season performance, not just monthly consistency.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Do you work with startups?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Some lenders require 6+ months in business, but newer restaurants with strong revenue or personal credit may still qualify. We'll match you with startup-friendly lenders if you're just opening or recently opened.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Can I use funds for equipment or payroll?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Restaurant funding can be used for any business purpose: equipment purchases, payroll, inventory, rent, marketing, expansion, emergency repairs, or debt consolidation. There are no restrictions on how you use the funds.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">What documents do I need?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Most applications require basic business information, bank statements (3-6 months), and tax returns. Some lenders may request additional documents after initial approval. We'll guide you through the process.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Is there a prepayment penalty?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>This depends on the lender and loan type. Many working capital loans have no prepayment penalties, while some equipment financing may include them. All terms are clearly disclosed before you accept any offer.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span class="faq-question-text">Do you serve all of Florida?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. We work with restaurant owners throughout Florida, including Miami, Orlando, Tampa, Jacksonville, Fort Lauderdale, St. Petersburg, Tallahassee, and all other cities and regions statewide.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+  <script>
+    // FAQ Accordion functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const faqItem = this.parentElement;
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          const icon = this.querySelector('.faq-icon');
+          
+          // Close all other FAQ items
+          faqQuestions.forEach(q => {
+            if (q !== this) {
+              q.setAttribute('aria-expanded', 'false');
+              q.parentElement.classList.remove('faq-item-active');
+              q.querySelector('.faq-icon').textContent = '+';
+            }
+          });
+          
+          // Toggle current item
+          if (isExpanded) {
+            this.setAttribute('aria-expanded', 'false');
+            faqItem.classList.remove('faq-item-active');
+            icon.textContent = '+';
+          } else {
+            this.setAttribute('aria-expanded', 'true');
+            faqItem.classList.add('faq-item-active');
+            icon.textContent = '−';
+          }
+        });
+      });
+    });
+  </script>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <img src="../../images/logo/onlineloans-logo.png" alt="OnlineLoans.org Logo" class="footer-logo-img">
+          </div>
+          <p class="footer-description">Connecting Florida restaurant owners with fast, flexible funding solutions.</p>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../../" class="footer-link">Home</a></li>
+            <li><a href="../../business-loan/" class="footer-link">Business Loans</a></li>
+            <li><a href="../../restaurant-funding/" class="footer-link">Restaurant Funding</a></li>
+            <li><a href="../../about/" class="footer-link">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Resources</h3>
+          <ul class="footer-links">
+            <li><a href="../../privacy-policy/" class="footer-link">Privacy Policy</a></li>
+            <li><a href="../../terms-of-use/" class="footer-link">Terms of Use</a></li>
+            <li><a href="../../contact/" class="footer-link">Contact Us</a></li>
+            <li><a href="../../faq/" class="footer-link">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3 class="footer-heading">Contact</h3>
+          <ul class="footer-links">
+            <li><a href="tel:+18001234567" class="footer-link">1-800-123-4567</a></li>
+            <li><a href="mailto:info@onlineloans.org" class="footer-link">info@onlineloans.org</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2024 OnlineLoans.org. All rights reserved.</p>
+        <p class="footer-disclaimer">OnlineLoans.org is a loan matching service. We connect borrowers with lenders. We are not a lender and do not make credit decisions.</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
