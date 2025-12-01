@@ -529,6 +529,156 @@
       </div>
     </section>
   </div>
+
+  <!-- Thank You Popup Modal -->
+  <div id="thankYouPopup" class="thank-you-popup" style="display: none;">
+    <div class="thank-you-popup-overlay"></div>
+    <div class="thank-you-popup-content">
+      <button class="thank-you-popup-close" aria-label="Close popup">&times;</button>
+      <div class="thank-you-popup-icon">✓</div>
+      <h2 class="thank-you-popup-title">Thank You!</h2>
+      <p class="thank-you-popup-message">Your restaurant funding application has been submitted successfully. Our team will review your information and contact you shortly.</p>
+      <p class="thank-you-popup-submessage">You should receive a confirmation email within the next few minutes.</p>
+      <button class="thank-you-popup-button" onclick="closeThankYouPopup()">Close</button>
+    </div>
+  </div>
+
+  <style>
+    .thank-you-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .thank-you-popup-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+    }
+
+    .thank-you-popup-content {
+      position: relative;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      animation: popupSlideIn 0.3s ease-out;
+    }
+
+    @keyframes popupSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .thank-you-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 32px;
+      color: #999;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .thank-you-popup-close:hover {
+      color: #333;
+    }
+
+    .thank-you-popup-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #4CAF50;
+      color: white;
+      font-size: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-weight: bold;
+    }
+
+    .thank-you-popup-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #1c2c45;
+      margin: 0 0 16px 0;
+    }
+
+    .thank-you-popup-message {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 0 12px 0;
+    }
+
+    .thank-you-popup-submessage {
+      font-size: 14px;
+      color: #999;
+      margin: 0 0 24px 0;
+    }
+
+    .thank-you-popup-button {
+      background: #1c2c45;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .thank-you-popup-button:hover {
+      background: #2a3f5f;
+    }
+
+    @media (max-width: 768px) {
+      .thank-you-popup-content {
+        padding: 32px 24px;
+      }
+
+      .thank-you-popup-title {
+        font-size: 24px;
+      }
+
+      .thank-you-popup-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 36px;
+      }
+    }
+  </style>
+
   <script>
     // FAQ Accordion functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -561,7 +711,104 @@
           }
         });
       });
+
+      // Form submission handlers
+      const step1Form = document.getElementById('step-1-form');
+      const step2Form = document.querySelector('.form-2');
+
+      // Handle Step 1 Form
+      if (step1Form) {
+        step1Form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const formData = new FormData(step1Form);
+          const formObject = {};
+          
+          // Collect all form data
+          for (let [key, value] of formData.entries()) {
+            formObject[key] = value;
+          }
+          
+          // Console.log all submitted information
+          console.log('=== FORM STEP 1 SUBMISSION ===');
+          console.log('Full Name:', formObject.FullName || 'N/A');
+          console.log('Email:', formObject.Email || 'N/A');
+          console.log('Phone:', formObject.Phone || 'N/A');
+          console.log('Annual Sales:', formObject.SalesDistributionTier || 'N/A');
+          console.log('Privacy Policy Accepted:', formObject.PrivacyPolicyAccepted || 'N/A');
+          console.log('Complete Form Data:', formObject);
+          console.log('=============================');
+          
+          // Show thank you popup
+          showThankYouPopup();
+        });
+      }
+
+      // Handle Step 2 Form
+      if (step2Form) {
+        step2Form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const formData = new FormData(step2Form);
+          const formObject = {};
+          
+          // Collect all form data
+          for (let [key, value] of formData.entries()) {
+            formObject[key] = value;
+          }
+          
+          // Console.log all submitted information
+          console.log('=== FORM STEP 2 SUBMISSION ===');
+          console.log('Annual Sales Above $120k:', formObject.AnnualSales || 'N/A');
+          console.log('Has Business Bank Account:', formObject.BusinessAccount || 'N/A');
+          console.log('Business Established Date:', formObject.BusinessEstablishedDate || 'N/A');
+          console.log('Credit Score:', formObject.CreditScore || 'N/A');
+          console.log('Business Not Started:', formObject.BusinessNotStarted || 'N/A');
+          console.log('Complete Form Data:', formObject);
+          console.log('=============================');
+          
+          // Show thank you popup
+          showThankYouPopup();
+        });
+      }
+
+      // Close popup handlers
+      const closeButton = document.querySelector('.thank-you-popup-close');
+      const overlay = document.querySelector('.thank-you-popup-overlay');
+      
+      if (closeButton) {
+        closeButton.addEventListener('click', closeThankYouPopup);
+      }
+      
+      if (overlay) {
+        overlay.addEventListener('click', closeThankYouPopup);
+      }
+
+      // Close on Escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeThankYouPopup();
+        }
+      });
     });
+
+    // Function to show thank you popup
+    function showThankYouPopup() {
+      const popup = document.getElementById('thankYouPopup');
+      if (popup) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+    }
+
+    // Function to close thank you popup
+    function closeThankYouPopup() {
+      const popup = document.getElementById('thankYouPopup');
+      if (popup) {
+        popup.style.display = 'none';
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    }
   </script>
   <footer class="site-footer">
     <div class="footer-container">
