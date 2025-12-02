@@ -81,7 +81,7 @@ export const Reviews = memo(() => {
     <div className={cls.wrapper}>
       <Swiper
         modules={[Autoplay]}
-        spaceBetween={24}
+        spaceBetween={120}
         slidesPerView={1.75}
         centeredSlides={false}
         grabCursor={true}
