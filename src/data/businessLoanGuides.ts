@@ -9,6 +9,15 @@ export interface BusinessLoanGuide {
 
 export const businessLoanGuides: BusinessLoanGuide[] = [
   {
+    id: 'best-business-loans',
+    title: 'Best Business Loans of 2025',
+    description:
+      'Compare top business loan providers and find the right funding option for your company. See ratings, terms, and funding speed.',
+    href: '/business-loan/best-business-loans',
+    image: '/images/table/best-business-loans-2025.png',
+    category: 'Comparison',
+  },
+  {
     id: 'restaurant-funding',
     title: 'Restaurant Funding',
     description:
@@ -19,4 +28,3 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
   },
   // Add more guides here as they are created
 ];
-
