@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
@@ -21,7 +21,7 @@ const faqItems = [
   {
     question: 'What documents do I need to apply?',
     answer:
-      'Most personal loan applications require: proof of identity (driver\'s license or passport), proof of income (pay stubs, tax returns, or bank statements), proof of address (utility bill or lease), employment verification, and sometimes bank account information. Some lenders may also request additional documentation based on your specific situation.',
+      "Most personal loan applications require: proof of identity (driver's license or passport), proof of income (pay stubs, tax returns, or bank statements), proof of address (utility bill or lease), employment verification, and sometimes bank account information. Some lenders may also request additional documentation based on your specific situation.",
   },
   {
     question: 'How fast can I get funded?',
@@ -31,7 +31,7 @@ const faqItems = [
   {
     question: 'Will applying affect my credit score?',
     answer:
-      'Yes, most personal loan applications result in a hard credit inquiry, which can temporarily lower your credit score by a few points. However, many lenders allow you to check your rate with a soft credit pull first, which doesn\'t affect your score. Multiple applications within a 14-45 day window are typically counted as a single inquiry for credit scoring purposes.',
+      "Yes, most personal loan applications result in a hard credit inquiry, which can temporarily lower your credit score by a few points. However, many lenders allow you to check your rate with a soft credit pull first, which doesn't affect your score. Multiple applications within a 14-45 day window are typically counted as a single inquiry for credit scoring purposes.",
   },
   {
     question: 'What is a good APR for a personal loan?',
@@ -72,20 +72,49 @@ const financialProductSchema = {
   },
 };
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.onlineloans.org',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Personal Loans',
+      item: 'https://www.onlineloans.org/personal-loan',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Best Personal Loans of 2025',
+      item: 'https://www.onlineloans.org/personal-loan/best-personal-loans',
+    },
+  ],
+};
+
 const lastUpdated = 'January 15, 2025';
 
 export default function BestPersonalLoansPage() {
-  const [selectedLoanType, setSelectedLoanType] = useState<string | null>(null);
-  const [showResults, setShowResults] = useState(false);
-
-  useEffect(() => {
-    // Check if user has already selected a loan type
-    const savedType = sessionStorage.getItem('selectedLoanType');
-    if (savedType) {
-      setSelectedLoanType(savedType);
-      setShowResults(true);
+  // Initialize state from sessionStorage if available
+  const [_selectedLoanType, setSelectedLoanType] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('selectedLoanType');
     }
-  }, []);
+
+    return null;
+  });
+  const [showResults, setShowResults] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !!sessionStorage.getItem('selectedLoanType');
+    }
+
+    return false;
+  });
 
   const handleLoanTypeSelect = (loanType: string) => {
     setSelectedLoanType(loanType);
@@ -104,6 +133,11 @@ export default function BestPersonalLoansPage() {
         id="financial-product-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className={cls.wrapper}>
@@ -238,4 +272,3 @@ export default function BestPersonalLoansPage() {
     </>
   );
 }
-

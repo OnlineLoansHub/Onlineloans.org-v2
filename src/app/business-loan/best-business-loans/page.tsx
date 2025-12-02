@@ -72,6 +72,31 @@ const financialProductSchema = {
   },
 };
 
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://www.onlineloans.org',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Business Loans',
+      item: 'https://www.onlineloans.org/business-loan',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Best Business Loans of 2025',
+      item: 'https://www.onlineloans.org/business-loan/best-business-loans',
+    },
+  ],
+};
+
 const lastUpdated = 'January 15, 2025';
 
 export default function BestBusinessLoansPage() {
@@ -106,6 +131,11 @@ export default function BestBusinessLoansPage() {
         id="financial-product-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
+      />
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       <div className={cls.wrapper}>

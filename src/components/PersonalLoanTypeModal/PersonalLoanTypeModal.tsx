@@ -13,8 +13,12 @@ export const PersonalLoanTypeModal = ({ onSelect }: PersonalLoanTypeModalProps) 
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Show modal every time the page loads
-    setIsVisible(true);
+    // Check if user has already selected a loan type
+    const savedType = sessionStorage.getItem('selectedLoanType');
+    if (!savedType) {
+      // Show modal only if no previous selection exists
+      setIsVisible(true);
+    }
   }, []);
 
   const handleSelect = (loanType: string) => {
