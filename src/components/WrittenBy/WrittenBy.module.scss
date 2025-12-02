@@ -1,0 +1,121 @@
+.writtenBy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.imageWrapper {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+}
+
+.authorImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.nameLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.writtenByText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7a7a7a;
+  line-height: 1.4;
+}
+
+.authorName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0a64d0;
+  line-height: 1.4;
+}
+
+.authorNameLink {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0a64d0;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+
+  &:hover {
+    color: #084a9e;
+    text-decoration: underline;
+  }
+}
+
+.roleLine {
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.authorRole {
+  font-size: 13px;
+  font-weight: 400;
+  color: #7a7a7a;
+  line-height: 1;
+}
+
+/* Variant for dark backgrounds (hero sections) */
+.writtenBy.dark {
+  .writtenByText {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .authorName {
+    color: #5eb3ff;
+  }
+
+  .authorNameLink {
+    color: #5eb3ff;
+
+    &:hover {
+      color: #4da3ef;
+      text-decoration: underline;
+    }
+  }
+
+  .authorRole {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+@media (width <= 768px) {
+  .writtenBy {
+    gap: 8px;
+  }
+
+  .imageWrapper,
+  .authorImage {
+    width: 64px;
+    height: 64px;
+  }
+
+  .writtenByText,
+  .authorName,
+  .authorNameLink {
+    font-size: 13px;
+  }
+
+  .authorRole {
+    font-size: 12px;
+  }
+}
+

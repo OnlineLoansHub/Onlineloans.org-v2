@@ -1,0 +1,178 @@
+export interface Lender {
+  id: string;
+  name: string;
+  logo?: string;
+  badge?: string;
+  description: string;
+  loanAmountRange: string;
+  minCreditScore: string;
+  timeInBusiness: string;
+  monthlyRevenue: string;
+  fundingSpeed: string;
+  pros: string[];
+  ctaLink: string;
+}
+
+export const lenders: Lender[] = [
+  {
+    id: 'biz2credit',
+    name: 'Biz2Credit',
+    badge: 'Top Pick',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Comprehensive business financing platform offering multiple loan types with fast approval.',
+    loanAmountRange: '$25,000 - $6,000,000',
+    minCreditScore: '575+',
+    timeInBusiness: '6+ months',
+    monthlyRevenue: '$10,000+',
+    fundingSpeed: '24-72 hours',
+    pros: [
+      'Wide range of loan products',
+      'Fast approval process',
+      'High loan amounts available',
+      'Flexible repayment terms',
+      'Strong customer support',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'lendio',
+    name: 'Lendio',
+    badge: 'Best Marketplace',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Business loan marketplace connecting you with multiple lenders in one application.',
+    loanAmountRange: '$500 - $5,000,000',
+    minCreditScore: '550+',
+    timeInBusiness: '6+ months',
+    monthlyRevenue: '$8,000+',
+    fundingSpeed: '24-48 hours',
+    pros: [
+      'Compare multiple offers',
+      'Single application process',
+      'No credit impact for browsing',
+      'Wide variety of loan types',
+      'Free to use marketplace',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'ondeck',
+    name: 'OnDeck',
+    badge: 'Fastest Funding',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Specialized in fast business loans and lines of credit for established businesses.',
+    loanAmountRange: '$5,000 - $250,000',
+    minCreditScore: '600+',
+    timeInBusiness: '1+ year',
+    monthlyRevenue: '$10,000+',
+    fundingSpeed: 'Same day',
+    pros: [
+      'Same-day funding available',
+      'Simple online application',
+      'Flexible credit requirements',
+      'No collateral required',
+      'Established lender reputation',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'fundbox',
+    name: 'Fundbox',
+    badge: 'Best for Small Loans',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Fast invoice financing and lines of credit for small businesses and freelancers.',
+    loanAmountRange: '$1,000 - $150,000',
+    minCreditScore: '500+',
+    timeInBusiness: '3+ months',
+    monthlyRevenue: '$5,000+',
+    fundingSpeed: '24 hours',
+    pros: [
+      'Low credit score requirements',
+      'Quick approval process',
+      'Invoice financing options',
+      'Transparent pricing',
+      'Easy online platform',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'lendzi',
+    name: 'Lendzi',
+    badge: 'Best Rates',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Competitive rates and flexible terms for businesses seeking traditional financing.',
+    loanAmountRange: '$10,000 - $2,000,000',
+    minCreditScore: '600+',
+    timeInBusiness: '1+ year',
+    monthlyRevenue: '$15,000+',
+    fundingSpeed: '3-7 days',
+    pros: [
+      'Competitive interest rates',
+      'Long repayment terms',
+      'Large loan amounts',
+      'Professional service',
+      'Multiple loan products',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'funding-circle',
+    name: 'Funding Circle',
+    badge: 'Best for Established',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Peer-to-peer lending platform ideal for established businesses with strong credit.',
+    loanAmountRange: '$25,000 - $500,000',
+    minCreditScore: '620+',
+    timeInBusiness: '2+ years',
+    monthlyRevenue: '$10,000+',
+    fundingSpeed: '5-10 days',
+    pros: [
+      'Fixed monthly payments',
+      'No prepayment penalties',
+      'Transparent rates',
+      'Established business focus',
+      'Strong customer reviews',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'bluevine',
+    name: 'BlueVine',
+    badge: 'Best Line of Credit',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Flexible business lines of credit and invoice factoring for growing businesses.',
+    loanAmountRange: '$5,000 - $250,000',
+    minCreditScore: '600+',
+    timeInBusiness: '6+ months',
+    monthlyRevenue: '$10,000+',
+    fundingSpeed: '24 hours',
+    pros: [
+      'Revolving credit line',
+      'Fast funding available',
+      'Draw funds as needed',
+      'Competitive rates',
+      'Simple application',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+  {
+    id: 'credibly',
+    name: 'Credibly',
+    badge: 'Best for Startups',
+    logo: '/images/table/LightStream-logo.svg',
+    description: 'Business funding solutions designed for startups and newer businesses.',
+    loanAmountRange: '$5,000 - $400,000',
+    minCreditScore: '550+',
+    timeInBusiness: '6+ months',
+    monthlyRevenue: '$15,000+',
+    fundingSpeed: '24-48 hours',
+    pros: [
+      'Startup-friendly requirements',
+      'Fast approval process',
+      'Multiple funding options',
+      'Flexible terms',
+      'Supportive for new businesses',
+    ],
+    ctaLink: '/business-loan/apply',
+  },
+];
+
