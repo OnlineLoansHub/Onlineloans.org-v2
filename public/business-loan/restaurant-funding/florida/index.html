@@ -88,7 +88,7 @@
       <section class="section hero v2">
         <div class="w-layout-blockcontainer container-hero z-index-1 w-container">
           <div class="inner-container width-844px width-100-tablet">
-            <h1 class="display-12 text-neutral-100 display-12-bold">Fast Restaurant Funding for Florida Restaurants - Get Approved in 24 Hours
+            <h1 class="display-12 text-neutral-100 display-12-bold">Fast Funding for Florida Restaurants - Get Approved in 24 Hours
             </h1>
             <p class="paragraph-large text-neutral-200 paragraph-large-bold">Get fast restaurant working capital loans and equipment financing for your Florida restaurant. No red tape, zero credit impact on initial application.² Funding available for restaurants in Miami, Orlando, Tampa, Jacksonville, and throughout Florida.</p>
             <div class="w-layout-blockcontainer container-logo-bar w-container"><img src="./assets/logo-bar-bbb-trustpilot.svg"
@@ -680,6 +680,101 @@
   </style>
 
   <script>
+    // Impression Tracking
+    const IMPRESSION_STORAGE_KEY = 'impression_id';
+    const IMPRESSION_TIMESTAMP_KEY = 'impression_timestamp';
+    const IMPRESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    const API_URL = 'https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/impression';
+
+    // Track impression on page load
+    async function trackImpression() {
+      try {
+        // Check if we have a valid impression ID in localStorage
+        const storedId = localStorage.getItem(IMPRESSION_STORAGE_KEY);
+        const storedTimestamp = localStorage.getItem(IMPRESSION_TIMESTAMP_KEY);
+
+        if (storedId && storedTimestamp) {
+          const timestamp = parseInt(storedTimestamp, 10);
+          const now = Date.now();
+          const timeElapsed = now - timestamp;
+
+          // If less than 24 hours have passed, use existing ID
+          if (timeElapsed < IMPRESSION_DURATION) {
+            console.log('Using existing impression ID:', storedId);
+            return;
+          }
+        }
+        
+        // Get current URL with all query parameters as referrer
+        const currentUrl = document.referrer || window.location.origin + window.location.pathname + window.location.search;
+        console.log('referrer', document.referrer);
+        console.log('currentUrl', currentUrl);
+        
+        // Create new impression
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Referrer': currentUrl,
+          },
+          body: JSON.stringify({}),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data?.id) {
+            // Save ID and timestamp to localStorage
+            localStorage.setItem(IMPRESSION_STORAGE_KEY, data.id);
+            localStorage.setItem(IMPRESSION_TIMESTAMP_KEY, Date.now().toString());
+            console.log('New impression created:', data.id);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to track impression:', error);
+      }
+    }
+
+    // Update impression with form data (can handle multiple steps at once)
+    async function patchImpressionForm({ steps, formName }) {
+      try {
+        const impressionId = localStorage.getItem(IMPRESSION_STORAGE_KEY);
+
+        if (!impressionId) {
+          console.warn('No impression ID found in localStorage');
+          return;
+        }
+
+        // Get current date in YYYY-MM-DD format
+        const date = new Date().toISOString().split('T')[0];
+
+        // Build the form data object with all steps
+        const patchData = {
+          date,
+          ...(formName && { formName }),
+        };
+
+        // Add all steps to the patch data
+        steps.forEach(({ stepNumber, question, answer }) => {
+          patchData[`step${stepNumber}Question`] = question;
+          patchData[`step${stepNumber}Answer`] = answer;
+        });
+
+        await fetch(`${API_URL}/${impressionId}/form`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(patchData),
+        });
+
+        console.log('Impression updated with form data:', patchData);
+      } catch (error) {
+        console.error('Failed to patch impression form:', error);
+        // Don't throw - we don't want to break the form flow if impression tracking fails
+      }
+    }
+
+    // Track impression when page loads
+    trackImpression();
+
     // FAQ Accordion functionality
     document.addEventListener('DOMContentLoaded', function() {
       const faqQuestions = document.querySelectorAll('.faq-question');
@@ -718,7 +813,7 @@
 
       // Handle Step 1 Form
       if (step1Form) {
-        step1Form.addEventListener('submit', function(e) {
+        step1Form.addEventListener('submit', async function(e) {
           e.preventDefault();
           
           const formData = new FormData(step1Form);
@@ -739,6 +834,66 @@
           console.log('Complete Form Data:', formObject);
           console.log('=============================');
           
+          // Get the actual selected option text for annual sales
+          let salesValue = formObject.SalesDistributionTier || '';
+          if (salesValue) {
+            const salesSelect = step1Form.querySelector('select[name="SalesDistributionTier"]');
+            if (salesSelect) {
+              const selectedOption = salesSelect.options[salesSelect.selectedIndex];
+              if (selectedOption && selectedOption.text) {
+                salesValue = selectedOption.text.trim();
+              }
+            }
+          }
+          
+          // Prepare all steps data
+          const steps = [];
+          let currentStep = 1;
+          
+          // Step 1: First and Last Name
+          if (formObject.FullName) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'First and Last Name*',
+              answer: formObject.FullName
+            });
+          }
+          
+          // Step 2: Email
+          if (formObject.Email) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Email*',
+              answer: formObject.Email
+            });
+          }
+          
+          // Step 3: Phone
+          if (formObject.Phone) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Phone*',
+              answer: formObject.Phone
+            });
+          }
+          
+          // Step 4: Annual Sales (with actual selected text)
+          if (salesValue) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Select your estimated annual sales*',
+              answer: salesValue
+            });
+          }
+          
+          // Send all steps in one request
+          if (steps.length > 0) {
+            await patchImpressionForm({
+              steps: steps,
+              formName: 'restaurant-funding-florida',
+            });
+          }
+          
           // Show thank you popup
           showThankYouPopup();
         });
@@ -746,7 +901,7 @@
 
       // Handle Step 2 Form
       if (step2Form) {
-        step2Form.addEventListener('submit', function(e) {
+        step2Form.addEventListener('submit', async function(e) {
           e.preventDefault();
           
           const formData = new FormData(step2Form);
@@ -766,6 +921,76 @@
           console.log('Business Not Started:', formObject.BusinessNotStarted || 'N/A');
           console.log('Complete Form Data:', formObject);
           console.log('=============================');
+          
+          // Get the actual selected option text for credit score
+          let creditValue = formObject.CreditScore || '';
+          if (creditValue) {
+            const creditSelect = step2Form.querySelector('select[name="CreditScore"]');
+            if (creditSelect) {
+              const selectedOption = creditSelect.options[creditSelect.selectedIndex];
+              if (selectedOption && selectedOption.text) {
+                creditValue = selectedOption.text.trim();
+              }
+            }
+          }
+          
+          // Prepare all steps data (continuing from Step 1)
+          // Assuming Step 1 had 4 fields, Step 2 starts at step 5
+          const steps = [];
+          let currentStep = 5;
+          
+          // Step 5: Annual Sales Above $120k
+          if (formObject.AnnualSales) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Are your annual sales above $120k?*',
+              answer: formObject.AnnualSales === 'true' ? 'Yes' : 'No'
+            });
+          }
+          
+          // Step 6: Business Bank Account
+          if (formObject.BusinessAccount) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Do you have a business bank account?*',
+              answer: formObject.BusinessAccount === 'true' ? 'Yes' : 'No'
+            });
+          }
+          
+          // Step 7: Business Established Date
+          if (formObject.BusinessEstablishedDate) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'When was your business established*?',
+              answer: formObject.BusinessEstablishedDate
+            });
+          }
+          
+          // Step 8: Credit Score (with actual selected text)
+          if (creditValue) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'Select your estimated credit score*',
+              answer: creditValue
+            });
+          }
+          
+          // Step 9: Business Not Started
+          if (formObject.BusinessNotStarted) {
+            steps.push({
+              stepNumber: currentStep++,
+              question: 'My business is not yet started',
+              answer: formObject.BusinessNotStarted ? 'Yes' : 'No'
+            });
+          }
+          
+          // Send all steps in one request
+          if (steps.length > 0) {
+            await patchImpressionForm({
+              steps: steps,
+              formName: 'restaurant-funding-florida',
+            });
+          }
           
           // Show thank you popup
           showThankYouPopup();
