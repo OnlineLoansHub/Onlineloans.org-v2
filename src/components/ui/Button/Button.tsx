@@ -5,7 +5,7 @@ import cls from './Button.module.scss';
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'primary' | 'secondary';
   className?: string;
-  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const Button: FC<IButtonProps> = ({
@@ -27,7 +27,7 @@ export const Button: FC<IButtonProps> = ({
         },
         [className]
       )}
-      onClick={(e) => onClick(e)}
+      onClick={onClick ? (e) => onClick(e) : undefined}
       disabled={disabled}
       {...props}
     >

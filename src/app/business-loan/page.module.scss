@@ -94,3 +94,101 @@
   padding: 60px 20px;
 }
 
+.landingPagesSection {
+  padding: 80px 0;
+  background: var(--color-white);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.landingPagesDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-gray-medium, #9ca3af);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.landingPagesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 48px;
+
+  @media (width <= 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+.landingPageCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border, #e5e7f1);
+  border-radius: 16px;
+  padding: 32px;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+
+    .landingPageLink {
+      color: var(--color-primary, #2a3d66);
+    }
+  }
+}
+
+.landingPageTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-gray-dark, #161616);
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.landingPageDescription {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-gray-medium, #9ca3af);
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.landingPageLink {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-primary, #2a3d66);
+  transition: color 0.2s ease;
+  margin-top: auto;
+}
+
+.ctaSection {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.ctaButtonLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.ctaButton {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
