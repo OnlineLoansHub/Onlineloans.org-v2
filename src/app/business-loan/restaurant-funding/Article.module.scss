@@ -1,0 +1,576 @@
+.section {
+  width: 100%;
+  padding: 35px 0;
+  background-color: var(--color-article-bg);
+  display: block;
+}
+
+.containerContent {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.blockTitle {
+  font-size: 30px;
+  color: #000000;
+  font-weight: 400;
+  font-style: normal;
+  font-family: 'DM Serif Display', serif;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.loanInfo {
+  display: flex;
+  gap: 25px;
+  color: #706f74;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.loanInfoDot {
+  width: 5px;
+  height: 5px;
+}
+
+.loanInfoImg {
+  width: 18px;
+  height: 18px;
+}
+
+.loanContent {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.loanLeftPart {
+  position: sticky;
+  top: 20px;
+  width: 25%;
+  height: max-content;
+  align-self: flex-start;
+}
+
+.loanCenterPart {
+  width: 40%;
+}
+
+.loanRightPart {
+  position: sticky;
+  top: 20px;
+  width: 20%;
+  font-family: 'Inter', sans-serif;
+  height: max-content;
+  align-self: flex-start;
+}
+
+.loanShareMobile {
+  display: none;
+}
+
+.loanShareImages {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.loanShareImages button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.loanShareImg {
+  width: 24px;
+  height: 24px;
+}
+
+.loanShareTitle {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.loanApplyLinks {
+  margin-bottom: 30px;
+}
+
+.loanApplyLinks .stateLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.loanApplyLinks .stateLink {
+  display: block;
+  padding: 10px 15px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  color: #0f6056;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.loanApplyLinks .stateLink:hover {
+  background: #0f6056;
+  color: #fff;
+  border-color: #0f6056;
+}
+
+.loanContentsTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #0f6056;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #dcdcdc;
+  margin-bottom: 22px;
+}
+
+.loanContentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.loanContentsListItem {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  padding: 0px 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.loanContentsListItem:hover {
+  color: #0f6056;
+}
+
+.loanContentsListItem.active {
+  font-weight: 700;
+  padding-left: 15px;
+  color: #0f6056;
+  border-left: 2px solid #0f6056;
+}
+
+.loanArticle {
+  margin-bottom: 30px;
+}
+
+.loanArticleTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.loanArticleTxt {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.loanArticleList {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.loanArticleListItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.loanArticleCheck {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.articleImage {
+  width: 100%;
+  margin-top: 30px;
+  height: auto;
+}
+
+.articleLoanTip {
+  display: flex;
+  gap: 17px;
+  background: #fff;
+  padding: 20px 21px 20px 5px;
+  border: 1px solid #e9e9e9;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.articleIcon {
+  width: 73px;
+  height: 73px;
+  flex-shrink: 0;
+}
+
+.articleLoanTipTxt {
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  line-height: 26px;
+}
+
+.loanArticleTitleNumber {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 20px 0;
+}
+
+.loanAction {
+  display: flex;
+  gap: 40px;
+  background: #0b2953;
+  padding: 20px 24px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.loanActionTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 120%;
+  color: #fff;
+}
+
+.loanActionBtn {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  padding: 10px 24px;
+  color: #000;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.loanAuthorWrapper,
+.loanAuthorWrapperMobile {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.loanAuthorWrapperMobile {
+  display: none;
+}
+
+.loanAuthorBy {
+  color: #2c2a33;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.loanAuthor {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.loanAuthorName {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.loanAuthorName p:first-child {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.loanAuthorName p:last-child {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  color: #bbbaba;
+}
+
+.loanAuthorImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.loanAuthorAbout {
+  font-size: 14px;
+  padding-left: 15px;
+  border-left: 1px solid #0d767f;
+}
+
+.loanAuthorAbout a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.loanArticleRightBlock {
+  background: #fff;
+  padding: 20px 8px;
+  margin-bottom: 30px;
+  border: 1px solid #e9e9e9;
+  border-radius: 5px;
+}
+
+.loanArticleRightBlockTitle {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.loanArticleRightBlockSubtitle {
+  font-weight: 500;
+  font-size: 14px;
+  color: #696868;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.loanArticleRightBlockTxtWrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.loanArticleRightBlockTxt {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.tooltip img {
+  width: 10px;
+  height: 10px;
+}
+
+.tooltipText {
+  visibility: hidden;
+  width: 200px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 12px;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.tooltipText::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  border-style: solid;
+  border-color: #000 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+.loanArticleRightBlockNumbers {
+  font-weight: 700;
+  font-size: 30px;
+  color: #0d767f;
+  margin: 5px 0 12px 0;
+}
+
+.loanArticleContact .loanArticleRightBlockTitle {
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.loanArticleContact .loanArticleRightBlockTxt {
+  margin-bottom: 20px;
+}
+
+.loanArticleRightBlockInput {
+  font-size: 16px;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #e4e4e4;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.primaryBtn {
+  width: 100%;
+}
+
+.stateLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stateLink {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  color: #0f6056;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.stateLink:hover {
+  background: #0f6056;
+  color: #fff;
+  border-color: #0f6056;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .loanContent {
+    gap: 8px;
+  }
+
+  .loanCenterPart {
+    width: 45%;
+  }
+
+  .loanRightPart {
+    width: 25%;
+  }
+}
+
+@media (max-width: 768px) {
+  .loanContent {
+    flex-direction: column;
+  }
+
+  .loanLeftPart,
+  .loanRightPart {
+    position: unset;
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .loanCenterPart {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .loanShare,
+  .loanAuthorWrapper {
+    display: none;
+  }
+
+  .loanAuthorWrapperMobile {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+  }
+
+  .loanShareMobile {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .loanContents {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .loanCenterPart,
+  .loanAuthorWrapperMobile,
+  .loanLeftPart,
+  .loanRightPart {
+    width: 100%;
+  }
+
+  .blockTitle {
+    font-size: 22px;
+  }
+
+  .loanInfo {
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+
+  .loanContentsTitle {
+    font-size: 18px;
+  }
+
+  .loanArticleTitle {
+    font-size: 22px;
+  }
+
+  .loanAction {
+    gap: 25px;
+    flex-direction: column;
+  }
+
+  .loanActionTitle {
+    text-align: center;
+  }
+}
+
