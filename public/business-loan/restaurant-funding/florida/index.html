@@ -116,8 +116,8 @@
                         <div class="error-message-2">This is some text inside of a div block.</div>
                       </div>
                       <div class="input-group"><label for="Phone" class="field-label">Phone*</label><input
-                          class="input w-input" maxlength="256" name="Phone" placeholder="123-456-7890" type="tel"
-                          required="">
+                          class="input w-input" maxlength="256" name="Phone" placeholder="1234567890" type="tel"
+                          pattern="[0-9]*" inputmode="numeric" id="phone-input" required="">
                         <div class="error-message-2">This is some text inside of a div block.</div>
                       </div>
                       <div class="input-group"><label for="SalesDistributionTier" class="field-label">Select your
@@ -775,8 +775,38 @@
     // Track impression when page loads
     trackImpression();
 
+    // Phone input validation - allow only numbers
+    function setupPhoneValidation() {
+      const phoneInput = document.getElementById('phone-input');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          // Remove any non-numeric characters
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
+        
+        // Prevent paste of non-numeric characters
+        phoneInput.addEventListener('paste', function(e) {
+          e.preventDefault();
+          const paste = (e.clipboardData || window.clipboardData).getData('text');
+          const numbersOnly = paste.replace(/[^0-9]/g, '');
+          this.value = numbersOnly;
+        });
+        
+        // Prevent non-numeric keypress
+        phoneInput.addEventListener('keypress', function(e) {
+          const char = String.fromCharCode(e.which);
+          if (!/[0-9]/.test(char)) {
+            e.preventDefault();
+          }
+        });
+      }
+    }
+
     // FAQ Accordion functionality
     document.addEventListener('DOMContentLoaded', function() {
+      // Setup phone validation
+      setupPhoneValidation();
+      
       const faqQuestions = document.querySelectorAll('.faq-question');
       
       faqQuestions.forEach(question => {
