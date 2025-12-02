@@ -26,5 +26,14 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     image: '/images/article/image-chef-kitchen.jpg',
     category: 'Industry-Specific',
   },
+  {
+    id: 'construction-funding',
+    title: 'Construction Business Loans',
+    description:
+      'Complete guide to construction business loans: Learn how construction loans work, types of construction financing, how to apply, and find the best lenders.',
+    href: '/business-loan/construction-funding',
+    image: '/images/article/article_home.png',
+    category: 'Industry-Specific',
+  },
   // Add more guides here as they are created
 ];

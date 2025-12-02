@@ -39,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/business-loan/construction-funding`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/personal-loan`,
       lastModified: currentDate,
       changeFrequency: 'weekly',

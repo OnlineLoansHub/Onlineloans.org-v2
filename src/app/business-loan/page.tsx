@@ -95,6 +95,58 @@ export default function BusinessLoanPage() {
           </div>
         </div>
       </section>
+
+      <section className={cls.landingPagesSection}>
+        <div className={cls.container}>
+          <h2 className={cls.sectionTitle}>Construction Business Loans by State</h2>
+          <p className={cls.landingPagesDescription}>
+            Get fast construction business loans tailored to your state. Compare offers and apply for
+            equipment financing, working capital, and project funding.
+          </p>
+          <div className={cls.landingPagesGrid}>
+            <AppLink
+              href="/business-loan/construction-funding/florida/index.html"
+              className={cls.landingPageCard}
+            >
+              <h3 className={cls.landingPageTitle}>Florida Construction Loans</h3>
+              <p className={cls.landingPageDescription}>
+                Fast equipment financing and working capital for Florida construction companies. Get
+                approved in 24-72 hours.
+              </p>
+              <span className={cls.landingPageLink}>Apply Now →</span>
+            </AppLink>
+            <AppLink
+              href="/business-loan/construction-funding/new-york/index.html"
+              className={cls.landingPageCard}
+            >
+              <h3 className={cls.landingPageTitle}>New York Construction Loans</h3>
+              <p className={cls.landingPageDescription}>
+                High-demand funding options for NYC and statewide construction companies. Flexible
+                terms and fast approval.
+              </p>
+              <span className={cls.landingPageLink}>Apply Now →</span>
+            </AppLink>
+            <AppLink
+              href="/business-loan/construction-funding/texas/index.html"
+              className={cls.landingPageCard}
+            >
+              <h3 className={cls.landingPageTitle}>Texas Construction Loans</h3>
+              <p className={cls.landingPageDescription}>
+                Flexible funding solutions for Texas construction companies. Competitive rates and
+                quick funding.
+              </p>
+              <span className={cls.landingPageLink}>Apply Now →</span>
+            </AppLink>
+          </div>
+          <div className={cls.ctaSection}>
+            <AppLink href="/business-loan/apply" className={cls.ctaButtonLink}>
+              <Button variant="primary" className={cls.ctaButton}>
+                Apply for Construction Loans in All Other States
+              </Button>
+            </AppLink>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
