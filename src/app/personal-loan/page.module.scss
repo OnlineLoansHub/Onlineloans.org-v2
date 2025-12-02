@@ -1,0 +1,96 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-gray-light, #f3f4f6);
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (width <= 768px) {
+    padding: 0 16px;
+  }
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--color-primary, #2a3d66) 0%, #1e2d4a 100%);
+  color: var(--color-white);
+  padding: 80px 0;
+  text-align: center;
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.heroTitle {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+
+  @media (width <= 768px) {
+    font-size: 32px;
+  }
+}
+
+.heroDescription {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.95;
+
+  @media (width <= 768px) {
+    font-size: 16px;
+  }
+}
+
+.guidesSection {
+  padding: 80px 0;
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-gray-dark, #161616);
+  margin: 0 0 40px 0;
+  text-align: center;
+
+  @media (width <= 768px) {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+}
+
+.guidesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 32px;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.emptyState {
+  text-align: center;
+  font-size: 18px;
+  color: var(--color-gray-medium, #9ca3af);
+  padding: 60px 20px;
+}
+

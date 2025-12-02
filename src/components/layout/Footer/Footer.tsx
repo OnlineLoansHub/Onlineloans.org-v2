@@ -13,6 +13,14 @@ interface FooterLinkItem {
 // back to footer
 const topNavLinks: FooterLinkItem[] = [
   {
+    title: 'Business Loans',
+    path: '/business-loan',
+  },
+  {
+    title: 'Personal Loans',
+    path: '/personal-loan',
+  },
+  {
     title: 'About Us',
     path: URL_CONFIG.about,
   },

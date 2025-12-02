@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { BusinessLoanGuide } from '@/data/businessLoanGuides';
+import { PersonalLoanGuide } from '@/data/personalLoanGuides';
 import cls from './GuideCard.module.scss';
 
 interface GuideCardProps {
-  guide: BusinessLoanGuide;
+  guide: BusinessLoanGuide | PersonalLoanGuide;
 }
 
 export const GuideCard = ({ guide }: GuideCardProps) => {

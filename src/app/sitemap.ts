@@ -15,7 +15,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${baseUrl}/business-loan`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/business-loan/apply`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/business-loan/restaurant-funding`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/personal-loan`,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -27,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/personal-loan/article1`,
+      url: `${baseUrl}/personal-loan/what-is-a-personal-loan`,
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.8,
