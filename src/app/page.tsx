@@ -16,8 +16,9 @@ export default function Home() {
     <DynamicHomePage
       title={
         <>
-          Compare and choose <br />
-          top financial products
+          Money when <br />
+          you need it. <br />
+          Fast, easy, secure.
         </>
       }
     />

@@ -16,23 +16,23 @@
   /* sizes */
   --max-container-width: 1700px;
   --header-height: 53px;
-  --header-height-mobile: 60px;
+  --header-height-mobile: 64px;
 
   /* 🧩 Typography */
   --font-weight-bold: 700;
 
   /* 📝 Title Font Sizes */
 
-  --title-size-mobile-320: 1.5rem;
-  --title-size-mobile-360: 1.77rem;
-  --title-size-mobile-375: 1.8rem;
-  --title-size-mobile-390: 1.9rem;
-  --title-size-mobile-412: 2rem;
-  --title-size-mobile-414: 2rem;
-  --title-size-mobile-430: 2.1rem;
-  --title-size-tablet: 1.8rem;
-  --title-size-laptop: 3.6rem;
-  --title-size-large: 4rem;
+  --title-size-mobile-320: 1.75rem;
+  --title-size-mobile-360: 2rem;
+  --title-size-mobile-375: 2.1rem;
+  --title-size-mobile-390: 2.2rem;
+  --title-size-mobile-412: 2.3rem;
+  --title-size-mobile-414: 2.3rem;
+  --title-size-mobile-430: 2.4rem;
+  --title-size-tablet: 2rem;
+  --title-size-laptop: 4rem;
+  --title-size-large: 4.5rem;
 
   /* 🎯 Logo Font Sizes */
   --logo-size-mobile: 17px;

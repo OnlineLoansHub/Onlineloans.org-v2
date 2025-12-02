@@ -13,7 +13,7 @@
   width: 100%;
   max-width: var(--max-container-width);
   margin: 0 auto;
-  padding: 0 17rem;
+  padding: 0 20rem;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -27,7 +27,12 @@
 
   /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
   @media (min-width: 1025px) and (max-width: 1600px) {
-    padding: 0 5.25rem 0 5.25rem;
+    padding: 0 7rem;
+  }
+
+  /* 💻 Very large screens */
+  @media (min-width: 1601px) {
+    padding: 0 5rem;
   }
 }
 
@@ -72,7 +77,9 @@
   width: 32px;
   height: 32px;
   color: var(--color-white);
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 
   &:hover {
     color: var(--color-secondary);

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { Header } from '@/components/layout/Header/Header';
+import { LegacyBanner } from '@/components/layout/LegacyBanner/LegacyBanner';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/seo/StructuredData';
@@ -72,6 +73,7 @@ export default function RootLayout({
           <DefaultStructuredData />
           <SkipToContent />
           <Header />
+          {/* <LegacyBanner /> */}
           <main id="main-content" className="main-container">
             {children}
           </main>
