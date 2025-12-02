@@ -113,7 +113,6 @@ export default function RestaurantFundingPage() {
     }
   };
 
-
   return (
     <section id="restaurant-funding" className={cls.section}>
       <div className={cls.containerContent}>
@@ -123,7 +122,13 @@ export default function RestaurantFundingPage() {
           </h3>
 
           <div className={cls.loanInfo}>
-            <p>{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+            <p>
+              {new Date().toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric',
+              })}
+            </p>
             <Image
               src="/images/article/dot_2.svg"
               alt=""
@@ -215,13 +220,22 @@ export default function RestaurantFundingPage() {
             <div className={cls.loanApplyLinks}>
               <p className={cls.loanShareTitle}>Get Approved for Up to $10 Million — Apply Now</p>
               <div className={cls.stateLinks}>
-                <AppLink href="/business-loan/restaurant-funding/florida/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/florida/index.html"
+                  className={cls.stateLink}
+                >
                   Florida
                 </AppLink>
-                <AppLink href="/business-loan/restaurant-funding/new-york/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/new-york/index.html"
+                  className={cls.stateLink}
+                >
                   New York
                 </AppLink>
-                <AppLink href="/business-loan/restaurant-funding/texas/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/texas/index.html"
+                  className={cls.stateLink}
+                >
                   Texas
                 </AppLink>
                 <AppLink href="/business-loan/apply" className={cls.stateLink}>
@@ -269,9 +283,10 @@ export default function RestaurantFundingPage() {
                 during slow periods.
                 <br />
                 <br />
-                Restaurant funding differs from traditional business loans because lenders understand
-                the unique challenges of the restaurant industry, including seasonal fluctuations,
-                high employee turnover, perishable inventory, and the need for specialized equipment.
+                Restaurant funding differs from traditional business loans because lenders
+                understand the unique challenges of the restaurant industry, including seasonal
+                fluctuations, high employee turnover, perishable inventory, and the need for
+                specialized equipment.
                 <strong>
                   Funding amounts typically range from $5,000 to $500,000, with approval and funding
                   often available within 24-48 hours.
@@ -411,10 +426,10 @@ export default function RestaurantFundingPage() {
                   />
                   <div>
                     <strong>Equipment Financing:</strong> This type of funding is specifically for
-                    purchasing restaurant equipment like commercial ovens, refrigerators, dishwashers,
-                    POS systems, and kitchen appliances. The equipment itself serves as collateral,
-                    which often means lower interest rates and easier approval. Terms typically range
-                    from 2-7 years, matching the useful life of the equipment.
+                    purchasing restaurant equipment like commercial ovens, refrigerators,
+                    dishwashers, POS systems, and kitchen appliances. The equipment itself serves as
+                    collateral, which often means lower interest rates and easier approval. Terms
+                    typically range from 2-7 years, matching the useful life of the equipment.
                   </div>
                 </li>
                 <li className={cls.loanArticleListItem}>
@@ -444,10 +459,10 @@ export default function RestaurantFundingPage() {
                   />
                   <div>
                     <strong>Term Loans:</strong> Traditional term loans provide a lump sum that you
-                    repay over a fixed period (typically 1-5 years) with fixed monthly payments. These
-                    are best for larger investments like expansion, major renovations, or purchasing
-                    a restaurant. Term loans usually offer the lowest interest rates but may require
-                    stronger credit and more documentation.
+                    repay over a fixed period (typically 1-5 years) with fixed monthly payments.
+                    These are best for larger investments like expansion, major renovations, or
+                    purchasing a restaurant. Term loans usually offer the lowest interest rates but
+                    may require stronger credit and more documentation.
                   </div>
                 </li>
                 <li className={cls.loanArticleListItem}>
@@ -459,11 +474,11 @@ export default function RestaurantFundingPage() {
                     className={cls.loanArticleCheck}
                   />
                   <div>
-                    <strong>Business Lines of Credit:</strong> A line of credit gives you access to a
-                    revolving credit limit that you can draw from as needed. You only pay interest on
-                    the amount you use, making it ideal for managing seasonal cash flow or covering
-                    unexpected expenses. Lines of credit are flexible and can be used repeatedly as
-                    you pay down the balance.
+                    <strong>Business Lines of Credit:</strong> A line of credit gives you access to
+                    a revolving credit limit that you can draw from as needed. You only pay interest
+                    on the amount you use, making it ideal for managing seasonal cash flow or
+                    covering unexpected expenses. Lines of credit are flexible and can be used
+                    repeatedly as you pay down the balance.
                   </div>
                 </li>
                 <li className={cls.loanArticleListItem}>
@@ -538,10 +553,10 @@ export default function RestaurantFundingPage() {
                 prices.
                 <br />
                 <br />
-                <strong>Marketing and Customer Acquisition:</strong> In competitive markets, effective
-                marketing is essential for attracting new customers and retaining existing ones.
-                Restaurant funding can finance marketing campaigns, social media advertising, and
-                promotional events that drive traffic and increase revenue.
+                <strong>Marketing and Customer Acquisition:</strong> In competitive markets,
+                effective marketing is essential for attracting new customers and retaining existing
+                ones. Restaurant funding can finance marketing campaigns, social media advertising,
+                and promotional events that drive traffic and increase revenue.
               </p>
               <Image
                 src="/images/article/article_home.png"
@@ -587,14 +602,14 @@ export default function RestaurantFundingPage() {
               <p className={cls.loanArticleTxt}>
                 <strong>Credit Score Requirements:</strong> Restaurant funding is more accessible
                 than traditional loans when it comes to credit scores. While traditional banks may
-                require scores of 680 or higher, many restaurant lenders work with scores as low
-                as 500. However,{' '}
+                require scores of 680 or higher, many restaurant lenders work with scores as low as
+                500. However,{' '}
                 <strong>
                   higher credit scores typically result in better interest rates and more favorable
                   terms.
                 </strong>{' '}
-                If your credit score is lower, you may still qualify, but you might pay higher
-                rates or need to provide additional documentation.
+                If your credit score is lower, you may still qualify, but you might pay higher rates
+                or need to provide additional documentation.
                 <br />
                 <br />
                 <strong>Revenue and Cash Flow:</strong> Lenders want to see consistent revenue that
@@ -668,10 +683,10 @@ export default function RestaurantFundingPage() {
               </p>
               <p className={cls.loanArticleTitleNumber}>3. Submit your application</p>
               <p className={cls.loanArticleTxt}>
-                Once you&apos;ve chosen a lender, complete the full application. This typically takes
-                15-30 minutes and involves providing basic business information, financial details,
-                and uploading your documentation. Many lenders have streamlined online applications
-                that make this process quick and easy.
+                Once you&apos;ve chosen a lender, complete the full application. This typically
+                takes 15-30 minutes and involves providing basic business information, financial
+                details, and uploading your documentation. Many lenders have streamlined online
+                applications that make this process quick and easy.
                 <br />
                 <br />
                 <strong>
@@ -692,8 +707,8 @@ export default function RestaurantFundingPage() {
                 best deal.
                 <br />
                 <br />
-                Once you accept an offer, the lender will finalize the loan agreement. Read the terms
-                carefully, especially regarding prepayment penalties, late fees, and default
+                Once you accept an offer, the lender will finalize the loan agreement. Read the
+                terms carefully, especially regarding prepayment penalties, late fees, and default
                 conditions. If you have questions, ask the lender before signing.
               </p>
               <p className={cls.loanArticleTitleNumber}>5. Receive your funds</p>
@@ -711,12 +726,9 @@ export default function RestaurantFundingPage() {
             </article>
 
             <div className={cls.loanAction}>
-              <p className={cls.loanActionTitle}>
-                Get restaurant funding offers from multiple lenders now!
-              </p>
               <AppLink href="/business-loan/restaurant-funding/florida/index.html">
                 <Button variant="primary" onClick={() => {}} className={cls.loanActionBtn}>
-                  Get Approved for Up to $10 Million — Apply Now
+                  Get restaurant funding offers from multiple lenders now!
                 </Button>
               </AppLink>
             </div>
@@ -747,9 +759,9 @@ export default function RestaurantFundingPage() {
                   />
                   <div>
                     <strong>Industry Experience:</strong> Choose lenders that specialize in or have
-                    extensive experience with restaurant funding. They understand your industry&apos;s
-                    unique challenges, seasonal patterns, and cash flow needs, which often results in
-                    more favorable terms and better customer service.
+                    extensive experience with restaurant funding. They understand your
+                    industry&apos;s unique challenges, seasonal patterns, and cash flow needs, which
+                    often results in more favorable terms and better customer service.
                   </div>
                 </li>
                 <li className={cls.loanArticleListItem}>
@@ -763,9 +775,9 @@ export default function RestaurantFundingPage() {
                   <div>
                     <strong>Transparency and Fees: </strong>
                     Look for lenders that are transparent about all costs, including interest rates,
-                    origination fees, processing fees, and any other charges. The best lenders clearly
-                    explain the total cost of borrowing (APR) upfront. Avoid lenders with hidden fees
-                    or unclear terms.
+                    origination fees, processing fees, and any other charges. The best lenders
+                    clearly explain the total cost of borrowing (APR) upfront. Avoid lenders with
+                    hidden fees or unclear terms.
                   </div>
                 </li>
                 <li className={cls.loanArticleListItem}>
@@ -827,25 +839,34 @@ export default function RestaurantFundingPage() {
                   <div>
                     <strong>Loan Amounts and Terms: </strong>
                     Ensure the lender offers loan amounts that meet your needs and repayment terms
-                    that fit your cash flow. Some lenders specialize in smaller loans ($5,000-$50,000)
-                    while others focus on larger amounts ($100,000+). Match the lender&apos;s
-                    specialty to your funding needs.
+                    that fit your cash flow. Some lenders specialize in smaller loans
+                    ($5,000-$50,000) while others focus on larger amounts ($100,000+). Match the
+                    lender&apos;s specialty to your funding needs.
                   </div>
                 </li>
               </ul>
               <p className={cls.loanArticleTxt}>
                 <strong>Explore Restaurant Funding by State:</strong> Restaurant funding options and
-                requirements can vary by location. Explore our state-specific guides to find the best
-                funding solutions for restaurants in your area:
+                requirements can vary by location. Explore our state-specific guides to find the
+                best funding solutions for restaurants in your area:
               </p>
               <div className={cls.stateLinks}>
-                <AppLink href="/business-loan/restaurant-funding/florida/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/florida/index.html"
+                  className={cls.stateLink}
+                >
                   Restaurant Funding in Florida →
                 </AppLink>
-                <AppLink href="/business-loan/restaurant-funding/new-york/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/new-york/index.html"
+                  className={cls.stateLink}
+                >
                   Restaurant Funding in New York →
                 </AppLink>
-                <AppLink href="/business-loan/restaurant-funding/texas/index.html" className={cls.stateLink}>
+                <AppLink
+                  href="/business-loan/restaurant-funding/texas/index.html"
+                  className={cls.stateLink}
+                >
                   Restaurant Funding in Texas →
                 </AppLink>
               </div>
@@ -921,11 +942,9 @@ export default function RestaurantFundingPage() {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </section>
   );
 }
-

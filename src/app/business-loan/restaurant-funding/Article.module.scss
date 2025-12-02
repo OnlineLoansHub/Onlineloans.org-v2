@@ -275,7 +275,7 @@
 
 .loanAction {
   display: flex;
-  gap: 40px;
+  justify-content: center;
   background: #0b2953;
   padding: 20px 24px;
   border-radius: 5px;
@@ -296,10 +296,13 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 26px;
-  padding: 10px 24px;
+  padding: 12px 32px;
   color: #000;
   border-radius: 5px;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
 }
 
 .loanAuthorWrapper,
@@ -588,8 +591,13 @@
   }
 
   .loanAction {
-    gap: 25px;
-    flex-direction: column;
+    padding: 16px 20px;
+  }
+
+  .loanActionBtn {
+    font-size: 14px;
+    padding: 10px 20px;
+    max-width: 100%;
   }
 
   .loanActionTitle {
