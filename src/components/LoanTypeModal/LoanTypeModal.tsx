@@ -12,16 +12,12 @@ export const LoanTypeModal = ({ onSelect }: LoanTypeModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Check if user has already selected a loan type in this session
-    const hasSelected = sessionStorage.getItem('loanTypeSelected');
-    if (!hasSelected) {
-      setIsVisible(true);
-    }
+    // Show modal every time the page loads
+    setIsVisible(true);
   }, []);
 
   const handleSelect = (loanType: string) => {
     setIsLoading(true);
-    sessionStorage.setItem('loanTypeSelected', 'true');
     sessionStorage.setItem('selectedLoanType', loanType);
 
     // Show loader for 3 seconds
