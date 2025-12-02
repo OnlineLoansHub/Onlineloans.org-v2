@@ -32,6 +32,12 @@
   margin-bottom: 50px;
 }
 
+.loanInfo p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .loanInfoDot {
   width: 5px;
   height: 5px;
