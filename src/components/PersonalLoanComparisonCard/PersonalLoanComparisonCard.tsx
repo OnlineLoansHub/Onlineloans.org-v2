@@ -1,0 +1,81 @@
+import type { FC } from 'react';
+import { AppLink } from '@/components/ui/AppLink/AppLink';
+import { Button } from '@/components/ui/Button/Button';
+import type { PersonalLender } from '@/data/personalLenders';
+import cls from './PersonalLoanComparisonCard.module.scss';
+
+interface PersonalLoanComparisonCardProps {
+  lender: PersonalLender;
+  index?: number;
+}
+
+export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = ({ lender, index }) => {
+  return (
+    <div className={cls.card}>
+      {index !== undefined && (
+        <div className={cls.cardNumber}>{index + 1}</div>
+      )}
+      <div className={cls.header}>
+        {lender.logo ? (
+          <img src={lender.logo} alt={`${lender.name} logo`} className={cls.logo} />
+        ) : (
+          <div className={cls.logoPlaceholder}>
+            <span className={cls.logoPlaceholderText}>{lender.name.charAt(0)}</span>
+          </div>
+        )}
+      </div>
+
+      <p className={cls.description}>{lender.description}</p>
+
+      <div className={cls.detailsGrid}>
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>Rating</span>
+          <div className={cls.ratingValue}>
+            <span className={cls.ratingNumber}>9.9</span>
+            <div className={cls.ratingStars}>
+              <span className={cls.star}>★</span>
+              <span className={cls.star}>★</span>
+              <span className={cls.star}>★</span>
+              <span className={cls.star}>★</span>
+              <span className={cls.star}>★</span>
+            </div>
+          </div>
+        </div>
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>Loan Amount Range</span>
+          <span className={cls.detailValue}>{lender.loanAmountRange}</span>
+        </div>
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>APR Range</span>
+          <span className={cls.detailValue}>{lender.aprRange}</span>
+        </div>
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>Min. Credit Score</span>
+          <span className={cls.detailValue}>{lender.minCreditScore}</span>
+        </div>
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>Funding Speed</span>
+          <span className={cls.detailValue}>{lender.fundingSpeed}</span>
+        </div>
+      </div>
+
+      <div className={cls.pros}>
+        <h4 className={cls.prosTitle}>Pros:</h4>
+        <ul className={cls.prosList}>
+          {lender.pros.map((pro, index) => (
+            <li key={index} className={cls.prosItem}>
+              {pro}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <AppLink href={lender.ctaLink} className={cls.ctaLink}>
+        <Button variant="primary" className={cls.ctaButton}>
+          Apply Now
+        </Button>
+      </AppLink>
+    </div>
+  );
+};
+

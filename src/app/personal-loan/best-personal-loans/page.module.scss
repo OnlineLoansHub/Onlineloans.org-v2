@@ -1,0 +1,334 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-gray-light, #f3f4f6);
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (width <= 768px) {
+    padding: 0 16px;
+  }
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary, #2a3d66) 0%,
+    #1e2d4a 50%,
+    #2a3d66 100%
+  );
+  background-size: 200% 200%;
+  position: relative;
+  color: var(--color-white);
+  padding: 100px 0;
+  text-align: left;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(90, 193, 137, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(255, 188, 153, 0.1) 0%,
+        transparent 50%
+      );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background-image: url('/business-loan/restaurant-funding/assets/shape-vector-primary.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+
+    &::after {
+      width: 350px;
+      height: 350px;
+      right: -40px;
+      opacity: 0.3;
+    }
+  }
+}
+
+.heroTitle {
+  font-size: 56px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+}
+
+.writtenByWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-bottom: 20px;
+  }
+}
+
+.trustBadges {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-top: 32px;
+  }
+}
+
+.trustBadgesImage {
+  height: auto;
+  width: auto;
+  max-width: 350px;
+  filter: brightness(0) invert(1);
+  opacity: 1;
+
+  @media (width <= 768px) {
+    max-width: 280px;
+  }
+}
+
+.heroSubtitle {
+  font-size: 22px;
+  line-height: 1.6;
+  margin: 0 0 32px 0;
+  max-width: 700px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-bottom: 32px;
+  }
+}
+
+.lastUpdated {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+  font-weight: 500;
+  text-decoration: underline;
+
+  @media (width <= 768px) {
+    font-size: 13px;
+  }
+}
+
+/* Lenders Section */
+.lendersSection {
+  padding: 80px 0;
+  background: var(--color-white);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--color-gray-dark, #161616);
+  margin: 0 0 20px 0;
+  text-align: center;
+
+  @media (width <= 768px) {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: none;
+  }
+}
+
+.sectionDescription {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-gray-medium, #9ca3af);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 48px;
+
+  @media (width <= 768px) {
+    font-size: 16px;
+    margin-bottom: 32px;
+    display: none;
+  }
+}
+
+.lendersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 32px;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.placeholderContent {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-gray-medium, #9ca3af);
+  font-size: 18px;
+  margin-top: 48px;
+}
+
+/* Methodology Section */
+.methodologySection {
+  padding: 80px 0;
+  background: var(--color-gray-light, #f3f4f6);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.methodologyContent {
+  max-width: 900px;
+  margin: 0 auto;
+
+  p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-gray-dark, #161616);
+    margin: 0 0 20px 0;
+
+    @media (width <= 768px) {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    strong {
+      color: var(--color-primary, #2a3d66);
+      font-weight: 700;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* FAQ Section */
+.faqSection {
+  padding: 80px 0;
+  background: var(--color-white);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+/* Footer CTA Section */
+.footerCtaSection {
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--color-primary, #2a3d66) 0%, #1e2d4a 100%);
+  color: var(--color-white);
+  text-align: center;
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.footerCtaTitle {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+
+  @media (width <= 768px) {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+}
+
+.footerCtaDescription {
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0 0 40px 0;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (width <= 768px) {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+}
+
+.ctaLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.ctaButton {
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media (width <= 768px) {
+    padding: 14px 28px;
+    font-size: 16px;
+  }
+}
+
