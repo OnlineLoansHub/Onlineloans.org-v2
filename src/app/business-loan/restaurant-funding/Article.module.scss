@@ -100,8 +100,14 @@
   height: 24px;
 }
 
+.loanShareImg svg {
+  width: 24px;
+  height: 24px;
+  color: #706f74;
+}
+
 .loanShareTitle {
-  font-weight: 400;
+  font-weight: 700;
   font-size: 12px;
   line-height: 100%;
   text-transform: uppercase;
@@ -227,6 +233,16 @@
   height: auto;
 }
 
+.articleImageCaption {
+  font-size: 14px;
+  color: #706f74;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
+  font-style: italic;
+}
+
 .articleLoanTip {
   display: flex;
   gap: 17px;
@@ -278,6 +294,7 @@
 .loanActionBtn {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
+  font-weight: 700;
   line-height: 26px;
   padding: 10px 24px;
   color: #000;

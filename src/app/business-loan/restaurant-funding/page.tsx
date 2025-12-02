@@ -82,23 +82,30 @@ export default function RestaurantFundingPage() {
   };
 
   const handleShare = (platform: string) => {
-    const url = window.location.href;
-    const title = 'Restaurant Funding Guide - How Restaurant Loans Work';
-
     switch (platform) {
       case 'link':
-        navigator.clipboard.writeText(url);
+        navigator.clipboard.writeText(window.location.href);
         break;
       case 'facebook':
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
-          '_blank'
-        );
+        window.open('https://www.facebook.com', '_blank', 'noopener,noreferrer');
         break;
       case 'twitter':
+        window.open('https://www.x.com', '_blank', 'noopener,noreferrer');
+        break;
+      case 'instagram':
+        window.open('https://www.instagram.com', '_blank', 'noopener,noreferrer');
+        break;
+      case 'linkedin':
+        window.open('https://www.linkedin.com', '_blank', 'noopener,noreferrer');
+        break;
+      case 'telegram':
+        window.open('https://t.me/onlineloans_org', '_blank', 'noopener,noreferrer');
+        break;
+      case 'slack':
         window.open(
-          `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
-          '_blank'
+          'https://join.slack.com/t/onlineloansorg/shared_invite/zt-3jjtcgy6t-7p1rJWNhZ2tXJjx2aOZDlA',
+          '_blank',
+          'noopener,noreferrer'
         );
         break;
       default:
@@ -159,48 +166,54 @@ export default function RestaurantFundingPage() {
           </div>
           <div className={cls.loanLeftPart}>
             <div className={cls.loanShare}>
-              <p className={cls.loanShareTitle}>Share this</p>
+              <p className={cls.loanShareTitle}>Follow us</p>
               <div className={cls.loanShareImages}>
                 <button onClick={() => handleShare('link')} aria-label="Copy link">
                   <Image
                     src="/images/article/share_link.svg"
-                    alt="Share link"
+                    alt="Copy link"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('facebook')} aria-label="Share on Facebook">
+                <button onClick={() => handleShare('facebook')} aria-label="Facebook">
                   <Image
                     src="/images/article/share_fb.svg"
-                    alt="Share on Facebook"
+                    alt="Facebook"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('twitter')} aria-label="Share on Twitter">
+                <button onClick={() => handleShare('twitter')} aria-label="X (Twitter)">
                   <Image
                     src="/images/article/share_twitter.svg"
-                    alt="Share on Twitter"
+                    alt="X (Twitter)"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('more')} aria-label="More sharing options">
-                  <Image
-                    src="/images/article/share_dots.svg"
-                    alt="More sharing options"
-                    width={24}
-                    height={24}
+                <button onClick={() => handleShare('linkedin')} aria-label="LinkedIn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                     className={cls.loanShareImg}
-                  />
+                  >
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
             <div className={cls.loanApplyLinks}>
-              <p className={cls.loanShareTitle}>Apply Now</p>
+              <p className={cls.loanShareTitle}>Get Approved for Up to $10 Million — Apply Now</p>
               <div className={cls.stateLinks}>
                 <AppLink href="/business-loan/restaurant-funding/florida/index.html" className={cls.stateLink}>
                   Florida
@@ -347,6 +360,16 @@ export default function RestaurantFundingPage() {
                 handle emergencies. This fast turnaround time makes restaurant funding ideal for
                 businesses that can&apos;t wait weeks for traditional bank loan approval.
               </p>
+              <Image
+                src="/images/article/image-chef-kitchen.jpg"
+                alt="Chef working in a restaurant kitchen"
+                width={600}
+                height={400}
+                className={cls.articleImage}
+              />
+              <p className={cls.articleImageCaption}>
+                <strong>Bella Vista Restaurant</strong> - Miami, Florida
+              </p>
             </article>
 
             <article
@@ -460,6 +483,13 @@ export default function RestaurantFundingPage() {
                   </div>
                 </li>
               </ul>
+              <Image
+                src="/images/article/hero-image.jpg"
+                alt="Restaurant business funding solutions"
+                width={600}
+                height={400}
+                className={cls.articleImage}
+              />
             </article>
 
             <article
@@ -513,6 +543,13 @@ export default function RestaurantFundingPage() {
                 Restaurant funding can finance marketing campaigns, social media advertising, and
                 promotional events that drive traffic and increase revenue.
               </p>
+              <Image
+                src="/images/article/article_home.png"
+                alt="Restaurant business growth and expansion"
+                width={600}
+                height={400}
+                className={cls.articleImage}
+              />
             </article>
 
             <article
@@ -679,7 +716,7 @@ export default function RestaurantFundingPage() {
               </p>
               <AppLink href="/business-loan/restaurant-funding/florida/index.html">
                 <Button variant="primary" onClick={() => {}} className={cls.loanActionBtn}>
-                  Apply now
+                  Get Approved for Up to $10 Million — Apply Now
                 </Button>
               </AppLink>
             </div>
@@ -838,43 +875,49 @@ export default function RestaurantFundingPage() {
             </div>
 
             <div className={cls.loanShareMobile}>
-              <p className={cls.loanShareTitle}>Share this</p>
+              <p className={cls.loanShareTitle}>Follow us</p>
               <div className={cls.loanShareImages}>
                 <button onClick={() => handleShare('link')} aria-label="Copy link">
                   <Image
                     src="/images/article/share_link.svg"
-                    alt="Share link"
+                    alt="Copy link"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('facebook')} aria-label="Share on Facebook">
+                <button onClick={() => handleShare('facebook')} aria-label="Facebook">
                   <Image
                     src="/images/article/share_fb.svg"
-                    alt="Share on Facebook"
+                    alt="Facebook"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('twitter')} aria-label="Share on Twitter">
+                <button onClick={() => handleShare('twitter')} aria-label="X (Twitter)">
                   <Image
                     src="/images/article/share_twitter.svg"
-                    alt="Share on Twitter"
+                    alt="X (Twitter)"
                     width={24}
                     height={24}
                     className={cls.loanShareImg}
                   />
                 </button>
-                <button onClick={() => handleShare('more')} aria-label="More sharing options">
-                  <Image
-                    src="/images/article/share_dots.svg"
-                    alt="More sharing options"
-                    width={24}
-                    height={24}
+                <button onClick={() => handleShare('linkedin')} aria-label="LinkedIn">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                     className={cls.loanShareImg}
-                  />
+                  >
+                    <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
