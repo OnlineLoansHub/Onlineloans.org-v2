@@ -11,8 +11,18 @@
 
   &.open {
     height: fit-content;
-   
+
     background-color: var(--color-white);
+  }
+
+  @media (width <= 768px) {
+    background: linear-gradient(
+      to bottom,
+      var(--color-gray-light) 0%,
+      var(--color-gray-light) 60px,
+      #ffffff 60px,
+      #ffffff 100%
+    );
   }
 }
 
@@ -94,7 +104,7 @@
 }
 
 .footerTitle {
-  margin-top: 32px;
+  margin-top: 52px;
   margin-bottom: 16px;
   font-size: 56px;
   font-weight: 700;
@@ -104,6 +114,7 @@
 
   @media (width <= 1024) {
     font-size: 32px;
+    margin-top: 80px;
   }
 
   @media (width <= 768) {

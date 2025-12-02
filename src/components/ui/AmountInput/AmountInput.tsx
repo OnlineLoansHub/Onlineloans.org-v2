@@ -30,7 +30,7 @@ const AmountCard = ({ type, handleValueChange, value }: AmountInputCardProps) =>
     return {
       buttonText: 'See My Offer',
       placeholder: '$ Amount',
-      maxAmountLabel: 'Up to 1M',
+      maxAmountLabel: 'Up to 10M',
       href: URL_CONFIG.businessLoan,
       amount: value,
     };

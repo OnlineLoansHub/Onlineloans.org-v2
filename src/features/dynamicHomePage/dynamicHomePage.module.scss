@@ -16,6 +16,8 @@
 
   @media (max-width: 768px) {
     padding: 0 1.25rem;
+    min-height: 0;
+    height: auto;
   }
 
   @media (min-width: 1025px) and (max-width: 1600px) {
@@ -54,7 +56,10 @@
   }
 
   @media (width <= 768px) {
-    padding: 24px 0 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 40px 0 24px;
   }
 }
 
@@ -139,6 +144,8 @@
   }
 
   @media (width <= 768px) {
-    display: none;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 0;
   }
 }
