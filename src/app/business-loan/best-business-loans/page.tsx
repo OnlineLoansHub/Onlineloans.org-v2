@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
@@ -31,7 +31,7 @@ const faqItems = [
   {
     question: 'Will applying affect my credit score?',
     answer:
-      'Most business loan applications will result in a hard credit inquiry, which can temporarily lower your credit score by a few points. However, many marketplace lenders like Lendio allow you to browse offers with only a soft credit check, which doesn\'t affect your score. Multiple applications within a short period (14-45 days) are typically counted as a single inquiry.',
+      "Most business loan applications will result in a hard credit inquiry, which can temporarily lower your credit score by a few points. However, many marketplace lenders like Lendio allow you to browse offers with only a soft credit check, which doesn't affect your score. Multiple applications within a short period (14-45 days) are typically counted as a single inquiry.",
   },
   {
     question: 'How do business loan marketplaces work?',
@@ -97,20 +97,37 @@ const breadcrumbSchema = {
   ],
 };
 
-const lastUpdated = 'January 15, 2025';
+// Calculate date 7 days before current date
+const getLastUpdated = (): string => {
+  const date = new Date();
+
+  date.setDate(date.getDate() - 7);
+
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+const lastUpdated = getLastUpdated();
 
 export default function BestBusinessLoansPage() {
-  const [selectedLoanType, setSelectedLoanType] = useState<string | null>(null);
-  const [showResults, setShowResults] = useState(false);
-
-  useEffect(() => {
-    // Check if user has already selected a loan type
-    const savedType = sessionStorage.getItem('selectedLoanType');
-    if (savedType) {
-      setSelectedLoanType(savedType);
-      setShowResults(true);
+  // Initialize state from sessionStorage if available
+  const [_selectedLoanType, setSelectedLoanType] = useState<string | null>(() => {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem('selectedLoanType');
     }
-  }, []);
+
+    return null;
+  });
+  const [showResults, setShowResults] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !!sessionStorage.getItem('selectedLoanType');
+    }
+
+    return false;
+  });
 
   const handleLoanTypeSelect = (loanType: string) => {
     setSelectedLoanType(loanType);
@@ -143,9 +160,16 @@ export default function BestBusinessLoansPage() {
         <section className={cls.hero}>
           <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
             <h1 className={cls.heroTitle}>Best Business Loans of 2025</h1>
-            <p className={cls.heroSubtitle}>
-              Compare top business loan providers and find the right funding option for your company.
-            </p>
+            <div className={cls.heroSubtitle}>
+              <p className={cls.heroSubtitleText}>
+                The research was based on the following criteria:
+              </p>
+              <ul className={cls.heroSubtitleList}>
+                <li>Interest Rates %</li>
+                <li>Qualifications</li>
+                <li>Funding speed</li>
+              </ul>
+            </div>
             <div className={cls.writtenByWrapper}>
               <WrittenBy
                 name="Michael Thompson"
@@ -177,7 +201,7 @@ export default function BestBusinessLoansPage() {
               We've evaluated dozens of business loan providers to bring you the best options for
               2025. Compare rates, terms, and funding speed to find the right fit for your business.
             </p>
-                {showResults && (
+            {showResults && (
               <div className={cls.lendersGrid}>
                 {lenders.map((lender, index) => (
                   <LoanComparisonCard key={lender.id} lender={lender} index={index} />
@@ -204,9 +228,9 @@ export default function BestBusinessLoansPage() {
               </p>
               <p>
                 <strong>Loan Terms & Transparency:</strong> We prioritize lenders that offer clear,
-                competitive interest rates, flexible repayment terms, and transparent fee structures.
-                Hidden fees and unclear terms are red flags that eliminate lenders from our
-                recommendations.
+                competitive interest rates, flexible repayment terms, and transparent fee
+                structures. Hidden fees and unclear terms are red flags that eliminate lenders from
+                our recommendations.
               </p>
               <p>
                 <strong>Customer Reviews & Reputation:</strong> We analyze thousands of customer
@@ -220,9 +244,9 @@ export default function BestBusinessLoansPage() {
                 while still maintaining responsible lending practices.
               </p>
               <p>
-                <strong>Requirements & Accessibility:</strong> We consider lenders that serve a
-                wide range of businesses, including those with lower credit scores or shorter time
-                in business. However, we balance accessibility with responsible lending practices.
+                <strong>Requirements & Accessibility:</strong> We consider lenders that serve a wide
+                range of businesses, including those with lower credit scores or shorter time in
+                business. However, we balance accessibility with responsible lending practices.
               </p>
               <p>
                 <strong>Ease of Application:</strong> A streamlined, user-friendly application
@@ -269,4 +293,3 @@ export default function BestBusinessLoansPage() {
     </>
   );
 }
-

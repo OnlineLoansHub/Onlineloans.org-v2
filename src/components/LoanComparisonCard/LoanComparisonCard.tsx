@@ -12,9 +12,7 @@ interface LoanComparisonCardProps {
 export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index }) => {
   return (
     <div className={cls.card}>
-      {index !== undefined && (
-        <div className={cls.cardNumber}>{index + 1}</div>
-      )}
+      {index !== undefined && <div className={cls.cardNumber}>{index + 1}</div>}
       <div className={cls.header}>
         {lender.logo ? (
           <img src={lender.logo} alt={`${lender.name} logo`} className={cls.logo} />
@@ -31,7 +29,7 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
         <div className={cls.detailItem}>
           <span className={cls.detailLabel}>Rating</span>
           <div className={cls.ratingValue}>
-            <span className={cls.ratingNumber}>9.9</span>
+            <span className={cls.ratingNumber}>10</span>
             <div className={cls.ratingStars}>
               <span className={cls.star}>★</span>
               <span className={cls.star}>★</span>
@@ -78,4 +76,3 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
     </div>
   );
 };
-
