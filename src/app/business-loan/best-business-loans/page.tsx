@@ -162,7 +162,7 @@ export default function BestBusinessLoansPage() {
             <h1 className={cls.heroTitle}>Best Business Loans of 2025</h1>
             <div className={cls.heroSubtitle}>
               <p className={cls.heroSubtitleText}>
-                The research was based on the following criteria:
+                The research is based on the following criteria:
               </p>
               <ul className={cls.heroSubtitleList}>
                 <li>Interest Rates %</li>
