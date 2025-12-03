@@ -20,11 +20,7 @@
 
 .bestOptionCard {
   border: 1.5px solid #d4af37;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
-
-  &:hover {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
-  }
+  // Shadow inherited from .card - same as all other cards
 }
 
 .bestOptionBadge {
