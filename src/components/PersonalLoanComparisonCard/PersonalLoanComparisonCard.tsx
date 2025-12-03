@@ -10,10 +10,18 @@ interface PersonalLoanComparisonCardProps {
 }
 
 export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = ({ lender, index }) => {
+  const isFeatured = lender.isFeatured;
+  const isCreditNinja = lender.id === 'credit-ninja';
+  const isNerdWallet = lender.id === 'discover';
+
   return (
-    <div className={cls.card}>
-      {index !== undefined && (
-        <div className={cls.cardNumber}>{index + 1}</div>
+    <div className={`${cls.card} ${isFeatured ? cls.featuredCard : ''} ${isCreditNinja ? cls.creditNinjaCard : ''} ${isNerdWallet ? cls.nerdWalletCard : ''}`}>
+      {isFeatured ? (
+        <div className={cls.featuredBadge}>
+          <span className={cls.featuredText}>Top Rated</span>
+        </div>
+      ) : (
+        index !== undefined && <div className={cls.cardNumber}>{index + 1}</div>
       )}
       <div className={cls.header}>
         {lender.logo ? (
@@ -24,8 +32,6 @@ export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = (
           </div>
         )}
       </div>
-
-      <p className={cls.description}>{lender.description}</p>
 
       <div className={cls.detailsGrid}>
         <div className={cls.detailItem}>
@@ -59,19 +65,8 @@ export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = (
         </div>
       </div>
 
-      <div className={cls.pros}>
-        <h4 className={cls.prosTitle}>Pros:</h4>
-        <ul className={cls.prosList}>
-          {lender.pros.map((pro, index) => (
-            <li key={index} className={cls.prosItem}>
-              {pro}
-            </li>
-          ))}
-        </ul>
-      </div>
-
       <AppLink href={lender.ctaLink} className={cls.ctaLink}>
-        <Button variant="primary" className={cls.ctaButton}>
+        <Button variant="primary" className={`${cls.ctaButton} ${isFeatured ? cls.ctaButtonGold : ''}`}>
           Apply Now
         </Button>
       </AppLink>

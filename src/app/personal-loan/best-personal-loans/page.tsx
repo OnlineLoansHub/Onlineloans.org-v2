@@ -97,7 +97,20 @@ const breadcrumbSchema = {
   ],
 };
 
-const lastUpdated = 'January 15, 2025';
+// Calculate date 7 days before current date
+const getLastUpdated = (): string => {
+  const date = new Date();
+
+  date.setDate(date.getDate() - 7);
+
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+const lastUpdated = getLastUpdated();
 
 export default function BestPersonalLoansPage() {
   // Initialize state from sessionStorage if available
@@ -145,9 +158,16 @@ export default function BestPersonalLoansPage() {
         <section className={cls.hero}>
           <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
             <h1 className={cls.heroTitle}>Best Personal Loans of 2025</h1>
-            <p className={cls.heroSubtitle}>
-              Compare top personal loan providers and find the right funding option for your needs.
-            </p>
+            <div className={cls.heroSubtitle}>
+              <p className={cls.heroSubtitleText}>
+                The research is based on the following criteria:
+              </p>
+              <ul className={cls.heroSubtitleList}>
+                <li>Interest Rates %</li>
+                <li>Qualifications</li>
+                <li>Funding speed</li>
+              </ul>
+            </div>
             <div className={cls.writtenByWrapper}>
               <WrittenBy
                 name="Michael Thompson"
@@ -200,50 +220,42 @@ export default function BestPersonalLoansPage() {
             <h2 className={cls.sectionTitle}>How We Selected the Best Personal Loans of 2025</h2>
             <div className={cls.methodologyContent}>
               <p>
-                Our team of financial experts evaluated personal loan providers based on multiple
-                criteria to ensure we recommend only the most reliable and beneficial options for
-                borrowers.
+                Our team evaluated personal loan providers using three key criteria to identify the
+                best options for borrowers in 2025.
               </p>
               <p>
-                <strong>Interest Rates & Fees:</strong> We prioritize lenders that offer competitive
-                interest rates and transparent fee structures. We favor lenders with no origination
-                fees, no prepayment penalties, and clear APR disclosures. Hidden fees and unclear
-                terms eliminate lenders from our recommendations.
+                <strong>Interest Rates:</strong> We prioritize lenders offering competitive,
+                transparent interest rates that provide real value to borrowers. We compare annual
+                percentage rates (APR) across lenders, including all fees and charges, to ensure
+                borrowers get the most cost-effective financing options. Lenders with excessive rates
+                or hidden fees are excluded from our recommendations.
               </p>
               <p>
-                <strong>Customer Reviews & Reputation:</strong> We analyze thousands of customer
-                reviews, Better Business Bureau ratings, and industry reports to assess each
-                lender's reputation. Lenders with consistently poor customer service or numerous
-                complaints are excluded.
+                <strong>Qualifications:</strong> We assess each lender's qualification requirements,
+                including minimum credit scores, income thresholds, and employment history. We favor
+                lenders that serve a wide range of borrowers while maintaining responsible lending
+                standards. This includes options for borrowers with varying credit profiles, from
+                excellent credit to those with lower scores, ensuring accessibility without
+                compromising loan quality.
               </p>
               <p>
-                <strong>Funding Speed:</strong> When you need a personal loan, speed matters. We
-                favor lenders that can approve and fund loans quickly, typically within 1-3 business
-                days, while still maintaining responsible lending practices.
+                <strong>Funding Speed:</strong> Speed is critical for borrowers who need capital
+                quickly. We prioritize lenders that can approve and fund loans within 24-72 hours,
+                with some offering same-day funding for qualified applicants. We evaluate the entire
+                process from application submission to funds in your account, ensuring lenders
+                deliver on their promised timelines.
               </p>
               <p>
-                <strong>Credit Requirements & Accessibility:</strong> We consider lenders that serve
-                a wide range of credit profiles, including those with fair credit scores. However,
-                we balance accessibility with responsible lending practices and competitive rates.
-              </p>
-              <p>
-                <strong>Ease of Application:</strong> A streamlined, user-friendly application
-                process is essential. We prefer lenders with online applications, rate checking
-                tools that use soft credit pulls, clear documentation requirements, and helpful
-                customer support throughout the process.
-              </p>
-              <p>
-                Our methodology ensures that every lender on this list has been thoroughly vetted
-                and meets our high standards for reliability, transparency, and value. We regularly
-                update our recommendations as new lenders enter the market and existing ones improve
-                their offerings.
+                By focusing on these three essential factors, we ensure every lender on this list
+                offers competitive rates, reasonable qualification requirements, and fast funding
+                that meets the real-world needs of borrowers.
               </p>
             </div>
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className={cls.faqSection}>
+        <section id="faq" className={cls.faqSection}>
           <div className={cls.container}>
             <h2 className={cls.sectionTitle}>Frequently Asked Questions</h2>
             <p className={cls.sectionDescription}>
