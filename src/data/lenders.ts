@@ -5,10 +5,11 @@ export interface Lender {
   badge?: string;
   description: string;
   loanAmountRange: string;
-  minCreditScore: string;
+  minCreditScore?: string;
   timeInBusiness: string;
   monthlyRevenue: string;
   fundingSpeed: string;
+  rating: number;
   pros: string[];
   ctaLink: string;
 }
@@ -22,10 +23,11 @@ export const lenders: Lender[] = [
     description:
       'Comprehensive business financing solutions with competitive rates and flexible terms.',
     loanAmountRange: '$10,000 - $5,000,000',
-    minCreditScore: '600+',
-    timeInBusiness: '1+ year',
-    monthlyRevenue: '$10,000+',
-    fundingSpeed: '24-72 hours',
+    minCreditScore: 'FICO not required',
+    timeInBusiness: '6 Months+',
+    monthlyRevenue: '$5,000+',
+    fundingSpeed: '24-48 hours',
+    rating: 10,
     pros: [
       'Competitive rates',
       'Fast approval process',
@@ -47,6 +49,7 @@ export const lenders: Lender[] = [
     timeInBusiness: '6+ months',
     monthlyRevenue: '$10,000+',
     fundingSpeed: '24-72 hours',
+    rating: 9.6,
     pros: [
       'Wide range of loan products',
       'Fast approval process',
@@ -64,10 +67,10 @@ export const lenders: Lender[] = [
     description:
       'Business loan marketplace connecting you with multiple lenders in one application.',
     loanAmountRange: '$500 - $5,000,000',
-    minCreditScore: '550+',
     timeInBusiness: '6+ months',
     monthlyRevenue: '$8,000+',
     fundingSpeed: '24-48 hours',
+    rating: 9.4,
     pros: [
       'Compare multiple offers',
       'Single application process',
@@ -85,10 +88,10 @@ export const lenders: Lender[] = [
     description:
       'Specialized in fast business loans and lines of credit for established businesses.',
     loanAmountRange: '$5,000 - $250,000',
-    minCreditScore: '600+',
     timeInBusiness: '1+ year',
     monthlyRevenue: '$10,000+',
     fundingSpeed: 'Same day',
+    rating: 9.2,
     pros: [
       'Same-day funding available',
       'Simple online application',

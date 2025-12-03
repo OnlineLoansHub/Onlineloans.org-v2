@@ -162,9 +162,19 @@
 }
 
 .star {
-  color: #5ec189;
+  color: #d1d5db;
   font-size: 14px;
   line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.starFilled {
+  color: #5ec189;
+}
+
+.starHalf {
+  color: #5ec189;
+  opacity: 0.5;
 }
 
 .pros {

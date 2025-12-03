@@ -29,13 +29,24 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
         <div className={cls.detailItem}>
           <span className={cls.detailLabel}>Rating</span>
           <div className={cls.ratingValue}>
-            <span className={cls.ratingNumber}>10</span>
+            <span className={cls.ratingNumber}>{lender.rating}</span>
             <div className={cls.ratingStars}>
-              <span className={cls.star}>★</span>
-              <span className={cls.star}>★</span>
-              <span className={cls.star}>★</span>
-              <span className={cls.star}>★</span>
-              <span className={cls.star}>★</span>
+              {Array.from({ length: 5 }, (_, i) => {
+                const starValue = i + 1;
+                const isFilled = lender.rating >= starValue;
+                const isHalfFilled = lender.rating >= starValue - 0.5 && lender.rating < starValue;
+
+                return (
+                  <span
+                    key={i}
+                    className={`${cls.star} ${isFilled ? cls.starFilled : ''} ${
+                      isHalfFilled ? cls.starHalf : ''
+                    }`}
+                  >
+                    ★
+                  </span>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -43,6 +54,12 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
           <span className={cls.detailLabel}>Loan Amount Range</span>
           <span className={cls.detailValue}>{lender.loanAmountRange}</span>
         </div>
+        {lender.minCreditScore && (
+          <div className={cls.detailItem}>
+            <span className={cls.detailLabel}>Min. Credit Score</span>
+            <span className={cls.detailValue}>{lender.minCreditScore}</span>
+          </div>
+        )}
         <div className={cls.detailItem}>
           <span className={cls.detailLabel}>Time in Business</span>
           <span className={cls.detailValue}>{lender.timeInBusiness}</span>
