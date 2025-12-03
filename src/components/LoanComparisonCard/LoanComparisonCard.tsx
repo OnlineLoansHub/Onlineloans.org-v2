@@ -10,9 +10,17 @@ interface LoanComparisonCardProps {
 }
 
 export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index }) => {
+  const isBestOption = lender.rating === 10;
+
   return (
-    <div className={cls.card}>
-      {index !== undefined && <div className={cls.cardNumber}>{index + 1}</div>}
+    <div className={`${cls.card} ${isBestOption ? cls.bestOptionCard : ''}`}>
+      {isBestOption ? (
+        <div className={cls.bestOptionBadge}>
+          <span className={cls.bestOptionText}>Top Rated</span>
+        </div>
+      ) : (
+        index !== undefined && <div className={cls.cardNumber}>{index + 1}</div>
+      )}
       <div className={cls.header}>
         {lender.logo ? (
           <img src={lender.logo} alt={`${lender.name} logo`} className={cls.logo} />
@@ -65,7 +73,7 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
           <span className={cls.detailValue}>{lender.timeInBusiness}</span>
         </div>
         <div className={cls.detailItem}>
-          <span className={cls.detailLabel}>Monthly Revenue</span>
+          <span className={cls.detailLabel}>Min. Monthly Revenue</span>
           <span className={cls.detailValue}>{lender.monthlyRevenue}</span>
         </div>
         <div className={cls.detailItem}>
@@ -86,7 +94,10 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
       </div>
 
       <AppLink href={lender.ctaLink} className={cls.ctaLink}>
-        <Button variant="primary" className={cls.ctaButton}>
+        <Button
+          variant="primary"
+          className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
+        >
           Apply Now
         </Button>
       </AppLink>

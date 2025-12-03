@@ -18,6 +18,48 @@
   }
 }
 
+.bestOptionCard {
+  border: 1.5px solid #d4af37;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
+
+  &:hover {
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.bestOptionBadge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  min-width: 100px;
+  height: 35px;
+  background: var(--color-white);
+  color: #d4af37;
+  border-top-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  padding: 0 16px;
+
+  @media (width <= 768px) {
+    font-size: 12px;
+    padding: 0 12px;
+    min-width: 90px;
+  }
+}
+
+.bestOptionText {
+  display: flex;
+  align-items: center;
+}
+
 .cardNumber {
   display: none;
   position: absolute;
@@ -237,6 +279,16 @@
   &:hover {
     background-color: #1e2d4a !important;
     border-color: #1e2d4a !important;
+  }
+}
+
+.ctaButtonGold {
+  background-color: #d4af37 !important;
+  border-color: #d4af37 !important;
+
+  &:hover {
+    background-color: #b8941f !important;
+    border-color: #b8941f !important;
   }
 }
 
