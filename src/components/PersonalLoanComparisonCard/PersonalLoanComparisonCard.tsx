@@ -9,13 +9,18 @@ interface PersonalLoanComparisonCardProps {
   index?: number;
 }
 
-export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = ({ lender, index }) => {
+export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = ({
+  lender,
+  index,
+}) => {
   const isFeatured = lender.isFeatured;
   const isCreditNinja = lender.id === 'credit-ninja';
   const isNerdWallet = lender.id === 'discover';
 
   return (
-    <div className={`${cls.card} ${isFeatured ? cls.featuredCard : ''} ${isCreditNinja ? cls.creditNinjaCard : ''} ${isNerdWallet ? cls.nerdWalletCard : ''}`}>
+    <div
+      className={`${cls.card} ${isFeatured ? cls.featuredCard : ''} ${isCreditNinja ? cls.creditNinjaCard : ''} ${isNerdWallet ? cls.nerdWalletCard : ''}`}
+    >
       {isFeatured ? (
         <div className={cls.featuredBadge}>
           <span className={cls.featuredText}>Top Rated</span>
@@ -65,12 +70,30 @@ export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = (
         </div>
       </div>
 
-      <AppLink href={lender.ctaLink} className={cls.ctaLink}>
-        <Button variant="primary" className={`${cls.ctaButton} ${isFeatured ? cls.ctaButtonGold : ''}`}>
-          Apply Now
-        </Button>
-      </AppLink>
+      {lender.ctaLink.startsWith('http') ? (
+        <a
+          href={lender.ctaLink}
+          target="_blank"
+          rel="nofollow sponsored noopener"
+          className={cls.ctaLink}
+        >
+          <Button
+            variant="primary"
+            className={`${cls.ctaButton} ${isFeatured ? cls.ctaButtonGold : ''}`}
+          >
+            Apply Now
+          </Button>
+        </a>
+      ) : (
+        <AppLink href={lender.ctaLink} className={cls.ctaLink}>
+          <Button
+            variant="primary"
+            className={`${cls.ctaButton} ${isFeatured ? cls.ctaButtonGold : ''}`}
+          >
+            Apply Now
+          </Button>
+        </AppLink>
+      )}
     </div>
   );
 };
-

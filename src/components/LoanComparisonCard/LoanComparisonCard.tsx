@@ -83,7 +83,7 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
           <a
             href={lender.ctaLink}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow sponsored noopener"
             className={cls.ctaLink}
           >
             <Button

@@ -31,7 +31,7 @@ export const personalLenders: PersonalLender[] = [
       'Direct payment to creditors',
       '24/7 customer service',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.nerdwallet.com/',
   },
   {
     id: 'credit-ninja',
@@ -50,7 +50,7 @@ export const personalLenders: PersonalLender[] = [
       'Transparent rates',
       'No prepayment penalties',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.creditninja.com/',
     isFeatured: true,
   },
   {
@@ -70,7 +70,7 @@ export const personalLenders: PersonalLender[] = [
       'Member benefits program',
       'Fast approval process',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.sofi.com/',
   },
   {
     id: 'lendingclub',
@@ -89,7 +89,7 @@ export const personalLenders: PersonalLender[] = [
       'No prepayment penalties',
       'Established platform',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.lendingclub.com/',
   },
   {
     id: 'best-egg',
@@ -108,7 +108,7 @@ export const personalLenders: PersonalLender[] = [
       'No prepayment penalties',
       'Easy online application',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.fundera.com/',
   },
   {
     id: 'marcus',
@@ -127,7 +127,7 @@ export const personalLenders: PersonalLender[] = [
       'No prepayment penalties',
       'Backed by Goldman Sachs',
     ],
-    ctaLink: '/personal-loan/apply',
+    ctaLink: 'https://www.lendio.com/',
   },
 ];
 
