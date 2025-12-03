@@ -22,6 +22,7 @@ export const lenders: Lender[] = [
     logo: '/images/brands-logos/fund-box.svg',
     description: 'Fast invoice financing and lines of credit for small businesses and freelancers.',
     loanAmountRange: '$1,000 - $250,000',
+    minCreditScore: 'Not specified',
     timeInBusiness: '3+ months',
     monthlyRevenue: '$2,500+',
     fundingSpeed: '24 hours',
@@ -87,6 +88,7 @@ export const lenders: Lender[] = [
     description:
       "Nation's leading small business financing platform. Connect with 75+ lenders through one simple application. Over $16 billion facilitated.",
     loanAmountRange: '$1 - $1,000,000+',
+    minCreditScore: 'Varies by lender',
     timeInBusiness: '6+ months',
     monthlyRevenue: '$8,000+',
     fundingSpeed: '24 hours',

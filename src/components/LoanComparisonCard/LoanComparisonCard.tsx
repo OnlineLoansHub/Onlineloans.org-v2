@@ -60,12 +60,10 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
           <span className={cls.detailLabel}>Loan Amount Range</span>
           <span className={cls.detailValue}>{lender.loanAmountRange}</span>
         </div>
-        {lender.minCreditScore && (
-          <div className={cls.detailItem}>
-            <span className={cls.detailLabel}>Min. Credit Score</span>
-            <span className={cls.detailValue}>{lender.minCreditScore}</span>
-          </div>
-        )}
+        <div className={cls.detailItem}>
+          <span className={cls.detailLabel}>Min. Credit Score</span>
+          <span className={cls.detailValue}>{lender.minCreditScore || 'Not specified'}</span>
+        </div>
         <div className={cls.detailItem}>
           <span className={cls.detailLabel}>Time in Business</span>
           <span className={cls.detailValue}>{lender.timeInBusiness}</span>
