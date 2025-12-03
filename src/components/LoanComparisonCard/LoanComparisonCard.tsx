@@ -31,8 +31,6 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
         )}
       </div>
 
-      <p className={cls.description}>{lender.description}</p>
-
       <div className={cls.detailsGrid}>
         <div className={cls.detailItem}>
           <span className={cls.detailLabel}>Rating</span>
@@ -82,36 +80,32 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
         </div>
       </div>
 
-      <div className={cls.pros}>
-        <h4 className={cls.prosTitle}>Pros:</h4>
-        <ul className={cls.prosList}>
-          {lender.pros.map((pro, index) => (
-            <li key={index} className={cls.prosItem}>
-              {pro}
-            </li>
-          ))}
-        </ul>
+      <div className={cls.expandableContent}>
+        {lender.ctaLink.startsWith('http') ? (
+          <a
+            href={lender.ctaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cls.ctaLink}
+          >
+            <Button
+              variant="primary"
+              className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
+            >
+              Apply Now
+            </Button>
+          </a>
+        ) : (
+          <AppLink href={lender.ctaLink} className={cls.ctaLink}>
+            <Button
+              variant="primary"
+              className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
+            >
+              Apply Now
+            </Button>
+          </AppLink>
+        )}
       </div>
-
-      {lender.ctaLink.startsWith('http') ? (
-        <a href={lender.ctaLink} target="_blank" rel="noopener noreferrer" className={cls.ctaLink}>
-          <Button
-            variant="primary"
-            className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
-          >
-            Apply Now
-          </Button>
-        </a>
-      ) : (
-        <AppLink href={lender.ctaLink} className={cls.ctaLink}>
-          <Button
-            variant="primary"
-            className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
-          >
-            Apply Now
-          </Button>
-        </AppLink>
-      )}
     </div>
   );
 };

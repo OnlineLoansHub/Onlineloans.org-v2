@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
-import { AppLink } from '@/components/ui/AppLink/AppLink';
-import { Button } from '@/components/ui/Button/Button';
 import { LoanComparisonCard } from '@/components/LoanComparisonCard/LoanComparisonCard';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
 import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
@@ -247,42 +245,35 @@ export default function BestBusinessLoansPage() {
             <h2 className={cls.sectionTitle}>How We Selected the Best Business Loans of 2025</h2>
             <div className={cls.methodologyContent}>
               <p>
-                Our team of financial experts evaluated business loan providers based on multiple
-                criteria to ensure we recommend only the most reliable and beneficial options for
-                business owners.
+                Our team evaluated business loan providers using three key criteria to identify the
+                best options for business owners in 2025.
               </p>
               <p>
-                <strong>Loan Terms & Transparency:</strong> We prioritize lenders that offer clear,
-                competitive interest rates, flexible repayment terms, and transparent fee
-                structures. Hidden fees and unclear terms are red flags that eliminate lenders from
-                our recommendations.
+                <strong>Interest Rates:</strong> We prioritize lenders offering competitive,
+                transparent interest rates that provide real value to borrowers. We compare annual
+                percentage rates (APR) across lenders, including all fees and charges, to ensure
+                business owners get the most cost-effective financing options. Lenders with
+                excessive rates or hidden fees are excluded from our recommendations.
               </p>
               <p>
-                <strong>Customer Reviews & Reputation:</strong> We analyze thousands of customer
-                reviews, Better Business Bureau ratings, and industry reports to assess each
-                lender's reputation. Lenders with consistently poor customer service or numerous
-                complaints are excluded.
+                <strong>Qualifications:</strong> We assess each lender's qualification requirements,
+                including minimum credit scores, time in business, and revenue thresholds. We favor
+                lenders that serve a wide range of businesses while maintaining responsible lending
+                standards. This includes options for businesses with varying credit profiles, from
+                excellent credit to those with lower scores, ensuring accessibility without
+                compromising loan quality.
               </p>
               <p>
-                <strong>Funding Speed:</strong> In today's business environment, speed matters. We
-                favor lenders that can approve and fund loans quickly, typically within 24-72 hours,
-                while still maintaining responsible lending practices.
+                <strong>Funding Speed:</strong> Speed is critical for business owners who need
+                capital quickly. We prioritize lenders that can approve and fund loans within 24-72
+                hours, with some offering same-day funding for qualified applicants. We evaluate the
+                entire process from application submission to funds in your account, ensuring
+                lenders deliver on their promised timelines.
               </p>
               <p>
-                <strong>Requirements & Accessibility:</strong> We consider lenders that serve a wide
-                range of businesses, including those with lower credit scores or shorter time in
-                business. However, we balance accessibility with responsible lending practices.
-              </p>
-              <p>
-                <strong>Ease of Application:</strong> A streamlined, user-friendly application
-                process is essential. We prefer lenders with online applications, clear
-                documentation requirements, and helpful customer support throughout the process.
-              </p>
-              <p>
-                Our methodology ensures that every lender on this list has been thoroughly vetted
-                and meets our high standards for reliability, transparency, and value. We regularly
-                update our recommendations as new lenders enter the market and existing ones improve
-                their offerings.
+                By focusing on these three essential factors, we ensure every lender on this list
+                offers competitive rates, reasonable qualification requirements, and fast funding
+                that meets the real-world needs of business owners.
               </p>
             </div>
           </div>
@@ -297,21 +288,6 @@ export default function BestBusinessLoansPage() {
               funding options.
             </p>
             <FAQAccordion items={faqItems} />
-          </div>
-        </section>
-
-        {/* Footer CTA Section */}
-        <section className={cls.footerCtaSection}>
-          <div className={cls.container}>
-            <h2 className={cls.footerCtaTitle}>Ready to Get Funding?</h2>
-            <p className={cls.footerCtaDescription}>
-              Compare offers from multiple lenders and find the best business loan for your needs.
-            </p>
-            <AppLink href="/business-loan/apply" className={cls.ctaLink}>
-              <Button variant="primary" className={cls.ctaButton}>
-                Apply Now — Up to $10 Million in Funding
-              </Button>
-            </AppLink>
           </div>
         </section>
       </div>

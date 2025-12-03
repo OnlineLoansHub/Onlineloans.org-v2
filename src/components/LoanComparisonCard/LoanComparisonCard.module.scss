@@ -222,6 +222,16 @@
   opacity: 0.5;
 }
 
+.expandableContent {
+  @media (min-width: 769px) {
+    display: block;
+  }
+
+  @media (width <= 768px) {
+    display: none;
+  }
+}
+
 .pros {
   margin-bottom: 24px;
   flex: 1;
