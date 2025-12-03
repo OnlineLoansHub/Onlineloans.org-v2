@@ -93,14 +93,25 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
         </ul>
       </div>
 
-      <AppLink href={lender.ctaLink} className={cls.ctaLink}>
-        <Button
-          variant="primary"
-          className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
-        >
-          Apply Now
-        </Button>
-      </AppLink>
+      {lender.ctaLink.startsWith('http') ? (
+        <a href={lender.ctaLink} target="_blank" rel="noopener noreferrer" className={cls.ctaLink}>
+          <Button
+            variant="primary"
+            className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
+          >
+            Apply Now
+          </Button>
+        </a>
+      ) : (
+        <AppLink href={lender.ctaLink} className={cls.ctaLink}>
+          <Button
+            variant="primary"
+            className={`${cls.ctaButton} ${isBestOption ? cls.ctaButtonGold : ''}`}
+          >
+            Apply Now
+          </Button>
+        </AppLink>
+      )}
     </div>
   );
 };

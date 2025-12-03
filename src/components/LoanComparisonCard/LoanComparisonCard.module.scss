@@ -109,11 +109,18 @@
 }
 
 .logo {
-  width: 100%;
-  max-width: 100%;
+  width: auto;
+  max-width: 300px;
   height: 120px;
   object-fit: contain;
   border-radius: 8px;
+  margin: 0 auto;
+  display: block;
+
+  @media (width <= 768px) {
+    max-width: 200px;
+    height: 45px;
+  }
 }
 
 .logoPlaceholder {
