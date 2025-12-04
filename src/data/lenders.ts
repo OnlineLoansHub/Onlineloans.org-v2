@@ -56,7 +56,7 @@ export const lenders: Lender[] = [
       'Flexible repayment options',
       'Strong customer service',
     ],
-    ctaLink: '/business-loan/apply',
+    ctaLink: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP',
   },
   {
     id: 'biz2credit',
