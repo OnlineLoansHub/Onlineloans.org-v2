@@ -10,7 +10,63 @@ import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
 import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
 import { PersonalLoanTypeModal } from '@/components/PersonalLoanTypeModal/PersonalLoanTypeModal';
 import { personalLenders } from '@/data/personalLenders';
+import { useUserLocation } from '@/lib/useUserLocation';
 import cls from './page.module.scss';
+
+// State code to state name mapping
+const STATE_NAMES: Record<string, string> = {
+  AL: 'Alabama',
+  AK: 'Alaska',
+  AZ: 'Arizona',
+  AR: 'Arkansas',
+  CA: 'California',
+  CO: 'Colorado',
+  CT: 'Connecticut',
+  DE: 'Delaware',
+  FL: 'Florida',
+  GA: 'Georgia',
+  HI: 'Hawaii',
+  ID: 'Idaho',
+  IL: 'Illinois',
+  IN: 'Indiana',
+  IA: 'Iowa',
+  KS: 'Kansas',
+  KY: 'Kentucky',
+  LA: 'Louisiana',
+  ME: 'Maine',
+  MD: 'Maryland',
+  MA: 'Massachusetts',
+  MI: 'Michigan',
+  MN: 'Minnesota',
+  MS: 'Mississippi',
+  MO: 'Missouri',
+  MT: 'Montana',
+  NE: 'Nebraska',
+  NV: 'Nevada',
+  NH: 'New Hampshire',
+  NJ: 'New Jersey',
+  NM: 'New Mexico',
+  NY: 'New York',
+  NC: 'North Carolina',
+  ND: 'North Dakota',
+  OH: 'Ohio',
+  OK: 'Oklahoma',
+  OR: 'Oregon',
+  PA: 'Pennsylvania',
+  RI: 'Rhode Island',
+  SC: 'South Carolina',
+  SD: 'South Dakota',
+  TN: 'Tennessee',
+  TX: 'Texas',
+  UT: 'Utah',
+  VT: 'Vermont',
+  VA: 'Virginia',
+  WA: 'Washington',
+  WV: 'West Virginia',
+  WI: 'Wisconsin',
+  WY: 'Wyoming',
+  DC: 'District of Columbia',
+};
 
 const faqItems = [
   {
@@ -113,6 +169,8 @@ const getLastUpdated = (): string => {
 const lastUpdated = getLastUpdated();
 
 export default function BestPersonalLoansPage() {
+  const { state: stateCode } = useUserLocation();
+
   // Initialize state from sessionStorage if available
   const [_selectedLoanType, setSelectedLoanType] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -133,6 +191,9 @@ export default function BestPersonalLoansPage() {
     setSelectedLoanType(loanType);
     setShowResults(true);
   };
+
+  // Get state name from code, or use default
+  const stateName = stateCode ? STATE_NAMES[stateCode] : null;
 
   return (
     <>
@@ -157,7 +218,13 @@ export default function BestPersonalLoansPage() {
         {/* Hero Section */}
         <section className={cls.hero}>
           <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
-            <h1 className={cls.heroTitle}>Best Personal Loans of 2025</h1>
+            <h1 className={cls.heroTitle}>
+              {stateName ? (
+                <>Best Personal Loans in {stateName} - 2025</>
+              ) : (
+                <>Best Personal Loans of 2025</>
+              )}
+            </h1>
             <div className={cls.heroSubtitle}>
               <p className={cls.heroSubtitleText}>
                 The research is based on the following criteria:
@@ -201,9 +268,27 @@ export default function BestPersonalLoansPage() {
             </p>
             {showResults && (
               <div className={cls.lendersGrid}>
-                {personalLenders.map((lender, index) => (
-                  <PersonalLoanComparisonCard key={lender.id} lender={lender} index={index} />
-                ))}
+                {personalLenders.map((lender, index) => {
+                  // Calculate display number: skip Featured card (isFeatured === true) in numbering
+                  const isFeatured = lender.isFeatured;
+                  let displayNumber: number | undefined;
+
+                  if (!isFeatured) {
+                    // Count non-featured cards before this one
+                    const cardsBefore = personalLenders
+                      .slice(0, index)
+                      .filter((l) => !l.isFeatured).length;
+                    displayNumber = cardsBefore + 1;
+                  }
+
+                  return (
+                    <PersonalLoanComparisonCard
+                      key={lender.id}
+                      lender={lender}
+                      index={displayNumber !== undefined ? displayNumber - 1 : undefined}
+                    />
+                  );
+                })}
               </div>
             )}
             {!showResults && (
@@ -227,8 +312,8 @@ export default function BestPersonalLoansPage() {
                 <strong>Interest Rates:</strong> We prioritize lenders offering competitive,
                 transparent interest rates that provide real value to borrowers. We compare annual
                 percentage rates (APR) across lenders, including all fees and charges, to ensure
-                borrowers get the most cost-effective financing options. Lenders with excessive rates
-                or hidden fees are excluded from our recommendations.
+                borrowers get the most cost-effective financing options. Lenders with excessive
+                rates or hidden fees are excluded from our recommendations.
               </p>
               <p>
                 <strong>Qualifications:</strong> We assess each lender's qualification requirements,

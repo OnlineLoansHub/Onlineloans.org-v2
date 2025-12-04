@@ -13,7 +13,7 @@ export const LoanComparisonCard: FC<LoanComparisonCardProps> = ({ lender, index 
   const isBestOption = lender.rating === 10;
 
   return (
-    <div className={`${cls.card} ${isBestOption ? cls.bestOptionCard : ''}`}>
+    <div className={`${cls.card} ${isBestOption ? cls.bestOptionCard : ''} ${isBestOption ? cls.topRatedCard : ''}`}>
       {isBestOption ? (
         <div className={cls.bestOptionBadge}>
           <span className={cls.bestOptionText}>Top Rated</span>

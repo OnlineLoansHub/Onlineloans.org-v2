@@ -19,7 +19,7 @@ export const PersonalLoanComparisonCard: FC<PersonalLoanComparisonCardProps> = (
 
   return (
     <div
-      className={`${cls.card} ${isFeatured ? cls.featuredCard : ''} ${isCreditNinja ? cls.creditNinjaCard : ''} ${isNerdWallet ? cls.nerdWalletCard : ''}`}
+      className={`${cls.card} ${isFeatured ? cls.featuredCard : ''} ${isFeatured ? cls.topRatedCard : ''} ${isCreditNinja ? cls.creditNinjaCard : ''} ${isNerdWallet ? cls.nerdWalletCard : ''}`}
     >
       {isFeatured ? (
         <div className={cls.featuredBadge}>

@@ -8,7 +8,63 @@ import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
 import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
 import { LoanTypeModal } from '@/components/LoanTypeModal/LoanTypeModal';
 import { lenders } from '@/data/lenders';
+import { useUserLocation } from '@/lib/useUserLocation';
 import cls from './page.module.scss';
+
+// State code to state name mapping
+const STATE_NAMES: Record<string, string> = {
+  AL: 'Alabama',
+  AK: 'Alaska',
+  AZ: 'Arizona',
+  AR: 'Arkansas',
+  CA: 'California',
+  CO: 'Colorado',
+  CT: 'Connecticut',
+  DE: 'Delaware',
+  FL: 'Florida',
+  GA: 'Georgia',
+  HI: 'Hawaii',
+  ID: 'Idaho',
+  IL: 'Illinois',
+  IN: 'Indiana',
+  IA: 'Iowa',
+  KS: 'Kansas',
+  KY: 'Kentucky',
+  LA: 'Louisiana',
+  ME: 'Maine',
+  MD: 'Maryland',
+  MA: 'Massachusetts',
+  MI: 'Michigan',
+  MN: 'Minnesota',
+  MS: 'Mississippi',
+  MO: 'Missouri',
+  MT: 'Montana',
+  NE: 'Nebraska',
+  NV: 'Nevada',
+  NH: 'New Hampshire',
+  NJ: 'New Jersey',
+  NM: 'New Mexico',
+  NY: 'New York',
+  NC: 'North Carolina',
+  ND: 'North Dakota',
+  OH: 'Ohio',
+  OK: 'Oklahoma',
+  OR: 'Oregon',
+  PA: 'Pennsylvania',
+  RI: 'Rhode Island',
+  SC: 'South Carolina',
+  SD: 'South Dakota',
+  TN: 'Tennessee',
+  TX: 'Texas',
+  UT: 'Utah',
+  VT: 'Vermont',
+  VA: 'Virginia',
+  WA: 'Washington',
+  WV: 'West Virginia',
+  WI: 'Wisconsin',
+  WY: 'Wyoming',
+  DC: 'District of Columbia',
+};
 
 const faqItems = [
   {
@@ -136,6 +192,8 @@ const getLastUpdated = (): string => {
 const lastUpdated = getLastUpdated();
 
 export default function BestBusinessLoansPage() {
+  const { state: stateCode } = useUserLocation();
+
   // Initialize state from sessionStorage if available
   const [_selectedLoanType, setSelectedLoanType] = useState<string | null>(() => {
     if (typeof window !== 'undefined') {
@@ -158,6 +216,9 @@ export default function BestBusinessLoansPage() {
     // Optionally reload the page or filter results based on loan type
     // window.location.reload();
   };
+
+  // Get state name from code, or use default
+  const stateName = stateCode ? STATE_NAMES[stateCode] : null;
 
   return (
     <>
@@ -182,7 +243,18 @@ export default function BestBusinessLoansPage() {
         {/* Hero Section */}
         <section className={cls.hero}>
           <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
-            <h1 className={cls.heroTitle}>Best Business Loans of 2025</h1>
+            <h1 className={cls.heroTitle}>
+              {stateName ? (
+                <>
+                  Best <span className={cls.underlinedText}>Business Loans</span> in {stateName} -
+                  2025
+                </>
+              ) : (
+                <>
+                  Best <span className={cls.underlinedText}>Business Loans</span> of 2025
+                </>
+              )}
+            </h1>
             <div className={cls.heroSubtitle}>
               <p className={cls.heroSubtitleText}>
                 The research is based on the following criteria:
@@ -226,9 +298,27 @@ export default function BestBusinessLoansPage() {
             </p>
             {showResults && (
               <div className={cls.lendersGrid}>
-                {lenders.map((lender, index) => (
-                  <LoanComparisonCard key={lender.id} lender={lender} index={index} />
-                ))}
+                {lenders.map((lender, index) => {
+                  // Calculate display number: skip Top Rated card (rating === 10) in numbering
+                  const isTopRated = lender.rating === 10;
+                  let displayNumber: number | undefined;
+
+                  if (!isTopRated) {
+                    // Count non-top-rated cards before this one
+                    const cardsBefore = lenders
+                      .slice(0, index)
+                      .filter((l) => l.rating !== 10).length;
+                    displayNumber = cardsBefore + 1;
+                  }
+
+                  return (
+                    <LoanComparisonCard
+                      key={lender.id}
+                      lender={lender}
+                      index={displayNumber !== undefined ? displayNumber - 1 : undefined}
+                    />
+                  );
+                })}
               </div>
             )}
             {!showResults && (

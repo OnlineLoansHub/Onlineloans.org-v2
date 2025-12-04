@@ -291,6 +291,12 @@
   }
 }
 
+.topRatedCard {
+  @media (width <= 768px) {
+    order: -1;
+  }
+}
+
 .nerdWalletCard {
   @media (width <= 768px) {
     order: 0;

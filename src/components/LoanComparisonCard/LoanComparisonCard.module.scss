@@ -23,6 +23,12 @@
   // Shadow inherited from .card - same as all other cards
 }
 
+.topRatedCard {
+  @media (width <= 768px) {
+    order: -1;
+  }
+}
+
 .bestOptionBadge {
   position: absolute;
   top: 0;
@@ -223,13 +229,8 @@
 }
 
 .expandableContent {
-  @media (min-width: 769px) {
-    display: block;
-  }
-
-  @media (width <= 768px) {
-    display: none;
-  }
+  display: block;
+  margin-top: auto;
 }
 
 .pros {
