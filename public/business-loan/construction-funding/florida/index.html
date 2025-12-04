@@ -141,70 +141,19 @@
                               href="/terms-of-use" target="_blank"
                               class="link-4">Terms and Conditions</a></span></label>
                         <div class="error-message-2">This is some text inside of a div block.</div>
-                      </div><input type="submit" class="submit-button w-button" value="Apply Now">
+                      </div>
+                      <!-- Honeypot field -->
+                      <input
+                        type="text"
+                        name="honey"
+                        style="display:none;"
+                        autocomplete="off"
+                      />
+                      <input type="submit" class="submit-button w-button" value="Apply Now">
                       <div class="credit-callout-bloc"><img src="../assets/icon-credit.svg" loading="lazy" alt="Zero credit impact icon"
                           class="image-21">
                         <div class="text-block-9">Zero impact to your credit score²</div>
                       </div>
-                    </form>
-                    <div class="w-form-done" role="region" aria-label="Email Form success">
-                      <div>Thank you! Your submission has been received!</div>
-                    </div>
-                    <div class="w-form-fail" role="region" aria-label="Email Form failure">
-                      <div>Oops! Something went wrong while submitting the form.</div>
-                    </div>
-                  </div>
-                  <div class="form-modal form-step-2 w-form">
-                    <form name="email-form" method="get" class="form-2" aria-label="Construction Funding Application Form Step 2">
-                      <h2 class="heading-7">Apply for Construction Funding in Minutes</h2>
-                      <div class="input-group"><label for="name" class="field-label">Are your annual sales above
-                          $120k?*</label>
-                        <div class="radio-button-row"><label id="w-node-_7d960e5e-b397-aebc-14c5-653b93e40f48-cd25f770"
-                            class="radio-section w-radio"><input type="radio" name="AnnualSales" required=""
-                              class="w-form-formradioinput radio-button-2 w-radio-input" value="true"><span
-                              class="radio-label w-form-label">Yes</span></label><label
-                            class="radio-section w-radio"><input type="radio" name="AnnualSales" required=""
-                              class="w-form-formradioinput radio-button-2 w-radio-input" value="false"><span
-                              class="radio-label w-form-label" for="false">No</span></label></div>
-                        <div class="error-message-2">This is some text inside of a div block.</div>
-                      </div>
-                      <div class="input-group"><label for="name" class="field-label">Do you have a business bank
-                          account?*</label>
-                        <div class="radio-button-row"><label class="radio-section w-radio"><input type="radio"
-                              name="BusinessAccount" required=""
-                              class="w-form-formradioinput radio-button-2 w-radio-input" value="true"><span
-                              class="radio-label w-form-label">Yes</span></label><label
-                            class="radio-section w-radio"><input type="radio" name="BusinessAccount" required=""
-                              class="w-form-formradioinput radio-button-2 w-radio-input" value="false"><span
-                              class="radio-label w-form-label" for="false-2">No</span></label></div>
-                        <div class="error-message-2">This is some text inside of a div block.</div>
-                      </div>
-                      <div class="input-group-two-columns">
-                        <div id="w-node-_7d960e5e-b397-aebc-14c5-653b93e40f61-cd25f770" class="input-group"><label
-                            for="BusinessEstablishedDate" class="field-label">When was your business
-                            established*?</label><input
-                            class="input w-node-input-date w-input" maxlength="256"
-                            name="BusinessEstablishedDate" placeholder="MM/YYYY" type="text" required="">
-                          <div class="error-message-2">This is some text inside of a div block.</div>
-                        </div>
-                        <div class="input-group"><label for="CreditScore" class="field-label">Select your estimated
-                            credit score*</label><select name="CreditScore"
-                            class="input w-node-select-credit w-select">
-                            <option value="">--Select--</option>
-                            <option value="720">Excellent (720+)</option>
-                            <option value="690">Good (680-719)</option>
-                            <option value="630">Fair (640-679)</option>
-                            <option value="300">Poor (300-639)</option>
-                          </select>
-                          <div class="error-message-2">This is some text inside of a div block.</div>
-                        </div>
-                      </div>
-                      <div class="input-group"><label class="w-checkbox checkbox-field-3"><input type="checkbox"
-                            name="BusinessNotStarted" required="" class="w-checkbox-input checkbox-2"><span
-                            class="item-label w-form-label" for="BusinessNotStarted">My business is not yet
-                            started</span></label>
-                        <div class="error-message-2">This is some text inside of a div block.</div>
-                      </div><input type="submit" class="submit-button w-button" value="Apply Now">
                     </form>
                     <div class="w-form-done" role="region" aria-label="Email Form success">
                       <div>Thank you! Your submission has been received!</div>
@@ -735,7 +684,7 @@
     }
 
     // Update impression with form data (can handle multiple steps at once)
-    async function patchImpressionForm({ steps, formName }) {
+    async function patchImpressionForm({ steps, formName, honey }) {
       try {
         const impressionId = localStorage.getItem(IMPRESSION_STORAGE_KEY);
 
@@ -751,6 +700,7 @@
         const patchData = {
           date,
           ...(formName && { formName }),
+          ...(honey !== undefined && { honey }), // Include honeypot field if provided
         };
 
         // Add all steps to the patch data
@@ -868,7 +818,6 @@
 
       // Form submission handlers
       const step1Form = document.getElementById('step-1-form');
-      const step2Form = document.querySelector('.form-2');
 
       // Handle Step 1 Form
       if (step1Form) {
@@ -881,6 +830,14 @@
           // Collect all form data
           for (let [key, value] of formData.entries()) {
             formObject[key] = value;
+          }
+          
+          // BOT DETECTION - If honeypot is filled, mark it
+          if (formObject.honey && formObject.honey.trim() !== '') {
+            // Mark as bot by prefixing the value
+            formObject.honey = 'bot - ' + formObject.honey;
+            console.warn('🚫 Bot detected: honeypot field was filled. Marking as:', formObject.honey);
+            // Continue with submission - server will see "bot - {value}"
           }
           
           // Console.log all submitted information
@@ -950,104 +907,7 @@
             await patchImpressionForm({
               steps: steps,
               formName: 'construction-funding-florida',
-            });
-          }
-          
-          // Show thank you popup
-          showThankYouPopup();
-        });
-      }
-
-      // Handle Step 2 Form
-      if (step2Form) {
-        step2Form.addEventListener('submit', async function(e) {
-          e.preventDefault();
-          
-          const formData = new FormData(step2Form);
-          const formObject = {};
-          
-          // Collect all form data
-          for (let [key, value] of formData.entries()) {
-            formObject[key] = value;
-          }
-          
-          // Console.log all submitted information
-          console.log('=== FORM STEP 2 SUBMISSION ===');
-          console.log('Annual Sales Above $120k:', formObject.AnnualSales || 'N/A');
-          console.log('Has Business Bank Account:', formObject.BusinessAccount || 'N/A');
-          console.log('Business Established Date:', formObject.BusinessEstablishedDate || 'N/A');
-          console.log('Credit Score:', formObject.CreditScore || 'N/A');
-          console.log('Business Not Started:', formObject.BusinessNotStarted || 'N/A');
-          console.log('Complete Form Data:', formObject);
-          console.log('=============================');
-          
-          // Get the actual selected option text for credit score
-          let creditValue = formObject.CreditScore || '';
-          if (creditValue) {
-            const creditSelect = step2Form.querySelector('select[name="CreditScore"]');
-            if (creditSelect) {
-              const selectedOption = creditSelect.options[creditSelect.selectedIndex];
-              if (selectedOption && selectedOption.text) {
-                creditValue = selectedOption.text.trim();
-              }
-            }
-          }
-          
-          // Prepare all steps data (continuing from Step 1)
-          // Assuming Step 1 had 4 fields, Step 2 starts at step 5
-          const steps = [];
-          let currentStep = 5;
-          
-          // Step 5: Annual Sales Above $120k
-          if (formObject.AnnualSales) {
-            steps.push({
-              stepNumber: currentStep++,
-              question: 'Are your annual sales above $120k?*',
-              answer: formObject.AnnualSales === 'true' ? 'Yes' : 'No'
-            });
-          }
-          
-          // Step 6: Business Bank Account
-          if (formObject.BusinessAccount) {
-            steps.push({
-              stepNumber: currentStep++,
-              question: 'Do you have a business bank account?*',
-              answer: formObject.BusinessAccount === 'true' ? 'Yes' : 'No'
-            });
-          }
-          
-          // Step 7: Business Established Date
-          if (formObject.BusinessEstablishedDate) {
-            steps.push({
-              stepNumber: currentStep++,
-              question: 'When was your business established*?',
-              answer: formObject.BusinessEstablishedDate
-            });
-          }
-          
-          // Step 8: Credit Score (with actual selected text)
-          if (creditValue) {
-            steps.push({
-              stepNumber: currentStep++,
-              question: 'Select your estimated credit score*',
-              answer: creditValue
-            });
-          }
-          
-          // Step 9: Business Not Started
-          if (formObject.BusinessNotStarted) {
-            steps.push({
-              stepNumber: currentStep++,
-              question: 'My business is not yet started',
-              answer: formObject.BusinessNotStarted ? 'Yes' : 'No'
-            });
-          }
-          
-          // Send all steps in one request
-          if (steps.length > 0) {
-            await patchImpressionForm({
-              steps: steps,
-              formName: 'construction-funding-florida',
+              honey: formObject.honey || '', // Include honeypot field for bot detection
             });
           }
           
