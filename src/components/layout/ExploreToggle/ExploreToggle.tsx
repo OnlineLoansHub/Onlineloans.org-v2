@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { classNames } from '@/lib';
-import { LenderTable } from '@/components/LenderTable/LenderTable';
 import { useExploreToggle } from '@/contexts/ExploreToggleContext';
+import { businessLoanGuides } from '@/data/businessLoanGuides';
+import { personalLoanGuides } from '@/data/personalLoanGuides';
+import { GuideCard } from '@/components/businessLoan/GuideCard/GuideCard';
+import { AppLink } from '@/components/ui/AppLink/AppLink';
 import cls from './ExploreToggle.module.scss';
 
 export const ExploreToggle = () => {
@@ -14,6 +17,16 @@ export const ExploreToggle = () => {
   const pathname = usePathname();
 
   const isShowTable = useMemo(() => isOpen || isMobile, [isMobile, isOpen]);
+
+  // Check if we're on the home page
+  const isHomePage = useMemo(() => {
+    return pathname === '/';
+  }, [pathname]);
+
+  // Check if we should hide the explore toggle (on main business-loan or personal-loan pages)
+  const shouldHide = useMemo(() => {
+    return pathname === '/business-loan' || pathname === '/personal-loan';
+  }, [pathname]);
 
   // Determine loan type based on current route
   const loanType = useMemo(() => {
@@ -27,6 +40,22 @@ export const ExploreToggle = () => {
 
     return undefined;
   }, [pathname]);
+
+  // Get guides based on loan type, or show both on home page
+  const guides = useMemo(() => {
+    if (isHomePage) {
+      return [...businessLoanGuides, ...personalLoanGuides];
+    }
+
+    return loanType === 'personal' ? personalLoanGuides : businessLoanGuides;
+  }, [loanType, isHomePage]);
+
+  // States available for restaurant and construction funding
+  const states = [
+    { name: 'Florida', code: 'florida' },
+    { name: 'Texas', code: 'texas' },
+    { name: 'New York', code: 'new-york' },
+  ];
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -45,6 +74,11 @@ export const ExploreToggle = () => {
   //     }, 100);
   //   }
   // }, [isOpen, isMobile]);
+
+  // Don't render on main business-loan or personal-loan pages
+  if (shouldHide) {
+    return null;
+  }
 
   return (
     <div
@@ -83,10 +117,57 @@ export const ExploreToggle = () => {
           <>
             <p className={cls.footerTitle}>Want to explore before deciding?</p>
             <p className={cls.footerSubtitle}>
-              That's okay — you can skip the form for now and browse all available loan plans.
-              Compare interest rates, terms, and lenders side by side.
+              That's okay — explore our guides and state-specific resources to learn more about your
+              financing options.
             </p>
-            <LenderTable loanType={loanType} />
+
+            {/* Available Guides Section */}
+            {(isHomePage || loanType === 'business' || loanType === 'personal') && (
+              <div className={cls.exploreSection}>
+                <h3 className={cls.sectionTitle}>Available Guides</h3>
+                <div className={cls.guidesGrid}>
+                  {guides.map((guide) => (
+                    <GuideCard key={guide.id} guide={guide} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Restaurant Funding by State - Show on home page or business loan pages */}
+            {(isHomePage || loanType === 'business') && (
+              <div className={cls.exploreSection}>
+                <h3 className={cls.sectionTitle}>Restaurant Funding by State</h3>
+                <div className={cls.statesGrid}>
+                  {states.map((state) => (
+                    <AppLink
+                      key={state.code}
+                      href={`/business-loan/restaurant-funding/${state.code}`}
+                      className={cls.stateLink}
+                    >
+                      Restaurant Funding in {state.name}
+                    </AppLink>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Construction Business Loans by State - Show on home page or business loan pages */}
+            {(isHomePage || loanType === 'business') && (
+              <div className={cls.exploreSection}>
+                <h3 className={cls.sectionTitle}>Construction Business Loans by State</h3>
+                <div className={cls.statesGrid}>
+                  {states.map((state) => (
+                    <AppLink
+                      key={state.code}
+                      href={`/business-loan/construction-funding/${state.code}`}
+                      className={cls.stateLink}
+                    >
+                      Construction Loans in {state.name}
+                    </AppLink>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

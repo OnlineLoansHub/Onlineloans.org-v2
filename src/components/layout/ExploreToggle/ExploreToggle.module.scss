@@ -152,3 +152,78 @@
     font-size: 14px;
   }
 }
+
+.exploreSection {
+  margin-bottom: 60px;
+
+  @media (width <= 768px) {
+    margin-bottom: 40px;
+  }
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 32px 0;
+  text-align: center;
+
+  @media (width <= 768px) {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+.guidesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.statesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @media (width <= 768px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.stateLink {
+  display: block;
+  padding: 16px 24px;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  @media (width <= 768px) {
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+}

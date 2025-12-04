@@ -14,7 +14,7 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     description:
       'Compare top personal loan providers and find the right funding option for your needs. See ratings, rates, and funding speed.',
     href: '/personal-loan/best-personal-loans',
-    image: '/images/table/best-business-loans-2025.png',
+    image: '/images/table/best-personal-loans-2025.png',
     category: 'Comparison',
   },
   {
