@@ -141,7 +141,7 @@ export const ExploreToggle = () => {
                   {states.map((state) => (
                     <AppLink
                       key={state.code}
-                      href={`/business-loan/restaurant-funding/${state.code}`}
+                      href={`/business-loan/restaurant-funding/${state.code}/index.html`}
                       className={cls.stateLink}
                     >
                       Restaurant Funding in {state.name}
@@ -159,7 +159,7 @@ export const ExploreToggle = () => {
                   {states.map((state) => (
                     <AppLink
                       key={state.code}
-                      href={`/business-loan/construction-funding/${state.code}`}
+                      href={`/business-loan/construction-funding/${state.code}/index.html`}
                       className={cls.stateLink}
                     >
                       Construction Loans in {state.name}
