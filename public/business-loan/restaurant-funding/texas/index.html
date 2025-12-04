@@ -107,7 +107,7 @@
                       <h2 class="heading-6 heading-bold">Apply for Restaurant Funding in Minutes</h2>
                       <div class="input-group"><label for="FullName" class="field-label">First and Last
                           Name*</label><input class="input w-input" maxlength="256" name="FullName"
-                          placeholder="Your Name Here" type="text" required="">
+                          placeholder="Your Name Here" type="text" id="name-input" required="">
                         <div class="error-message-2">This is some text inside of a div block.</div>
                       </div>
                       <div class="input-group"><label for="Email" class="field-label">Email*</label><input
@@ -802,10 +802,39 @@
       }
     }
 
+    // Name input validation - prevent numbers
+    function setupNameValidation() {
+      const nameInput = document.getElementById('name-input');
+      if (nameInput) {
+        nameInput.addEventListener('input', function(e) {
+          // Remove any numeric characters
+          this.value = this.value.replace(/[0-9]/g, '');
+        });
+        
+        // Prevent paste of numeric characters
+        nameInput.addEventListener('paste', function(e) {
+          e.preventDefault();
+          const paste = (e.clipboardData || window.clipboardData).getData('text');
+          const noNumbers = paste.replace(/[0-9]/g, '');
+          this.value = noNumbers;
+        });
+        
+        // Prevent numeric keypress
+        nameInput.addEventListener('keypress', function(e) {
+          const char = String.fromCharCode(e.which);
+          if (/[0-9]/.test(char)) {
+            e.preventDefault();
+          }
+        });
+      }
+    }
+
     // FAQ Accordion functionality
     document.addEventListener('DOMContentLoaded', function() {
       // Setup phone validation
       setupPhoneValidation();
+      // Setup name validation
+      setupNameValidation();
       
       const faqQuestions = document.querySelectorAll('.faq-question');
       
