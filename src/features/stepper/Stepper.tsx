@@ -48,6 +48,9 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
   const activeClass = safeActiveConfig?.className || '';
   const isLast = hasValidConfig ? index === config.formConfig.length - 1 : false;
 
+  // Extracts all unique field names from the current step's form options
+  // Only includes fields of type 'input', 'select', or 'buttons' (excludes display-only fields)
+  // Used to determine which fields need to be validated for the current step
   const stepFieldNames = useMemo(() => {
     if (!safeActiveConfig) return [];
     const fields = safeActiveConfig.options
@@ -57,6 +60,11 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     return Array.from(new Set(fields));
   }, [safeActiveConfig]);
 
+  // Validates that all required fields in the current step are properly filled
+  // Checks two conditions for each field:
+  // 1. Field is not empty (not undefined, null, or empty string)
+  // 2. Field passes any specific validator function defined in config.validators
+  // Returns true only if ALL fields in the step pass both checks
   const stepValid = useMemo(() => {
     return stepFieldNames.every((name) => {
       const v = formState[name];
@@ -78,11 +86,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
       if (isLast) {
         const currentStep = index + 1; // Step number (1-based)
         const question = activeConfig?.title || '';
-        
+
         // Get all answers for current step fields and combine them
         const answers = stepFieldNames
           .map((fieldName) => {
             const value = formState[fieldName];
+
             return value !== undefined && value !== null ? String(value).trim() : '';
           })
           .filter((answer) => answer !== '')
@@ -209,11 +218,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
     // Patch impression with current step data before moving to next step
     const currentStep = index + 1; // Step number (1-based)
     const question = activeConfig?.title || '';
-    
+
     // Get all answers for current step fields and combine them
     const answers = stepFieldNames
       .map((fieldName) => {
         const value = formState[fieldName];
+
         return value !== undefined && value !== null ? String(value).trim() : '';
       })
       .filter((answer) => answer !== '')
@@ -247,11 +257,12 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
         // Patch impression with current step data before auto-advancing
         const currentStep = index + 1; // Step number (1-based)
         const question = activeConfig?.title || '';
-        
+
         // Get all answers for current step fields and combine them
         const answers = stepFieldNames
           .map((fieldName) => {
             const value = formState[fieldName];
+
             return value !== undefined && value !== null ? String(value).trim() : '';
           })
           .filter((answer) => answer !== '')
@@ -263,7 +274,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
           answer: answers || '',
           formName: config.formName,
         });
-        
+
         setIndex((i) => {
           const nextIndex = Math.min(i + 1, config.formConfig.length - 1);
 
@@ -273,7 +284,16 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
       return () => clearTimeout(timeoutId);
     }
-  }, [formState, stepValid, isLast, config.formConfig.length, index, activeConfig, stepFieldNames, config.formName]);
+  }, [
+    formState,
+    stepValid,
+    isLast,
+    config.formConfig.length,
+    index,
+    activeConfig,
+    stepFieldNames,
+    config.formName,
+  ]);
 
   // Update height when step changes or window resizes
   useEffect(() => {

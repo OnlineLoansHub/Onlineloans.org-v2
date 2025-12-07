@@ -19,6 +19,7 @@ export default function PersonalLoanForm({ type: _type }: IPersonalLoanFormProps
 
   const config = useMemo(() => {
     const loanConfig = getPersonalLoanConfig(amount);
+    
     return {
       ...loanConfig,
       formName: 'personal-loan',
