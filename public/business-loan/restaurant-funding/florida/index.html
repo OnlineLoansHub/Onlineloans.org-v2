@@ -11,6 +11,24 @@
 
   gtag('config', 'G-CW0NYXW5S0');
 </script>
+<!-- Google tag (gtag.js) event - no-redirect helper -->
+<script>
+  function gtagSendEvent() {
+    const callback = () => {
+      console.log('lead_form_submit - sent to Google Analytics');
+    };
+
+    gtag('event', 'lead_form_submit', {
+      event_callback: callback,
+      event_timeout: 2000
+      // Optional: event parameters can go here
+      // value: 1,
+      // state: 'FL'
+    });
+
+    return false;
+  }
+</script>
   <meta charset="UTF-8">
   <title>Restaurant Loans FL - Get Funded in 24hrs</title>
   <meta name="description" content="Get fast restaurant funding in Florida. Working capital loans, equipment financing, and restaurant loans available in 24-48 hours. Apply now for Florida restaurant funding.">
@@ -699,7 +717,7 @@
 
         if (!impressionId) {
           console.warn('No impression ID found in localStorage');
-          return;
+          return false;
         }
 
         // Get current date in YYYY-MM-DD format
@@ -718,16 +736,23 @@
           patchData[`step${stepNumber}Answer`] = answer;
         });
 
-        await fetch(`${API_URL}/${impressionId}/form`, {
+        const response = await fetch(`${API_URL}/${impressionId}/form`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(patchData),
         });
 
-        console.log('Impression updated with form data:', patchData);
+        if (response.ok) {
+          console.log('Impression updated with form data:', patchData);
+          return true;
+        } else {
+          console.error('Failed to patch impression form: HTTP', response.status);
+          return false;
+        }
       } catch (error) {
         console.error('Failed to patch impression form:', error);
         // Don't throw - we don't want to break the form flow if impression tracking fails
+        return false;
       }
     }
 
@@ -911,17 +936,41 @@
             });
           }
           
-          // Send all steps in one request
+          // Send all steps in one request and check if it succeeds
+          let apiSuccess = false;
           if (steps.length > 0) {
-            await patchImpressionForm({
+            apiSuccess = await patchImpressionForm({
               steps: steps,
               formName: 'restaurant-funding-florida',
               honey: formObject.honey || '', // Include honeypot field for bot detection
             });
+          } else {
+            // If no steps to send, consider it successful
+            apiSuccess = true;
           }
           
-          // Show thank you popup
-          showThankYouPopup();
+          // Only execute gtagSendEvent and show popup if API request was successful
+          if (apiSuccess) {
+            // Build URL with form data as query parameters (since form method is GET)
+            const formAction = step1Form.getAttribute('action') || window.location.href;
+            const urlParams = new URLSearchParams();
+            Object.keys(formObject).forEach(key => {
+              if (formObject[key] && key !== 'honey') { // Exclude honeypot from URL
+                urlParams.append(key, formObject[key]);
+              }
+            });
+            const submitUrl = formAction + (formAction.includes('?') ? '&' : '?') + urlParams.toString();
+            
+            // Track Google Analytics event and navigate after event is sent
+            gtagSendEvent(submitUrl);
+            
+            // Show thank you popup
+            showThankYouPopup();
+          } else {
+            // If API request failed, show error message
+            console.error('Form submission failed: API request was not successful');
+            alert('There was an error submitting your form. Please try again.');
+          }
         });
       }
 
