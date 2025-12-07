@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/business-loan/best-business-loans`,
-      lastModified: new Date('2025-12-04'),
+      lastModified: new Date('2025-12-07'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },

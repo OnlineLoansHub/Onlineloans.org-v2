@@ -332,7 +332,8 @@ export default function BestBusinessLoansPage() {
         {/* Methodology Section */}
         <section className={cls.methodologySection}>
           <div className={cls.container}>
-            <h2 className={cls.sectionTitle}>How We Selected the Best Business Loans of 2025</h2>
+            <h2 className={cls.methodologyTitle}>How We Select the Best Business Loans</h2>
+            <div className={cls.methodologyDivider}></div>
             <div className={cls.methodologyContent}>
               <p>
                 Our team evaluated business loan providers using three key criteria to identify the
@@ -364,6 +365,73 @@ export default function BestBusinessLoansPage() {
                 By focusing on these three essential factors, we ensure every lender on this list
                 offers competitive rates, reasonable qualification requirements, and fast funding
                 that meets the real-world needs of business owners.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Which Business Loans We Consider Section */}
+        <section className={cls.considerationSection}>
+          <div className={cls.container}>
+            <h2 className={cls.methodologyTitle}>Which business loans we consider</h2>
+            <div className={cls.methodologyDivider}></div>
+            <div className={cls.methodologyContent}>
+              <p>
+                Our analysis covers a broad range of small-business financing options to ensure we
+                capture the most relevant choices for U.S. entrepreneurs. We reviewed dozens of
+                U.S.-based, online lenders that operate nationally, focusing on loans that are
+                widely available to businesses across industries and stages (from startups to
+                established companies). By concentrating on online lenders, we emphasize financing
+                sources that offer convenient digital applications and faster funding times compared
+                to traditional banks <cite>biz2credit.com</cite>.
+              </p>
+              <p>
+                <strong>Scope of lenders included:</strong> We included only online lenders and
+                platforms in our comparison. This means we looked at reputable fintech and non-bank
+                lenders known for serving small businesses – for example, companies like OnDeck,
+                BlueVine, Fundbox, Kabbage (AmEx), and others that specialize in quick, accessible
+                working-capital solutions <cite>clearlyacquired.com</cite>. These online lenders
+                provide a variety of loan products (such as term loans, business lines of credit,
+                invoice financing/factoring, equipment loans, and merchant cash advances), giving us
+                a comprehensive view of financing options available through the internet. We also
+                included government-backed financing in our consideration – specifically U.S. Small
+                Business Administration (SBA) loan programs (e.g. SBA 7(a) loans, 504 loans, and SBA
+                microloans). These SBA-backed loans are offered through many lending platforms
+                (including some online lenders) and are popular for their favorable terms and broad
+                usage possibilities <cite>biz2credit.com</cite>. Including SBA loans ensures our
+                recommendations account for low-interest, long-term financing options in addition to
+                private online loans.
+              </p>
+              <p>
+                <strong>What's not included:</strong> Our comparison does not focus on traditional
+                banks or nonprofit lenders. We excluded brick-and-mortar banks and credit unions
+                from our primary list of considered lenders, even though they can offer competitive
+                rates, because our emphasis is on online borrowing options that are accessible
+                nationwide. Traditional banks often have more stringent requirements and slower
+                application processes (taking weeks or months for approval) compared to online
+                lenders <cite>biz2credit.com</cite>. Likewise, we did not include local community
+                lenders or nonprofit microlenders (such as certain community development loan
+                programs or organizations like Kiva) in the core list due to their limited
+                geographic reach and niche availability <cite>nerdwallet.com</cite>. (These local or
+                nonprofit options can be excellent for specific cases – for instance, some community
+                lenders specialize in startup loans or loans for business owners with weaker credit{' '}
+                <cite>nerdwallet.com</cite> – but they serve a narrower audience and thus fall
+                outside the scope of our nationwide online comparison.) By narrowing our focus to
+                U.S.-based online lenders and SBA-backed programs, we ensure that the "Y" (the
+                universe of lenders we considered) consists of broadly available, fast-to-fund
+                financing options that a wide range of small business owners can realistically
+                access.
+              </p>
+              <p>
+                Overall, our team started with a large pool of online business lenders and loan
+                products and filtered them down to the top recommendations you see in our comparison
+                table. This approach — considering only U.S. online lenders (plus SBA loans) and
+                excluding less-accessible funding sources — helps you understand who "Y" is, i.e.
+                which lenders and loans were in the running when we selected our recommended
+                business loan options. Our goal is to give you confidence that we've surveyed the
+                key players in the online small-business lending space{' '}
+                <cite>clearlyacquired.com</cite>, so the loan offers and lenders we highlight truly
+                represent the best among what's available to meet your business's financing needs.
               </p>
             </div>
           </div>
