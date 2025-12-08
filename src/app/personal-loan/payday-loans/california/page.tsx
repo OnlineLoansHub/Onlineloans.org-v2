@@ -25,7 +25,7 @@ const lastUpdated = getLastUpdated();
 // Lender data for comparison table
 const lenders = [
   {
-    name: 'ACE Cash Express',
+    name: 'ACE',
     slug: 'ace-cash-express',
     logo: '/images/paydayloans-california/ace-cash-express.webp',
     expertRating: '4.7/5',
@@ -37,7 +37,7 @@ const lenders = [
     url: 'https://www.acecashexpress.com/payday-loans/',
   },
   {
-    name: 'Speedy Cash',
+    name: 'Speedy',
     slug: 'speedy-cash',
     logo: '/images/paydayloans-california/sppedtCash-logo.svg',
     expertRating: '4.4/5',
@@ -73,7 +73,7 @@ const lenders = [
     url: 'https://www.checkcity.com/rates-fees/california',
   },
   {
-    name: 'Advance America',
+    name: 'Advance',
     slug: 'advance-america',
     logo: '/images/paydayloans-california/AdvanceAmerica-logo.svg',
     expertRating: '4.9/5',
@@ -85,7 +85,7 @@ const lenders = [
     url: 'https://web.advanceamerica.net/online',
   },
   {
-    name: "Check 'n Go",
+    name: 'Check&Go',
     slug: 'check-n-go',
     logo: '/images/paydayloans-california/cng-logo.webp',
     expertRating: '4.5/5',
@@ -277,7 +277,9 @@ export default function PaydayLoansCaliforniaPage() {
                           >
                             SEE LOAN OPTIONS
                           </a>
-                          <span className={cls.ctaSubtext}>with onlineLoans.org</span>
+                          <span className={cls.ctaSubtext}>
+                            By {lender.name} with onlineLoans.org
+                          </span>
                         </div>
                       </td>
                     </tr>

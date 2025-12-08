@@ -5,9 +5,9 @@ const publishedDate = new Date('2025-01-15');
 const modifiedDate = new Date();
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Payday Loans in California: Top Lenders, Laws & Legality',
+  title: 'California Payday Loans 2025 — Laws, Fees & Top Providers',
   description:
-    'Complete guide to payday loans in California. Learn about state laws, legality, fees, and compare the best online payday loan providers including Advance America, ACE Cash Express, Check n Go, and more.',
+    'Complete guide to payday loans in California. Learn about state laws, legality, fees, and compare the best online payday loan providers.',
   keywords:
     'payday loans California, online payday loans California, California payday loan laws, payday loans legal California, best payday loans California, payday loan lenders California, cash advance California, California payday loan regulations',
   path: '/personal-loan/payday-loans/california',
