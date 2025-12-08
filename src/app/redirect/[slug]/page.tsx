@@ -1,53 +1,45 @@
 'use client';
 
 import { useEffect } from 'react';
-import Image from 'next/image';
+import { useParams } from 'next/navigation';
+import Logo from '@/components/ui/Logo/Logo';
 import './redirect.css';
 
-interface RedirectPageProps {
-  params: {
-    slug: string;
-  };
-}
+export default function RedirectPage() {
+  const params = useParams();
+  const slug = params?.slug as string;
 
-export default function RedirectPage({ params }: RedirectPageProps) {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const decodedUrl = decodeURIComponent(params.slug);
-      
-      const timer = setTimeout(() => {
-        window.location.href = decodedUrl;
-      }, 5000);
+    if (typeof window !== 'undefined' && slug) {
+      try {
+        const decodedUrl = decodeURIComponent(slug);
 
-      return () => {
-        clearTimeout(timer);
-      };
+        const timer = setTimeout(() => {
+          window.location.href = decodedUrl;
+        }, 5000);
+
+        return () => {
+          clearTimeout(timer);
+        };
+      } catch (error) {
+        console.error('Error decoding URL:', error);
+      }
     }
-  }, [params.slug]);
+  }, [slug]);
 
   return (
     <div className="redirect-container">
       <div className="redirect-content">
         <div className="logo-wrapper">
-          <Image
-            src="/logo.png"
-            alt="OnlineLoans.org"
-            width={200}
-            height={60}
-            className="logo"
-            priority
-          />
+          <Logo text="OnlineLoans.org" textColor="var(--color-primary)" className="logo" />
         </div>
-        
+
         <div className="loader-wrapper">
           <div className="loader"></div>
         </div>
-        
-        <p className="redirect-text">
-          One moment, pulling up that offer for you...
-        </p>
+
+        <p className="redirect-text">One moment, pulling up that offer for you...</p>
       </div>
     </div>
   );
 }
-

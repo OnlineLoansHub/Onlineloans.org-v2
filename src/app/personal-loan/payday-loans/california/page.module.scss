@@ -438,6 +438,16 @@
   }
 }
 
+.logoLink {
+  display: block;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
 .logoWrapper {
   display: flex;
   align-items: center;

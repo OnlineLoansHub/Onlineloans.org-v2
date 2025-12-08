@@ -241,15 +241,21 @@ export default function PaydayLoansCaliforniaPage() {
                   {lenders.map((lender, index) => (
                     <tr key={index}>
                       <td>
-                        <div className={cls.logoWrapper}>
-                          <Image
-                            src={lender.logo}
-                            alt={`${lender.name} logo`}
-                            width={120}
-                            height={40}
-                            className={cls.logoImage}
-                          />
-                        </div>
+                        <a
+                          href={`/redirect/${encodeURIComponent(lender.url)}`}
+                          rel="nofollow"
+                          className={cls.logoLink}
+                        >
+                          <div className={cls.logoWrapper}>
+                            <Image
+                              src={lender.logo}
+                              alt={`${lender.name} logo`}
+                              width={120}
+                              height={40}
+                              className={cls.logoImage}
+                            />
+                          </div>
+                        </a>
                       </td>
                       <td>
                         <div className={cls.ratingWrapper}>
@@ -270,9 +276,8 @@ export default function PaydayLoansCaliforniaPage() {
                       <td>
                         <div className={cls.ctaWrapper}>
                           <a
-                            href={lender.url}
+                            href={`/redirect/${encodeURIComponent(lender.url)}`}
                             rel="nofollow"
-                            target="_blank"
                             className={cls.ctaButton}
                           >
                             SEE LOAN OPTIONS
