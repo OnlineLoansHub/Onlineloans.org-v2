@@ -22,7 +22,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.onlineloans.org'),
   ...generateSEOMetadata({
-    title: 'Online Loans® – Compare Loans, Insurance & Financial Products',
+    title: 'Online Loans® – Simple Financial Solutions',
     description:
       'Compare top financial products including personal loans, business loans, insurance plans, and credit cards. Get matched with trusted lenders and providers, explore rankings and reviews, and apply online in minutes. Fast, secure, and transparent financial comparison.',
     keywords:
