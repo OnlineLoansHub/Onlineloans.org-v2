@@ -1,0 +1,751 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--color-gray-light, #f3f4f6);
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  @media (width <= 768px) {
+    padding: 0 16px;
+  }
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary, #2a3d66) 0%, #1e2d4a 50%, #2a3d66 100%);
+  background-size: 200% 200%;
+  position: relative;
+  color: var(--color-white);
+  padding: 100px 0;
+  text-align: left;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 20% 50%, rgba(90, 193, 137, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 188, 153, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background-image: url('/business-loan/restaurant-funding/assets/shape-vector-primary.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+
+    &::after {
+      width: 350px;
+      height: 350px;
+      right: -40px;
+      opacity: 0.3;
+    }
+  }
+}
+
+.heroTitle {
+  font-size: 72px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    font-size: 32px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    text-align: left;
+  }
+}
+
+.writtenByWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-bottom: 20px;
+  }
+}
+
+.trustBadges {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-top: 32px;
+  }
+}
+
+.trustBadgesImage {
+  height: auto;
+  width: auto;
+  max-width: 350px;
+  filter: brightness(0) invert(1);
+  opacity: 1;
+
+  @media (width <= 768px) {
+    max-width: 280px;
+  }
+}
+
+.heroSubtitle {
+  margin: 0 0 32px 0;
+  max-width: 900px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-bottom: 24px;
+  }
+}
+
+.heroSubtitleText {
+  font-size: 22px;
+  line-height: 1.6;
+  margin: 0;
+
+  @media (width <= 768px) {
+    font-size: 16px;
+  }
+
+  cite {
+    font-style: italic;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+  }
+}
+
+.tableOfContents {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  @media (width <= 768px) {
+    padding: 20px;
+  }
+}
+
+.tocTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--color-white);
+
+  @media (width <= 768px) {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+}
+
+.tocList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @media (width <= 768px) {
+    gap: 10px;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1.5;
+    display: block;
+    padding: 8px 0;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      color: var(--color-white);
+      padding-left: 8px;
+      border-bottom-color: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (width <= 768px) {
+      font-size: 14px;
+      padding: 6px 0;
+    }
+  }
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (width <= 768px) {
+    margin-bottom: 32px;
+  }
+}
+
+.lastUpdated {
+  font-size: 14px;
+  opacity: 0.9;
+  margin: 0;
+  font-weight: 500;
+  text-decoration: underline;
+
+  @media (width <= 768px) {
+    font-size: 13px;
+  }
+}
+
+/* Content Sections */
+.contentSection {
+  padding: 80px 0;
+  background: var(--color-white);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.contentSectionAlt {
+  padding: 80px 0;
+  background: var(--color-gray-light, #f3f4f6);
+
+  @media (width <= 768px) {
+    padding: 60px 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--color-gray-dark, #161616);
+  margin: 0 0 20px 0;
+  text-align: center;
+  line-height: 1.3;
+  scroll-margin-top: 100px;
+
+  @media (width <= 768px) {
+    font-size: 28px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    scroll-margin-top: 80px;
+  }
+}
+
+.sectionDivider {
+  width: 100px;
+  height: 4px;
+  background-color: var(--color-primary, #2a3d66);
+  margin: 0 auto 32px;
+  border-radius: 2px;
+
+  @media (width <= 768px) {
+    margin-bottom: 24px;
+    width: 80px;
+    height: 3px;
+  }
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+
+  p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-gray-dark, #161616);
+    margin: 0 0 20px 0;
+
+    @media (width <= 768px) {
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    strong {
+      color: var(--color-primary, #2a3d66);
+      font-weight: 700;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    cite {
+      font-style: italic;
+      font-size: 0.9em;
+      color: var(--color-gray-medium, #9ca3af);
+      font-weight: 400;
+    }
+  }
+}
+
+.lawsList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+
+  li {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-gray-dark, #161616);
+    margin: 0 0 16px 0;
+    padding-left: 24px;
+    position: relative;
+
+    @media (width <= 768px) {
+      font-size: 16px;
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary, #2a3d66);
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 700;
+
+      @media (width <= 768px) {
+        font-size: 20px;
+      }
+    }
+
+    strong {
+      color: var(--color-primary, #2a3d66);
+      font-weight: 700;
+    }
+
+    cite {
+      font-style: italic;
+      font-size: 0.9em;
+      color: var(--color-gray-medium, #9ca3af);
+      font-weight: 400;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Comparison Table */
+.tableWrapper {
+  max-width: 1200px;
+  margin: 40px auto;
+  overflow-x: auto;
+
+  @media (width <= 768px) {
+    margin: 32px auto;
+  }
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+
+  thead {
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-color: #8b8c8f;
+
+    th {
+      padding: 16px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--color-gray-dark, #161616);
+      background: transparent;
+      border: none;
+
+      @media (width <= 768px) {
+        padding: 12px 8px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      border-color: #8b8c8f;
+      background: transparent;
+    }
+
+    td {
+      padding: 16px 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--color-gray-dark, #161616);
+      vertical-align: middle;
+
+      @media (width <= 768px) {
+        padding: 12px 8px;
+        font-size: 13px;
+      }
+
+      strong {
+        color: var(--color-primary, #2a3d66);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  height: 60px;
+
+  @media (width <= 768px) {
+    height: 40px;
+  }
+}
+
+.logoImage {
+  max-width: 120px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+
+  @media (width <= 768px) {
+    max-width: 80px;
+    max-height: 40px;
+  }
+}
+
+.ratingWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-start;
+}
+
+.star {
+  font-size: 16px;
+  color: #22c55e;
+  line-height: 1;
+
+  @media (width <= 768px) {
+    font-size: 14px;
+  }
+}
+
+.expertRating {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary, #2a3d66);
+  display: inline-block;
+
+  @media (width <= 768px) {
+    font-size: 12px;
+  }
+}
+
+.reviewLink {
+  font-size: 11px;
+  color: var(--color-primary, #2a3d66);
+  text-decoration: underline;
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+
+  @media (width <= 768px) {
+    font-size: 10px;
+  }
+
+  &:hover {
+    color: #1e2d4a;
+  }
+}
+
+.ctaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ctaButton {
+  background: var(--color-primary, #2a3d66);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+
+  @media (width <= 768px) {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  &:hover {
+    background: #1e2d4a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.ctaSubtext {
+  font-size: 10px;
+  color: var(--color-gray-medium, #9ca3af);
+  text-align: center;
+  white-space: nowrap;
+
+  @media (width <= 768px) {
+    font-size: 9px;
+  }
+}
+
+.tableNote {
+  font-size: 14px !important;
+  color: var(--color-gray-medium, #9ca3af);
+  font-style: italic;
+  margin: 20px auto 0;
+  max-width: 900px;
+  text-align: left;
+
+  @media (width <= 768px) {
+    font-size: 11px;
+    margin-top: 16px;
+  }
+}
+
+.feesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feesSubtext {
+  font-size: 11px;
+  color: var(--color-gray-medium, #9ca3af);
+  line-height: 1.3;
+
+  @media (width <= 768px) {
+    font-size: 10px;
+  }
+}
+
+/* Lender Reviews */
+.lenderReviews {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.lenderReview {
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 2px solid var(--color-gray-light, #f3f4f6);
+  scroll-margin-top: 100px;
+
+  @media (width <= 768px) {
+    scroll-margin-top: 80px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  @media (width <= 768px) {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+  }
+
+  p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-gray-dark, #161616);
+    margin: 0 0 16px 0;
+
+    @media (width <= 768px) {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    strong {
+      color: var(--color-primary, #2a3d66);
+      font-weight: 700;
+    }
+
+    cite {
+      font-style: italic;
+      font-size: 0.9em;
+      color: var(--color-gray-medium, #9ca3af);
+      font-weight: 400;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.lenderName {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-primary, #2a3d66);
+  margin: 0 0 20px 0;
+  line-height: 1.3;
+
+  @media (width <= 768px) {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+}
+
+.feeScheduleImage {
+  margin: 2rem 0;
+  text-align: center;
+
+  @media (width <= 768px) {
+    margin: 1.5rem 0;
+  }
+}
+
+.feeScheduleImg {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  @media (width <= 768px) {
+    border-radius: 0.25rem;
+  }
+}
+
+.imageCaption {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-gray-medium, #9ca3af);
+  font-style: italic;
+  text-align: center;
+
+  @media (width <= 768px) {
+    font-size: 0.8125rem;
+    margin-top: 0.5rem;
+  }
+
+  a {
+    color: var(--color-primary, #2a3d66);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--color-primary-dark, #1e2d4a);
+    }
+  }
+}
+
+.loanSubheading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-primary, #2a3d66);
+  margin: 24px 0 12px 0;
+  line-height: 1.4;
+
+  @media (width <= 768px) {
+    font-size: 18px;
+    margin: 20px 0 10px 0;
+  }
+}
+
+/* Sources Section */
+.sourcesList {
+  max-width: 900px;
+  margin: 0 auto;
+
+  p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--color-gray-dark, #161616);
+    margin: 0 0 16px 0;
+
+    @media (width <= 768px) {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    cite {
+      font-style: italic;
+      font-size: 0.9em;
+      color: var(--color-gray-medium, #9ca3af);
+      font-weight: 400;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

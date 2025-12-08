@@ -45,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/personal-loan`,
-      lastModified: new Date('2025-12-04'),
+      lastModified: new Date('2025-12-08'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -72,6 +72,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date('2025-12-04'),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/personal-loan/payday-loans/california`,
+      lastModified: new Date('2025-12-08'),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/about-us`,

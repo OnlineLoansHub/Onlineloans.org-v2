@@ -35,6 +35,15 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     image: '/images/brands-logos/lendingtree-logo.jpg',
     category: 'Reviews',
   },
+  {
+    id: 'payday-loans-california',
+    title: 'Payday Loans in California: Top Lenders, Laws & Legality',
+    description:
+      'Complete guide to payday loans in California. Learn about state laws, legality, fees, and compare the best online payday loan providers including Advance America, ACE Cash Express, Check n Go, and more.',
+    href: '/personal-loan/payday-loans/california',
+    image: '/images/paydayloans-california/paydayloans-california.png',
+    category: 'Guides',
+  },
   // Add more guides here as they are created
 ];
 
