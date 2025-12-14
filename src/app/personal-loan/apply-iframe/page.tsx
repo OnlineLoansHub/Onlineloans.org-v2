@@ -264,7 +264,7 @@ export default function PersonalLoanIframeLandingPage() {
           <p className={cls.faqDescription}>
             Get answers to common questions about personal loans and the application process.
           </p>
-          <FAQAccordion items={faqItems} />
+          <FAQAccordion items={faqItems} variant="dark" />
         </div>
       </section>
 

@@ -10,9 +10,10 @@ interface FAQItem {
 
 interface FAQAccordionProps {
   items: FAQItem[];
+  variant?: 'light' | 'dark';
 }
 
-export const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
+export const FAQAccordion: FC<FAQAccordionProps> = ({ items, variant = 'light' }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleItem = (index: number) => {
@@ -20,7 +21,7 @@ export const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
   };
 
   return (
-    <div className={cls.faqContainer}>
+    <div className={`${cls.faqContainer} ${variant === 'dark' ? cls.faqContainerDark : ''}`}>
       {items.map((item, index) => {
         const isOpen = openIndex === index;
         return (
@@ -47,4 +48,3 @@ export const FAQAccordion: FC<FAQAccordionProps> = ({ items }) => {
     </div>
   );
 };
-
