@@ -75,7 +75,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/personal-loan/lendingtree-review`,
-      lastModified: new Date('2025-12-04'),
+      lastModified: new Date('2025-12-14'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
