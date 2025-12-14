@@ -47,7 +47,7 @@ export default function PersonalLoanIframeLandingPage() {
       {/* Iframe Section - Primary Focus */}
       <section id="application-form-section" className={cls.iframeSection}>
         <div id="application-form-wrapper">
-          <IframeEmbed iframeId="PL-LeadStackStyle1" />
+          <IframeEmbed iframeId="PL-LeadStackStyle3" />
         </div>
       </section>
 
