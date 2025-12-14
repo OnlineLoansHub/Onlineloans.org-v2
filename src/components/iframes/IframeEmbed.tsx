@@ -36,6 +36,7 @@ export default function IframeEmbed({
 }: IframeEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const [iframeReady, setIframeReady] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const scriptsLoadedRef = useRef<Set<string>>(new Set());
   const styleElementRef = useRef<HTMLStyleElement | null>(null);
@@ -44,13 +45,16 @@ export default function IframeEmbed({
 
   const config = getIframeConfig(iframeId);
 
-  // Timeout fallback - hide loader after 5 seconds even if onLoad doesn't fire
+  // Timeout fallback - hide loader after 1 second even if onLoad doesn't fire
   // This handles cases where cross-origin iframes don't fire onLoad events
+  // Most iframes load quickly, so we don't need a long delay
   useEffect(() => {
     if (config) {
+      // Show iframe immediately, hide loader after short delay
+      setIframeReady(true);
       loadTimeoutRef.current = setTimeout(() => {
         setIsLoading(false);
-      }, 5000);
+      }, 1000);
     }
 
     return () => {
@@ -257,14 +261,14 @@ export default function IframeEmbed({
         scrolling={finalConfig.scrolling}
         frameBorder={finalConfig.frameBorder}
         sandbox={sandboxAttr}
-        loading={finalConfig.loading}
+        loading={finalConfig.loading || 'eager'}
         className={`${cls.iframe} ${finalConfig.className || ''}`}
         onLoad={handleLoad}
         onError={handleError}
         style={{
           display: hasError ? 'none' : 'block',
-          opacity: isLoading ? 0 : 1,
-          transition: 'opacity 0.3s ease-in-out',
+          opacity: iframeReady && !isLoading ? 1 : isLoading ? 0.3 : 0,
+          transition: 'opacity 0.2s ease-in-out',
         }}
       />
     </div>
