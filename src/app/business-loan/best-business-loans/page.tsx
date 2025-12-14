@@ -256,9 +256,7 @@ export default function BestBusinessLoansPage() {
               )}
             </h1>
             <div className={cls.heroSubtitle}>
-              <p className={cls.heroSubtitleText}>
-                The research is based on the following criteria:
-              </p>
+              <p className={cls.heroSubtitleText}>The Rating is based:</p>
               <ul className={cls.heroSubtitleList}>
                 <li>Interest Rates %</li>
                 <li>Qualifications</li>
