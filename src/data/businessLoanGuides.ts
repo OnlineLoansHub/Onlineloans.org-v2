@@ -35,5 +35,14 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     image: '/images/article/article_home.png',
     category: 'Industry-Specific',
   },
+  {
+    id: 'fixed-vs-variable',
+    title: 'Are Small Business Loans Fixed or Variable?',
+    description:
+      'Learn the difference between fixed and variable rate business loans. Compare pros, cons, and real examples to choose the best option for your small business financing needs.',
+    href: '/business-loan/fixed-vs-variable',
+    image: '/images/article/fixed-vs-variable.png',
+    category: 'Guides',
+  },
   // Add more guides here as they are created
 ];

@@ -38,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/business-loan/fixed-vs-variable`,
+      lastModified: new Date('2025-01-15'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/business-loan/construction-funding`,
       lastModified: new Date('2025-12-04'),
       changeFrequency: 'monthly',
