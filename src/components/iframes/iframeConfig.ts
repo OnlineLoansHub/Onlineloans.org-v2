@@ -49,14 +49,9 @@ export const iframeConfigs: Record<string, IframeConfig> = {
     scrolling: 'no',
     customStyles: `
       #application-form {
-        height: 840px;
+        height: 800px;
         width: 100%;
         border: none;
-      }
-      @media (max-width: 768px) {
-        #application-form {
-          height: 1000px;
-        }
       }
     `,
     scripts: [
