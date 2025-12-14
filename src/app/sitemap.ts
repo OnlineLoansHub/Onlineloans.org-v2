@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/business-loan/fixed-vs-variable`,
-      lastModified: new Date('2025-01-15'),
+      lastModified: new Date('2025-12-14'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
