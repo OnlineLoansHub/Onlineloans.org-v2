@@ -11,13 +11,7 @@ interface WrittenByProps {
   variant?: 'default' | 'dark';
 }
 
-export const WrittenBy = ({
-  name,
-  role,
-  imageUrl,
-  link,
-  variant = 'default',
-}: WrittenByProps) => {
+export const WrittenBy = ({ name, role, imageUrl, link, variant = 'default' }: WrittenByProps) => {
   const defaultImageUrl = '/images/article/article_author.png';
 
   const authorContent = (
@@ -59,4 +53,3 @@ export const WrittenBy = ({
     </div>
   );
 };
-

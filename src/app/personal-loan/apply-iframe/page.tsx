@@ -14,11 +14,11 @@ export default function PersonalLoanIframeLandingPage() {
         <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
           <h1 className={cls.heroTitle}>Borrow up to $90,000 with good & bad credit</h1>
           <div className={cls.heroSubtitle}>
-            <p className={cls.heroSubtitleText}>Why people choose this loan:</p>
+            <p className={cls.heroSubtitleText}>Apply for a personal loan:</p>
             <ul className={cls.heroSubtitleList}>
-              <li>6.5% Interest Rate</li>
-              <li>No impact to your credit score</li>
-              <li>All online — no phone calls</li>
+              <li>Fixed rates as low as 6.5% - 35.99% APR</li>
+              <li>Check your rate in 5 minutes</li>
+              <li>Funds sent in as fast as 24 hours</li>
             </ul>
           </div>
           <div className={cls.writtenByWrapper}>
