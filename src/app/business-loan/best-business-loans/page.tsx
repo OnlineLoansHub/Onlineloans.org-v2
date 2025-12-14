@@ -256,11 +256,11 @@ export default function BestBusinessLoansPage() {
               )}
             </h1>
             <div className={cls.heroSubtitle}>
-              <p className={cls.heroSubtitleText}>The Rating is based:</p>
+              <p className={cls.heroSubtitleText}>Lender ratings weight:</p>
               <ul className={cls.heroSubtitleList}>
-                <li>Interest Rates %</li>
-                <li>Qualifications</li>
-                <li>Funding speed</li>
+                <li>Interest rates — 40%</li>
+                <li>Ease of approval — 30%</li>
+                <li>Speed of funding — 30%</li>
               </ul>
             </div>
             <div className={cls.writtenByWrapper}>
