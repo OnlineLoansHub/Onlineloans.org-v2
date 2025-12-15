@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/Button/Button';
 import cls from './page.module.scss';
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Business Loan Guides - Complete Funding Resources | OnlineLoans.org',
+  title: 'Business Loan Guides - Funding Resources',
   description:
     'Explore comprehensive guides on business loans, restaurant funding, and other financing options. Learn how to apply, compare lenders, and get the funding your business needs.',
   keywords:
@@ -100,8 +100,8 @@ export default function BusinessLoanPage() {
         <div className={cls.container}>
           <h2 className={cls.sectionTitle}>Construction Business Loans by State</h2>
           <p className={cls.landingPagesDescription}>
-            Get fast construction business loans tailored to your state. Compare offers and apply for
-            equipment financing, working capital, and project funding.
+            Get fast construction business loans tailored to your state. Compare offers and apply
+            for equipment financing, working capital, and project funding.
           </p>
           <div className={cls.landingPagesGrid}>
             <AppLink

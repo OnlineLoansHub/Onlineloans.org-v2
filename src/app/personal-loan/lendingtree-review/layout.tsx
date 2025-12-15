@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'LendingTree Review: Comprehensive Overview for Personal Loans | OnlineLoans.org',
+  title: 'LendingTree Review: Comprehensive Overview',
   description:
-    "Complete LendingTree review for personal loans. Learn how LendingTree works, compare personal loan offers, understand pros and cons, and find out if it's the right marketplace for your borrowing needs. Get multiple loan quotes with one application.",
+    "Complete LendingTree review for personal loans. Learn how it works, compare offers, understand pros and cons, and find out if it's right for you.",
   keywords:
     'LendingTree review, LendingTree personal loans, LendingTree marketplace, compare personal loans, LendingTree pros and cons, online loan marketplace, personal loan comparison, LendingTree customer reviews, LendingTree personal loan rates, best personal loan marketplace, compare personal loan lenders',
   path: '/personal-loan/lendingtree-review',

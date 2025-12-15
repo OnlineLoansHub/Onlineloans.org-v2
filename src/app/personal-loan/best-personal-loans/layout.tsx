@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Best Personal Loans of 2025 | Compare Top Lenders & Rates',
+  title: 'Best Personal Loans 2025 - Compare Lenders',
   description:
     'Compare the best personal loans of 2025 from top lenders. Find fast funding options with competitive rates, flexible terms, and same-day approval. Compare LightStream, SoFi, Upstart, and more.',
   keywords:
@@ -12,11 +12,6 @@ export const metadata: Metadata = generateSEOMetadata({
   type: 'website',
 });
 
-export default function BestPersonalLoansLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BestPersonalLoansLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-

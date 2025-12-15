@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Best Business Loans of 2025 | Compare Top Lenders & Funding Options',
+  title: 'Best Business Loans 2025 - Compare Lenders',
   description:
     'Compare the best business loans of 2025 from top lenders. Find fast funding options with competitive rates, flexible terms, and 24-72 hour approval. Compare Biz2Credit, Lendio, OnDeck, and more.',
   keywords:
@@ -12,11 +12,6 @@ export const metadata: Metadata = generateSEOMetadata({
   type: 'website',
 });
 
-export default function BestBusinessLoansLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function BestBusinessLoansLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-

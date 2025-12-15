@@ -5,7 +5,7 @@ import { GuideCard } from '@/components/businessLoan/GuideCard/GuideCard';
 import cls from './page.module.scss';
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'Personal Loan Guides - Complete Lending Resources | OnlineLoans.org',
+  title: 'Personal Loan Guides - Lending Resources',
   description:
     'Explore comprehensive guides on personal loans, how to apply, compare lenders, and get the funding you need for your personal financial goals.',
   keywords:
@@ -44,4 +44,3 @@ export default function PersonalLoanPage() {
     </div>
   );
 }
-
