@@ -59,6 +59,28 @@ export const lenders: Lender[] = [
     ctaLink: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP',
   },
   {
+    id: 'advance-funds-network',
+    name: 'Advance Funds Network',
+    badge: 'Fast Funding',
+    logo: '/images/brands-logos/advancefundsnetwork.png',
+    description:
+      'Quick and accessible business financing solutions with flexible terms and fast approval process.',
+    loanAmountRange: '$5,000 - $5,000,000',
+    minCreditScore: '500+',
+    timeInBusiness: '1 year',
+    monthlyRevenue: '$25,000+',
+    fundingSpeed: '24-48 hours',
+    rating: 9.9,
+    pros: [
+      'Fast approval process',
+      'Flexible loan amounts',
+      'Quick funding turnaround',
+      'Accessible credit requirements',
+      'Competitive rates',
+    ],
+    ctaLink: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=top10&sub_id_2=',
+  },
+  {
     id: 'biz2credit',
     name: 'Biz2Credit',
     badge: 'Top Pick',

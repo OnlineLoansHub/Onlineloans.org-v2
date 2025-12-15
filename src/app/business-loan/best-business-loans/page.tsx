@@ -310,11 +310,16 @@ export default function BestBusinessLoansPage() {
                   }
 
                   return (
-                    <LoanComparisonCard
+                    <div
                       key={lender.id}
-                      lender={lender}
-                      index={displayNumber !== undefined ? displayNumber - 1 : undefined}
-                    />
+                      data-lender-id={lender.id}
+                      className={cls.lenderCardWrapper}
+                    >
+                      <LoanComparisonCard
+                        lender={lender}
+                        index={displayNumber !== undefined ? displayNumber - 1 : undefined}
+                      />
+                    </div>
                   );
                 })}
               </div>

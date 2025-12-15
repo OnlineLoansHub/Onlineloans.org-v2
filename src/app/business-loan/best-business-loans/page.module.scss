@@ -414,6 +414,28 @@
   }
 }
 
+.lenderCardWrapper {
+  @media (width <= 768px) {
+    // Rok Financial (Top Rated) - appears first
+    &[data-lender-id='rok-financial'] {
+      order: -1;
+    }
+
+    // Advance Funds Network - appears second (before Fundbox)
+    &[data-lender-id='advance-funds-network'] {
+      order: 0;
+    }
+
+    // Fundbox - appears third (after Advance Funds Network)
+    &[data-lender-id='fundbox'] {
+      order: 1;
+    }
+
+    // All other cards maintain their DOM order (default order: 0)
+    // They will appear after the explicitly ordered cards above
+  }
+}
+
 .placeholderContent {
   text-align: center;
   padding: 60px 20px;
