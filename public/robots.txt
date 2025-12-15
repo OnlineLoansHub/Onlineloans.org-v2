@@ -2,6 +2,11 @@
 User-agent: *
 Allow: /
 
+# Disallow static HTML files to prevent duplicate content
+Disallow: /business-loan/construction-funding/*/index.html
+Disallow: /business-loan/restaurant-funding/*/index.html
+Disallow: /redirect/
+
 # Disallow admin and private areas (if any)
 # Disallow: /admin/
 # Disallow: /api/

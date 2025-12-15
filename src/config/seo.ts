@@ -153,6 +153,11 @@ export function generateMetadata({
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+      other: process.env.NEXT_PUBLIC_BING_VERIFICATION
+        ? {
+            'msvalidate.01': process.env.NEXT_PUBLIC_BING_VERIFICATION,
+          }
+        : undefined,
     },
   };
 }
