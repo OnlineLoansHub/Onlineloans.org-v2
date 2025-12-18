@@ -662,31 +662,15 @@
     const IMPRESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
     const API_URL = 'https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/impression';
 
-    // Track impression on page load
+    // Track impression on page load - always create a new impression
     async function trackImpression() {
       try {
-        // Check if we have a valid impression ID in localStorage
-        const storedId = localStorage.getItem(IMPRESSION_STORAGE_KEY);
-        const storedTimestamp = localStorage.getItem(IMPRESSION_TIMESTAMP_KEY);
-
-        if (storedId && storedTimestamp) {
-          const timestamp = parseInt(storedTimestamp, 10);
-          const now = Date.now();
-          const timeElapsed = now - timestamp;
-
-          // If less than 24 hours have passed, use existing ID
-          if (timeElapsed < IMPRESSION_DURATION) {
-            console.log('Using existing impression ID:', storedId);
-            return;
-          }
-        }
-        
         // Get current URL with all query parameters as referrer
         const currentUrl = document.referrer || window.location.origin + window.location.pathname + window.location.search;
         console.log('referrer', document.referrer);
         console.log('currentUrl', currentUrl);
         
-        // Create new impression
+        // Always create new impression on page load
         const response = await fetch(API_URL, {
           method: 'POST',
           headers: {
