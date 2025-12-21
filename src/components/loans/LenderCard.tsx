@@ -174,13 +174,13 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             </div>
 
             {/* Score */}
-            <div className="flex items-center gap-4 lg:w-[calc(33.333%-1rem)] lg:justify-end">
-              <div className="lg:text-right">
-                <div className="flex items-baseline gap-1 lg:justify-end">
+            <div className="flex items-center gap-4 lg:w-[calc(33.333%-1rem)] lg:justify-start">
+              <div className="lg:text-left">
+                <div className="flex items-baseline gap-1 lg:justify-start">
                   <span className="text-2xl font-bold text-[#2a3d66]">{lender.totalScore}</span>
                   <span className="text-slate-400 text-sm">/10</span>
                 </div>
-                <div className="flex items-center justify-end gap-2 mt-1">
+                <div className="flex items-center justify-start gap-2 mt-1">
                   <StarRating score={lender.totalScore} />
                 </div>
                 <div className="flex items-center justify-start gap-1 mt-1">
