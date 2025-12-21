@@ -146,13 +146,18 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                     <button
                       key={option.value}
                       onClick={() => handleAnswer(steps[currentStep].key, option.value)}
-                      className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
+                      className={`w-full p-4 text-left rounded-xl transition-all ${
                         answers[steps[currentStep].key] === option.value
-                          ? 'border-[#235675] bg-[#235675]/5'
-                          : 'border-slate-200 hover:border-[#235675]/50 hover:bg-slate-50'
+                          ? 'bg-[#235675]/5'
+                          : 'hover:bg-slate-50'
                       }`}
+                      style={{
+                        border: `2px solid ${
+                          answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
+                        }`,
+                      }}
                     >
-                      <span className="font-medium text-slate-700">{option.label}</span>
+                      <span className="font-medium text-slate-700 text-sm">{option.label}</span>
                     </button>
                   ))}
                 </div>
@@ -232,4 +237,3 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
     </section>
   );
 }
-

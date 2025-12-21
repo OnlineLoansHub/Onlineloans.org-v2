@@ -175,11 +175,21 @@ export default function LendersPage() {
 
             {/* Show More Button */}
             {hasMore && (
-              <div className="mt-8 text-center">
+              <div className="mt-8 flex justify-center">
                 <Button
                   variant="secondary"
                   onClick={() => setDisplayCount((prev) => prev + 5)}
-                  className="px-8 py-3 text-lg"
+                  className="!px-8 !py-3 !text-sm !rounded-xl !text-black"
+                  style={{
+                    padding: '8px 48px',
+                    fontSize: '.875rem',
+                    lineHeight: '1.25rem',
+                    borderRadius: '12px',
+                    height: 'auto',
+                    minHeight: 'auto',
+                    borderColor: '#e5e7eb',
+                    color: '#000000',
+                  }}
                 >
                   Show More
                   <ChevronDown className="w-4 h-4 ml-2 inline-block" />
@@ -202,7 +212,6 @@ export default function LendersPage() {
 
       {/* Educational Content */}
       <EducationalContent />
- 
     </div>
   );
 }
