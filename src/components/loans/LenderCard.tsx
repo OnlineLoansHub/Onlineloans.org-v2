@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ExternalLink, Check, ArrowRight, Info } from 'lucide-react';
+import { ExternalLink, Check, ArrowRight, Info, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import ExpandableExplanation from './ExpandableExplanation';
@@ -20,7 +20,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
       {/* Mobile Card - Simple Layout */}
       <div
         className={`lg:hidden bg-white rounded-2xl shadow-lg overflow-hidden relative ${
-          rank === 1 ? 'border-4 border-[#2a3d66]' : 'border-2 border-slate-200'
+          rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border-2 border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
@@ -103,7 +103,13 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className="w-full bg-[#2a3d66] hover:bg-[#1f2d4d] text-white py-3 px-4 rounded-lg font-semibold text-sm"
+              className="w-full bg-[#2a3d66] hover:bg-[#1f2d4d] text-white font-bold"
+              style={{
+                padding: '8px 16px',
+                borderRadius: '12px',
+                fontSize: '16px',
+                height: 'auto',
+              }}
               onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
             >
               EXPLORE
@@ -121,7 +127,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
         {rank === 1 && (
           <div className="bg-[#2a3d66] text-white text-center py-2.5 px-4">
             <p className="text-xs flex items-center justify-center gap-1.5">
-              <span className="text-lg">📊</span>
+              <TrendingUp className="w-4 h-4" />
               <span>1407 people visited this site this week</span>
             </p>
           </div>

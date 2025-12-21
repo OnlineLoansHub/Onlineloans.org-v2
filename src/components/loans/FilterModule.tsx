@@ -225,7 +225,16 @@ export default function FilterModule({
         <Button
           variant="secondary"
           onClick={() => setMobileFiltersOpen(true)}
-          className="w-full flex items-center justify-center gap-2"
+          className="w-full flex items-center justify-center gap-2 !text-black"
+          style={{
+            padding: '6px 16px',
+            border: '1px solid #e5e7eb',
+            fontSize: '14px',
+            borderRadius: '12px',
+            height: 'auto',
+            minHeight: 'auto',
+            color: '#000000',
+          }}
         >
           <Filter className="w-4 h-4" />
           Filters

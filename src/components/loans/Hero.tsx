@@ -34,7 +34,7 @@ export default function Hero({ validDate = 'December 21, 2025' }: HeroProps) {
           </h1>
 
           {/* Subtitle */}
-          <h2 className="text-xl sm:text-2xl text-[#235675] font-medium mb-4">
+          <h2 className="text-[1.125rem] sm:text-xl lg:text-2xl text-[#235675] font-medium mb-4 whitespace-nowrap">
             Find funding that fits your business
           </h2>
 

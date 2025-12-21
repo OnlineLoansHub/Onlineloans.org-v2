@@ -27,6 +27,7 @@ type Props = {
   disabled?: boolean;
   className?: string; // root
   buttonClassName?: string; // trigger
+  buttonStyle?: React.CSSProperties; // button inline styles
   listClassName?: string; // popup
   optionClassName?: string; // each row
 };
@@ -41,6 +42,7 @@ export function Select({
   disabled,
   className = '',
   buttonClassName = '',
+  buttonStyle,
   listClassName = '',
   optionClassName = '',
 }: Props) {
@@ -181,6 +183,7 @@ export function Select({
           { [cls.open]: isOpen, [cls.active]: value !== undefined },
           [buttonClassName]
         )}
+        style={buttonStyle}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-controls={listId}
