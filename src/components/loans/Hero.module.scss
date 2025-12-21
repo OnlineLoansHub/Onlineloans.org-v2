@@ -1,63 +1,82 @@
 .hero {
-  background: linear-gradient(135deg, var(--color-primary, #2a3d66) 0%, #1e2d4a 50%, #2a3d66 100%);
-  background-size: 200% 200%;
   position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1e2d4d 50%, #152238 100%);
   color: var(--color-white);
   padding: 100px 0;
   text-align: left;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      radial-gradient(circle at 20% 50%, rgba(90, 193, 137, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(255, 188, 153, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: -80px;
-    transform: translateY(-50%);
-    width: 600px;
-    height: 600px;
-    background-image: url('/business-loan/restaurant-funding/assets/shape-vector-primary.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    opacity: 0.4;
-    pointer-events: none;
-  }
 
   @media (width <= 768px) {
     padding: 60px 0;
+  }
+}
 
-    &::after {
-      width: 350px;
-      height: 350px;
-      right: -40px;
-      opacity: 0.3;
-    }
+.stripedPattern {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255, 255, 255, 0.08) 60px,
+      rgba(255, 255, 255, 0.08) 61px,
+      transparent 61px,
+      transparent 120px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255, 255, 255, 0.08) 60px,
+      rgba(255, 255, 255, 0.08) 61px,
+      transparent 61px,
+      transparent 120px
+    );
+}
+
+.wavePattern {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 33.333333%;
+  pointer-events: none;
+  overflow: hidden;
+
+  svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 120%;
+    width: auto;
+    opacity: 0.2;
   }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--max-container-width);
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   position: relative;
   z-index: 1;
 
-  @media (width <= 768px) {
-    padding: 0 16px;
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 

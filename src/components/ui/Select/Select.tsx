@@ -30,6 +30,7 @@ type Props = {
   buttonStyle?: React.CSSProperties; // button inline styles
   listClassName?: string; // popup
   optionClassName?: string; // each row
+  optionStyle?: React.CSSProperties; // option inline styles
 };
 
 export function Select({
@@ -45,6 +46,7 @@ export function Select({
   buttonStyle,
   listClassName = '',
   optionClassName = '',
+  optionStyle,
 }: Props) {
   const uid = useId();
   const selectId = id ?? `select-${uid}`;
@@ -223,6 +225,7 @@ export function Select({
                   },
                   [optionClassName]
                 )}
+                style={optionStyle}
                 onMouseEnter={() => !opt.disabled && setActiveIndex(i)}
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => !opt.disabled && commit(i)}

@@ -42,6 +42,9 @@ export default function SortControl({ sortBy, onSortChange }: SortControlProps) 
           width: '120px',
           color: '#000000',
         }}
+        optionStyle={{
+          fontSize: '14px',
+        }}
       />
     </div>
   );

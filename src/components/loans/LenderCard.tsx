@@ -139,21 +139,22 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
       </div>
 
       {/* Desktop Card - Full Layout */}
-      <div className="hidden lg:block bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+      <div
+        className={`hidden lg:block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative ${
+          rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border border-slate-200'
+        }`}
+      >
+        {/* Rank Number - Top Left Corner */}
+        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br-2xl flex items-center justify-center z-10">
+          <span className="text-white font-bold text-lg">{rank}</span>
+        </div>
+
         <div className="p-6">
           {/* Header Row */}
-          <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-6">
-            {/* Rank */}
-            <div className="flex lg:flex-col items-center gap-3 lg:gap-1">
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-[#2a3d66] text-white flex items-center justify-center font-bold text-lg lg:text-xl">
-                {rank}
-              </div>
-              <span className="text-xs text-slate-400 font-medium lg:text-center">RANK</span>
-            </div>
-
+          <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             {/* Logo & Brand Section */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-xl border border-slate-200 p-4 mb-3 flex items-center justify-center min-h-[80px]">
+              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[80px]">
                 {lender.logo ? (
                   <div className="relative w-full h-20">
                     <Image
@@ -170,13 +171,6 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
                   </div>
                 )}
               </div>
-              {lender.reviewCount && (
-                <div className="flex items-center gap-2 text-xs text-slate-500">
-                  <span>{lender.reviewCount.toLocaleString()} Reviews</span>
-                  <span className="text-slate-300">•</span>
-                  <span className="text-emerald-600 font-medium">Trustpilot</span>
-                </div>
-              )}
             </div>
 
             {/* Score */}
@@ -230,7 +224,17 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
-              className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white py-6 px-8 rounded-xl font-semibold text-base transition-all group"
+              className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white rounded-xl font-semibold text-base transition-all group"
+              style={{
+                borderRadius: '.75rem',
+                fontSize: '1rem',
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                paddingLeft: '32px',
+                paddingRight: '32px',
+                margin: '0',
+                border: '0',
+              }}
               onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
             >
               See Plans

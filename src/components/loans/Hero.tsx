@@ -13,6 +13,42 @@ export default function Hero({ validDate = 'December 21, 2025' }: HeroProps) {
 
   return (
     <section className={cls.hero}>
+      {/* Decorative Wave Pattern - Right Side */}
+      <div className={cls.wavePattern}>
+        <svg
+          viewBox="0 0 400 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M50 0C50 0 150 100 150 200C150 300 50 400 50 500C50 600 150 700 150 700"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+          />
+          <path
+            d="M100 0C100 0 200 100 200 200C200 300 100 400 100 500C100 600 200 700 200 700"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+          />
+          <path
+            d="M150 0C150 0 250 100 250 200C250 300 150 400 150 500C150 600 250 700 250 700"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+          />
+          <path
+            d="M200 0C200 0 300 100 300 200C300 300 200 400 200 500C200 600 300 700 300 700"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+          />
+          <path
+            d="M250 0C250 0 350 100 350 200C350 300 250 400 250 500C250 600 350 700 350 700"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+          />
+        </svg>
+      </div>
+
       <div className={cls.container}>
         {/* Main heading */}
         <h1 className={cls.title}>
