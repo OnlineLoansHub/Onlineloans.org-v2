@@ -109,8 +109,6 @@ export default function LendersPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <DisclosureBar />
-      <Header />
       <Hero validDate="December 21, 2025" />
 
       {/* Main Content */}
