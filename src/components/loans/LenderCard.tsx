@@ -2,10 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { ExternalLink, Check, ArrowRight, Info, TrendingUp } from 'lucide-react';
+import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
-import ExpandableExplanation from './ExpandableExplanation';
 import StarRating from './StarRating';
 import type { Lender } from './lendersData';
 
@@ -151,12 +150,12 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
 
         <div className="p-6" style={{ paddingLeft: '5rem', paddingRight: '5rem' }}>
           {/* Header Row */}
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-4">
             {/* Logo & Brand Section */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[120px]">
+              <div className="bg-white rounded-xl p-2 mb-2 flex items-center justify-center min-h-[80px]">
                 {lender.logo ? (
-                  <div className="relative w-full h-[120px] max-w-[280px] mx-auto">
+                  <div className="relative w-full h-[80px] max-w-[280px] mx-auto">
                     <Image
                       src={lender.logo}
                       alt={lender.name}
@@ -200,7 +199,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           </div>
 
           {/* Score Breakdown */}
-          <div className="mt-4">
+          <div className="mt-3">
             <ScoreBreakdown
               trustpilotScore={lender.trustpilotScore}
               brandReputation={lender.brandReputation}
@@ -209,30 +208,28 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             />
           </div>
 
-          {/* Expandable Explanation */}
-          <ExpandableExplanation />
-
-          {/* Highlight Line */}
-          {lender.highlight && (
-            <div className="mt-4 p-3 bg-[#2a3d66]/5 rounded-lg border-l-4 border-[#2a3d66]">
-              <p className="text-sm text-slate-700 font-medium">{lender.highlight}</p>
-            </div>
-          )}
-
           {/* Details */}
           {lender.details && lender.details.length > 0 && (
-            <div className="mt-4 grid grid-cols-2 gap-2">
-              {lender.details.map((detail, index) => (
-                <div key={index} className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-slate-600">{detail}</span>
-                </div>
-              ))}
+            <div className="mt-6 grid grid-cols-2 gap-2">
+              {lender.details.map((detail, index) => {
+                const isLeftColumn = index % 2 === 0;
+
+                return (
+                  <div key={index} className="flex items-start gap-2">
+                    {isLeftColumn ? (
+                      <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    ) : (
+                      <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                    )}
+                    <span className="text-sm text-slate-600">{detail}</span>
+                  </div>
+                );
+              })}
             </div>
           )}
 
           {/* CTA Section */}
-          <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
               className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white rounded-xl font-semibold text-base transition-all group"
