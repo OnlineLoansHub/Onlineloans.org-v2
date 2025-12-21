@@ -18,12 +18,12 @@ import cls from './HomePage.module.scss';
 
 const categories = [
   { icon: Briefcase, title: 'Business Loans' },
-  { icon: PawPrint, title: 'Pet Insurance' },
   { icon: HomeIcon, title: 'Mortgage Loans' },
-  { icon: Heart, title: 'Life Insurance' },
   { icon: GraduationCap, title: 'Student Loans' },
-  { icon: Layers, title: 'Debt Consolidation' },
   { icon: Wallet, title: 'Personal Loans' },
+  { icon: Layers, title: 'Debt Consolidation' },
+  { icon: PawPrint, title: 'Pet Insurance' },
+  { icon: Heart, title: 'Life Insurance' },
   { icon: Landmark, title: 'Online Banking' },
   { icon: Coins, title: 'Gold and Silver' },
 ];
