@@ -1,0 +1,589 @@
+.container {
+  min-height: 100vh;
+  background-color: white;
+}
+
+// Hero Section
+.heroSection {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1e2d4d 50%, #152238 100%);
+}
+
+.stripedPattern {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  height: 50%;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255, 255, 255, 0.08) 60px,
+      rgba(255, 255, 255, 0.08) 61px,
+      transparent 61px,
+      transparent 120px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255, 255, 255, 0.08) 60px,
+      rgba(255, 255, 255, 0.08) 61px,
+      transparent 61px,
+      transparent 120px
+    );
+}
+
+.wavePattern {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 33.333333%;
+  pointer-events: none;
+  overflow: hidden;
+
+  svg {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 120%;
+    width: auto;
+    opacity: 0.2;
+  }
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .heroContent {
+    padding: 5rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroContent {
+    padding: 6rem 2rem;
+  }
+}
+
+.headline {
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.25;
+  font-size: 30px;
+  padding: 0 1rem;
+  margin-bottom: 1.25rem;
+  margin-top: -10px;
+  transition: all 1s;
+  transition-delay: 50ms;
+
+  @media (min-width: 640px) {
+    font-size: 48px;
+    margin-bottom: 3rem;
+  }
+}
+
+.headlineLoaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.headlineNotLoaded {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+.headlineSpan {
+  display: block;
+
+  @media (min-width: 640px) {
+    display: inline;
+
+    &:not(:first-child) {
+      margin-left: 0.25rem;
+    }
+  }
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 1s;
+  transition-delay: 150ms;
+
+  @media (min-width: 640px) {
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.categoryGridLoaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.categoryGridNotLoaded {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
+.categoryCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1rem 0.75rem;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+}
+
+.categoryCardLoaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.categoryCardNotLoaded {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+
+.categoryIconWrapper {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: #e8f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background-color 0.2s;
+
+  @media (min-width: 1024px) {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .categoryCard:hover & {
+    background-color: #dceef5;
+  }
+}
+
+.categoryIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-primary);
+
+  @media (min-width: 1024px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.categoryTitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  transition: color 0.2s;
+
+  @media (min-width: 1024px) {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .categoryCard:hover & {
+    color: var(--color-primary);
+  }
+}
+
+// Vendor Logos Bar
+.vendorSection {
+  width: 100%;
+  border-top: 1px solid #e5e7eb;
+  padding: 2rem 0;
+  background-color: #f2f2f2;
+}
+
+.vendorContent {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+
+  @media (min-width: 640px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
+  }
+}
+
+.vendorMobileLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.vendorMobileTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+
+  @media (min-width: 640px) {
+    font-size: 1.875rem;
+  }
+
+  span {
+    font-weight: 700;
+  }
+}
+
+.vendorMobileLogos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 28rem;
+  padding: 0 0.5rem;
+}
+
+// Uniform logo cell - logo-agnostic container
+// All logos use the same container size for visual consistency
+.vendorLogoCell {
+  position: relative;
+  width: 82px;
+  height: 21px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  // Next.js Image with fill prop needs absolute positioning
+  // object-fit: contain ensures logos don't stretch or overflow
+  img {
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+// Text cell for Lemonade (same container structure)
+.vendorTextCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lemonadeText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #ff2968;
+  text-align: center;
+  line-height: 1.2;
+
+  @media (min-width: 480px) {
+    font-size: 1.125rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 1.125rem;
+  }
+}
+
+.vendorDesktopLayout {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  @media (min-width: 640px) {
+    gap: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    display: flex;
+    gap: 3.5rem;
+  }
+}
+
+.vendorDesktopLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.vendorLabelBar {
+  width: 0.375rem;
+  height: 3rem;
+  border-radius: 9999px;
+  background-color: var(--color-primary);
+}
+
+.vendorLabelText {
+  font-size: 1rem;
+
+  span:first-child {
+    color: #6b7280;
+  }
+
+  span:last-child {
+    font-weight: 600;
+    color: #1f2937;
+  }
+}
+
+.vendorLogosContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+
+  @media (min-width: 1024px) {
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+  }
+}
+
+// How It Works Section
+.howItWorksSection {
+  width: 100%;
+  background-color: white;
+  padding: 4rem 0;
+
+  @media (min-width: 640px) {
+    padding: 5rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 6rem 0;
+  }
+}
+
+.howItWorksContent {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+
+  @media (min-width: 640px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0 2rem;
+  }
+}
+
+.sectionHeading {
+  font-weight: 700;
+  text-align: center;
+  font-size: 30px;
+  line-height: 120%;
+  margin-bottom: 25px;
+  color: #000;
+
+  @media (min-width: 640px) {
+    text-align: left;
+    font-size: 40px;
+    margin-bottom: 4rem;
+  }
+
+  br {
+    @media (min-width: 640px) {
+      display: none;
+    }
+  }
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 1rem;
+  border: 2px solid #d4eaf2;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: all 0.3s;
+
+  &:hover {
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-0.5rem);
+    border-color: var(--color-primary);
+  }
+}
+
+.stepNumber {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 0.5rem;
+  transition: transform 0.3s;
+
+  .card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: 1rem;
+  transition: all 0.3s;
+
+  .card:hover & {
+    background: linear-gradient(to bottom right, var(--color-primary) 0%, transparent 100%);
+    opacity: 0.05;
+  }
+}
+
+.illustrationWrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 8rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+
+  .card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+.illustrationSvg {
+  width: 100%;
+  height: 100%;
+  max-width: 120px;
+  max-height: 120px;
+}
+
+.cardTitle {
+  position: relative;
+  z-index: 10;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  transition: color 0.3s;
+
+  .card:hover & {
+    color: var(--color-primary);
+  }
+}
+
+.cardDescription {
+  position: relative;
+  z-index: 10;
+  font-size: 0.875rem;
+  color: #4b5563;
+  text-align: center;
+  line-height: 1.625;
+  max-width: 24rem;
+  transition: color 0.3s;
+
+  .card:hover & {
+    color: #374151;
+  }
+}
+
+.bottomAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0.25rem;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+  transform-origin: left;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+  .card:hover & {
+    transform: scaleX(1);
+  }
+}
