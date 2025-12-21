@@ -83,11 +83,12 @@ export default function HomePage() {
           <div className={cls.categoryGrid}>
             {categories.map((category, index) => {
               const IconComponent = category.icon;
+              const href = category.title === 'Business Loans' ? '/lenders' : '#';
 
               return (
                 <Link
                   key={index}
-                  href="#"
+                  href={href}
                   className={cls.categoryCard}
                   style={{ animationDelay: `${150 + index * 30}ms` }}
                 >
