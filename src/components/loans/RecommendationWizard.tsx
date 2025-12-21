@@ -1,0 +1,235 @@
+'use client';
+
+import React, { useState } from 'react';
+import { ArrowLeft, ArrowRight, Sparkles, Check } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
+import StarRating from './StarRating';
+import type { Lender } from './lendersData';
+
+interface RecommendationWizardProps {
+  lenders: Lender[];
+}
+
+interface Step {
+  question: string;
+  key: string;
+  options: Array<{ value: string; label: string }>;
+}
+
+const steps: Step[] = [
+  {
+    question: 'What type of loan are you looking for?',
+    key: 'loanType',
+    options: [
+      { value: 'business_loan', label: 'Business Loan' },
+      { value: 'line_of_credit', label: 'Line of Credit' },
+      { value: 'working_capital', label: 'Working Capital' },
+      { value: 'sba', label: 'SBA Loan' },
+      { value: 'other', label: 'Other' },
+    ],
+  },
+  {
+    question: 'How long have you been in business?',
+    key: 'timeInBusiness',
+    options: [
+      { value: '2_plus', label: '2 or more years' },
+      { value: '1_2', label: '1-2 years' },
+      { value: '6m_1y', label: '6 months to 1 year' },
+      { value: '0_6m', label: '0-6 months' },
+    ],
+  },
+  {
+    question: 'What is your average monthly revenue?',
+    key: 'monthlyRevenue',
+    options: [
+      { value: 'more_30k', label: 'More than $30K' },
+      { value: '20k_30k', label: '$20K - $30K' },
+      { value: '10k_20k', label: '$10K - $20K' },
+      { value: 'less_10k', label: 'Less than $10K' },
+    ],
+  },
+  {
+    question: 'What is your credit score range?',
+    key: 'creditScore',
+    options: [
+      { value: 'excellent', label: 'Excellent (720-850)' },
+      { value: 'good', label: 'Good (690-719)' },
+      { value: 'fair', label: 'Fair (630-689)' },
+      { value: 'poor', label: 'Poor (350-629)' },
+    ],
+  },
+];
+
+export default function RecommendationWizard({ lenders }: RecommendationWizardProps) {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showResults, setShowResults] = useState(false);
+
+  const handleAnswer = (key: string, value: string) => {
+    setAnswers((prev) => ({ ...prev, [key]: value }));
+
+    if (currentStep < steps.length - 1) {
+      setTimeout(() => setCurrentStep((prev) => prev + 1), 300);
+    } else {
+      setTimeout(() => setShowResults(true), 300);
+    }
+  };
+
+  const handleBack = () => {
+    if (showResults) {
+      setShowResults(false);
+    } else if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
+    }
+  };
+
+  const handleReset = () => {
+    setCurrentStep(0);
+    setAnswers({});
+    setShowResults(false);
+  };
+
+  // Simple recommendation logic - in real app, this would be more sophisticated
+  const getRecommendedLenders = () => {
+    return lenders.slice(0, 3);
+  };
+
+  const recommendedLenders = getRecommendedLenders();
+
+  return (
+    <section className="py-12 lg:py-16">
+      <div className="max-w-4xl mx-auto">
+        <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+          {/* Header */}
+          <div className="bg-[#235675] text-white p-6 lg:p-8">
+            <div className="flex items-center gap-3 mb-2">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-sm font-medium opacity-90">
+                Need help finding the right lender for you?
+              </span>
+            </div>
+            <h2 className="text-2xl lg:text-3xl font-bold">
+              Compare and choose the best business loans for you
+            </h2>
+          </div>
+
+          {/* Content */}
+          <div className="p-6 lg:p-8">
+            {!showResults ? (
+              <div>
+                {/* Progress */}
+                <div className="mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-slate-600">
+                      Step {currentStep + 1} / {steps.length}
+                    </span>
+                    <span className="text-sm text-slate-500">
+                      {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
+                    </span>
+                  </div>
+                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-[#235675] rounded-full transition-all duration-500"
+                      style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                    />
+                  </div>
+                </div>
+
+                {/* Question */}
+                <h3 className="text-xl lg:text-2xl font-semibold text-slate-900 mb-6">
+                  {steps[currentStep].question}
+                </h3>
+
+                {/* Options */}
+                <div className="grid gap-3">
+                  {steps[currentStep].options.map((option) => (
+                    <button
+                      key={option.value}
+                      onClick={() => handleAnswer(steps[currentStep].key, option.value)}
+                      className={`w-full p-4 text-left rounded-xl border-2 transition-all ${
+                        answers[steps[currentStep].key] === option.value
+                          ? 'border-[#235675] bg-[#235675]/5'
+                          : 'border-slate-200 hover:border-[#235675]/50 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span className="font-medium text-slate-700">{option.label}</span>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Navigation */}
+                {currentStep > 0 && (
+                  <div className="mt-6 pt-6 border-t border-slate-100">
+                    <Button variant="secondary" onClick={handleBack} className="text-slate-600">
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back
+                    </Button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                <div className="text-center mb-8">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
+                    <Check className="w-8 h-8 text-emerald-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                    Based on your answers, we recommend
+                  </h3>
+                  <p className="text-slate-600">These lenders match your business profile</p>
+                </div>
+
+                {/* Recommended Lenders */}
+                <div className="space-y-4">
+                  {recommendedLenders.map((lender, index) => (
+                    <div
+                      key={lender.id}
+                      className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold">
+                        {index + 1}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-slate-900">{lender.name}</h4>
+                        <div className="flex items-center gap-2 mt-1">
+                          <StarRating score={lender.totalScore} />
+                          <span className="text-sm text-slate-500">{lender.totalScore}/10</span>
+                        </div>
+                      </div>
+                      <Button
+                        variant="primary"
+                        className="bg-[#235675] hover:bg-[#1a4259]"
+                        onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
+                      >
+                        See Plans
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Disclaimer */}
+                <p className="mt-6 text-xs text-slate-500 text-center italic">
+                  *This recommendation is based on our assessment; users are urged to consider
+                  individual factors before choosing a vendor.
+                </p>
+
+                {/* Actions */}
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                  <Button variant="secondary" onClick={handleReset}>
+                    Start Over
+                  </Button>
+                  <Button variant="secondary" onClick={handleBack} className="text-slate-600">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back
+                  </Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
