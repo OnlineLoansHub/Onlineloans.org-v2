@@ -221,25 +221,25 @@ export default function FilterModule({
       </div>
 
       {/* Mobile Filter Button */}
-      <div className="lg:hidden mb-4">
+      <div className="lg:hidden" style={{ flex: '1', minWidth: 0, maxWidth: '40%' }}>
         <Button
           variant="secondary"
           onClick={() => setMobileFiltersOpen(true)}
-          className="w-full flex items-center justify-center gap-2 !text-black"
+          className="w-full flex items-center justify-center gap-1.5 !text-black"
           style={{
-            padding: '6px 16px',
+            padding: '5px 12px',
             border: '1px solid #e5e7eb',
-            fontSize: '14px',
+            fontSize: '13px',
             borderRadius: '12px',
             height: 'auto',
             minHeight: 'auto',
             color: '#000000',
           }}
         >
-          <Filter className="w-4 h-4" />
+          <Filter className="w-3.5 h-3.5" />
           Filters
           {activeFilterCount > 0 && (
-            <span className="bg-[#235675] text-white text-xs px-2 py-0.5 rounded-full">
+            <span className="bg-[#235675] text-white text-xs px-1.5 py-0.5 rounded-full">
               {activeFilterCount}
             </span>
           )}

@@ -19,18 +19,16 @@ const sortOptions: Option[] = [
 
 export default function SortControl({ sortBy, onSortChange }: SortControlProps) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="flex items-center gap-1.5 text-sm text-slate-500 whitespace-nowrap">
-        <ArrowUpDown className="w-4 h-4" />
-        <span>Sort by:</span>
-      </div>
+    <div className="flex items-center gap-1.5 lg:gap-3 w-full lg:w-auto">
+      <ArrowUpDown className="w-4 h-4 text-slate-500 flex-shrink-0" />
+      <span className="text-sm text-slate-500 whitespace-nowrap flex-shrink-0">Sort by:</span>
       <Select
         name="sort"
         value={sortBy}
         onChange={(value) => onSortChange(String(value))}
         options={sortOptions}
         placeholder="Select..."
-        className="!w-auto"
+        className="!w-auto flex-1 lg:!w-auto"
         buttonClassName="!h-auto !text-sm !font-normal !text-black"
         buttonStyle={{
           padding: '6px 16px',
@@ -39,7 +37,7 @@ export default function SortControl({ sortBy, onSortChange }: SortControlProps) 
           borderRadius: '12px',
           height: 'auto',
           minHeight: 'auto',
-          width: '120px',
+          width: '100%',
           color: '#000000',
         }}
         optionStyle={{

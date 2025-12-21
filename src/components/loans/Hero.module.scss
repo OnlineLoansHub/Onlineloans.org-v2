@@ -4,11 +4,11 @@
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-primary) 0%, #1e2d4d 50%, #152238 100%);
   color: var(--color-white);
-  padding: 100px 0;
+  padding: 100px 0 40px 0;
   text-align: left;
 
   @media (width <= 768px) {
-    padding: 60px 0;
+    padding: 16px 0 16px 0;
   }
 }
 
@@ -113,14 +113,14 @@
 }
 
 .lastUpdated {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   position: relative;
   z-index: 1;
   color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
 
   @media (width <= 768px) {
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 }
 
@@ -132,7 +132,7 @@
   z-index: 1;
 
   @media (width <= 768px) {
-    margin-bottom: 0;
+    display: none;
   }
 }
 
@@ -140,4 +140,3 @@
   max-width: 100%;
   height: auto;
 }
-

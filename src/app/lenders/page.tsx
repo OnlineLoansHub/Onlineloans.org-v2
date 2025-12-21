@@ -101,6 +101,17 @@ export default function LendersPage() {
 
       {/* Main Content */}
       <section className={styles.mainContent}>
+        {/* Mobile Filter and Sort Row */}
+        <div className={styles.mobileControlsRow}>
+          <SortControl sortBy={sortBy} onSortChange={setSortBy} />
+          <FilterModule
+            filters={filters}
+            onFilterChange={handleFilterChange}
+            onReset={handleReset}
+            resultCount={filteredLenders.length}
+          />
+        </div>
+
         <div className={styles.contentWrapper}>
           {/* Sidebar Filters - Desktop */}
           <aside className={styles.sidebar}>
@@ -116,7 +127,7 @@ export default function LendersPage() {
 
           {/* Main Content Area */}
           <main className={styles.mainArea}>
-            {/* Sort Control */}
+            {/* Sort Control - Desktop */}
             <div className={styles.sortControlContainer}>
               <div className={styles.resultsText}>
                 Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
