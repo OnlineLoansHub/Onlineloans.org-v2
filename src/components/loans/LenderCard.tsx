@@ -199,7 +199,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           </div>
 
           {/* Score Breakdown */}
-          <div className="mt-3">
+          <div className="mt-4">
             <ScoreBreakdown
               trustpilotScore={lender.trustpilotScore}
               brandReputation={lender.brandReputation}
