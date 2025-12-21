@@ -41,6 +41,7 @@ export default function ScoreBreakdown({
     <div className="grid grid-cols-3 gap-4 py-4 border-t border-b border-slate-100">
       {scores.map((score, index) => (
         <div key={index} className="text-center relative">
+          <div className="text-2xl font-bold text-[#235675] mb-1">{score.value || '—'}</div>
           <div className="flex items-center justify-center gap-1 mb-1">
             <span className="text-xs text-slate-500 font-medium">{score.label}</span>
             <div
@@ -57,8 +58,7 @@ export default function ScoreBreakdown({
               )}
             </div>
           </div>
-          <div className="text-2xl font-bold text-[#235675]">{score.value || '—'}</div>
-          <div className="text-xs text-slate-400 mt-0.5">{score.helper}</div>
+          <div className="text-xs text-slate-400">{score.helper}</div>
         </div>
       ))}
     </div>
