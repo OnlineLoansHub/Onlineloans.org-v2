@@ -116,8 +116,11 @@ function FilterSection({
   return (
     <div className="border-b border-slate-100 last:border-b-0">
       <button
-        onClick={onToggle}
-        className="w-full flex items-center justify-between py-3 px-4 hover:bg-slate-50 transition-colors"
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggle();
+        }}
+        className="w-full flex items-center justify-between py-3 px-4 lg:hover:bg-slate-50 transition-colors"
       >
         <span className="font-medium text-slate-700">{config.label}</span>
         <div className="flex items-center gap-2">
@@ -135,22 +138,34 @@ function FilterSection({
       {isExpanded && (
         <div className="overflow-hidden transition-all duration-200">
           <div className="px-4 pb-3 space-y-1">
-            {config.options.map((option) => (
-              <label
-                key={option.value}
-                className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors"
-              >
-                <input
-                  type="radio"
-                  name={filterKey}
-                  value={option.value}
-                  checked={value === option.value}
-                  onChange={() => onChange(filterKey, option.value)}
-                  className="w-4 h-4 text-[#235675] border-slate-300 focus:ring-[#235675]"
-                />
-                <span className="text-sm text-slate-600">{option.label}</span>
-              </label>
-            ))}
+            {config.options.map((option) => {
+              const isSelected = value === option.value;
+              const inputId = `${filterKey}-${option.value}`;
+
+              return (
+                <label
+                  key={option.value}
+                  htmlFor={inputId}
+                  className="flex items-center gap-3 py-2 px-3 rounded-lg lg:hover:bg-slate-50 cursor-pointer transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <input
+                    type="radio"
+                    id={inputId}
+                    name={filterKey}
+                    value={option.value}
+                    checked={isSelected}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      onChange(filterKey, e.target.value);
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                    className="w-4 h-4 text-[#235675] border-slate-300 focus:ring-[#235675]"
+                  />
+                  <span className="text-sm text-slate-600 flex-1">{option.label}</span>
+                </label>
+              );
+            })}
           </div>
         </div>
       )}
@@ -178,7 +193,7 @@ export default function FilterModule({
 
   const activeFilterCount = Object.values(filters).filter((v) => v !== 'all').length;
 
-  const FilterContent = () => (
+  const filterContent = (
     <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
       <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50">
         <div className="flex items-center gap-2">
@@ -188,7 +203,7 @@ export default function FilterModule({
         {activeFilterCount > 0 && (
           <button
             onClick={onReset}
-            className="flex items-center gap-1 text-xs text-slate-500 hover:text-[#235675] transition-colors"
+            className="flex items-center gap-1 text-xs text-slate-500 lg:hover:text-[#235675] transition-colors"
           >
             <RotateCcw className="w-3 h-3" />
             Reset
@@ -214,7 +229,7 @@ export default function FilterModule({
     <>
       {/* Desktop Filters */}
       <div className="hidden lg:block">
-        <FilterContent />
+        {filterContent}
         <div className="mt-4 text-center text-sm text-slate-500">
           <span className="font-medium text-slate-700">{resultCount}</span> results found
         </div>
@@ -246,32 +261,44 @@ export default function FilterModule({
         </Button>
       </div>
 
-      {/* Mobile Filter Drawer */}
+      {/* Mobile Filter Popup */}
       {mobileFiltersOpen && (
         <>
           <div
             className="fixed inset-0 bg-black/50 z-[1001] lg:hidden"
             onClick={() => setMobileFiltersOpen(false)}
           />
-          <div className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white z-[1001] lg:hidden overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 pt-16">
-              <h3 className="font-semibold text-lg">Filters</h3>
-              <button
-                onClick={() => setMobileFiltersOpen(false)}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-4">
-              <FilterContent />
-              <Button
-                variant="primary"
-                className="w-full mt-4 bg-[#235675] hover:bg-[#1a4259]"
-                onClick={() => setMobileFiltersOpen(false)}
-              >
-                Show {resultCount} results
-              </Button>
+          <div className="fixed inset-0 z-[1002] lg:hidden flex items-center justify-center p-4 pointer-events-none">
+            <div
+              className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[85vh] flex flex-col pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 border-b border-slate-200 flex-shrink-0">
+                <h3 className="font-semibold text-lg">Filters</h3>
+                <button
+                  onClick={() => setMobileFiltersOpen(false)}
+                  className="p-2 rounded-lg transition-colors active:bg-slate-100"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="overflow-y-auto flex-1">
+                <div className="p-4">{filterContent}</div>
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 border-t border-slate-200 flex-shrink-0">
+                <Button
+                  variant="primary"
+                  className="w-full bg-[#235675] active:bg-[#1a4259]"
+                  onClick={() => setMobileFiltersOpen(false)}
+                >
+                  Show {resultCount} results
+                </Button>
+              </div>
             </div>
           </div>
         </>
@@ -279,4 +306,3 @@ export default function FilterModule({
     </>
   );
 }
-
