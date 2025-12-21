@@ -202,9 +202,7 @@ export default function LendersPage() {
 
       {/* Educational Content */}
       <EducationalContent />
-
-      {/* Footer */}
-      <Footer />
+ 
     </div>
   );
 }
