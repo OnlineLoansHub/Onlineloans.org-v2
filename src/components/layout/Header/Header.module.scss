@@ -35,14 +35,14 @@
 
   /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
   @media (min-width: 1025px) and (max-width: 1600px) {
-    padding: 0 7rem;
+    padding: 0 4rem; // Reduced from 7rem to decrease spacing
   }
 
   /* 💻 Very large screens */
   @media (min-width: 1601px) {
     max-width: var(--max-container-width);
     margin: 0 auto;
-    padding: 0 300px; // 300px each side on very large screens
+    padding: 0 4rem; // Reduced spacing to match laptops
   }
 }
 
