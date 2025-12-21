@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import DynamicHomePage from '@/features/dynamicHomePage/dynamicHomePage';
+import HomePage from '@/components/HomePage/HomePage';
 import { generateMetadata as generateSEOMetadata } from '@/config/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
@@ -12,15 +12,5 @@ export const metadata: Metadata = generateSEOMetadata({
 });
 
 export default function Home() {
-  return (
-    <DynamicHomePage
-      title={
-        <>
-          Money when <br />
-          you need it. <br />
-          Fast, easy, secure.
-        </>
-      }
-    />
-  );
+  return <HomePage />;
 }
