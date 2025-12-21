@@ -28,7 +28,7 @@ export default function SortControl({ sortBy, onSortChange }: SortControlProps) 
         onChange={(value) => onSortChange(String(value))}
         options={sortOptions}
         placeholder="Select..."
-        className="!w-auto flex-1 lg:!w-auto"
+        className="!w-auto flex-1 lg:!w-auto sort-control-select"
         buttonClassName="!h-auto !text-sm !font-normal !text-black"
         buttonStyle={{
           padding: '6px 16px',
@@ -47,4 +47,3 @@ export default function SortControl({ sortBy, onSortChange }: SortControlProps) 
     </div>
   );
 }
-

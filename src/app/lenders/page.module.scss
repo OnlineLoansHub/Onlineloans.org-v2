@@ -94,6 +94,19 @@
   }
 }
 
+:global(.sort-control-select) {
+  @media (min-width: 1024px) {
+    button {
+      width: auto !important;
+      min-width: 140px;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
 .resultsText {
   font-size: 0.875rem;
   color: #64748b;
