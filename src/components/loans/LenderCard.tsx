@@ -149,20 +149,20 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <span className="text-white font-bold text-lg">{rank}</span>
         </div>
 
-        <div className="p-6">
+        <div className="p-6" style={{ paddingLeft: '5rem', paddingRight: '5rem' }}>
           {/* Header Row */}
           <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             {/* Logo & Brand Section */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[80px]">
+              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[90px]">
                 {lender.logo ? (
-                  <div className="relative w-full h-20">
+                  <div className="relative w-full h-[90px] max-w-[220px] mx-auto">
                     <Image
                       src={lender.logo}
                       alt={lender.name}
                       fill
                       className="object-contain"
-                      sizes="(max-width: 1024px) 150px, 200px"
+                      sizes="(max-width: 1024px) 120px, 220px"
                     />
                   </div>
                 ) : (
@@ -174,15 +174,26 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             </div>
 
             {/* Score */}
-            <div className="flex items-center gap-4 lg:text-right">
-              <div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-[#2a3d66]">{lender.totalScore}</span>
+            <div className="flex items-center gap-4 lg:w-[calc(33.333%-1rem)] lg:justify-end">
+              <div className="lg:text-right">
+                <div className="flex items-baseline gap-1 lg:justify-end">
+                  <span className="text-2xl font-bold text-[#2a3d66]">{lender.totalScore}</span>
                   <span className="text-slate-400 text-sm">/10</span>
                 </div>
                 <div className="flex items-center justify-end gap-2 mt-1">
                   <StarRating score={lender.totalScore} />
+                </div>
+                <div className="flex items-center justify-start gap-1 mt-1">
                   <span className="text-xs text-slate-500">Our score</span>
+                  <div className="relative group">
+                    <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
+                      <Info className="w-3.5 h-3.5 text-slate-400" />
+                    </button>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
+                      Our score combines Trustpilot ratings, brand reputation, and popularity to
+                      give you a comprehensive view of each lender's quality and reliability.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
