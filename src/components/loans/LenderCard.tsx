@@ -31,7 +31,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
         {/* Main Content - Two Column Layout */}
         <div className="p-5 pt-12 flex gap-4">
           {/* Left Column */}
-          <div className="flex-[1.5] flex flex-col items-center gap-3">
+          <div className="flex-[1.5] flex flex-col items-center">
             {/* Logo */}
             <div className="flex items-center justify-center min-h-[50px] w-full">
               {lender.logo ? (
@@ -53,7 +53,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
 
             {/* Loan Amount Range */}
             {lender.details && lender.details[0] && (
-              <div className="text-center mt-auto">
+              <div className="text-center mt-2">
                 <p className="text-xs text-slate-600 mb-1 font-medium">Loan Amount</p>
                 <p className="text-2xl font-bold text-slate-900">
                   {lender.details[0].split(': ')[1] || '$25K - $2M'}
@@ -75,7 +75,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               {[...Array(5)].map((_, i) => {
                 const starValue = (lender.totalScore / 10) * 5;
                 const isFilled = i < Math.floor(starValue);
-                
+
                 return (
                   <svg
                     key={i}
@@ -118,7 +118,10 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             </Button>
 
             {/* Phone Number */}
-            <a href="tel:888-501-8270" className="text-xs text-slate-500 hover:text-[#2a3d66] underline">
+            <a
+              href="tel:888-501-8270"
+              className="text-xs text-slate-500 hover:text-[#2a3d66] underline"
+            >
               (888)-501-8270
             </a>
           </div>
@@ -250,4 +253,3 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
     </>
   );
 }
-
