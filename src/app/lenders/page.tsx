@@ -3,18 +3,14 @@
 import { useState, useMemo } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
-
-import DisclosureBar from '@/components/loans/DisclosureBar';
-import Header from '@/components/loans/Header';
 import Hero from '@/components/loans/Hero';
 import LenderCard from '@/components/loans/LenderCard';
 import FilterModule from '@/components/loans/FilterModule';
 import SortControl from '@/components/loans/SortControl';
 import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import CrossPromo from '@/components/loans/CrossPromo';
-import EducationalContent from '@/components/loans/EducationalContent';
-import Footer from '@/components/loans/Footer';
 import { lendersData } from '@/components/loans/lendersData';
+import styles from './page.module.scss';
 
 const INITIAL_DISPLAY_COUNT = 5;
 
@@ -93,30 +89,22 @@ export default function LendersPage() {
       );
     }
 
-    // Sort
-    result.sort((a, b) => {
-      const aVal = (a[sortBy as keyof typeof a] as number) || 0;
-      const bVal = (b[sortBy as keyof typeof b] as number) || 0;
-
-      return bVal - aVal;
-    });
-
     return result;
-  }, [filters, sortBy]);
+  }, [filters]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
   const hasMore = displayCount < filteredLenders.length;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className={styles.page}>
       <Hero validDate="December 21, 2025" />
 
       {/* Main Content */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
-        <div className="flex flex-col lg:flex-row gap-8">
+      <section className={styles.mainContent}>
+        <div className={styles.contentWrapper}>
           {/* Sidebar Filters - Desktop */}
-          <aside className="lg:w-72 flex-shrink-0">
-            <div className="lg:sticky lg:top-24">
+          <aside className={styles.sidebar}>
+            <div className={styles.stickySidebar}>
               <FilterModule
                 filters={filters}
                 onFilterChange={handleFilterChange}
@@ -127,33 +115,26 @@ export default function LendersPage() {
           </aside>
 
           {/* Main Content Area */}
-          <main className="flex-1 min-w-0">
+          <main className={styles.mainArea}>
             {/* Sort Control */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <div className="text-sm text-slate-600">
-                Showing{' '}
-                <span className="font-semibold text-slate-900">{displayedLenders.length}</span> of{' '}
-                <span className="font-semibold text-slate-900">{filteredLenders.length}</span>{' '}
-                lenders
+            <div className={styles.sortControlContainer}>
+              <div className={styles.resultsText}>
+                Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+                <span className={styles.resultsCount}>{filteredLenders.length}</span> lenders
               </div>
               <SortControl sortBy={sortBy} onSortChange={setSortBy} />
             </div>
 
             {/* Lender Cards */}
-            <div className="space-y-6">
+            <div className={styles.lenderCardsContainer}>
               {displayedLenders.length > 0 ? (
                 displayedLenders.map((lender, index) => (
                   <LenderCard key={lender.id} lender={lender} rank={index + 1} />
                 ))
               ) : (
-                <div className="text-center py-12">
-                  <div className="text-slate-400 mb-4">
-                    <svg
-                      className="w-16 h-16 mx-auto"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                <div className={styles.emptyState}>
+                  <div className={styles.emptyStateIcon}>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -162,8 +143,8 @@ export default function LendersPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2">No lenders found</h3>
-                  <p className="text-slate-600 mb-4">
+                  <h3 className={styles.emptyStateTitle}>No lenders found</h3>
+                  <p className={styles.emptyStateText}>
                     Try adjusting your filters to see more results.
                   </p>
                   <Button variant="secondary" onClick={handleReset}>
@@ -175,21 +156,11 @@ export default function LendersPage() {
 
             {/* Show More Button */}
             {hasMore && (
-              <div className="mt-8 flex justify-center">
+              <div className={styles.showMoreContainer}>
                 <Button
                   variant="secondary"
                   onClick={() => setDisplayCount((prev) => prev + 5)}
-                  className="!px-8 !py-3 !text-sm !rounded-xl !text-black"
-                  style={{
-                    padding: '8px 48px',
-                    fontSize: '.875rem',
-                    lineHeight: '1.25rem',
-                    borderRadius: '12px',
-                    height: 'auto',
-                    minHeight: 'auto',
-                    borderColor: '#e5e7eb',
-                    color: '#000000',
-                  }}
+                  className={styles.showMoreButton}
                 >
                   Show More
                   <ChevronDown className="w-4 h-4 ml-2 inline-block" />
@@ -201,8 +172,8 @@ export default function LendersPage() {
       </section>
 
       {/* Recommendation Wizard */}
-      <div className="bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className={styles.recommendationSection}>
+        <div className={styles.recommendationContainer}>
           <RecommendationWizard lenders={lendersData} />
         </div>
       </div>
