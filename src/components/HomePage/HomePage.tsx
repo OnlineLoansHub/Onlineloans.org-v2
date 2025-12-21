@@ -13,15 +13,18 @@ import {
   Wallet,
   Landmark,
   Coins,
+  Search,
+  GitCompare,
+  CheckCircle,
 } from 'lucide-react';
 
 const categories = [
+  { icon: Briefcase, title: 'Business Loans' },
   { icon: PawPrint, title: 'Pet Insurance' },
   { icon: HomeIcon, title: 'Mortgage Loans' },
   { icon: Heart, title: 'Life Insurance' },
   { icon: GraduationCap, title: 'Student Loans' },
   { icon: Layers, title: 'Debt Consolidation' },
-  { icon: Briefcase, title: 'Business Loans' },
   { icon: Wallet, title: 'Personal Loans' },
   { icon: Landmark, title: 'Online Banking' },
   { icon: Coins, title: 'Gold and Silver' },
@@ -133,44 +136,56 @@ export default function HomePage() {
       </section>
 
       {/* Vendor Logos Bar */}
-      <section className="w-full bg-gray-50 border-t border-gray-200 py-8">
+      <section
+        className="w-full border-t border-gray-200 py-8"
+        style={{ backgroundColor: '#f2f2f2' }}
+      >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mobile Layout */}
-          <div className="flex flex-col items-center gap-4 lg:hidden">
-            <h3 className="text-base font-semibold text-gray-800 text-center">
+          <div className="flex flex-col items-center gap-5 lg:hidden">
+            <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 text-center">
               Explore our <span className="font-bold">Top Vendors:</span>
             </h3>
 
-            <div className="flex flex-col items-center gap-3 w-full max-w-md">
+            <div className="flex flex-col items-center gap-4 w-full max-w-md">
               {/* Row 1 */}
-              <div className="flex items-center justify-center gap-6 w-full">
-                <div className="relative h-8 w-32">
+              <div className="flex items-center justify-center gap-4 w-full">
+                <div className="relative h-7 w-28">
                   <Image
                     src="/images/table/LendingTree-logo.svg"
                     alt="LendingTree"
                     fill
                     className="object-contain"
+                    quality={100}
+                    sizes="112px"
+                    priority
                   />
                 </div>
-                <div className="relative h-8 w-20">
+                <div className="relative h-7 w-20">
                   <Image
                     src="/images/table/Sofi-logo.svg"
                     alt="SoFi"
                     fill
                     className="object-contain"
+                    quality={100}
+                    sizes="80px"
+                    priority
                   />
                 </div>
-                <span className="text-lg font-semibold italic text-[#ff2968]">Lemonade</span>
+                <span className="text-2xl font-semibold italic text-[#ff2968]">Lemonade</span>
               </div>
 
               {/* Row 2 */}
-              <div className="flex items-center justify-center gap-6 w-full">
+              <div className="flex items-center justify-center gap-4 w-full">
                 <div className="relative h-6 w-24">
                   <Image
                     src="/images/table/Credible-logo.svg"
                     alt="Credible"
                     fill
                     className="object-contain"
+                    quality={100}
+                    sizes="96px"
+                    priority
                   />
                 </div>
                 <div className="relative h-6 w-28">
@@ -179,6 +194,9 @@ export default function HomePage() {
                     alt="Fundera"
                     fill
                     className="object-contain"
+                    quality={100}
+                    sizes="112px"
+                    priority
                   />
                 </div>
                 <div className="relative h-6 w-28">
@@ -187,6 +205,9 @@ export default function HomePage() {
                     alt="Biz2Credit"
                     fill
                     className="object-contain"
+                    quality={100}
+                    sizes="112px"
+                    priority
                   />
                 </div>
               </div>
@@ -265,251 +286,114 @@ export default function HomePage() {
             className="font-bold text-center sm:text-left text-[30px] sm:text-[40px] leading-[120%] mb-[25px] sm:mb-16"
             style={{ color: '#000' }}
           >
-            We make things easier for you:
+            We make things <br className="sm:hidden" /> easier for you:
           </h2>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Card 1 */}
-            <div className="bg-white rounded-2xl border border-[#d4eaf2] shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center">
+            <div className="group relative bg-white rounded-2xl border-2 border-[#d4eaf2] shadow-md hover:shadow-xl hover:shadow-[var(--color-primary)]/10 transition-all duration-300 hover:-translate-y-2 hover:border-[var(--color-primary)]/30 p-8 flex flex-col items-center overflow-hidden">
+              {/* Step Number */}
+              <div className="absolute top-0 left-0 w-12 h-12 bg-[var(--color-primary)] text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-110 transition-transform duration-300 rounded-tl-2xl rounded-br-lg">
+                1
+              </div>
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/0 to-[var(--color-primary)]/0 group-hover:from-[var(--color-primary)]/5 group-hover:to-transparent transition-all duration-300 rounded-2xl"></div>
               {/* Illustration */}
-              <div className="w-full h-32 mb-6 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[#e8f4f8] opacity-30 rounded-xl blur-xl"></div>
-                <svg
-                  className="relative z-10 w-24 h-24"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="20"
-                    y="25"
-                    width="60"
-                    height="50"
-                    rx="4"
-                    stroke="var(--color-primary)"
-                    strokeWidth="2"
-                    fill="#f0f9ff"
+              <div className="relative z-10 w-full h-32 mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 opacity-30 group-hover:opacity-50 rounded-xl blur-xl transition-opacity duration-300"></div>
+                <div className="relative z-10 w-20 h-20 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 flex items-center justify-center group-hover:from-[var(--color-primary)]/20 group-hover:to-[var(--color-primary)]/15 transition-all duration-300">
+                  <Search
+                    className="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
+                    style={{ color: 'var(--color-primary)' }}
+                    strokeWidth={2}
                   />
-                  <line
-                    x1="28"
-                    y1="35"
-                    x2="55"
-                    y2="35"
-                    stroke="var(--color-primary)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="28"
-                    y1="45"
-                    x2="50"
-                    y2="45"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="28"
-                    y1="55"
-                    x2="60"
-                    y2="55"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="28"
-                    y1="65"
-                    x2="45"
-                    y2="65"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="70" cy="35" r="8" fill="#4da6c7" opacity="0.6" />
-                  <path
-                    d="M67 35L69 37L73 33"
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
-                Find the Right Information
+              <h3 className="relative z-10 text-xl font-bold text-gray-900 text-center mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                Explore
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-600 text-center leading-relaxed max-w-sm">
+              <p className="relative z-10 text-sm text-gray-600 text-center leading-relaxed max-w-sm group-hover:text-gray-700 transition-colors duration-300">
                 Get access to accurate and relevant financial insights tailored to your needs. Stay
                 informed with real-time updates.
               </p>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[var(--color-primary)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl"></div>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white rounded-2xl border border-[#d4eaf2] shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center">
+            <div className="group relative bg-white rounded-2xl border-2 border-[#d4eaf2] shadow-md hover:shadow-xl hover:shadow-[var(--color-primary)]/10 transition-all duration-300 hover:-translate-y-2 hover:border-[var(--color-primary)]/30 p-8 flex flex-col items-center overflow-hidden">
+              {/* Step Number */}
+              <div className="absolute top-0 left-0 w-12 h-12 bg-[var(--color-primary)] text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-110 transition-transform duration-300 rounded-tl-2xl rounded-br-lg">
+                2
+              </div>
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/0 to-[var(--color-primary)]/0 group-hover:from-[var(--color-primary)]/5 group-hover:to-transparent transition-all duration-300 rounded-2xl"></div>
               {/* Illustration */}
-              <div className="w-full h-32 mb-6 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[#e8f4f8] opacity-30 rounded-xl blur-xl"></div>
-                <svg
-                  className="relative z-10 w-24 h-24"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="25"
-                    y="20"
-                    width="50"
-                    height="60"
-                    rx="4"
-                    stroke="var(--color-primary)"
-                    strokeWidth="2"
-                    fill="#f0f9ff"
+              <div className="relative z-10 w-full h-32 mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 opacity-30 group-hover:opacity-50 rounded-xl blur-xl transition-opacity duration-300"></div>
+                <div className="relative z-10 w-20 h-20 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 flex items-center justify-center group-hover:from-[var(--color-primary)]/20 group-hover:to-[var(--color-primary)]/15 transition-all duration-300">
+                  <GitCompare
+                    className="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
+                    style={{ color: 'var(--color-primary)' }}
+                    strokeWidth={2}
                   />
-                  <rect x="35" y="15" width="30" height="8" rx="2" fill="#4da6c7" />
-                  <line
-                    x1="32"
-                    y1="32"
-                    x2="42"
-                    y2="32"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="32"
-                    y1="40"
-                    x2="42"
-                    y2="40"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="32"
-                    y1="48"
-                    x2="42"
-                    y2="48"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="32"
-                    y1="56"
-                    x2="42"
-                    y2="56"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="32"
-                    y1="64"
-                    x2="42"
-                    y2="64"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <rect x="46" y="30" width="20" height="6" rx="1" fill="#4da6c7" opacity="0.4" />
-                  <rect x="46" y="38" width="20" height="6" rx="1" fill="#4da6c7" opacity="0.4" />
-                  <rect x="46" y="46" width="20" height="6" rx="1" fill="#4da6c7" opacity="0.4" />
-                  <rect x="46" y="54" width="20" height="6" rx="1" fill="#4da6c7" opacity="0.6" />
-                  <rect x="46" y="62" width="20" height="6" rx="1" fill="#4da6c7" opacity="0.4" />
-                </svg>
+                </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
-                Compare Your Options
+              <h3 className="relative z-10 text-xl font-bold text-gray-900 text-center mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                Compare
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-600 text-center leading-relaxed max-w-sm">
+              <p className="relative z-10 text-sm text-gray-600 text-center leading-relaxed max-w-sm group-hover:text-gray-700 transition-colors duration-300">
                 Easily evaluate different providers and offers side by side. Focus on what matters
                 most to make the best decision.
               </p>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[var(--color-primary)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl"></div>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white rounded-2xl border border-[#d4eaf2] shadow-sm hover:shadow-md transition-shadow p-8 flex flex-col items-center">
+            <div className="group relative bg-white rounded-2xl border-2 border-[#d4eaf2] shadow-md hover:shadow-xl hover:shadow-[var(--color-primary)]/10 transition-all duration-300 hover:-translate-y-2 hover:border-[var(--color-primary)]/30 p-8 flex flex-col items-center overflow-hidden">
+              {/* Step Number */}
+              <div className="absolute top-0 left-0 w-12 h-12 bg-[var(--color-primary)] text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:scale-110 transition-transform duration-300 rounded-tl-2xl rounded-br-lg">
+                3
+              </div>
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/0 to-[var(--color-primary)]/0 group-hover:from-[var(--color-primary)]/5 group-hover:to-transparent transition-all duration-300 rounded-2xl"></div>
               {/* Illustration */}
-              <div className="w-full h-32 mb-6 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[#e8f4f8] opacity-30 rounded-xl blur-xl"></div>
-                <svg
-                  className="relative z-10 w-24 h-24"
-                  viewBox="0 0 100 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="30"
-                    y="25"
-                    width="40"
-                    height="50"
-                    rx="4"
-                    stroke="var(--color-primary)"
-                    strokeWidth="2"
-                    fill="#f0f9ff"
+              <div className="relative z-10 w-full h-32 mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 opacity-30 group-hover:opacity-50 rounded-xl blur-xl transition-opacity duration-300"></div>
+                <div className="relative z-10 w-20 h-20 rounded-xl bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 flex items-center justify-center group-hover:from-[var(--color-primary)]/20 group-hover:to-[var(--color-primary)]/15 transition-all duration-300">
+                  <CheckCircle
+                    className="w-10 h-10 group-hover:scale-110 transition-transform duration-300"
+                    style={{ color: 'var(--color-primary)' }}
+                    strokeWidth={2}
                   />
-                  <line
-                    x1="37"
-                    y1="35"
-                    x2="50"
-                    y2="35"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="37"
-                    y1="43"
-                    x2="55"
-                    y2="43"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <line
-                    x1="37"
-                    y1="51"
-                    x2="48"
-                    y2="51"
-                    stroke="#b8dce8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                  <rect x="37" y="60" width="26" height="8" rx="2" fill="#4da6c7" />
-                  <circle cx="75" cy="35" r="12" fill="#4da6c7" opacity="0.2" />
-                  <circle cx="75" cy="35" r="10" fill="#4da6c7" opacity="0.6" />
-                  <path
-                    d="M72 35L74 37L78 33"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="25" cy="50" r="8" fill="#d4eaf2" opacity="0.5" />
-                  <circle cx="25" cy="65" r="6" fill="#d4eaf2" opacity="0.5" />
-                </svg>
+                </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
-                Choose with Confidence
+              <h3 className="relative z-10 text-xl font-bold text-gray-900 text-center mb-3 group-hover:text-[var(--color-primary)] transition-colors duration-300">
+                Choose
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-600 text-center leading-relaxed max-w-sm">
+              <p className="relative z-10 text-sm text-gray-600 text-center leading-relaxed max-w-sm group-hover:text-gray-700 transition-colors duration-300">
                 Select from a trusted list of providers and move forward knowing you've made a
                 well-informed financial choice.
               </p>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[var(--color-primary)] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-2xl"></div>
             </div>
           </div>
         </div>

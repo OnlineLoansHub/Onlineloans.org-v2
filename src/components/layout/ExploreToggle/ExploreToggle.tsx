@@ -101,7 +101,7 @@ export const ExploreToggle = () => {
               </>
             ) : (
               <div className={cls.footerWrapper}>
-                <span className={cls.btnText}>Want to explore before deciding?</span>
+                <span className={cls.btnText}>Want to read more?</span>
                 <Image
                   src={'/images/icons/features/form-footer-arrowDown.svg'}
                   alt={'arrow'}
@@ -115,7 +115,7 @@ export const ExploreToggle = () => {
         )}
         {isShowTable && (
           <>
-            <p className={cls.footerTitle}>Want to explore before deciding?</p>
+            <p className={cls.footerTitle}>Want to read more?</p>
             <p className={cls.footerSubtitle}>
               That's okay — explore our guides and state-specific resources to learn more about your
               financing options.
