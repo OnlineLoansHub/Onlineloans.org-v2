@@ -323,30 +323,34 @@ export default function FilterModule({
 
       {/* Mobile Filter Button */}
       <div className="lg:hidden" style={{ flex: '1', minWidth: 0, maxWidth: '40%' }}>
-        <Button
-          variant="secondary"
+        <button
+          type="button"
           onClick={handleOpenMobileFilters}
-          className="w-full flex items-center justify-center gap-2 !text-black !bg-white hover:!bg-slate-50"
+          className="w-full flex items-center justify-center gap-1.5 text-sm font-normal text-black bg-white hover:bg-slate-50 transition-colors"
           style={{
-            padding: '8px 16px',
+            padding: '6px 16px',
             border: '1px solid #e5e7eb',
             fontSize: '14px',
-            fontWeight: '500',
+            fontWeight: 'normal',
+            lineHeight: '1.25rem',
             borderRadius: '12px',
             height: 'auto',
             minHeight: 'auto',
             color: '#000000',
-            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <Filter className="w-4 h-4" />
+          <Filter className="w-3.5 h-3.5" />
           <span>Filters</span>
           {activeFilterCount > 0 && (
-            <span className="bg-[#235675] text-white text-xs font-semibold px-2 py-0.5 rounded-full min-w-[20px] flex items-center justify-center">
+            <span className="bg-[#235675] text-white text-xs px-1.5 py-0.5 rounded-full">
               {activeFilterCount}
             </span>
           )}
-        </Button>
+        </button>
       </div>
 
       {/* Mobile Filter Popup */}
