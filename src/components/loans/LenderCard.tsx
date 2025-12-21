@@ -75,6 +75,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               {[...Array(5)].map((_, i) => {
                 const starValue = (lender.totalScore / 10) * 5;
                 const isFilled = i < Math.floor(starValue);
+                
                 return (
                   <svg
                     key={i}
