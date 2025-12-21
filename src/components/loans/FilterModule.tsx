@@ -250,11 +250,11 @@ export default function FilterModule({
       {mobileFiltersOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-50 lg:hidden"
+            className="fixed inset-0 bg-black/50 z-[1001] lg:hidden"
             onClick={() => setMobileFiltersOpen(false)}
           />
-          <div className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white z-50 lg:hidden overflow-y-auto">
-            <div className="flex items-center justify-between p-4 border-b border-slate-200">
+          <div className="fixed right-0 top-0 bottom-0 w-full max-w-sm bg-white z-[1001] lg:hidden overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-slate-200 pt-16">
               <h3 className="font-semibold text-lg">Filters</h3>
               <button
                 onClick={() => setMobileFiltersOpen(false)}
