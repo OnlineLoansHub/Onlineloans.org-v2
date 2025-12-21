@@ -50,13 +50,11 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               )}
             </div>
 
-            {/* Loan Amount Range */}
-            {lender.details && lender.details[0] && (
-              <div className="text-center mt-2">
+            {/* Loan Amount - Mobile Only */}
+            {lender.loanAmount && (
+              <div className="text-center mt-2 lg:hidden">
                 <p className="text-xs text-slate-600 mb-1 font-medium">Loan Amount</p>
-                <p className="text-2xl font-bold text-slate-900">
-                  {lender.details[0].split(': ')[1] || '$25K - $2M'}
-                </p>
+                <p className="text-2xl font-bold text-slate-900">{lender.loanAmount}</p>
               </div>
             )}
           </div>
@@ -209,22 +207,34 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           </div>
 
           {/* Details */}
-          {lender.details && lender.details.length > 0 && (
+          {((lender.goodDetails && lender.goodDetails.length > 0) ||
+            (lender.badDetails && lender.badDetails.length > 0)) && (
             <div className="mt-6 grid grid-cols-2 gap-2">
-              {lender.details.map((detail, index) => {
-                const isLeftColumn = index % 2 === 0;
-
-                return (
-                  <div key={index} className="flex items-start gap-2">
-                    {isLeftColumn ? (
-                      <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                    ) : (
-                      <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
-                    )}
+              {/* Left Column - Good Details */}
+              <div className="flex flex-col gap-2">
+                {/* Loan Amount - Desktop Only, First Item, Bold */}
+                {lender.loanAmount && (
+                  <div className="hidden lg:flex items-start gap-2">
+                    <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm font-bold text-slate-900">Loan Amount: {lender.loanAmount}</span>
+                  </div>
+                )}
+                {lender.goodDetails?.map((detail, index) => (
+                  <div key={`good-${index}`} className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
                     <span className="text-sm text-slate-600">{detail}</span>
                   </div>
-                );
-              })}
+                ))}
+              </div>
+              {/* Right Column - Bad Details */}
+              <div className="flex flex-col gap-2">
+                {lender.badDetails?.map((detail, index) => (
+                  <div key={`bad-${index}`} className="flex items-start gap-2">
+                    <X className="w-5 h-5 text-red-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-slate-600">{detail}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
 
