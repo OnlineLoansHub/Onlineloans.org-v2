@@ -18,12 +18,12 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
     <>
       {/* Mobile Card - Simple Layout */}
       <div
-        className={`lg:hidden bg-white rounded-2xl shadow-lg overflow-hidden relative ${
+        className={`lg:hidden bg-white rounded shadow-lg overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border-2 border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br-2xl flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-lg">{rank}</span>
         </div>
 
@@ -104,7 +104,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               className="w-full bg-[#2a3d66] hover:bg-[#1f2d4d] text-white font-bold"
               style={{
                 padding: '8px 16px',
-                borderRadius: '12px',
+                borderRadius: '6px',
                 fontSize: '16px',
                 height: 'auto',
               }}
@@ -137,12 +137,12 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
 
       {/* Desktop Card - Full Layout */}
       <div
-        className={`hidden lg:block bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative ${
+        className={`hidden lg:block bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br-2xl flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-lg">{rank}</span>
         </div>
 
@@ -151,7 +151,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-4">
             {/* Logo & Brand Section */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-xl p-2 mb-2 flex items-center justify-center min-h-[80px]">
+              <div className="bg-white rounded p-2 mb-2 flex items-center justify-center min-h-[80px]">
                 {lender.logo ? (
                   <div className="relative w-full h-[80px] max-w-[280px] mx-auto">
                     <Image
@@ -242,9 +242,9 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
-              className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white rounded-xl font-semibold text-base transition-all group"
+              className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white rounded font-semibold text-base transition-all group"
               style={{
-                borderRadius: '.75rem',
+                borderRadius: '6px',
                 fontSize: '1rem',
                 paddingTop: '10px',
                 paddingBottom: '10px',

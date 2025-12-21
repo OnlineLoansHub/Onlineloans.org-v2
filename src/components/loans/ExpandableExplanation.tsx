@@ -5,7 +5,7 @@ export default function ExpandableExplanation() {
     <div className="mt-8">
       <h2 className="text-2xl font-bold text-slate-900 mb-6">How our total score works</h2>
 
-      <div className="p-5 bg-slate-50 rounded-xl space-y-4">
+      <div className="p-5 bg-slate-50 rounded space-y-4">
         <div>
           <h4 className="font-semibold text-slate-900 text-sm mb-1.5">Our Total Score</h4>
           <p className="text-sm text-slate-600 leading-relaxed">

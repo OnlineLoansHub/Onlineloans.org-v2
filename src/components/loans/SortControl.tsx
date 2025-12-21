@@ -34,7 +34,7 @@ export default function SortControl({ sortBy, onSortChange }: SortControlProps) 
           padding: '6px 16px',
           border: '1px solid #e5e7eb',
           fontSize: '14px',
-          borderRadius: '12px',
+          borderRadius: '6px',
           height: 'auto',
           minHeight: 'auto',
           width: '100%',

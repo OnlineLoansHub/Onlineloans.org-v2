@@ -121,7 +121,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
       {/* Mobile Version */}
       <section className="lg:hidden py-8">
         <div className="w-full">
-          <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
             <div className="bg-[#235675] text-white p-6 py-8">
               <div className="flex items-center gap-2 mb-4">
@@ -168,7 +168,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                       <button
                         key={option.value}
                         onClick={() => handleAnswer(steps[currentStep].key, option.value)}
-                        className={`w-full p-3 text-left rounded-lg transition-all ${
+                        className={`w-full p-3 text-left rounded transition-all ${
                           answers[steps[currentStep].key] === option.value
                             ? 'bg-[#235675]/5'
                             : 'hover:bg-slate-50'
@@ -217,7 +217,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                     {recommendedLenders.map((lender, index) => (
                       <div
                         key={lender.id}
-                        className="flex flex-col gap-3 p-3 bg-white rounded-lg border border-slate-200"
+                        className="flex flex-col gap-3 p-3 bg-white rounded border border-slate-200"
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold flex-shrink-0">
@@ -275,7 +275,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
       {/* Desktop Version */}
       <section className="hidden lg:block py-12 lg:py-16">
         <div className="w-full">
-          <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
+          <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
             <div className="bg-[#235675] text-white p-6 lg:p-8 py-10 lg:py-12">
               <div className="flex items-center gap-3 mb-4">
@@ -322,7 +322,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                       <button
                         key={option.value}
                         onClick={() => handleAnswer(steps[currentStep].key, option.value)}
-                        className={`w-full p-4 text-left rounded-xl transition-all ${
+                        className={`w-full p-4 text-left rounded transition-all ${
                           answers[steps[currentStep].key] === option.value
                             ? 'bg-[#235675]/5'
                             : 'hover:bg-slate-50'
@@ -367,7 +367,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                     {recommendedLenders.map((lender, index) => (
                       <div
                         key={lender.id}
-                        className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md transition-shadow"
+                        className="flex items-center gap-4 p-4 bg-white rounded border border-slate-200 hover:shadow-md transition-shadow"
                       >
                         <div className="w-10 h-10 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold">
                           {index + 1}

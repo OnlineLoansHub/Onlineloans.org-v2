@@ -40,7 +40,7 @@ export default function CrossPromo() {
     <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#235675]/10 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#235675]/10 rounded mb-4">
             <Building2 className="w-4 h-4 text-[#235675]" />
             <span className="text-sm font-medium text-[#235675]">Related Services</span>
           </div>
@@ -56,10 +56,10 @@ export default function CrossPromo() {
           {relatedProviders.map((provider) => (
             <div
               key={provider.id}
-              className="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-lg transition-shadow"
+              className="bg-white rounded border border-slate-200 p-5 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center justify-between mb-3">
-                <div className="h-8 px-3 rounded-lg bg-slate-100 flex items-center">
+                <div className="h-8 px-3 rounded bg-slate-100 flex items-center">
                   <span className="font-bold text-slate-700">{provider.name}</span>
                 </div>
                 <div className="text-right">

@@ -162,7 +162,7 @@ function FilterSection({
                 <div
                   key={`${filterKey}-${option.value}`}
                   className={`
-                    flex items-center gap-3 py-2.5 px-3 rounded-lg cursor-pointer transition-all
+                    flex items-center gap-3 py-2.5 px-3 rounded cursor-pointer transition-all
                     ${isSelected ? 'bg-[#235675]/10 border border-[#235675]/20' : 'hover:bg-slate-50'}
                   `}
                   onClick={(e) => {
@@ -266,11 +266,11 @@ export default function FilterModule({
   const activeFilterCount = Object.values(filters).filter((v) => v !== 'all').length;
 
   const filterContent = (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div className="bg-white rounded border border-slate-200 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200">
         <div className="flex items-center gap-2.5">
-          <div className="p-1.5 bg-[#235675]/10 rounded-lg">
+          <div className="p-1.5 bg-[#235675]/10 rounded">
             <Filter className="w-4 h-4 text-[#235675]" />
           </div>
           <span className="font-bold text-slate-900 text-base">Filters</span>
@@ -279,7 +279,7 @@ export default function FilterModule({
           <button
             type="button"
             onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[#235675] hover:bg-slate-100 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[#235675] hover:bg-slate-100 rounded transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset
@@ -333,7 +333,7 @@ export default function FilterModule({
             fontSize: '14px',
             fontWeight: 'normal',
             lineHeight: '1.25rem',
-            borderRadius: '12px',
+            borderRadius: '6px',
             height: 'auto',
             minHeight: 'auto',
             color: '#000000',
@@ -362,7 +362,7 @@ export default function FilterModule({
           />
           <div className="fixed inset-0 z-[1002] lg:hidden flex items-center justify-center p-4 pointer-events-none">
             <div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[75vh] flex flex-col pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
+              className="bg-white rounded shadow-2xl w-full max-w-md max-h-[75vh] flex flex-col pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
               style={{
                 maxHeight: '75vh',
                 marginTop: 'auto',
@@ -376,7 +376,7 @@ export default function FilterModule({
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="p-2 hover:bg-slate-100 active:bg-slate-200 rounded-lg transition-colors"
+                  className="p-2 hover:bg-slate-100 active:bg-slate-200 rounded transition-colors"
                 >
                   <X className="w-5 h-5 text-slate-600" />
                 </button>
@@ -391,7 +391,7 @@ export default function FilterModule({
               <div className="px-5 py-4 border-t border-slate-200 flex-shrink-0 bg-slate-50/50">
                 <Button
                   variant="primary"
-                  className="w-full bg-[#235675] hover:bg-[#1a4259] text-white font-semibold py-3 rounded-xl shadow-sm"
+                  className="w-full bg-[#235675] hover:bg-[#1a4259] text-white font-semibold py-3 rounded shadow-sm"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   Show {resultCount} Results
