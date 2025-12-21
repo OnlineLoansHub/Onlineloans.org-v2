@@ -362,7 +362,12 @@ export default function FilterModule({
           />
           <div className="fixed inset-0 z-[1002] lg:hidden flex items-center justify-center p-4 pointer-events-none">
             <div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[75vh] flex flex-col pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
+              style={{
+                maxHeight: '75vh',
+                marginTop: 'auto',
+                marginBottom: 'auto',
+              }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Mobile Header */}
