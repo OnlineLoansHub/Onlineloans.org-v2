@@ -115,7 +115,7 @@ export const ExploreToggle = () => {
         )}
         {isShowTable && (
           <>
-            <p className={cls.footerTitle}>Want to read more?</p>
+            <h2 className={cls.footerTitle}>Want to read more?</h2>
             <p className={cls.footerSubtitle}>
               That's okay — explore our guides and state-specific resources to learn more about your
               financing options.

@@ -16,13 +16,7 @@
   }
 
   @media (width <= 768px) {
-    background: linear-gradient(
-      to bottom,
-      var(--color-gray-light) 0%,
-      var(--color-gray-light) 60px,
-      #ffffff 60px,
-      #ffffff 100%
-    );
+    background-color: var(--color-white);
   }
 }
 
@@ -121,7 +115,7 @@
   }
 
   @media (width <= 768) {
-    font-size: 28px;
+    display: none; // Hide on mobile
   }
 
   @media (width <= 576) {
@@ -146,8 +140,7 @@
   }
 
   @media (width <= 768) {
-    max-width: 85%;
-    font-size: 16px;
+    display: none; // Hide on mobile
   }
 
   @media (width <= 576) {
@@ -165,15 +158,19 @@
 }
 
 .sectionTitle {
-  font-size: 32px;
   font-weight: 700;
-  color: var(--color-primary);
-  margin: 0 0 32px 0;
   text-align: center;
+  font-size: 30px;
+  line-height: 120%;
+  margin-top: 1.5rem; // Small gap on top
+  margin-bottom: 25px;
+  color: #000;
+  text-decoration: underline;
 
-  @media (width <= 768px) {
-    font-size: 24px;
-    margin-bottom: 24px;
+  @media (min-width: 640px) {
+    font-size: 40px;
+    margin-top: 2rem; // Slightly larger gap on desktop
+    margin-bottom: 4rem;
   }
 }
 
