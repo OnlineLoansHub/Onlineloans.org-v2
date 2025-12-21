@@ -1,33 +1,38 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Filter, ChevronDown, ChevronUp, X, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 
-interface FilterOptions {
-  loanType: {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-  };
-  monthlyRevenue: {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-  };
-  timeInBusiness: {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-  };
-  creditScore: {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-  };
-  loanAmount: {
-    label: string;
-    options: Array<{ value: string; label: string }>;
-  };
+interface FilterOption {
+  value: string;
+  label: string;
 }
 
-const filterOptions: FilterOptions = {
+interface FilterConfig {
+  label: string;
+  options: FilterOption[];
+}
+
+type FilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore' | 'loanAmount';
+
+interface Filters {
+  loanType: string;
+  monthlyRevenue: string;
+  timeInBusiness: string;
+  creditScore: string;
+  loanAmount: string;
+}
+
+interface FilterModuleProps {
+  filters: Filters;
+  onFilterChange: (key: string, value: string) => void;
+  onReset: () => void;
+  resultCount: number;
+}
+
+// Filter configurations
+const FILTER_CONFIGS: Record<FilterKey, FilterConfig> = {
   loanType: {
     label: 'Loan Type',
     options: [
@@ -81,89 +86,123 @@ const filterOptions: FilterOptions = {
   },
 };
 
-interface Filters {
-  loanType: string;
-  monthlyRevenue: string;
-  timeInBusiness: string;
-  creditScore: string;
-  loanAmount: string;
-}
+// Filter order
+const FILTER_ORDER: FilterKey[] = [
+  'loanType',
+  'monthlyRevenue',
+  'timeInBusiness',
+  'creditScore',
+  'loanAmount',
+];
 
-interface FilterModuleProps {
-  filters: Filters;
-  onFilterChange: (key: string, value: string) => void;
-  onReset: () => void;
-  resultCount: number;
-}
-
+// Filter Section Component
 interface FilterSectionProps {
-  filterKey: string;
-  config: FilterOptions[keyof FilterOptions];
-  value: string;
-  onChange: (key: string, value: string) => void;
+  filterKey: FilterKey;
+  config: FilterConfig;
+  selectedValue: string;
   isExpanded: boolean;
+  onValueChange: (value: string) => void;
   onToggle: () => void;
 }
 
 function FilterSection({
   filterKey,
   config,
-  value,
-  onChange,
+  selectedValue,
   isExpanded,
+  onValueChange,
   onToggle,
 }: FilterSectionProps) {
+  const handleOptionClick = useCallback(
+    (value: string) => {
+      onValueChange(value);
+    },
+    [onValueChange]
+  );
+
+  const hasActiveFilter = selectedValue !== 'all';
+
   return (
-    <div className="border-b border-slate-100 last:border-b-0">
+    <div className="border-b border-slate-200 last:border-b-0">
+      {/* Section Header */}
       <button
+        type="button"
         onClick={(e) => {
           e.stopPropagation();
           onToggle();
         }}
-        className="w-full flex items-center justify-between py-3 px-4 lg:hover:bg-slate-50 transition-colors"
+        className="w-full flex items-center justify-between py-4 px-5 transition-colors"
       >
-        <span className="font-medium text-slate-700">{config.label}</span>
-        <div className="flex items-center gap-2">
-          {value !== 'all' && (
-            <span className="text-xs bg-[#235675] text-white px-2 py-0.5 rounded-full">1</span>
+        <div className="flex items-center gap-3">
+          <span className="font-semibold text-slate-900 text-sm">{config.label}</span>
+          {hasActiveFilter && (
+            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#235675] text-white text-xs font-medium">
+              1
+            </span>
           )}
+        </div>
+        <div className="flex items-center gap-2">
           {isExpanded ? (
-            <ChevronUp className="w-4 h-4 text-slate-400" />
+            <ChevronUp className="w-5 h-5 text-slate-400" />
           ) : (
-            <ChevronDown className="w-4 h-4 text-slate-400" />
+            <ChevronDown className="w-5 h-5 text-slate-400" />
           )}
         </div>
       </button>
 
+      {/* Options List */}
       {isExpanded && (
-        <div className="overflow-hidden transition-all duration-200">
-          <div className="px-4 pb-3 space-y-1">
+        <div className="pb-4 px-5">
+          <div className="space-y-2">
             {config.options.map((option) => {
-              const isSelected = value === option.value;
+              const isSelected = selectedValue === option.value;
               const inputId = `${filterKey}-${option.value}`;
 
               return (
-                <label
-                  key={option.value}
-                  htmlFor={inputId}
-                  className="flex items-center gap-3 py-2 px-3 rounded-lg lg:hover:bg-slate-50 cursor-pointer transition-colors"
-                  onClick={(e) => e.stopPropagation()}
+                <div
+                  key={`${filterKey}-${option.value}`}
+                  className={`
+                    flex items-center gap-3 py-2.5 px-3 rounded-lg cursor-pointer transition-all
+                    ${isSelected ? 'bg-[#235675]/10 border border-[#235675]/20' : 'hover:bg-slate-50'}
+                  `}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOptionClick(option.value);
+                  }}
                 >
-                  <input
-                    type="radio"
-                    id={inputId}
-                    name={filterKey}
-                    value={option.value}
-                    checked={isSelected}
-                    onChange={(e) => {
+                  <div className="relative flex items-center justify-center">
+                    <input
+                      type="radio"
+                      id={inputId}
+                      name={filterKey}
+                      value={option.value}
+                      checked={isSelected}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        handleOptionClick(e.target.value);
+                      }}
+                      className="w-4 h-4 text-[#235675] border-slate-300 focus:ring-2 focus:ring-[#235675] focus:ring-offset-0 cursor-pointer"
+                    />
+                    {isSelected && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-2 h-2 rounded-full bg-[#235675]"></div>
+                      </div>
+                    )}
+                  </div>
+                  <label
+                    htmlFor={inputId}
+                    className={`
+                      text-sm flex-1 cursor-pointer select-none
+                      ${isSelected ? 'text-[#235675] font-medium' : 'text-slate-700'}
+                    `}
+                    onClick={(e) => {
                       e.stopPropagation();
-                      onChange(filterKey, e.target.value);
+                      handleOptionClick(option.value);
                     }}
-                    onClick={(e) => e.stopPropagation()}
-                    className="w-4 h-4 text-[#235675] border-slate-300 focus:ring-[#235675]"
-                  />
-                  <span className="text-sm text-slate-600 flex-1">{option.label}</span>
-                </label>
+                  >
+                    {option.label}
+                  </label>
+                </div>
               );
             })}
           </div>
@@ -179,49 +218,94 @@ export default function FilterModule({
   onReset,
   resultCount,
 }: FilterModuleProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+  const [expandedSections, setExpandedSections] = useState<Record<FilterKey, boolean>>({
     loanType: true,
+    monthlyRevenue: false,
+    timeInBusiness: false,
+    creditScore: false,
+    loanAmount: false,
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const toggleSection = (key: string) => {
+  const toggleSection = useCallback((key: FilterKey) => {
     setExpandedSections((prev) => ({
       ...prev,
       [key]: !prev[key],
     }));
-  };
+  }, []);
+
+  const handleValueChange = useCallback(
+    (key: FilterKey, value: string) => {
+      onFilterChange(key, value);
+    },
+    [onFilterChange]
+  );
+
+  const handleOpenMobileFilters = useCallback(() => {
+    setExpandedSections({
+      loanType: true,
+      monthlyRevenue: false,
+      timeInBusiness: false,
+      creditScore: false,
+      loanAmount: false,
+    });
+    setMobileFiltersOpen(true);
+  }, []);
+
+  const handleReset = useCallback(() => {
+    onReset();
+    setExpandedSections({
+      loanType: true,
+      monthlyRevenue: false,
+      timeInBusiness: false,
+      creditScore: false,
+      loanAmount: false,
+    });
+  }, [onReset]);
 
   const activeFilterCount = Object.values(filters).filter((v) => v !== 'all').length;
 
   const filterContent = (
-    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-      <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-[#235675]" />
-          <span className="font-semibold text-slate-800">Filter By</span>
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200">
+        <div className="flex items-center gap-2.5">
+          <div className="p-1.5 bg-[#235675]/10 rounded-lg">
+            <Filter className="w-4 h-4 text-[#235675]" />
+          </div>
+          <span className="font-bold text-slate-900 text-base">Filters</span>
         </div>
         {activeFilterCount > 0 && (
           <button
-            onClick={onReset}
-            className="flex items-center gap-1 text-xs text-slate-500 lg:hover:text-[#235675] transition-colors"
+            type="button"
+            onClick={handleReset}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[#235675] hover:bg-slate-100 rounded-lg transition-colors"
           >
-            <RotateCcw className="w-3 h-3" />
+            <RotateCcw className="w-3.5 h-3.5" />
             Reset
           </button>
         )}
       </div>
 
-      {Object.entries(filterOptions).map(([key, config]) => (
-        <FilterSection
-          key={key}
-          filterKey={key}
-          config={config}
-          value={filters[key as keyof Filters]}
-          onChange={onFilterChange}
-          isExpanded={expandedSections[key] || false}
-          onToggle={() => toggleSection(key)}
-        />
-      ))}
+      {/* Filter Sections */}
+      <div className="divide-y divide-slate-200">
+        {FILTER_ORDER.map((key) => {
+          const config = FILTER_CONFIGS[key];
+          const selectedValue = filters[key];
+
+          return (
+            <FilterSection
+              key={key}
+              filterKey={key}
+              config={config}
+              selectedValue={selectedValue}
+              isExpanded={expandedSections[key] || false}
+              onValueChange={(value) => handleValueChange(key, value)}
+              onToggle={() => toggleSection(key)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 
@@ -230,8 +314,10 @@ export default function FilterModule({
       {/* Desktop Filters */}
       <div className="hidden lg:block">
         {filterContent}
-        <div className="mt-4 text-center text-sm text-slate-500">
-          <span className="font-medium text-slate-700">{resultCount}</span> results found
+        <div className="mt-5 text-center">
+          <p className="text-sm text-slate-600">
+            <span className="font-semibold text-slate-900">{resultCount}</span> results found
+          </p>
         </div>
       </div>
 
@@ -239,22 +325,24 @@ export default function FilterModule({
       <div className="lg:hidden" style={{ flex: '1', minWidth: 0, maxWidth: '40%' }}>
         <Button
           variant="secondary"
-          onClick={() => setMobileFiltersOpen(true)}
-          className="w-full flex items-center justify-center gap-1.5 !text-black"
+          onClick={handleOpenMobileFilters}
+          className="w-full flex items-center justify-center gap-2 !text-black !bg-white hover:!bg-slate-50"
           style={{
-            padding: '5px 12px',
+            padding: '8px 16px',
             border: '1px solid #e5e7eb',
-            fontSize: '13px',
+            fontSize: '14px',
+            fontWeight: '500',
             borderRadius: '12px',
             height: 'auto',
             minHeight: 'auto',
             color: '#000000',
+            boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
           }}
         >
-          <Filter className="w-3.5 h-3.5" />
-          Filters
+          <Filter className="w-4 h-4" />
+          <span>Filters</span>
           {activeFilterCount > 0 && (
-            <span className="bg-[#235675] text-white text-xs px-1.5 py-0.5 rounded-full">
+            <span className="bg-[#235675] text-white text-xs font-semibold px-2 py-0.5 rounded-full min-w-[20px] flex items-center justify-center">
               {activeFilterCount}
             </span>
           )}
@@ -265,22 +353,23 @@ export default function FilterModule({
       {mobileFiltersOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-[1001] lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1001] lg:hidden transition-opacity"
             onClick={() => setMobileFiltersOpen(false)}
           />
           <div className="fixed inset-0 z-[1002] lg:hidden flex items-center justify-center p-4 pointer-events-none">
             <div
-              className="bg-white rounded-xl shadow-xl w-full max-w-md max-h-[85vh] flex flex-col pointer-events-auto"
+              className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] flex flex-col pointer-events-auto animate-in fade-in zoom-in-95 duration-200"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b border-slate-200 flex-shrink-0">
-                <h3 className="font-semibold text-lg">Filters</h3>
+              {/* Mobile Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 flex-shrink-0 bg-gradient-to-r from-slate-50 to-white">
+                <h3 className="font-bold text-lg text-slate-900">Filters</h3>
                 <button
+                  type="button"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="p-2 rounded-lg transition-colors active:bg-slate-100"
+                  className="p-2 hover:bg-slate-100 active:bg-slate-200 rounded-lg transition-colors"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 text-slate-600" />
                 </button>
               </div>
 
@@ -289,14 +378,14 @@ export default function FilterModule({
                 <div className="p-4">{filterContent}</div>
               </div>
 
-              {/* Footer */}
-              <div className="p-4 border-t border-slate-200 flex-shrink-0">
+              {/* Mobile Footer */}
+              <div className="px-5 py-4 border-t border-slate-200 flex-shrink-0 bg-slate-50/50">
                 <Button
                   variant="primary"
-                  className="w-full bg-[#235675] active:bg-[#1a4259]"
+                  className="w-full bg-[#235675] hover:bg-[#1a4259] text-white font-semibold py-3 rounded-xl shadow-sm"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
-                  Show {resultCount} results
+                  Show {resultCount} Results
                 </Button>
               </div>
             </div>
