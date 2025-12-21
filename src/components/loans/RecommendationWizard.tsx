@@ -58,6 +58,26 @@ const steps: Step[] = [
       { value: 'poor', label: 'Poor (350-629)' },
     ],
   },
+  {
+    question: 'How much funding do you need?',
+    key: 'loanAmount',
+    options: [
+      { value: 'more_100k', label: 'More than $100K' },
+      { value: '50k_100k', label: '$50K - $100K' },
+      { value: '25k_50k', label: '$25K - $50K' },
+      { value: 'less_25k', label: 'Less than $25K' },
+    ],
+  },
+  {
+    question: 'How quickly do you need the funds?',
+    key: 'fundingSpeed',
+    options: [
+      { value: 'asap', label: 'As soon as possible (within 24-48 hours)' },
+      { value: 'within_week', label: 'Within a week' },
+      { value: 'within_month', label: 'Within a month' },
+      { value: 'flexible', label: 'Flexible timing' },
+    ],
+  },
 ];
 
 export default function RecommendationWizard({ lenders }: RecommendationWizardProps) {
@@ -97,143 +117,302 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
   const recommendedLenders = getRecommendedLenders();
 
   return (
-    <section className="py-12 lg:py-16">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
-          {/* Header */}
-          <div className="bg-[#235675] text-white p-6 lg:p-8">
-            <div className="flex items-center gap-3 mb-2">
-              <Sparkles className="w-5 h-5" />
-              <span className="text-sm font-medium opacity-90">
-                Need help finding the right lender for you?
-              </span>
+    <>
+      {/* Mobile Version */}
+      <section className="lg:hidden py-8">
+        <div className="w-full">
+          <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
+            {/* Header */}
+            <div className="bg-[#235675] text-white p-6 py-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Sparkles className="w-4 h-4 flex-shrink-0" />
+                <span className="text-sm font-medium opacity-90">
+                  Need help finding the right lender for you?
+                </span>
+              </div>
+              <h2 className="text-xl font-bold">
+                Compare and choose the best business loans for you
+              </h2>
             </div>
-            <h2 className="text-2xl lg:text-3xl font-bold">
-              Compare and choose the best business loans for you
-            </h2>
-          </div>
 
-          {/* Content */}
-          <div className="p-6 lg:p-8">
-            {!showResults ? (
-              <div>
-                {/* Progress */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-slate-600">
-                      Step {currentStep + 1} / {steps.length}
-                    </span>
-                    <span className="text-sm text-slate-500">
-                      {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
-                    </span>
+            {/* Content */}
+            <div className="p-4">
+              {!showResults ? (
+                <div>
+                  {/* Progress */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-slate-600">
+                        Step {currentStep + 1} / {steps.length}
+                      </span>
+                      <span className="text-sm text-slate-500">
+                        {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
+                      </span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#235675] rounded-full transition-all duration-500"
+                        style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                      />
+                    </div>
                   </div>
-                  <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-[#235675] rounded-full transition-all duration-500"
-                      style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                    />
+
+                  {/* Question */}
+                  <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                    {steps[currentStep].question}
+                  </h3>
+
+                  {/* Options */}
+                  <div className="grid gap-2">
+                    {steps[currentStep].options.map((option) => (
+                      <button
+                        key={option.value}
+                        onClick={() => handleAnswer(steps[currentStep].key, option.value)}
+                        className={`w-full p-3 text-left rounded-lg transition-all ${
+                          answers[steps[currentStep].key] === option.value
+                            ? 'bg-[#235675]/5'
+                            : 'hover:bg-slate-50'
+                        }`}
+                        style={{
+                          border: `2px solid ${
+                            answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
+                          }`,
+                        }}
+                      >
+                        <span className="font-medium text-slate-700 text-base">{option.label}</span>
+                      </button>
+                    ))}
                   </div>
+
+                  {/* Navigation */}
+                  {currentStep > 0 && (
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <Button
+                        variant="secondary"
+                        onClick={handleBack}
+                        className="text-slate-600 w-full"
+                      >
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back
+                      </Button>
+                    </div>
+                  )}
                 </div>
+              ) : (
+                <div>
+                  <div className="text-center mb-6">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 mb-3">
+                      <Check className="w-6 h-6 text-emerald-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">
+                      Based on your answers, we recommend
+                    </h3>
+                    <p className="text-base text-slate-600">
+                      These lenders match your business profile
+                    </p>
+                  </div>
 
-                {/* Question */}
-                <h3 className="text-xl lg:text-2xl font-semibold text-slate-900 mb-6">
-                  {steps[currentStep].question}
-                </h3>
+                  {/* Recommended Lenders */}
+                  <div className="space-y-3">
+                    {recommendedLenders.map((lender, index) => (
+                      <div
+                        key={lender.id}
+                        className="flex flex-col gap-3 p-3 bg-white rounded-lg border border-slate-200"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold flex-shrink-0">
+                            {index + 1}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-base text-slate-900">
+                              {lender.name}
+                            </h4>
+                            <div className="flex items-center gap-2 mt-1">
+                              <StarRating score={lender.totalScore} />
+                              <span className="text-sm text-slate-500">{lender.totalScore}/10</span>
+                            </div>
+                          </div>
+                        </div>
+                        <Button
+                          variant="primary"
+                          className="bg-[#235675] hover:bg-[#1a4259] w-full"
+                          onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
+                        >
+                          See Plans
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
 
-                {/* Options */}
-                <div className="grid gap-3">
-                  {steps[currentStep].options.map((option) => (
-                    <button
-                      key={option.value}
-                      onClick={() => handleAnswer(steps[currentStep].key, option.value)}
-                      className={`w-full p-4 text-left rounded-xl transition-all ${
-                        answers[steps[currentStep].key] === option.value
-                          ? 'bg-[#235675]/5'
-                          : 'hover:bg-slate-50'
-                      }`}
-                      style={{
-                        border: `2px solid ${
-                          answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
-                        }`,
-                      }}
+                  {/* Disclaimer */}
+                  <p className="mt-4 text-sm text-slate-500 text-center italic px-2">
+                    *This recommendation is based on our assessment; users are urged to consider
+                    individual factors before choosing a vendor.
+                  </p>
+
+                  {/* Actions */}
+                  <div className="mt-6 flex flex-col gap-3">
+                    <Button variant="secondary" onClick={handleReset} className="w-full">
+                      Start Over
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      onClick={handleBack}
+                      className="text-slate-600 w-full"
                     >
-                      <span className="font-medium text-slate-700 text-sm">{option.label}</span>
-                    </button>
-                  ))}
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Back
+                    </Button>
+                  </div>
                 </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
 
-                {/* Navigation */}
-                {currentStep > 0 && (
-                  <div className="mt-6 pt-6 border-t border-slate-100">
+      {/* Desktop Version */}
+      <section className="hidden lg:block py-12 lg:py-16">
+        <div className="w-full">
+          <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
+            {/* Header */}
+            <div className="bg-[#235675] text-white p-6 lg:p-8 py-10 lg:py-12">
+              <div className="flex items-center gap-3 mb-4">
+                <Sparkles className="w-5 h-5" />
+                <span className="text-lg font-medium opacity-90">
+                  Need help finding the right lender for you?
+                </span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold">
+                Compare and choose the best business loans for you
+              </h2>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 lg:p-8">
+              {!showResults ? (
+                <div>
+                  {/* Progress */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-lg font-medium text-slate-600">
+                        Step {currentStep + 1} / {steps.length}
+                      </span>
+                      <span className="text-lg text-slate-500">
+                        {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
+                      </span>
+                    </div>
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-[#235675] rounded-full transition-all duration-500"
+                        style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Question */}
+                  <h3 className="text-3xl lg:text-4xl font-semibold text-slate-900 mb-6">
+                    {steps[currentStep].question}
+                  </h3>
+
+                  {/* Options */}
+                  <div className="grid gap-3">
+                    {steps[currentStep].options.map((option) => (
+                      <button
+                        key={option.value}
+                        onClick={() => handleAnswer(steps[currentStep].key, option.value)}
+                        className={`w-full p-4 text-left rounded-xl transition-all ${
+                          answers[steps[currentStep].key] === option.value
+                            ? 'bg-[#235675]/5'
+                            : 'hover:bg-slate-50'
+                        }`}
+                        style={{
+                          border: `2px solid ${
+                            answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
+                          }`,
+                        }}
+                      >
+                        <span className="font-medium text-slate-700 text-lg">{option.label}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Navigation */}
+                  {currentStep > 0 && (
+                    <div className="mt-6 pt-6 border-t border-slate-100">
+                      <Button variant="secondary" onClick={handleBack} className="text-slate-600">
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Back
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div>
+                  <div className="text-center mb-8">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
+                      <Check className="w-8 h-8 text-emerald-600" />
+                    </div>
+                    <h3 className="text-4xl font-bold text-slate-900 mb-2">
+                      Based on your answers, we recommend
+                    </h3>
+                    <p className="text-xl text-slate-600">
+                      These lenders match your business profile
+                    </p>
+                  </div>
+
+                  {/* Recommended Lenders */}
+                  <div className="space-y-4">
+                    {recommendedLenders.map((lender, index) => (
+                      <div
+                        key={lender.id}
+                        className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md transition-shadow"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold">
+                          {index + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-xl text-slate-900">{lender.name}</h4>
+                          <div className="flex items-center gap-2 mt-1">
+                            <StarRating score={lender.totalScore} />
+                            <span className="text-lg text-slate-500">{lender.totalScore}/10</span>
+                          </div>
+                        </div>
+                        <Button
+                          variant="primary"
+                          className="bg-[#235675] hover:bg-[#1a4259]"
+                          onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
+                        >
+                          See Plans
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Disclaimer */}
+                  <p className="mt-6 text-base text-slate-500 text-center italic">
+                    *This recommendation is based on our assessment; users are urged to consider
+                    individual factors before choosing a vendor.
+                  </p>
+
+                  {/* Actions */}
+                  <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <Button variant="secondary" onClick={handleReset}>
+                      Start Over
+                    </Button>
                     <Button variant="secondary" onClick={handleBack} className="text-slate-600">
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       Back
                     </Button>
                   </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
-                    <Check className="w-8 h-8 text-emerald-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                    Based on your answers, we recommend
-                  </h3>
-                  <p className="text-slate-600">These lenders match your business profile</p>
                 </div>
-
-                {/* Recommended Lenders */}
-                <div className="space-y-4">
-                  {recommendedLenders.map((lender, index) => (
-                    <div
-                      key={lender.id}
-                      className="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md transition-shadow"
-                    >
-                      <div className="w-10 h-10 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold">
-                        {index + 1}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-slate-900">{lender.name}</h4>
-                        <div className="flex items-center gap-2 mt-1">
-                          <StarRating score={lender.totalScore} />
-                          <span className="text-sm text-slate-500">{lender.totalScore}/10</span>
-                        </div>
-                      </div>
-                      <Button
-                        variant="primary"
-                        className="bg-[#235675] hover:bg-[#1a4259]"
-                        onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
-                      >
-                        See Plans
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Disclaimer */}
-                <p className="mt-6 text-xs text-slate-500 text-center italic">
-                  *This recommendation is based on our assessment; users are urged to consider
-                  individual factors before choosing a vendor.
-                </p>
-
-                {/* Actions */}
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Button variant="secondary" onClick={handleReset}>
-                    Start Over
-                  </Button>
-                  <Button variant="secondary" onClick={handleBack} className="text-slate-600">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back
-                  </Button>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

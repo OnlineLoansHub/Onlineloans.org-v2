@@ -8,7 +8,7 @@ import LenderCard from '@/components/loans/LenderCard';
 import FilterModule from '@/components/loans/FilterModule';
 import SortControl from '@/components/loans/SortControl';
 import RecommendationWizard from '@/components/loans/RecommendationWizard';
-import CrossPromo from '@/components/loans/CrossPromo';
+import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import { lendersData } from '@/components/loans/lendersData';
 import styles from './page.module.scss';
 
@@ -178,8 +178,10 @@ export default function LendersPage() {
         </div>
       </div>
 
-      {/* Cross Promo */}
-      <CrossPromo />
+      {/* How Our Total Score Works Section */}
+      <div className="mt-12 mb-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ExpandableExplanation />
+      </div>
     </div>
   );
 }

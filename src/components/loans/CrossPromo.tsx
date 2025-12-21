@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowRight, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
-import ExpandableExplanation from './ExpandableExplanation';
 
 interface RelatedProvider {
   id: number;
@@ -86,13 +85,7 @@ export default function CrossPromo() {
             </div>
           ))}
         </div>
-
-        {/* How Our Total Score Works Section */}
-        <div className="mt-12 max-w-4xl mx-auto">
-          <ExpandableExplanation />
-        </div>
       </div>
     </section>
   );
 }
-
