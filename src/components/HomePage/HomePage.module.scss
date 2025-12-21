@@ -65,7 +65,7 @@
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 4rem 1rem;
+  padding: 2.5rem 1rem; // 40px top padding on mobile for 40px gap
 }
 
 @media (min-width: 640px) {
@@ -84,19 +84,27 @@
   font-weight: 700;
   color: white;
   text-align: center;
-  max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.25;
-  font-size: 30px;
-  padding: 0 1rem;
-  margin-bottom: 1.25rem;
-  margin-top: -10px;
   transition: all 1s;
   transition-delay: 50ms;
 
-  @media (min-width: 640px) {
+  // Mobile: Fluid font size with clamp to prevent overflow
+  // Forces exactly 2 lines - full width container
+  font-size: clamp(28px, 5.5vw, 36px);
+  max-width: 100%; // Full width allows text to fit in 2 lines
+  width: 100%;
+  padding: 0 0.75rem; // Reduced padding gives more width for text
+  margin-top: 0; // Reset negative margin for 40px total gap
+  margin-bottom: 20px; // 20px gap to cards on mobile
+  line-height: 1.2;
+  text-wrap: balance; // Distributes text evenly across lines
+
+  // Desktop: Single line guaranteed
+  @media (min-width: 1024px) {
     font-size: 48px;
+    max-width: 100%;
+    white-space: nowrap; // Prevents any wrapping on desktop
     margin-bottom: 3rem;
   }
 }
@@ -112,10 +120,15 @@
 }
 
 .headlineSpan {
+  // Mobile: Blocks stack vertically (2 lines)
+  // white-space: nowrap prevents text from wrapping within each span
   display: block;
+  white-space: nowrap;
 
-  @media (min-width: 640px) {
+  // Desktop: Inline with space between (1 line)
+  @media (min-width: 1024px) {
     display: inline;
+    white-space: normal; // Allow normal spacing within nowrap parent
 
     &:not(:first-child) {
       margin-left: 0.25rem;
@@ -221,7 +234,7 @@
 }
 
 .categoryTitle {
-  font-size: 0.75rem;
+  font-size: 0.875rem; // 14px on mobile
   font-weight: 600;
   color: #1f2937;
   text-align: center;
@@ -241,8 +254,12 @@
 .vendorSection {
   width: 100%;
   border-top: 1px solid #e5e7eb;
-  padding: 2rem 0;
+  padding: 1.5625rem 0 2rem 0; // 25px top, 32px bottom on mobile
   background-color: #f2f2f2;
+
+  @media (min-width: 640px) {
+    padding: 2rem 0; // 32px top and bottom on larger screens
+  }
 }
 
 .vendorContent {
@@ -272,7 +289,7 @@
 }
 
 .vendorMobileTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem; // 20px on mobile
   font-weight: 600;
   color: #1f2937;
   text-align: center;
@@ -315,6 +332,12 @@
   img {
     object-fit: contain;
     object-position: center;
+  }
+
+  // Desktop: Larger logo size
+  @media (min-width: 1024px) {
+    width: 100px;
+    height: 26px;
   }
 }
 
