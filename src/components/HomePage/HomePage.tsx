@@ -51,6 +51,33 @@ export default function HomePage() {
           background: 'linear-gradient(135deg, var(--color-primary) 0%, #1e2d4d 50%, #152238 100%)',
         }}
       >
+        {/* Professional Diagonal Striped Pattern - Right Bottom Only */}
+        <div
+          className="absolute right-0 bottom-0 w-1/2 h-1/2 pointer-events-none"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(
+                45deg,
+                transparent 0px,
+                transparent 60px,
+                rgba(255, 255, 255, 0.08) 60px,
+                rgba(255, 255, 255, 0.08) 61px,
+                transparent 61px,
+                transparent 120px
+              ),
+              repeating-linear-gradient(
+                -45deg,
+                transparent 0px,
+                transparent 60px,
+                rgba(255, 255, 255, 0.08) 60px,
+                rgba(255, 255, 255, 0.08) 61px,
+                transparent 61px,
+                transparent 120px
+              )
+            `,
+          }}
+        ></div>
+
         {/* Decorative Wave Pattern - Right Side */}
         <div className="absolute right-0 top-0 h-full w-1/3 pointer-events-none overflow-hidden">
           <svg
