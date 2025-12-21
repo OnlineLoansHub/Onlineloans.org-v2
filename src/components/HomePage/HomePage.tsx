@@ -1,6 +1,3 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -14,6 +11,9 @@ import {
   Landmark,
   Coins,
 } from 'lucide-react';
+import { ExploreIllustration } from './illustrations/ExploreIllustration';
+import { CompareIllustration } from './illustrations/CompareIllustration';
+import { ChooseIllustration } from './illustrations/ChooseIllustration';
 import cls from './HomePage.module.scss';
 
 const categories = [
@@ -29,17 +29,6 @@ const categories = [
 ];
 
 export default function HomePage() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Trigger animation after component mounts
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 10);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className={cls.container}>
       {/* Hero Section */}
@@ -49,7 +38,12 @@ export default function HomePage() {
 
         {/* Decorative Wave Pattern - Right Side */}
         <div className={cls.wavePattern}>
-          <svg viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            viewBox="0 0 400 600"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
             <path
               d="M50 0C50 0 150 100 150 200C150 300 50 400 50 500C50 600 150 700 150 700"
               stroke="var(--color-primary)"
@@ -80,19 +74,13 @@ export default function HomePage() {
 
         <div className={cls.heroContent}>
           {/* Headline */}
-          <h1
-            className={`${cls.headline} ${isLoaded ? cls.headlineLoaded : cls.headlineNotLoaded}`}
-          >
+          <h1 className={cls.headline}>
             <span className={cls.headlineSpan}>Compare & choose </span>
             <span className={cls.headlineSpan}>top financial products</span>
           </h1>
 
           {/* Category Grid */}
-          <div
-            className={`${cls.categoryGrid} ${
-              isLoaded ? cls.categoryGridLoaded : cls.categoryGridNotLoaded
-            }`}
-          >
+          <div className={cls.categoryGrid}>
             {categories.map((category, index) => {
               const IconComponent = category.icon;
 
@@ -100,10 +88,8 @@ export default function HomePage() {
                 <Link
                   key={index}
                   href="#"
-                  className={`${cls.categoryCard} ${
-                    isLoaded ? cls.categoryCardLoaded : cls.categoryCardNotLoaded
-                  }`}
-                  style={{ transitionDelay: `${150 + index * 30}ms` }}
+                  className={cls.categoryCard}
+                  style={{ animationDelay: `${150 + index * 30}ms` }}
                 >
                   <div className={cls.categoryIconWrapper}>
                     <IconComponent
@@ -136,7 +122,6 @@ export default function HomePage() {
                   alt="LendingTree"
                   fill
                   className="object-contain"
-                  quality={100}
                   sizes="(max-width: 640px) 140px, 112px"
                   priority
                 />
@@ -147,7 +132,6 @@ export default function HomePage() {
                   alt="SoFi"
                   fill
                   className="object-contain"
-                  quality={100}
                   sizes="(max-width: 640px) 140px, 80px"
                   priority
                 />
@@ -161,7 +145,6 @@ export default function HomePage() {
                   alt="Credible"
                   fill
                   className="object-contain"
-                  quality={100}
                   sizes="(max-width: 640px) 140px, 96px"
                   priority
                 />
@@ -172,7 +155,6 @@ export default function HomePage() {
                   alt="Fundera"
                   fill
                   className="object-contain"
-                  quality={100}
                   sizes="(max-width: 640px) 140px, 112px"
                   priority
                 />
@@ -183,7 +165,6 @@ export default function HomePage() {
                   alt="Biz2Credit"
                   fill
                   className="object-contain"
-                  quality={100}
                   sizes="(max-width: 640px) 140px, 112px"
                   priority
                 />
@@ -213,6 +194,7 @@ export default function HomePage() {
                   alt="LendingTree"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <div className={cls.vendorLogoCell}>
@@ -221,6 +203,7 @@ export default function HomePage() {
                   alt="SoFi"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <div className={`${cls.vendorLogoCell} ${cls.vendorTextCell}`}>
@@ -232,6 +215,7 @@ export default function HomePage() {
                   alt="Credible"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <div className={cls.vendorLogoCell}>
@@ -240,6 +224,7 @@ export default function HomePage() {
                   alt="Fundera"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <div className={cls.vendorLogoCell}>
@@ -248,6 +233,7 @@ export default function HomePage() {
                   alt="Biz2Credit"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -273,82 +259,7 @@ export default function HomePage() {
               <div className={cls.gradientOverlay}></div>
               {/* Illustration */}
               <div className={cls.illustrationWrapper}>
-                <svg
-                  width="120"
-                  height="120"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={cls.illustrationSvg}
-                >
-                  {/* Document */}
-                  <rect
-                    x="25"
-                    y="30"
-                    width="50"
-                    height="60"
-                    rx="3"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <rect
-                    x="25"
-                    y="30"
-                    width="50"
-                    height="12"
-                    rx="3"
-                    fill="#235675"
-                    fillOpacity="0.1"
-                  />
-
-                  {/* Document lines */}
-                  <line
-                    x1="32"
-                    y1="48"
-                    x2="68"
-                    y2="48"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="32"
-                    y1="56"
-                    x2="65"
-                    y2="56"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="32"
-                    y1="64"
-                    x2="62"
-                    y2="64"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-
-                  {/* Magnifying glass */}
-                  <circle cx="75" cy="35" r="14" stroke="#235675" strokeWidth="2" fill="none" />
-                  <line
-                    x1="85"
-                    y1="45"
-                    x2="95"
-                    y2="55"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-
-                  {/* Chart bars inside document */}
-                  <rect x="35" y="72" width="4" height="12" fill="#235675" fillOpacity="0.4" />
-                  <rect x="42" y="68" width="4" height="16" fill="#235675" fillOpacity="0.4" />
-                  <rect x="49" y="74" width="4" height="10" fill="#235675" fillOpacity="0.4" />
-                  <rect x="56" y="70" width="4" height="14" fill="#235675" fillOpacity="0.4" />
-                </svg>
+                <ExploreIllustration />
               </div>
 
               {/* Title */}
@@ -372,128 +283,7 @@ export default function HomePage() {
               <div className={cls.gradientOverlay}></div>
               {/* Illustration */}
               <div className={cls.illustrationWrapper}>
-                <svg
-                  width="120"
-                  height="120"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={cls.illustrationSvg}
-                >
-                  {/* Left card */}
-                  <rect
-                    x="10"
-                    y="35"
-                    width="40"
-                    height="50"
-                    rx="3"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <rect
-                    x="10"
-                    y="35"
-                    width="40"
-                    height="10"
-                    rx="3"
-                    fill="#235675"
-                    fillOpacity="0.1"
-                  />
-
-                  {/* Right card */}
-                  <rect
-                    x="70"
-                    y="30"
-                    width="40"
-                    height="55"
-                    rx="3"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <rect
-                    x="70"
-                    y="30"
-                    width="40"
-                    height="10"
-                    rx="3"
-                    fill="#235675"
-                    fillOpacity="0.15"
-                  />
-
-                  {/* Comparison arrows - bidirectional */}
-                  <path d="M55 55 L65 55" stroke="#235675" strokeWidth="2" strokeLinecap="round" />
-                  <path
-                    d="M60 50 L65 55 L60 60"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-
-                  {/* Balance scale indicator */}
-                  <line
-                    x1="30"
-                    y1="60"
-                    x2="90"
-                    y2="60"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeDasharray="2 2"
-                    strokeOpacity="0.4"
-                  />
-
-                  {/* Left card content */}
-                  <line
-                    x1="18"
-                    y1="52"
-                    x2="42"
-                    y2="52"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="18"
-                    y1="60"
-                    x2="38"
-                    y2="60"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-
-                  {/* Right card content */}
-                  <line
-                    x1="78"
-                    y1="47"
-                    x2="102"
-                    y2="47"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="78"
-                    y1="55"
-                    x2="100"
-                    y2="55"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="78"
-                    y1="63"
-                    x2="98"
-                    y2="63"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                </svg>
+                <CompareIllustration />
               </div>
 
               {/* Title */}
@@ -517,82 +307,7 @@ export default function HomePage() {
               <div className={cls.gradientOverlay}></div>
               {/* Illustration */}
               <div className={cls.illustrationWrapper}>
-                <svg
-                  width="120"
-                  height="120"
-                  viewBox="0 0 120 120"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className={cls.illustrationSvg}
-                >
-                  {/* Shield badge */}
-                  <path
-                    d="M60 25 L45 30 L45 50 C45 65 55 75 60 85 C65 75 75 65 75 50 L75 30 Z"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-
-                  {/* Checkmark inside shield */}
-                  <path
-                    d="M52 50 L58 56 L68 44"
-                    stroke="#235675"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    fill="none"
-                  />
-
-                  {/* Approved document */}
-                  <rect
-                    x="30"
-                    y="70"
-                    width="60"
-                    height="40"
-                    rx="3"
-                    stroke="#235675"
-                    strokeWidth="2"
-                    fill="none"
-                  />
-                  <rect
-                    x="30"
-                    y="70"
-                    width="60"
-                    height="12"
-                    rx="3"
-                    fill="#235675"
-                    fillOpacity="0.1"
-                  />
-
-                  {/* Document lines */}
-                  <line
-                    x1="38"
-                    y1="88"
-                    x2="82"
-                    y2="88"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="38"
-                    y1="96"
-                    x2="75"
-                    y2="96"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                  <line
-                    x1="38"
-                    y1="104"
-                    x2="70"
-                    y2="104"
-                    stroke="#235675"
-                    strokeWidth="1.5"
-                    strokeOpacity="0.3"
-                  />
-                </svg>
+                <ChooseIllustration />
               </div>
 
               {/* Title */}

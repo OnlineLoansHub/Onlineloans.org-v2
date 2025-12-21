@@ -58,7 +58,7 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <Script
           src="https://t.contentsquare.net/uxa/9cb737e1b8a22.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CW0NYXW5S0"
