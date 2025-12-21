@@ -25,24 +25,25 @@
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 0 300px; // 300px each side on desktop
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   background: var(--color-white);
 
   @media (width <= 768px) {
-    padding: 0 1.25rem 0 1.25rem;
     box-shadow: 0 2px 8px 0 #0000000a;
   }
 
-  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
-  @media (min-width: 1025px) and (max-width: 1600px) {
-    padding: 0 4rem; // Reduced from 7rem to decrease spacing
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
-  /* 💻 Very large screens */
-  @media (min-width: 1601px) {
-    max-width: var(--max-container-width);
-    margin: 0 auto;
-    padding: 0 4rem; // Reduced spacing to match laptops
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 

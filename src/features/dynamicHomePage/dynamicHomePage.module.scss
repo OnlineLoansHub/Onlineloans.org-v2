@@ -1,34 +1,30 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  padding: 0 20rem;
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   min-height: 0;
   flex: 1;
 
   @media (max-width: 993px) {
     display: block;
-    padding: 0 1.25rem;
     min-height: auto;
     flex: none;
     width: 100%;
     height: auto;
   }
 
-  @media (max-width: 768px) {
-    padding: 0 1.25rem;
-    min-height: 0;
-    height: auto;
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
-  @media (min-width: 1025px) and (max-width: 1600px) {
-    padding: 0 7rem;
-  }
-
-  /* 💻 Very large screens */
-  @media (min-width: 1601px) {
-    max-width: var(--max-container-width);
-    margin: 0 auto;
-    padding: 0 5rem;
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 

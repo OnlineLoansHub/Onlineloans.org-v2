@@ -13,7 +13,8 @@
   max-width: var(--max-container-width);
   max-height: calc(100vh - var(--header-height) - 4.32rem);
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -22,9 +23,14 @@
     max-height: 100%;
   }
 
-  /* 💻 ALL LAPTOPS (Mac & Windows 1280–1536 CSS px) */
-  @media (min-width: 1025px) and (max-width: 1600px) {
-    padding: 0 5.25rem 0 5.25rem;
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
