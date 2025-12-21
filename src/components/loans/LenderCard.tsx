@@ -154,15 +154,15 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
             {/* Logo & Brand Section */}
             <div className="flex-1 min-w-0">
-              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[90px]">
+              <div className="bg-white rounded-xl p-4 mb-3 flex items-center justify-center min-h-[120px]">
                 {lender.logo ? (
-                  <div className="relative w-full h-[90px] max-w-[220px] mx-auto">
+                  <div className="relative w-full h-[120px] max-w-[280px] mx-auto">
                     <Image
                       src={lender.logo}
                       alt={lender.name}
                       fill
                       className="object-contain"
-                      sizes="(max-width: 1024px) 120px, 220px"
+                      sizes="(max-width: 1024px) 160px, 280px"
                     />
                   </div>
                 ) : (
