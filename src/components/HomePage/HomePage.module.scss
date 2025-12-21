@@ -284,6 +284,10 @@
   span {
     font-weight: 700;
   }
+
+  .vendorTitleNormal {
+    font-weight: 400 !important;
+  }
 }
 
 .vendorMobileLogos {
@@ -372,6 +376,7 @@
 
   span:first-child {
     color: #6b7280;
+    font-weight: 400;
   }
 
   span:last-child {

@@ -126,7 +126,7 @@ export default function HomePage() {
           {/* Mobile Layout */}
           <div className={cls.vendorMobileLayout}>
             <h3 className={cls.vendorMobileTitle}>
-              Explore our <span>Top Vendors:</span>
+              <span className={cls.vendorTitleNormal}>Explore our</span> <span>Top Vendors:</span>
             </h3>
 
             <div className={cls.vendorMobileLogos}>
