@@ -22,7 +22,7 @@ export default function LendersPage() {
     creditScore: 'all',
     loanAmount: 'all',
   });
-  const [sortBy, setSortBy] = useState('totalScore');
+  const [sortBy, setSortBy] = useState('ourScore');
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
   const handleFilterChange = (key: string, value: string) => {
@@ -89,8 +89,37 @@ export default function LendersPage() {
       );
     }
 
-    return result;
-  }, [filters]);
+    // Apply sorting
+    if (sortBy === 'ourScore') {
+      // Priority lenders (id: 1 and 2) stay at top when sorting by Our Score
+      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2);
+      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2);
+
+      // Sort others by ourScore descending
+      otherLenders.sort((a, b) => b.ourScore - a.ourScore);
+
+      // Ensure priority order (id 1, then id 2)
+      const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
+
+      return [...sortedPriority, ...otherLenders];
+    } else {
+      // Sort all lenders by selected field descending
+      result.sort((a, b) => {
+        const aValue = a[sortBy as keyof typeof a] as number | null;
+        const bValue = b[sortBy as keyof typeof b] as number | null;
+
+        // Handle null values - put them at the end
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null) return 1;
+        if (bValue === null) return -1;
+
+        // Sort in descending order (highest first)
+        return bValue - aValue;
+      });
+
+      return result;
+    }
+  }, [filters, sortBy]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
   const hasMore = displayCount < filteredLenders.length;

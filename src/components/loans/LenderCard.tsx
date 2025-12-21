@@ -67,12 +67,12 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           {/* Right Column */}
           <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
             {/* Rating Number */}
-            <div className="text-4xl font-bold text-[#2a3d66]">{lender.totalScore}</div>
+            <div className="text-4xl font-bold text-[#2a3d66]">{lender.ourScore}</div>
 
             {/* Stars - Green like Trustpilot */}
             <div className="flex items-center gap-0">
               {[...Array(5)].map((_, i) => {
-                const starValue = (lender.totalScore / 10) * 5;
+                const starValue = (lender.ourScore / 10) * 5;
                 const isFilled = i < Math.floor(starValue);
 
                 return (
@@ -176,11 +176,11 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             <div className="flex items-center gap-4 lg:w-[calc(33.333%-1rem)] lg:justify-start">
               <div className="lg:text-left">
                 <div className="flex items-baseline gap-1 lg:justify-start">
-                  <span className="text-2xl font-bold text-[#2a3d66]">{lender.totalScore}</span>
+                  <span className="text-2xl font-bold text-[#2a3d66]">{lender.ourScore}</span>
                   <span className="text-slate-400 text-sm">/10</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 mt-1">
-                  <StarRating score={lender.totalScore} />
+                  <StarRating score={lender.ourScore} />
                 </div>
                 <div className="flex items-center justify-start gap-1 mt-1">
                   <span className="text-xs text-slate-500">Our score</span>

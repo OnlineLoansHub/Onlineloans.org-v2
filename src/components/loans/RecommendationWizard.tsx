@@ -228,8 +228,8 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                               {lender.name}
                             </h4>
                             <div className="flex items-center gap-2 mt-1">
-                              <StarRating score={lender.totalScore} />
-                              <span className="text-sm text-slate-500">{lender.totalScore}/10</span>
+                              <StarRating score={lender.ourScore} />
+                              <span className="text-sm text-slate-500">{lender.ourScore}/10</span>
                             </div>
                           </div>
                         </div>
@@ -375,8 +375,8 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         <div className="flex-1 min-w-0">
                           <h4 className="font-semibold text-xl text-slate-900">{lender.name}</h4>
                           <div className="flex items-center gap-2 mt-1">
-                            <StarRating score={lender.totalScore} />
-                            <span className="text-lg text-slate-500">{lender.totalScore}/10</span>
+                            <StarRating score={lender.ourScore} />
+                            <span className="text-lg text-slate-500">{lender.ourScore}/10</span>
                           </div>
                         </div>
                         <Button

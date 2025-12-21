@@ -11,10 +11,10 @@ interface SortControlProps {
 }
 
 const sortOptions: Option[] = [
-  { value: 'totalScore', label: 'Our Score' },
+  { value: 'ourScore', label: 'Our Score' },
   { value: 'trustpilotScore', label: 'Trustpilot' },
-  { value: 'popularityScore', label: 'Popularity' },
   { value: 'brandReputation', label: 'Brand Reputation' },
+  { value: 'popularityScore', label: 'Popularity' },
 ];
 
 export default function SortControl({ sortBy, onSortChange }: SortControlProps) {
