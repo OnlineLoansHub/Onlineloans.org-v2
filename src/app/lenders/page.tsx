@@ -209,9 +209,6 @@ export default function LendersPage() {
 
       {/* Cross Promo */}
       <CrossPromo />
-
-      {/* Educational Content */}
-      <EducationalContent />
     </div>
   );
 }
