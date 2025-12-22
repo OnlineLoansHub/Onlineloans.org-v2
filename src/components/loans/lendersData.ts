@@ -54,8 +54,8 @@ export const lendersData: Brand[] = [
       'Minimum Credit Score: 600',
       'APR Range: 8% - 30%',
     ],
-    ctaUrl: '#',
-    websiteUrl: '#',
+    ctaUrl: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
+    websiteUrl: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
   },
   {
     id: 2,
@@ -85,8 +85,8 @@ export const lendersData: Brand[] = [
       'Minimum Credit Score: 600',
       'APR Range: 7% - 28%',
     ],
-    ctaUrl: '#',
-    websiteUrl: '#',
+    ctaUrl: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP&sub_id_1=',
+    websiteUrl: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP&sub_id_1=',
   },
   {
     id: 3,

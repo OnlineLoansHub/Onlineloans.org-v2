@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
@@ -14,7 +14,49 @@ interface LenderCardProps {
   amountLabel?: string;
 }
 
+/**
+ * Processes CTA URL to append gclid or fclid to tracking parameters
+ * Applies sub_id_1 for Advance Funds Network and ROK Financial
+ */
+function processCtaUrl(baseUrl: string, lenderName: string): string {
+  if (!baseUrl || baseUrl === '#') return baseUrl;
+
+  try {
+    // Get gclid or fclid from current page URL
+    const urlParams = new URLSearchParams(
+      typeof window !== 'undefined' ? window.location.search : ''
+    );
+    const gclid = urlParams.get('gclid');
+    const fclid = urlParams.get('fclid');
+    const trackingId = gclid || fclid;
+
+    if (!trackingId) return baseUrl;
+
+    // Parse the base URL
+    const url = new URL(baseUrl);
+
+    // Apply sub_id_1 for Advance Funds Network and ROK Financial
+    if (lenderName === 'Advance Funds Network' || lenderName === 'ROK Financial') {
+      url.searchParams.set('sub_id_1', trackingId);
+    }
+    // For other brands, you can add different parameter logic here if needed
+
+    return url.toString();
+  } catch (error) {
+    // If URL parsing fails, return original URL
+    console.error('Error processing CTA URL:', error);
+
+    return baseUrl;
+  }
+}
+
 export default function LenderCard({ lender, rank, amountLabel }: LenderCardProps) {
+  // Process CTA URL to include gclid/fclid in sub_id_1 (only for Advance Funds Network)
+  const processedCtaUrl = useMemo(
+    () => processCtaUrl(lender.ctaUrl, lender.name),
+    [lender.ctaUrl, lender.name]
+  );
+
   return (
     <>
       {/* Mobile Card - Simple Layout */}
@@ -111,7 +153,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 fontSize: '16px',
                 height: 'auto',
               }}
-              onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
+              onClick={() => window.open(processedCtaUrl || '#', '_blank')}
             >
               EXPLORE
               <ArrowRight className="w-4 h-4 ml-1" />
@@ -260,7 +302,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 margin: '0',
                 border: '0',
               }}
-              onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
+              onClick={() => window.open(processedCtaUrl || '#', '_blank')}
             >
               See Plans
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
