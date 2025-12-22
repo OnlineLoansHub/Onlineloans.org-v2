@@ -10,6 +10,7 @@ import {
   Wallet,
   Landmark,
   Coins,
+  Clock,
 } from 'lucide-react';
 import { ExploreIllustration } from './illustrations/ExploreIllustration';
 import { CompareIllustration } from './illustrations/CompareIllustration';
@@ -103,6 +104,17 @@ export default function HomePage() {
                 </Link>
               );
             })}
+            {/* Coming Soon Card - Mobile Only */}
+            <div className={cls.comingSoonCard}>
+              <div className={cls.categoryIconWrapper}>
+                <Clock
+                  className={cls.categoryIcon}
+                  style={{ color: '#9ca3af' }}
+                  strokeWidth={1.5}
+                />
+              </div>
+              <span className={cls.comingSoonTitle}>Coming Soon</span>
+            </div>
           </div>
         </div>
       </section>
