@@ -221,7 +221,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 {lender.amount && amountLabel && (
                   <div className="hidden lg:flex items-start gap-2">
                     <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-bold text-slate-900">{amountLabel}: {lender.amount}</span>
+                    <span className="text-sm font-bold text-slate-900">
+                      {amountLabel}: {lender.amount}
+                    </span>
                   </div>
                 )}
                 {lender.goodDetails?.map((detail, index) => (
