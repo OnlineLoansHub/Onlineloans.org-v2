@@ -10,8 +10,7 @@ interface HeroProps {
 }
 
 export default function Hero({ heroConfig, validDate }: HeroProps) {
-  const currentDate = new Date();
-  const monthYear = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const monthYear = 'January 2026';
 
   return (
     <section className={cls.hero}>

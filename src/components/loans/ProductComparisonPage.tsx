@@ -157,7 +157,7 @@ export default function ProductComparisonPage({
     '@context': 'https://schema.org',
     '@type': 'FinancialProduct',
     name: productConfig.displayName,
-    description: `Compare the best ${productConfig.displayName.toLowerCase()} of 2025 from top providers.`,
+    description: `Compare the best ${productConfig.displayName.toLowerCase()} of 2026 from top providers.`,
     provider: {
       '@type': 'Organization',
       name: 'OnlineLoans.org',
