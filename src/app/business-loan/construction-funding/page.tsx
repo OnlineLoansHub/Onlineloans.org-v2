@@ -23,45 +23,64 @@ export default function ConstructionFundingPage() {
   ];
 
   useEffect(() => {
+    // Performance: Use requestAnimationFrame to batch DOM reads and prevent forced reflow
+    let rafId: number | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
+
     const handleScroll = () => {
-      const fromTop = window.scrollY + 100;
-      let foundActive = false;
+      // Performance: Batch all DOM reads in requestAnimationFrame
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          const fromTop = window.scrollY + 100;
+          let foundActive = false;
 
-      for (let i = articlesRef.current.length - 1; i >= 0; i--) {
-        const article = articlesRef.current[i];
-        if (article) {
-          const articleTop = article.offsetTop;
+          // Performance: Read all layout properties together before any writes
+          const articleTops = articlesRef.current.map((article) =>
+            article ? article.offsetTop : Infinity
+          );
 
-          if (fromTop >= articleTop && !foundActive) {
-            if (activeMenuItem !== i) {
-              setActiveMenuItem(i);
+          for (let i = articleTops.length - 1; i >= 0; i--) {
+            const articleTop = articleTops[i];
+
+            if (fromTop >= articleTop && !foundActive) {
+              if (activeMenuItem !== i) {
+                setActiveMenuItem(i);
+              }
+              foundActive = true;
             }
-
-            foundActive = true;
           }
-        }
-      }
 
-      if (!foundActive && activeMenuItem !== 0) {
-        setActiveMenuItem(0);
+          if (!foundActive && activeMenuItem !== 0) {
+            setActiveMenuItem(0);
+          }
+
+          rafId = null;
+        });
       }
     };
 
+    // Performance: Debounce scroll handler to reduce frequency
     const debounce = (func: () => void, wait: number) => {
-      let timeout: NodeJS.Timeout;
-
       return () => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(), wait);
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        timeoutId = setTimeout(() => func(), wait);
       };
     };
 
     const debouncedScroll = debounce(handleScroll, 20);
-    window.addEventListener('scroll', debouncedScroll);
+    window.addEventListener('scroll', debouncedScroll, { passive: true });
     handleScroll();
 
     return () => {
       window.removeEventListener('scroll', debouncedScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
     };
   }, [activeMenuItem]);
 

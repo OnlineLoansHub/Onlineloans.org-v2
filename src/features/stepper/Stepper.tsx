@@ -297,30 +297,56 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
 
   // Update height when step changes or window resizes
   useEffect(() => {
-    const updateHeight = () => {
-      const isMobile = window.innerWidth <= 993;
-      setIsMobile(isMobile);
+    // Performance: Use requestAnimationFrame to batch DOM reads and prevent forced reflow
+    let rafId: number | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
 
-      const activeStepElement = stepRefs.current[index];
-      if (activeStepElement && isMobile) {
-        setContainerHeight(activeStepElement.offsetHeight);
-      } else {
-        setContainerHeight('auto');
+    const updateHeight = () => {
+      // Performance: Batch layout reads in requestAnimationFrame
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          const isMobile = window.innerWidth <= 993;
+          setIsMobile(isMobile);
+
+          const activeStepElement = stepRefs.current[index];
+          if (activeStepElement && isMobile) {
+            // Performance: Read layout properties together
+            setContainerHeight(activeStepElement.offsetHeight);
+          } else {
+            setContainerHeight('auto');
+          }
+          rafId = null;
+        });
       }
+    };
+
+    // Performance: Throttle resize handler to prevent excessive layout calculations
+    const throttledUpdateHeight = () => {
+      if (timeoutId) return;
+      timeoutId = setTimeout(() => {
+        updateHeight();
+        timeoutId = null;
+      }, 150); // Throttle to max once per 150ms
     };
 
     // Initial height update
     updateHeight();
 
-    // Add resize listener
-    window.addEventListener('resize', updateHeight);
+    // Add resize listener with passive flag for better performance
+    window.addEventListener('resize', throttledUpdateHeight, { passive: true });
 
     // Slight delay to ensure DOM is fully rendered
-    const timeoutId = setTimeout(updateHeight, 50);
+    const initialTimeoutId = setTimeout(updateHeight, 50);
 
     return () => {
-      window.removeEventListener('resize', updateHeight);
-      clearTimeout(timeoutId);
+      window.removeEventListener('resize', throttledUpdateHeight);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      clearTimeout(initialTimeoutId);
     };
   }, [index, formState]);
 

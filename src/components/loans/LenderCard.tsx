@@ -41,6 +41,8 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
                     fill
                     className="object-contain"
                     sizes="(max-width: 768px) 100px, 150px"
+                    priority={rank === 1}
+                    loading={rank === 1 ? 'eager' : 'lazy'}
                   />
                 </div>
               ) : (
@@ -160,6 +162,8 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
                       fill
                       className="object-contain"
                       sizes="(max-width: 1024px) 160px, 280px"
+                      priority={rank === 1}
+                      loading={rank === 1 ? 'eager' : 'lazy'}
                     />
                   </div>
                 ) : (

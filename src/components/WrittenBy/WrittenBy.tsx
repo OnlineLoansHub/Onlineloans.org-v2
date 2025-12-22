@@ -23,6 +23,8 @@ export const WrittenBy = ({ name, role, imageUrl, link, variant = 'default' }: W
           width={80}
           height={80}
           className={cls.authorImage}
+          priority={false}
+          loading="lazy"
         />
       </div>
       <div className={cls.textContent}>

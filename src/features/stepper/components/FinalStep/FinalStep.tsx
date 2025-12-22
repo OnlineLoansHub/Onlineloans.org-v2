@@ -46,16 +46,43 @@ export const FinalStep = ({
 
   // Update window size for confetti
   useEffect(() => {
+    // Performance: Use requestAnimationFrame and throttle to prevent layout thrashing
+    let rafId: number | null = null;
+    let timeoutId: NodeJS.Timeout | null = null;
+
     const handleResize = () => {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      // Performance: Batch layout reads in requestAnimationFrame
+      if (rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+          rafId = null;
+        });
+      }
     };
 
-    window.addEventListener('resize', handleResize);
+    // Performance: Throttle resize handler
+    const throttledHandleResize = () => {
+      if (timeoutId) return;
+      timeoutId = setTimeout(() => {
+        handleResize();
+        timeoutId = null;
+      }, 150); // Throttle to max once per 150ms
+    };
 
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('resize', throttledHandleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', throttledHandleResize);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, []);
 
   return (

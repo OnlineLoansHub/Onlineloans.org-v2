@@ -31,7 +31,7 @@ const nextConfig: NextConfig = {
           {
             key: 'Link',
             value:
-              '<https://fonts.googleapis.com>; rel=preconnect, <https://fonts.gstatic.com>; rel=preconnect; crossorigin, <https://fonts.gstatic.com>; rel=dns-prefetch',
+              '<https://fonts.googleapis.com>; rel=preconnect, <https://fonts.gstatic.com>; rel=preconnect; crossorigin, <https://fonts.gstatic.com>; rel=dns-prefetch, <https://t.contentsquare.net>; rel=preconnect, <https://www.googletagmanager.com>; rel=preconnect, <https://server-ol-v2-fcaa9dab215e.herokuapp.com>; rel=preconnect',
           },
         ],
       },
@@ -56,12 +56,31 @@ const nextConfig: NextConfig = {
               value: 'public, max-age=31536000, immutable',
             },
           ],
+        },
+        // Performance: Cache CSS files in production
+        {
+          source: '/:path*\\.css',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        // Performance: Cache JS files in production
+        {
+          source: '/:path*\\.js',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
         }
       );
     }
-    
+
     return headers;
-    
   },
 };
 
