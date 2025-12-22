@@ -38,7 +38,7 @@ interface ProductComparisonPageProps {
 const getLastUpdated = (): string => {
   const date = new Date();
   date.setDate(date.getDate() - 7);
-  
+
   return date.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -53,7 +53,7 @@ export default function ProductComparisonPage({
   structuredData,
 }: ProductComparisonPageProps) {
   const lastUpdated = getLastUpdated();
-  
+
   // Initialize filters based on filterOrder
   const initialFilters: Record<string, string> = {};
   productConfig.filterOrder.forEach((key) => {
@@ -91,11 +91,25 @@ export default function ProductComparisonPage({
         const filterIndex = creditOrder.indexOf(value);
         result = result.filter((l) => {
           const lenderIndex = creditOrder.indexOf(l.minCreditScore || '');
+
           return lenderIndex <= filterIndex;
         });
-      } else if (key.includes('loanType') || key.includes('loanPurpose') || key.includes('vehicleType') || key.includes('policyType') || key.includes('metalType') || key.includes('accountType') || key.includes('petType') || key.includes('coverageType')) {
+      } else if (
+        key.includes('loanType') ||
+        key.includes('loanPurpose') ||
+        key.includes('vehicleType') ||
+        key.includes('policyType') ||
+        key.includes('metalType') ||
+        key.includes('accountType') ||
+        key.includes('petType') ||
+        key.includes('coverageType')
+      ) {
         result = result.filter((l) => l.loanTypes?.includes(value));
-      } else if (key.includes('loanAmount') || key.includes('coverageAmount') || key.includes('priceRange')) {
+      } else if (
+        key.includes('loanAmount') ||
+        key.includes('coverageAmount') ||
+        key.includes('priceRange')
+      ) {
         result = result.filter(
           (l) => l.loanAmountRange === value || l.loanAmountRange === '100k_plus'
         );
@@ -104,6 +118,7 @@ export default function ProductComparisonPage({
         const filterIndex = revenueOrder.indexOf(value);
         result = result.filter((l) => {
           const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
+
           return lenderIndex <= filterIndex;
         });
       } else if (key.includes('timeInBusiness')) {
@@ -111,6 +126,7 @@ export default function ProductComparisonPage({
         const filterIndex = timeOrder.indexOf(value);
         result = result.filter((l) => {
           const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
+
           return lenderIndex <= filterIndex;
         });
       }
@@ -122,6 +138,7 @@ export default function ProductComparisonPage({
       const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2);
       otherLenders.sort((a, b) => b.ourScore - a.ourScore);
       const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
+
       return [...sortedPriority, ...otherLenders];
     } else {
       result.sort((a, b) => {
@@ -130,8 +147,10 @@ export default function ProductComparisonPage({
         if (aValue === null && bValue === null) return 0;
         if (aValue === null) return 1;
         if (bValue === null) return -1;
+
         return bValue - aValue;
       });
+
       return result;
     }
   }, [filters, sortBy, lendersData]);
@@ -297,7 +316,9 @@ export default function ProductComparisonPage({
         {/* Recommendation Wizard */}
         <section className={styles.unifiedSection}>
           <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>Find Your Perfect {productConfig.displayName} Match</h2>
+            <h2 className={styles.unifiedTitle}>
+              Find Your Perfect {productConfig.displayName} Match
+            </h2>
             <RecommendationWizard lenders={lendersData} wizardConfig={productConfig.wizard} />
           </div>
         </section>
@@ -324,4 +345,3 @@ export default function ProductComparisonPage({
     </>
   );
 }
-
