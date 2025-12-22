@@ -1,71 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Script from 'next/script';
-import Image from 'next/image';
-import { LoanComparisonCard } from '@/components/LoanComparisonCard/LoanComparisonCard';
+import { ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
+import Hero from '@/components/loans/Hero';
+import LenderCard from '@/components/loans/LenderCard';
+import FilterModule from '@/components/loans/FilterModule';
+import SortControl from '@/components/loans/SortControl';
+import RecommendationWizard from '@/components/loans/RecommendationWizard';
+import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
-import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
-import { LoanTypeModal } from '@/components/LoanTypeModal/LoanTypeModal';
-import { lenders } from '@/data/lenders';
-import { useUserLocation } from '@/lib/useUserLocation';
-import cls from './page.module.scss';
+import { lendersData } from '@/components/loans/lendersData';
+import styles from './page.module.scss';
 
-// State code to state name mapping
-const STATE_NAMES: Record<string, string> = {
-  AL: 'Alabama',
-  AK: 'Alaska',
-  AZ: 'Arizona',
-  AR: 'Arkansas',
-  CA: 'California',
-  CO: 'Colorado',
-  CT: 'Connecticut',
-  DE: 'Delaware',
-  FL: 'Florida',
-  GA: 'Georgia',
-  HI: 'Hawaii',
-  ID: 'Idaho',
-  IL: 'Illinois',
-  IN: 'Indiana',
-  IA: 'Iowa',
-  KS: 'Kansas',
-  KY: 'Kentucky',
-  LA: 'Louisiana',
-  ME: 'Maine',
-  MD: 'Maryland',
-  MA: 'Massachusetts',
-  MI: 'Michigan',
-  MN: 'Minnesota',
-  MS: 'Mississippi',
-  MO: 'Missouri',
-  MT: 'Montana',
-  NE: 'Nebraska',
-  NV: 'Nevada',
-  NH: 'New Hampshire',
-  NJ: 'New Jersey',
-  NM: 'New Mexico',
-  NY: 'New York',
-  NC: 'North Carolina',
-  ND: 'North Dakota',
-  OH: 'Ohio',
-  OK: 'Oklahoma',
-  OR: 'Oregon',
-  PA: 'Pennsylvania',
-  RI: 'Rhode Island',
-  SC: 'South Carolina',
-  SD: 'South Dakota',
-  TN: 'Tennessee',
-  TX: 'Texas',
-  UT: 'Utah',
-  VT: 'Vermont',
-  VA: 'Virginia',
-  WA: 'Washington',
-  WV: 'West Virginia',
-  WI: 'Wisconsin',
-  WY: 'Wyoming',
-  DC: 'District of Columbia',
-};
+const INITIAL_DISPLAY_COUNT = 5;
 
+// FAQ items matching the reference page
 const faqItems = [
   {
     question: 'What types of business loans are available?',
@@ -119,6 +70,7 @@ const faqItems = [
   },
 ];
 
+// Structured data schemas
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -179,9 +131,7 @@ const breadcrumbSchema = {
 // Calculate date 7 days before current date
 const getLastUpdated = (): string => {
   const date = new Date();
-
   date.setDate(date.getDate() - 7);
-
   return date.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -192,37 +142,118 @@ const getLastUpdated = (): string => {
 const lastUpdated = getLastUpdated();
 
 export default function BestBusinessLoansPage() {
-  const { state: stateCode } = useUserLocation();
-
-  // Initialize state from sessionStorage if available
-  const [_selectedLoanType, setSelectedLoanType] = useState<string | null>(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('selectedLoanType');
-    }
-
-    return null;
+  const [filters, setFilters] = useState({
+    loanType: 'all',
+    monthlyRevenue: 'all',
+    timeInBusiness: 'all',
+    creditScore: 'all',
+    loanAmount: 'all',
   });
-  const [showResults, setShowResults] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return !!sessionStorage.getItem('selectedLoanType');
-    }
+  const [sortBy, setSortBy] = useState('ourScore');
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
-    return false;
-  });
-
-  const handleLoanTypeSelect = (loanType: string) => {
-    setSelectedLoanType(loanType);
-    setShowResults(true);
-    // Optionally reload the page or filter results based on loan type
-    // window.location.reload();
+  const handleFilterChange = (key: string, value: string) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+    setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 
-  // Get state name from code, or use default
-  const stateName = stateCode ? STATE_NAMES[stateCode] : null;
+  const handleReset = () => {
+    setFilters({
+      loanType: 'all',
+      monthlyRevenue: 'all',
+      timeInBusiness: 'all',
+      creditScore: 'all',
+      loanAmount: 'all',
+    });
+    setDisplayCount(INITIAL_DISPLAY_COUNT);
+  };
+
+  // Filter and sort lenders
+  const filteredLenders = useMemo(() => {
+    let result = [...lendersData];
+
+    // Apply filters
+    if (filters.loanType !== 'all') {
+      result = result.filter((l) => l.loanTypes?.includes(filters.loanType));
+    }
+
+    if (filters.creditScore !== 'all') {
+      const creditOrder = ['poor', 'fair', 'good', 'excellent'];
+      const filterIndex = creditOrder.indexOf(filters.creditScore);
+
+      result = result.filter((l) => {
+        const lenderIndex = creditOrder.indexOf(l.minCreditScore || '');
+
+        return lenderIndex <= filterIndex;
+      });
+    }
+
+    if (filters.monthlyRevenue !== 'all') {
+      const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
+      const filterIndex = revenueOrder.indexOf(filters.monthlyRevenue);
+
+      result = result.filter((l) => {
+        const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
+
+        return lenderIndex <= filterIndex;
+      });
+    }
+
+    if (filters.timeInBusiness !== 'all') {
+      const timeOrder = ['0_6m', '6m_1y', '1_2', '2_plus'];
+      const filterIndex = timeOrder.indexOf(filters.timeInBusiness);
+
+      result = result.filter((l) => {
+        const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
+
+        return lenderIndex <= filterIndex;
+      });
+    }
+
+    if (filters.loanAmount !== 'all') {
+      result = result.filter(
+        (l) => l.loanAmountRange === filters.loanAmount || l.loanAmountRange === '100k_plus'
+      );
+    }
+
+    // Apply sorting
+    if (sortBy === 'ourScore') {
+      // Priority lenders (id: 1 and 2) stay at top when sorting by Our Score
+      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2);
+      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2);
+
+      // Sort others by ourScore descending
+      otherLenders.sort((a, b) => b.ourScore - a.ourScore);
+
+      // Ensure priority order (id 1, then id 2)
+      const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
+
+      return [...sortedPriority, ...otherLenders];
+    } else {
+      // Sort all lenders by selected field descending
+      result.sort((a, b) => {
+        const aValue = a[sortBy as keyof typeof a] as number | null;
+        const bValue = b[sortBy as keyof typeof b] as number | null;
+
+        // Handle null values - put them at the end
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null) return 1;
+        if (bValue === null) return -1;
+
+        // Sort in descending order (highest first)
+        return bValue - aValue;
+      });
+
+      return result;
+    }
+  }, [filters, sortBy]);
+
+  const displayedLenders = filteredLenders.slice(0, displayCount);
+  const hasMore = displayCount < filteredLenders.length;
 
   return (
     <>
-      <LoanTypeModal onSelect={handleLoanTypeSelect} />
+      {/* Structured Data Scripts */}
       <Script
         id="faq-schema"
         type="application/ld+json"
@@ -239,215 +270,112 @@ export default function BestBusinessLoansPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className={cls.wrapper}>
-        {/* Hero Section */}
-        <section className={cls.hero}>
-          <div className={cls.container} style={{ position: 'relative', zIndex: 1 }}>
-            <h1 className={cls.heroTitle}>
-              {stateName ? (
-                <>
-                  Best <span className={cls.underlinedText}>Business Loans</span> in {stateName} -
-                  2025
-                </>
-              ) : (
-                <>
-                  Best <span className={cls.underlinedText}>Business Loans</span> of 2025
-                </>
-              )}
-            </h1>
-            <div className={cls.heroSubtitle}>
-              <p className={cls.heroSubtitleText}>Lender ratings weight:</p>
-              <ul className={cls.heroSubtitleList}>
-                <li>Interest rates — 40%</li>
-                <li>Ease of approval — 30%</li>
-                <li>Speed of funding — 30%</li>
-              </ul>
-            </div>
-            <div className={cls.writtenByWrapper}>
-              <WrittenBy
-                name="Michael Thompson"
-                role="Senior Business Finance Analyst"
-                imageUrl="/images/authors/0_Man_Adult_1920x1080_optimize.gif"
-                variant="dark"
-              />
-            </div>
-            <div className={cls.heroMeta}>
-              <p className={cls.lastUpdated}>Last Updated: {lastUpdated}</p>
-            </div>
-            <div className={cls.trustBadges}>
-              <Image
-                src="/business-loan/restaurant-funding/assets/logo-bar-bbb-trustpilot.svg"
-                alt="BBB and Trustpilot badges"
-                width={350}
-                height={53}
-                className={cls.trustBadgesImage}
-              />
-            </div>
+      <div className={styles.page}>
+        <Hero validDate={lastUpdated} />
+
+        {/* Main Content */}
+        <section className={styles.mainContent}>
+          {/* Mobile Filter and Sort Row */}
+          <div className={styles.mobileControlsRow}>
+            <SortControl sortBy={sortBy} onSortChange={setSortBy} />
+            <FilterModule
+              filters={filters}
+              onFilterChange={handleFilterChange}
+              onReset={handleReset}
+              resultCount={filteredLenders.length}
+            />
           </div>
-        </section>
 
-        {/* Lender Comparison Section */}
-        <section className={cls.lendersSection}>
-          <div className={cls.container}>
-            <h2 className={cls.sectionTitle}>Compare Top Business Lenders</h2>
-            <p className={cls.sectionDescription}>
-              We've evaluated dozens of business loan providers to bring you the best options for
-              2025. Compare rates, terms, and funding speed to find the right fit for your business.
-            </p>
-            {showResults && (
-              <div className={cls.lendersGrid}>
-                {lenders.map((lender, index) => {
-                  // Calculate display number: skip Top Rated card (rating === 10) in numbering
-                  const isTopRated = lender.rating === 10;
-                  let displayNumber: number | undefined;
+          <div className={styles.contentWrapper}>
+            {/* Sidebar Filters - Desktop */}
+            <aside className={styles.sidebar}>
+              <div className={styles.stickySidebar}>
+                <FilterModule
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                  onReset={handleReset}
+                  resultCount={filteredLenders.length}
+                />
+              </div>
+            </aside>
 
-                  if (!isTopRated) {
-                    // Count non-top-rated cards before this one
-                    const cardsBefore = lenders
-                      .slice(0, index)
-                      .filter((l) => l.rating !== 10).length;
-                    displayNumber = cardsBefore + 1;
-                  }
+            {/* Main Content Area */}
+            <main className={styles.mainArea}>
+              {/* Sort Control - Desktop */}
+              <div className={styles.sortControlContainer}>
+                <div className={styles.resultsText}>
+                  Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+                  <span className={styles.resultsCount}>{filteredLenders.length}</span> lenders
+                </div>
+                <SortControl sortBy={sortBy} onSortChange={setSortBy} />
+              </div>
 
-                  return (
-                    <div
-                      key={lender.id}
-                      data-lender-id={lender.id}
-                      className={cls.lenderCardWrapper}
-                    >
-                      <LoanComparisonCard
-                        lender={lender}
-                        index={displayNumber !== undefined ? displayNumber - 1 : undefined}
-                      />
+              {/* Lender Cards */}
+              <div className={styles.lenderCardsContainer}>
+                {displayedLenders.length > 0 ? (
+                  displayedLenders.map((lender, index) => (
+                    <LenderCard key={lender.id} lender={lender} rank={index + 1} />
+                  ))
+                ) : (
+                  <div className={styles.emptyState}>
+                    <div className={styles.emptyStateIcon}>
+                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.5}
+                          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
                     </div>
-                  );
-                })}
+                    <h3 className={styles.emptyStateTitle}>No lenders found</h3>
+                    <p className={styles.emptyStateText}>
+                      Try adjusting your filters to see more results.
+                    </p>
+                    <Button variant="secondary" onClick={handleReset}>
+                      Reset Filters
+                    </Button>
+                  </div>
+                )}
               </div>
-            )}
-            {!showResults && (
-              <div className={cls.placeholderContent}>
-                <p>Please select a loan type to see recommendations.</p>
-              </div>
-            )}
+
+              {/* Show More Button */}
+              {hasMore && (
+                <div className={styles.showMoreContainer}>
+                  <Button
+                    variant="secondary"
+                    onClick={() => setDisplayCount((prev) => prev + 5)}
+                    className={styles.showMoreButton}
+                  >
+                    Show More
+                    <ChevronDown className="w-4 h-4 ml-2 inline-block" />
+                  </Button>
+                </div>
+              )}
+            </main>
           </div>
         </section>
 
-        {/* Methodology Section */}
-        <section className={cls.methodologySection}>
-          <div className={cls.container}>
-            <h2 className={cls.methodologyTitle}>How We Select the Best Business Loans</h2>
-            <div className={cls.methodologyDivider}></div>
-            <div className={cls.methodologyContent}>
-              <p>
-                Our team evaluated business loan providers using three key criteria to identify the
-                best options for business owners in 2025.
-              </p>
-              <p>
-                <strong>Interest Rates:</strong> We prioritize lenders offering competitive,
-                transparent interest rates that provide real value to borrowers. We compare annual
-                percentage rates (APR) across lenders, including all fees and charges, to ensure
-                business owners get the most cost-effective financing options. Lenders with
-                excessive rates or hidden fees are excluded from our recommendations.
-              </p>
-              <p>
-                <strong>Qualifications:</strong> We assess each lender's qualification requirements,
-                including minimum credit scores, time in business, and revenue thresholds. We favor
-                lenders that serve a wide range of businesses while maintaining responsible lending
-                standards. This includes options for businesses with varying credit profiles, from
-                excellent credit to those with lower scores, ensuring accessibility without
-                compromising loan quality.
-              </p>
-              <p>
-                <strong>Funding Speed:</strong> Speed is critical for business owners who need
-                capital quickly. We prioritize lenders that can approve and fund loans within 24-72
-                hours, with some offering same-day funding for qualified applicants. We evaluate the
-                entire process from application submission to funds in your account, ensuring
-                lenders deliver on their promised timelines.
-              </p>
-              <p>
-                By focusing on these three essential factors, we ensure every lender on this list
-                offers competitive rates, reasonable qualification requirements, and fast funding
-                that meets the real-world needs of business owners.
-              </p>
-            </div>
+        {/* Recommendation Wizard */}
+        <section className={styles.unifiedSection}>
+          <div className={styles.unifiedContainer}>
+            <h2 className={styles.unifiedTitle}>Find Your Perfect Business Loan Match</h2>
+            <RecommendationWizard lenders={lendersData} />
           </div>
         </section>
 
-        {/* Which Business Loans We Consider Section */}
-        <section className={cls.considerationSection}>
-          <div className={cls.container}>
-            <h2 className={cls.methodologyTitle}>Which business loans we consider</h2>
-            <div className={cls.methodologyDivider}></div>
-            <div className={cls.methodologyContent}>
-              <p>
-                Our analysis covers a broad range of small-business financing options to ensure we
-                capture the most relevant choices for U.S. entrepreneurs. We reviewed dozens of
-                U.S.-based, online lenders that operate nationally, focusing on loans that are
-                widely available to businesses across industries and stages (from startups to
-                established companies). By concentrating on online lenders, we emphasize financing
-                sources that offer convenient digital applications and faster funding times compared
-                to traditional banks <cite>biz2credit.com</cite>.
-              </p>
-              <p>
-                <strong>Scope of lenders included:</strong> We included only online lenders and
-                platforms in our comparison. This means we looked at reputable fintech and non-bank
-                lenders known for serving small businesses – for example, companies like OnDeck,
-                BlueVine, Fundbox, Kabbage (AmEx), and others that specialize in quick, accessible
-                working-capital solutions <cite>clearlyacquired.com</cite>. These online lenders
-                provide a variety of loan products (such as term loans, business lines of credit,
-                invoice financing/factoring, equipment loans, and merchant cash advances), giving us
-                a comprehensive view of financing options available through the internet. We also
-                included government-backed financing in our consideration – specifically U.S. Small
-                Business Administration (SBA) loan programs (e.g. SBA 7(a) loans, 504 loans, and SBA
-                microloans). These SBA-backed loans are offered through many lending platforms
-                (including some online lenders) and are popular for their favorable terms and broad
-                usage possibilities <cite>biz2credit.com</cite>. Including SBA loans ensures our
-                recommendations account for low-interest, long-term financing options in addition to
-                private online loans.
-              </p>
-              <p>
-                <strong>What's not included:</strong> Our comparison does not focus on traditional
-                banks or nonprofit lenders. We excluded brick-and-mortar banks and credit unions
-                from our primary list of considered lenders, even though they can offer competitive
-                rates, because our emphasis is on online borrowing options that are accessible
-                nationwide. Traditional banks often have more stringent requirements and slower
-                application processes (taking weeks or months for approval) compared to online
-                lenders <cite>biz2credit.com</cite>. Likewise, we did not include local community
-                lenders or nonprofit microlenders (such as certain community development loan
-                programs or organizations like Kiva) in the core list due to their limited
-                geographic reach and niche availability <cite>nerdwallet.com</cite>. (These local or
-                nonprofit options can be excellent for specific cases – for instance, some community
-                lenders specialize in startup loans or loans for business owners with weaker credit{' '}
-                <cite>nerdwallet.com</cite> – but they serve a narrower audience and thus fall
-                outside the scope of our nationwide online comparison.) By narrowing our focus to
-                U.S.-based online lenders and SBA-backed programs, we ensure that the "Y" (the
-                universe of lenders we considered) consists of broadly available, fast-to-fund
-                financing options that a wide range of small business owners can realistically
-                access.
-              </p>
-              <p>
-                Overall, our team started with a large pool of online business lenders and loan
-                products and filtered them down to the top recommendations you see in our comparison
-                table. This approach — considering only U.S. online lenders (plus SBA loans) and
-                excluding less-accessible funding sources — helps you understand who "Y" is, i.e.
-                which lenders and loans were in the running when we selected our recommended
-                business loan options. Our goal is to give you confidence that we've surveyed the
-                key players in the online small-business lending space{' '}
-                <cite>clearlyacquired.com</cite>, so the loan offers and lenders we highlight truly
-                represent the best among what's available to meet your business's financing needs.
-              </p>
-            </div>
+        {/* How Our Total Score Works Section */}
+        <section className={styles.unifiedSection}>
+          <div className={styles.unifiedContainer}>
+            <h2 className={styles.unifiedTitle}>How Our Total Score Works</h2>
+            <ExpandableExplanation />
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className={cls.faqSection}>
-          <div className={cls.container}>
-            <h2 className={cls.sectionTitle}>Frequently Asked Questions</h2>
-            <p className={cls.sectionDescription}>
-              Get answers to common questions about business loans, application processes, and
-              funding options.
-            </p>
+        <section className={styles.unifiedSection}>
+          <div className={styles.unifiedContainer}>
+            <h2 className={styles.unifiedTitle}>Frequently Asked Questions</h2>
             <FAQAccordion items={faqItems} />
           </div>
         </section>
