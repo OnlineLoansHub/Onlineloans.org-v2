@@ -58,7 +58,7 @@ $left-offset-s: 18px;
   left: $left-offset;
   transform: translateY(-50%);
   font-size: 20px;
-  color: var(--color-gray-medium);
+  color: var(--color-black, #000);
   transition: $transition;
   white-space: nowrap;
 

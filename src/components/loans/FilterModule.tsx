@@ -143,9 +143,9 @@ function FilterSection({
         </div>
         <div className="flex items-center gap-2">
           {isExpanded ? (
-            <ChevronUp className="w-5 h-5 text-slate-400" />
+            <ChevronUp className="w-5 h-5 text-black" />
           ) : (
-            <ChevronDown className="w-5 h-5 text-slate-400" />
+            <ChevronDown className="w-5 h-5 text-black" />
           )}
         </div>
       </button>

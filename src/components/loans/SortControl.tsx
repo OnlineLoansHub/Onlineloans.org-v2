@@ -20,8 +20,8 @@ const sortOptions: Option[] = [
 export default function SortControl({ sortBy, onSortChange }: SortControlProps) {
   return (
     <div className="flex items-center gap-1.5 lg:gap-3 w-full lg:w-auto">
-      <ArrowUpDown className="w-4 h-4 text-slate-500 flex-shrink-0" />
-      <span className="text-sm text-slate-500 whitespace-nowrap flex-shrink-0">Sort by:</span>
+      <ArrowUpDown className="w-4 h-4 text-black flex-shrink-0" />
+      <span className="text-sm text-black whitespace-nowrap flex-shrink-0">Sort by:</span>
       <Select
         name="sort"
         value={sortBy}

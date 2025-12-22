@@ -109,7 +109,7 @@
 
 .resultsText {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--color-black, #000);
 }
 
 .resultsCount {
@@ -129,7 +129,7 @@
 }
 
 .emptyStateIcon {
-  color: #94a3b8;
+  color: var(--color-black, #000);
   margin-bottom: 1rem;
 
   svg {
@@ -148,7 +148,7 @@
 }
 
 .emptyStateText {
-  color: #64748b;
+  color: var(--color-black, #000);
   margin-bottom: 1rem;
 }
 

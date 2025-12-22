@@ -142,7 +142,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                       <span className="text-sm font-medium text-slate-600">
                         Step {currentStep + 1} / {steps.length}
                       </span>
-                      <span className="text-sm text-slate-500">
+                      <span className="text-sm text-black">
                         {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
                       </span>
                     </div>
@@ -226,7 +226,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                             </h4>
                             <div className="flex items-center gap-2 mt-1">
                               <StarRating score={lender.ourScore} />
-                              <span className="text-sm text-slate-500">{lender.ourScore}/10</span>
+                              <span className="text-sm text-black">{lender.ourScore}/10</span>
                             </div>
                           </div>
                         </div>
@@ -243,7 +243,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                   </div>
 
                   {/* Disclaimer */}
-                  <p className="mt-4 text-sm text-slate-500 text-center italic px-2">
+                  <p className="mt-4 text-sm text-black text-center italic px-2">
                     *This recommendation is based on our assessment; users are urged to consider
                     individual factors before choosing a vendor.
                   </p>
@@ -296,7 +296,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                       <span className="text-lg font-medium text-slate-600">
                         Step {currentStep + 1} / {steps.length}
                       </span>
-                      <span className="text-lg text-slate-500">
+                      <span className="text-lg text-black">
                         {Math.round(((currentStep + 1) / steps.length) * 100)}% complete
                       </span>
                     </div>
@@ -373,7 +373,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                           <h4 className="font-semibold text-xl text-slate-900">{lender.name}</h4>
                           <div className="flex items-center gap-2 mt-1">
                             <StarRating score={lender.ourScore} />
-                            <span className="text-lg text-slate-500">{lender.ourScore}/10</span>
+                            <span className="text-lg text-black">{lender.ourScore}/10</span>
                           </div>
                         </div>
                         <Button
@@ -389,7 +389,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                   </div>
 
                   {/* Disclaimer */}
-                  <p className="mt-6 text-base text-slate-500 text-center italic">
+                  <p className="mt-6 text-base text-black text-center italic">
                     *This recommendation is based on our assessment; users are urged to consider
                     individual factors before choosing a vendor.
                   </p>

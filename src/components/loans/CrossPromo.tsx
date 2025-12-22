@@ -64,7 +64,7 @@ export default function CrossPromo() {
                 </div>
                 <div className="text-right">
                   <div className="text-xl font-bold text-[var(--color-primary)]">{provider.score}</div>
-                  <div className="text-xs text-slate-500">Score</div>
+                  <div className="text-xs text-black">Score</div>
                 </div>
               </div>
 

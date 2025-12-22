@@ -86,10 +86,10 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               })}
             </div>
             <div className="flex items-center gap-1">
-              <p className="text-xs text-slate-500">Our score</p>
+              <p className="text-xs text-black">Our score</p>
               <div className="relative group">
                 <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                  <Info className="w-3.5 h-3.5 text-slate-400" />
+                  <Info className="w-3.5 h-3.5 text-black" />
                 </button>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
                   Our score combines Trustpilot ratings, brand reputation, and popularity to give
@@ -117,7 +117,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             {/* Phone Number */}
             <a
               href="tel:888-501-8270"
-              className="text-xs text-slate-500 hover:text-[var(--color-primary)] underline"
+              className="text-xs text-black hover:text-[var(--color-primary)] underline"
             >
               (888)-501-8270
             </a>
@@ -175,16 +175,16 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               <div className="lg:text-left">
                 <div className="flex items-baseline gap-1 lg:justify-start">
                   <span className="text-2xl font-bold text-black">{lender.ourScore}</span>
-                  <span className="text-slate-400 text-sm">/10</span>
+                  <span className="text-black text-sm">/10</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 mt-1">
                   <StarRating score={lender.ourScore} />
                 </div>
                 <div className="flex items-center justify-start gap-1 mt-1">
-                  <span className="text-xs text-slate-500">Our score</span>
+                  <span className="text-xs text-black">Our score</span>
                   <div className="relative group">
                     <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                      <Info className="w-3.5 h-3.5 text-slate-400" />
+                      <Info className="w-3.5 h-3.5 text-black" />
                     </button>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
                       Our score combines Trustpilot ratings, brand reputation, and popularity to
@@ -263,7 +263,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
                 href={lender.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-[var(--color-primary)] transition-colors"
+                className="flex items-center justify-center gap-1.5 text-sm text-black hover:text-[var(--color-primary)] transition-colors"
               >
                 Visit {lender.name}
                 <ExternalLink className="w-3.5 h-3.5" />

@@ -43,13 +43,13 @@ export default function ScoreBreakdown({
         <div key={index} className="text-center relative">
           <div className="text-2xl font-bold text-black mb-1">{score.value || '—'}</div>
           <div className="flex items-center justify-center gap-1 mb-1">
-            <span className="text-xs text-slate-500 font-medium">{score.label}</span>
+            <span className="text-xs text-black font-medium">{score.label}</span>
             <div
               className="relative"
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <Info className="w-3 h-3 text-slate-400 cursor-help" />
+              <Info className="w-3 h-3 text-black cursor-help" />
               {hoveredIndex === index && (
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap z-10">
                   {score.tooltip}
@@ -58,7 +58,7 @@ export default function ScoreBreakdown({
               )}
             </div>
           </div>
-          <div className="text-xs text-slate-400">{score.helper}</div>
+          <div className="text-xs text-black">{score.helper}</div>
         </div>
       ))}
     </div>
