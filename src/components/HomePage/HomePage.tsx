@@ -84,7 +84,10 @@ export default function HomePage() {
           <div className={cls.categoryGrid}>
             {categories.map((category, index) => {
               const IconComponent = category.icon;
-              const href = category.title === 'Business Loans' ? '/lenders' : '#';
+              const href =
+                category.title === 'Business Loans'
+                  ? 'https://www.onlineloans.org/business-loan/best-business-loans'
+                  : '#';
 
               return (
                 <Link
