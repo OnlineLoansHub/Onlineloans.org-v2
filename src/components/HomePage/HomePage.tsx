@@ -84,10 +84,21 @@ export default function HomePage() {
           <div className={cls.categoryGrid}>
             {categories.map((category, index) => {
               const IconComponent = category.icon;
-              const href =
-                category.title === 'Business Loans'
-                  ? 'https://www.onlineloans.org/business-loan/best-business-loans'
-                  : '#';
+              
+              // Map category titles to their respective page URLs
+              const hrefMap: Record<string, string> = {
+                'Business Loans': '/business-loan/best-business-loans',
+                'Mortgage Loans': '/mortgage-loan/best-mortgage-loans',
+                'Student Loans': '/student-loan/best-student-loans',
+                'Personal Loans': '/personal-loan/best-personal-loans',
+                'Debt Consolidation': '#', // TODO: Create page when needed
+                'Pet Insurance': '/pet-insurance/best-pet-insurance',
+                'Life Insurance': '/life-insurance/best-life-insurance',
+                'Online Banking': '/online-banking/best-online-banking',
+                'Gold and Silver': '/gold-and-silver/best-gold-and-silver',
+              };
+              
+              const href = hrefMap[category.title] || '#';
 
               return (
                 <Link

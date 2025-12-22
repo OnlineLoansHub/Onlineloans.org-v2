@@ -2,58 +2,37 @@ import React from 'react';
 import { ArrowRight, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
+import type { CrossPromoConfig } from '@/config/productTypes';
+import * as LucideIcons from 'lucide-react';
 
-interface RelatedProvider {
-  id: number;
-  name: string;
-  score: number;
-  description: string;
-  ctaUrl: string;
+interface CrossPromoProps {
+  crossPromoConfig: CrossPromoConfig;
 }
 
-const relatedProviders: RelatedProvider[] = [
-  {
-    id: 1,
-    name: 'Mercury',
-    score: 9.6,
-    description: 'Best for startups and tech companies',
-    ctaUrl: '#',
-  },
-  {
-    id: 2,
-    name: 'Bluevine',
-    score: 9.4,
-    description: 'Best for small business checking',
-    ctaUrl: '#',
-  },
-  {
-    id: 3,
-    name: 'Relay',
-    score: 9.2,
-    description: 'Best for expense management',
-    ctaUrl: '#',
-  },
-];
+export default function CrossPromo({ crossPromoConfig }: CrossPromoProps) {
+  // Get icon component dynamically
+  const IconComponent = crossPromoConfig.icon 
+    ? (LucideIcons[crossPromoConfig.icon as keyof typeof LucideIcons] as React.ComponentType<{ className?: string }>)
+    : Building2;
 
-export default function CrossPromo() {
   return (
     <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-primary)]/10 rounded mb-4">
-            <Building2 className="w-4 h-4 text-[var(--color-primary)]" />
+            <IconComponent className="w-4 h-4 text-[var(--color-primary)]" />
             <span className="text-sm font-medium text-[var(--color-primary)]">Related Services</span>
           </div>
           <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3">
-            Are you looking to open a business account?
+            {crossPromoConfig.title}
           </h2>
           <p className="text-lg text-slate-600">
-            Explore the best online business checking accounts
+            {crossPromoConfig.description}
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {relatedProviders.map((provider) => (
+          {crossPromoConfig.relatedProviders.map((provider) => (
             <div
               key={provider.id}
               className="bg-white rounded border border-slate-200 p-5 hover:shadow-lg transition-shadow"

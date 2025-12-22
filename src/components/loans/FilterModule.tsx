@@ -25,79 +25,17 @@ interface Filters {
 }
 
 interface FilterModuleProps {
-  filters: Filters;
+  filters: Record<string, string>;
+  filterConfig: Record<string, FilterConfig>;
+  filterOrder: string[];
   onFilterChange: (key: string, value: string) => void;
   onReset: () => void;
   resultCount: number;
 }
 
-// Filter configurations
-const FILTER_CONFIGS: Record<FilterKey, FilterConfig> = {
-  loanType: {
-    label: 'Loan Type',
-    options: [
-      { value: 'all', label: 'Show all' },
-      { value: 'business_loan', label: 'Business Loan' },
-      { value: 'line_of_credit', label: 'Line of Credit' },
-      { value: 'working_capital', label: 'Working Capital' },
-      { value: 'sba', label: 'SBA' },
-      { value: 'other', label: 'Other' },
-    ],
-  },
-  monthlyRevenue: {
-    label: 'Monthly Revenue',
-    options: [
-      { value: 'all', label: 'Show all' },
-      { value: 'more_30k', label: 'More than $30K' },
-      { value: '20k_30k', label: '$20K–$30K' },
-      { value: '10k_20k', label: '$10K–$20K' },
-      { value: 'less_10k', label: 'Less than $10K' },
-    ],
-  },
-  timeInBusiness: {
-    label: 'Time in Business',
-    options: [
-      { value: 'all', label: 'Show all' },
-      { value: '2_plus', label: '2+ years' },
-      { value: '1_2', label: '1–2 years' },
-      { value: '6m_1y', label: '6 months–1 year' },
-      { value: '0_6m', label: '0–6 months' },
-    ],
-  },
-  creditScore: {
-    label: 'Credit Score',
-    options: [
-      { value: 'all', label: 'Show all' },
-      { value: 'excellent', label: 'Excellent (720–850)' },
-      { value: 'good', label: 'Good (690–719)' },
-      { value: 'fair', label: 'Fair (630–689)' },
-      { value: 'poor', label: 'Poor (350–629)' },
-    ],
-  },
-  loanAmount: {
-    label: 'Loan Amount',
-    options: [
-      { value: 'all', label: 'Show all' },
-      { value: 'under_10k', label: 'Under $10,000' },
-      { value: '10k_50k', label: '$10,000–$50,000' },
-      { value: '50k_100k', label: '$50,000–$100,000' },
-      { value: '100k_plus', label: '$100,000+' },
-    ],
-  },
-};
-
-// Filter order
-const FILTER_ORDER: FilterKey[] = [
-  'loanType',
-  'monthlyRevenue',
-  'timeInBusiness',
-  'creditScore',
-  'loanAmount',
-];
-
 // Filter Section Component
 interface FilterSectionProps {
-  filterKey: FilterKey;
+  filterKey: string;
   config: FilterConfig;
   selectedValue: string;
   isExpanded: boolean;
@@ -214,20 +152,22 @@ function FilterSection({
 
 export default function FilterModule({
   filters,
+  filterConfig,
+  filterOrder,
   onFilterChange,
   onReset,
   resultCount,
 }: FilterModuleProps) {
-  const [expandedSections, setExpandedSections] = useState<Record<FilterKey, boolean>>({
-    loanType: true,
-    monthlyRevenue: false,
-    timeInBusiness: false,
-    creditScore: false,
-    loanAmount: false,
+  // Initialize expanded sections - first one expanded by default
+  const initialExpanded: Record<string, boolean> = {};
+  filterOrder.forEach((key, index) => {
+    initialExpanded[key] = index === 0;
   });
+
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(initialExpanded);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  const toggleSection = useCallback((key: FilterKey) => {
+  const toggleSection = useCallback((key: string) => {
     setExpandedSections((prev) => ({
       ...prev,
       [key]: !prev[key],
@@ -235,20 +175,18 @@ export default function FilterModule({
   }, []);
 
   const handleValueChange = useCallback(
-    (key: FilterKey, value: string) => {
+    (key: string, value: string) => {
       onFilterChange(key, value);
     },
     [onFilterChange]
   );
 
   const handleOpenMobileFilters = useCallback(() => {
-    setExpandedSections({
-      loanType: true,
-      monthlyRevenue: false,
-      timeInBusiness: false,
-      creditScore: false,
-      loanAmount: false,
+    const resetExpanded: Record<string, boolean> = {};
+    filterOrder.forEach((key, index) => {
+      resetExpanded[key] = index === 0;
     });
+    setExpandedSections(resetExpanded);
     setMobileFiltersOpen(true);
   }, []);
 
@@ -278,7 +216,7 @@ export default function FilterModule({
         {activeFilterCount > 0 && (
           <button
             type="button"
-            onClick={handleReset}
+            onClick={onReset}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[var(--color-primary)] hover:bg-slate-100 rounded transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -289,9 +227,9 @@ export default function FilterModule({
 
       {/* Filter Sections */}
       <div className="divide-y divide-slate-200">
-        {FILTER_ORDER.map((key) => {
-          const config = FILTER_CONFIGS[key];
-          const selectedValue = filters[key];
+        {filterOrder.map((key) => {
+          const config = filterConfig[key];
+          const selectedValue = filters[key] || 'all';
 
           return (
             <FilterSection

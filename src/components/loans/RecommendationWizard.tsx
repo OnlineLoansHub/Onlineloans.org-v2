@@ -6,17 +6,15 @@ import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
 import type { Lender } from './lendersData';
 
+import type { WizardConfig, WizardStep } from '@/config/productTypes';
+
 interface RecommendationWizardProps {
   lenders: Lender[];
+  wizardConfig: WizardConfig;
 }
 
-interface Step {
-  question: string;
-  key: string;
-  options: Array<{ value: string; label: string }>;
-}
-
-const steps: Step[] = [
+// Default steps (will be overridden by wizardConfig)
+const defaultSteps: WizardStep[] = [
   {
     question: 'What type of loan are you looking for?',
     key: 'loanType',
@@ -80,7 +78,8 @@ const steps: Step[] = [
   },
 ];
 
-export default function RecommendationWizard({ lenders }: RecommendationWizardProps) {
+export default function RecommendationWizard({ lenders, wizardConfig }: RecommendationWizardProps) {
+  const steps = wizardConfig.steps || defaultSteps;
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResults, setShowResults] = useState(false);
@@ -202,10 +201,10 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                       <Check className="w-6 h-6 text-emerald-600" />
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-2">
-                      Based on your answers, we recommend
+                      {wizardConfig.resultsTitle || 'Based on your answers, we recommend'}
                     </h3>
                     <p className="text-base text-slate-600">
-                      These lenders match your business profile
+                      {wizardConfig.resultsSubtitle || 'These lenders match your profile'}
                     </p>
                   </div>
 

@@ -10,8 +10,10 @@ import FilterModule from '@/components/loans/FilterModule';
 import SortControl from '@/components/loans/SortControl';
 import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
+import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
 import { lendersData } from '@/components/loans/lendersData';
+import { businessLoansConfig } from '@/config/productTypes/businessLoans';
 import styles from './page.module.scss';
 
 const INITIAL_DISPLAY_COUNT = 5;
@@ -132,7 +134,7 @@ const breadcrumbSchema = {
 const getLastUpdated = (): string => {
   const date = new Date();
   date.setDate(date.getDate() - 7);
-  
+
   return date.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -272,7 +274,7 @@ export default function BestBusinessLoansPage() {
       />
 
       <div className={styles.page}>
-        <Hero validDate={lastUpdated} />
+        <Hero heroConfig={businessLoansConfig.hero} validDate={lastUpdated} />
 
         {/* Main Content */}
         <section className={styles.mainContent}>
@@ -281,6 +283,8 @@ export default function BestBusinessLoansPage() {
             <SortControl sortBy={sortBy} onSortChange={setSortBy} />
             <FilterModule
               filters={filters}
+              filterConfig={businessLoansConfig.filters}
+              filterOrder={businessLoansConfig.filterOrder}
               onFilterChange={handleFilterChange}
               onReset={handleReset}
               resultCount={filteredLenders.length}
@@ -293,6 +297,8 @@ export default function BestBusinessLoansPage() {
               <div className={styles.stickySidebar}>
                 <FilterModule
                   filters={filters}
+                  filterConfig={businessLoansConfig.filters}
+                  filterOrder={businessLoansConfig.filterOrder}
                   onFilterChange={handleFilterChange}
                   onReset={handleReset}
                   resultCount={filteredLenders.length}
@@ -361,7 +367,7 @@ export default function BestBusinessLoansPage() {
         <section className={styles.unifiedSection}>
           <div className={styles.unifiedContainer}>
             <h2 className={styles.unifiedTitle}>Find Your Perfect Business Loan Match</h2>
-            <RecommendationWizard lenders={lendersData} />
+            <RecommendationWizard lenders={lendersData} wizardConfig={businessLoansConfig.wizard} />
           </div>
         </section>
 
@@ -372,6 +378,9 @@ export default function BestBusinessLoansPage() {
             <ExpandableExplanation />
           </div>
         </section>
+
+        {/* Cross Promo Section */}
+        <CrossPromo crossPromoConfig={businessLoansConfig.crossPromo} />
 
         {/* FAQ Section */}
         <section className={styles.unifiedSection}>
