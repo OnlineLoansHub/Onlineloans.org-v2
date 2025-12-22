@@ -76,7 +76,7 @@ export default function HomePage() {
         <div className={cls.heroContent}>
           {/* Headline */}
           <h1 className={cls.headline}>
-            <span className={cls.headlineSpan}>Compare & choose </span>
+            <span className={cls.headlineSpan}>Compare & Choose </span>
             <span className={cls.headlineSpan}>top financial products</span>
           </h1>
 
