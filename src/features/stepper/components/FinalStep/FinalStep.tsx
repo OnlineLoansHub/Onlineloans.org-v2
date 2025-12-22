@@ -79,6 +79,7 @@ export const FinalStep = ({
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
