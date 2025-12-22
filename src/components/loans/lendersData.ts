@@ -1,5 +1,5 @@
-// Lender data - easily swappable with real JSON data
-export interface Lender {
+// Brand data - easily swappable with real JSON data
+export interface Brand {
   id: number;
   name: string;
   logo: string | null;
@@ -9,19 +9,23 @@ export interface Lender {
   popularityScore: number | null;
   reviewCount: number | null;
   highlight: string;
-  loanTypes: string[];
-  minCreditScore: string;
-  minRevenue: string;
-  minTimeInBusiness: string;
-  loanAmountRange: string;
-  loanAmount?: string;
+  productTypes: string[]; // Generic field for all product types (loans, insurance, banking, etc.)
+  amount?: string; // Optional amount field (loan amount, premium, coverage, APY, price range)
   goodDetails: string[];
   badDetails: string[];
   ctaUrl: string;
   websiteUrl: string;
+  // Optional loan-specific fields
+  minCreditScore?: string;
+  minRevenue?: string; // For business loans
+  minTimeInBusiness?: string; // For business loans
+  amountRange?: string; // For filtering ranges across all product types
 }
 
-export const lendersData: Lender[] = [
+// Backward compatibility alias during migration
+export type Lender = Brand;
+
+export const lendersData: Brand[] = [
   {
     id: 1,
     name: 'Advance Funds Network',
@@ -32,12 +36,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.5,
     reviewCount: 8500,
     highlight: 'Quick access to working capital for growing businesses',
-    loanTypes: ['business_loan', 'working_capital'],
+    productTypes: ['business_loan', 'working_capital'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $2M',
+    amountRange: '50k_100k',
+    amount: '$5K - $2M',
     goodDetails: [
       'Funding Speed: 24-48 hours',
       'Collateral Required: No',
@@ -63,12 +67,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.7,
     reviewCount: 12000,
     highlight: 'Fast funding solutions for small businesses',
-    loanTypes: ['business_loan', 'working_capital', 'line_of_credit'],
+    productTypes: ['business_loan', 'working_capital', 'line_of_credit'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$10K - $5M',
+    amountRange: '50k_100k',
+    amount: '$10K - $5M',
     goodDetails: [
       'Funding Speed: Same day',
       'Collateral Required: No',
@@ -94,12 +98,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.6,
     reviewCount: 15146,
     highlight: 'Cash in the next 24hrs after approval',
-    loanTypes: ['business_loan', 'working_capital', 'line_of_credit'],
+    productTypes: ['business_loan', 'working_capital', 'line_of_credit'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$25K - $6M',
+    amountRange: '50k_100k',
+    amount: '$25K - $6M',
     goodDetails: [
       'Funding Speed: 24 hours',
       'Collateral Required: No',
@@ -125,12 +129,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.4,
     reviewCount: 8234,
     highlight: 'Expert guidance to find the best loan for your business',
-    loanTypes: ['business_loan', 'sba', 'line_of_credit'],
+    productTypes: ['business_loan', 'sba', 'line_of_credit'],
     minCreditScore: 'good',
     minRevenue: '20k_30k',
     minTimeInBusiness: '1_2',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $5M',
+    amountRange: '50k_100k',
+    amount: '$5K - $5M',
     goodDetails: [
       'APR Range: 5% - 24%',
       'Prepayment Penalty: None',
@@ -157,12 +161,12 @@ export const lendersData: Lender[] = [
     popularityScore: 10,
     reviewCount: 9665,
     highlight: 'Industry-leading digital banking experience with competitive rates',
-    loanTypes: ['business_loan', 'sba'],
+    productTypes: ['business_loan', 'sba'],
     minCreditScore: 'good',
     minRevenue: 'more_30k',
     minTimeInBusiness: '2_plus',
-    loanAmountRange: '100k_plus',
-    loanAmount: '$5K - $5M',
+    amountRange: '100k_plus',
+    amount: '$5K - $5M',
     goodDetails: [
       'APR Range: 4% - 22%',
       'Collateral Required: No',
@@ -188,12 +192,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.3,
     reviewCount: 12456,
     highlight: 'Compare multiple loan offers from top lenders in one place',
-    loanTypes: ['business_loan', 'line_of_credit', 'sba'],
+    productTypes: ['business_loan', 'line_of_credit', 'sba'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $500K',
+    amountRange: '50k_100k',
+    amount: '$5K - $500K',
     goodDetails: [
       'Funding Speed: 1-3 business days',
       'Collateral Required: No',
@@ -219,12 +223,12 @@ export const lendersData: Lender[] = [
     popularityScore: 9.0,
     reviewCount: 3421,
     highlight: 'Fast approval with flexible credit lines for growing businesses',
-    loanTypes: ['line_of_credit', 'working_capital'],
+    productTypes: ['line_of_credit', 'working_capital'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '10k_50k',
-    loanAmount: '$1K - $150K',
+    amountRange: '10k_50k',
+    amount: '$1K - $150K',
     goodDetails: [
       'Funding Speed: Same day',
       'Collateral Required: No',
@@ -250,12 +254,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.9,
     reviewCount: 4567,
     highlight: 'Access to 75+ lenders with one simple application',
-    loanTypes: ['business_loan', 'line_of_credit', 'sba', 'working_capital'],
+    productTypes: ['business_loan', 'line_of_credit', 'sba', 'working_capital'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $5M',
+    amountRange: '50k_100k',
+    amount: '$5K - $5M',
     goodDetails: [
       'Funding Speed: 24-72 hours',
       'Prepayment Penalty: None',
@@ -282,12 +286,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.8,
     reviewCount: 5234,
     highlight: 'Compare personalized loan offers from multiple lenders',
-    loanTypes: ['business_loan', 'sba'],
+    productTypes: ['business_loan', 'sba'],
     minCreditScore: 'good',
     minRevenue: '20k_30k',
     minTimeInBusiness: '1_2',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $500K',
+    amountRange: '50k_100k',
+    amount: '$5K - $500K',
     goodDetails: [
       'Prepayment Penalty: None',
       'Online Application: Yes',
@@ -315,12 +319,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.7,
     reviewCount: 3124,
     highlight: 'Low rates for well-qualified borrowers with excellent credit',
-    loanTypes: ['business_loan'],
+    productTypes: ['business_loan'],
     minCreditScore: 'excellent',
     minRevenue: 'more_30k',
     minTimeInBusiness: '2_plus',
-    loanAmountRange: '100k_plus',
-    loanAmount: '$5K - $100K',
+    amountRange: '100k_plus',
+    amount: '$5K - $100K',
     goodDetails: [
       'APR Range: 3% - 20%',
       'Collateral Required: No',
@@ -346,12 +350,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.6,
     reviewCount: 2845,
     highlight: 'Peer-to-peer lending platform with competitive rates',
-    loanTypes: ['business_loan', 'line_of_credit'],
+    productTypes: ['business_loan', 'line_of_credit'],
     minCreditScore: 'good',
     minRevenue: '20k_30k',
     minTimeInBusiness: '1_2',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $500K',
+    amountRange: '50k_100k',
+    amount: '$5K - $500K',
     goodDetails: [
       'Prepayment Penalty: None',
       'Online Application: Yes',
@@ -379,12 +383,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.4,
     reviewCount: 15678,
     highlight: 'Comprehensive comparison platform with expert financial advice',
-    loanTypes: ['business_loan', 'sba', 'line_of_credit'],
+    productTypes: ['business_loan', 'sba', 'line_of_credit'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: '50k_100k',
-    loanAmount: '$5K - $500K',
+    amountRange: '50k_100k',
+    amount: '$5K - $500K',
     goodDetails: [
       'Funding Speed: 2-4 business days',
       'Collateral Required: No',
@@ -410,12 +414,12 @@ export const lendersData: Lender[] = [
     popularityScore: 7.3,
     reviewCount: 1234,
     highlight: 'Fast funding for new businesses with flexible requirements',
-    loanTypes: ['other'],
+    productTypes: ['other'],
     minCreditScore: 'poor',
     minRevenue: 'less_10k',
     minTimeInBusiness: '0_6m',
-    loanAmountRange: 'under_10k',
-    loanAmount: '$1K - $9K',
+    amountRange: 'under_10k',
+    amount: '$1K - $9K',
     goodDetails: [
       'Funding Speed: Same day',
       'Collateral Required: No',
@@ -441,12 +445,12 @@ export const lendersData: Lender[] = [
     popularityScore: 7.6,
     reviewCount: 2345,
     highlight: 'Specialized loans for startups and new businesses',
-    loanTypes: ['business_loan', 'other'],
+    productTypes: ['business_loan', 'other'],
     minCreditScore: 'poor',
     minRevenue: 'less_10k',
     minTimeInBusiness: '0_6m',
-    loanAmountRange: 'under_10k',
-    loanAmount: '$2K - $8K',
+    amountRange: 'under_10k',
+    amount: '$2K - $8K',
     goodDetails: [
       'Funding Speed: 24-48 hours',
       'Collateral Required: No',
@@ -472,12 +476,12 @@ export const lendersData: Lender[] = [
     popularityScore: 8.1,
     reviewCount: 3456,
     highlight: 'Flexible loan options for businesses of all sizes',
-    loanTypes: ['business_loan', 'line_of_credit'],
+    productTypes: ['business_loan', 'line_of_credit'],
     minCreditScore: 'poor',
     minRevenue: 'less_10k',
     minTimeInBusiness: '0_6m',
-    loanAmountRange: '10k_50k',
-    loanAmount: '$5K - $45K',
+    amountRange: '10k_50k',
+    amount: '$5K - $45K',
     goodDetails: [
       'Funding Speed: 1-2 business days',
       'Prepayment Penalty: None',

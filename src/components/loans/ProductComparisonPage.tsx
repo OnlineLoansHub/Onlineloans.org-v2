@@ -12,7 +12,7 @@ import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
-import type { Lender } from './lendersData';
+import type { Brand } from './lendersData';
 import type { ProductTypeConfig } from '@/config/productTypes';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
 
@@ -25,7 +25,7 @@ interface FAQItem {
 
 interface ProductComparisonPageProps {
   productConfig: ProductTypeConfig;
-  lendersData: Lender[];
+  lendersData: Brand[];
   faqItems: FAQItem[];
   structuredData?: {
     faqSchema?: any;
@@ -104,14 +104,14 @@ export default function ProductComparisonPage({
         key.includes('petType') ||
         key.includes('coverageType')
       ) {
-        result = result.filter((l) => l.loanTypes?.includes(value));
+        result = result.filter((l) => l.productTypes?.includes(value));
       } else if (
         key.includes('loanAmount') ||
         key.includes('coverageAmount') ||
         key.includes('priceRange')
       ) {
         result = result.filter(
-          (l) => l.loanAmountRange === value || l.loanAmountRange === '100k_plus'
+          (l) => l.amountRange === value || l.amountRange === '100k_plus'
         );
       } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
         const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];

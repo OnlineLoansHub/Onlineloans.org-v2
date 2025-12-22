@@ -1,7 +1,7 @@
-// Helper function to generate placeholder lender data
-import type { Lender } from '@/components/loans/lendersData';
+// Helper function to generate placeholder brand data
+import type { Brand } from '@/components/loans/lendersData';
 
-export function generatePlaceholderLenders(count: number, productType: string): Lender[] {
+export function generatePlaceholderLenders(count: number, productType: string): Brand[] {
   const names = [
     'PrimeLend Financial',
     'SecureFund Capital',
@@ -23,12 +23,12 @@ export function generatePlaceholderLenders(count: number, productType: string): 
     popularityScore: 9.2 - (i * 0.1),
     reviewCount: 5000 + i * 1000,
     highlight: `Top-rated ${productType} provider with competitive rates`,
-    loanTypes: [productType.toLowerCase().replace(/\s+/g, '_')],
+    productTypes: [productType.toLowerCase().replace(/\s+/g, '_')],
     minCreditScore: i < 2 ? 'fair' : i < 4 ? 'good' : 'excellent',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
-    loanAmountRange: i < 2 ? '50k_100k' : '100k_plus',
-    loanAmount: `$${5 + i * 5}K - $${50 + i * 10}K`,
+    amountRange: i < 2 ? '50k_100k' : '100k_plus',
+    amount: `$${5 + i * 5}K - $${50 + i * 10}K`,
     goodDetails: [
       'Fast Approval: 24-48 hours',
       'Online Application: Yes',

@@ -177,7 +177,7 @@ export default function BestBusinessLoansPage() {
 
     // Apply filters
     if (filters.loanType !== 'all') {
-      result = result.filter((l) => l.loanTypes?.includes(filters.loanType));
+      result = result.filter((l) => l.productTypes?.includes(filters.loanType));
     }
 
     if (filters.creditScore !== 'all') {
@@ -215,7 +215,7 @@ export default function BestBusinessLoansPage() {
 
     if (filters.loanAmount !== 'all') {
       result = result.filter(
-        (l) => l.loanAmountRange === filters.loanAmount || l.loanAmountRange === '100k_plus'
+        (l) => l.amountRange === filters.loanAmount || l.amountRange === '100k_plus'
       );
     }
 
@@ -321,7 +321,12 @@ export default function BestBusinessLoansPage() {
               <div className={styles.lenderCardsContainer}>
                 {displayedLenders.length > 0 ? (
                   displayedLenders.map((lender, index) => (
-                    <LenderCard key={lender.id} lender={lender} rank={index + 1} />
+                    <LenderCard
+                      key={lender.id}
+                      lender={lender}
+                      rank={index + 1}
+                      amountLabel={businessLoansConfig.amountLabel}
+                    />
                   ))
                 ) : (
                   <div className={styles.emptyState}>

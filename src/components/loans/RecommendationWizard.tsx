@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Sparkles, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
-import type { Lender } from './lendersData';
+import type { Brand } from './lendersData';
 
 import type { WizardConfig, WizardStep } from '@/config/productTypes';
 
 interface RecommendationWizardProps {
-  lenders: Lender[];
+  lenders: Brand[];
   wizardConfig: WizardConfig;
 }
 

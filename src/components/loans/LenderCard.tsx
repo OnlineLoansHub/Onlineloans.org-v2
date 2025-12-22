@@ -6,10 +6,10 @@ import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X } from 'lucide-rea
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
-import type { Lender } from './lendersData';
+import type { Brand } from './lendersData';
 
 interface LenderCardProps {
-  lender: Lender;
+  lender: Brand;
   rank: number;
   amountLabel?: string;
 }
@@ -54,10 +54,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             </div>
 
             {/* Amount Field - Mobile Only */}
-            {lender.loanAmount && amountLabel && (
+            {lender.amount && amountLabel && (
               <div className="text-center mt-2 lg:hidden">
                 <p className="text-xs text-slate-600 mb-1 font-medium">{amountLabel}</p>
-                <p className="text-2xl font-bold text-slate-900">{lender.loanAmount}</p>
+                <p className="text-2xl font-bold text-slate-900">{lender.amount}</p>
               </div>
             )}
           </div>
@@ -218,10 +218,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               {/* Left Column - Good Details */}
               <div className="flex flex-col gap-2">
                 {/* Amount Field - Desktop Only, First Item, Bold */}
-                {lender.loanAmount && amountLabel && (
+                {lender.amount && amountLabel && (
                   <div className="hidden lg:flex items-start gap-2">
                     <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-bold text-slate-900">{amountLabel}: {lender.loanAmount}</span>
+                    <span className="text-sm font-bold text-slate-900">{amountLabel}: {lender.amount}</span>
                   </div>
                 )}
                 {lender.goodDetails?.map((detail, index) => (
