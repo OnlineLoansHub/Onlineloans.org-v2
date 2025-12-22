@@ -101,7 +101,7 @@ export const ExploreToggle = () => {
               </>
             ) : (
               <div className={cls.footerWrapper}>
-                <span className={cls.btnText}>Want to read more?</span>
+                <span className={cls.btnText}>Read More</span>
                 <Image
                   src={'/images/icons/features/form-footer-arrowDown.svg'}
                   alt={'arrow'}
@@ -115,16 +115,11 @@ export const ExploreToggle = () => {
         )}
         {isShowTable && (
           <>
-            <h2 className={cls.footerTitle}>Want to read more?</h2>
-            <p className={cls.footerSubtitle}>
-              That's okay — explore our guides and state-specific resources to learn more about your
-              financing options.
-            </p>
-
+  
             {/* Available Guides Section */}
             {(isHomePage || loanType === 'business' || loanType === 'personal') && (
               <div className={cls.exploreSection}>
-                <h3 className={cls.sectionTitle}>Available Guides</h3>
+                <h2 className={cls.sectionTitle}>Available Guides</h2>
                 <div className={cls.guidesGrid}>
                   {guides.map((guide) => (
                     <GuideCard key={guide.id} guide={guide} />
