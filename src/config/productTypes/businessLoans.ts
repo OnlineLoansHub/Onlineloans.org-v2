@@ -162,5 +162,6 @@ export const businessLoansConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'Loan Amount',
 };
 

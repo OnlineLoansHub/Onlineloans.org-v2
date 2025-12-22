@@ -127,5 +127,6 @@ export const autoLoansConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'Loan Amount',
 };
 

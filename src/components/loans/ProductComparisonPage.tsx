@@ -271,7 +271,7 @@ export default function ProductComparisonPage({
               <div className={styles.lenderCardsContainer}>
                 {displayedLenders.length > 0 ? (
                   displayedLenders.map((lender, index) => (
-                    <LenderCard key={lender.id} lender={lender} rank={index + 1} />
+                    <LenderCard key={lender.id} lender={lender} rank={index + 1} amountLabel={productConfig.amountLabel} />
                   ))
                 ) : (
                   <div className={styles.emptyState}>

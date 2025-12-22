@@ -11,9 +11,10 @@ import type { Lender } from './lendersData';
 interface LenderCardProps {
   lender: Lender;
   rank: number;
+  amountLabel?: string;
 }
 
-export default function LenderCard({ lender, rank }: LenderCardProps) {
+export default function LenderCard({ lender, rank, amountLabel }: LenderCardProps) {
   return (
     <>
       {/* Mobile Card - Simple Layout */}
@@ -52,10 +53,10 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
               )}
             </div>
 
-            {/* Loan Amount - Mobile Only */}
-            {lender.loanAmount && (
+            {/* Amount Field - Mobile Only */}
+            {lender.loanAmount && amountLabel && (
               <div className="text-center mt-2 lg:hidden">
-                <p className="text-xs text-slate-600 mb-1 font-medium">Loan Amount</p>
+                <p className="text-xs text-slate-600 mb-1 font-medium">{amountLabel}</p>
                 <p className="text-2xl font-bold text-slate-900">{lender.loanAmount}</p>
               </div>
             )}
@@ -216,11 +217,11 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             <div className="mt-6 grid grid-cols-2 gap-2">
               {/* Left Column - Good Details */}
               <div className="flex flex-col gap-2">
-                {/* Loan Amount - Desktop Only, First Item, Bold */}
-                {lender.loanAmount && (
+                {/* Amount Field - Desktop Only, First Item, Bold */}
+                {lender.loanAmount && amountLabel && (
                   <div className="hidden lg:flex items-start gap-2">
                     <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm font-bold text-slate-900">Loan Amount: {lender.loanAmount}</span>
+                    <span className="text-sm font-bold text-slate-900">{amountLabel}: {lender.loanAmount}</span>
                   </div>
                 )}
                 {lender.goodDetails?.map((detail, index) => (

@@ -129,5 +129,6 @@ export const onlineBankingConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'APY',
 };
 

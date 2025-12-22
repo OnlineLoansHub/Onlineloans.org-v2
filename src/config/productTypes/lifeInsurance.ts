@@ -125,5 +125,6 @@ export const lifeInsuranceConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'Coverage Amount',
 };
 

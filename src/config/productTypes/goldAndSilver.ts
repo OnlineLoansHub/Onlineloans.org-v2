@@ -127,5 +127,6 @@ export const goldAndSilverConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'Price Range',
 };
 

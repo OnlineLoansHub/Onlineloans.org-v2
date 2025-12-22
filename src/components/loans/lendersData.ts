@@ -14,7 +14,7 @@ export interface Lender {
   minRevenue: string;
   minTimeInBusiness: string;
   loanAmountRange: string;
-  loanAmount: string;
+  loanAmount?: string;
   goodDetails: string[];
   badDetails: string[];
   ctaUrl: string;

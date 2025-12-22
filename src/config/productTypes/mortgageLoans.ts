@@ -129,5 +129,6 @@ export const mortgageLoansConfig: ProductTypeConfig = {
       },
     ],
   },
+  amountLabel: 'Loan Amount',
 };
 
