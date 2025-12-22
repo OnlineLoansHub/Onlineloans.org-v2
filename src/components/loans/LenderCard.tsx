@@ -19,11 +19,11 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
       {/* Mobile Card - Simple Layout */}
       <div
         className={`lg:hidden bg-white rounded shadow-lg overflow-hidden relative ${
-          rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border-2 border-slate-200'
+          rank === 1 ? 'border-2 border-[var(--color-primary)]/70' : 'border-2 border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-10 h-10 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-lg">{rank}</span>
         </div>
 
@@ -65,7 +65,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           {/* Right Column */}
           <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
             {/* Rating Number */}
-            <div className="text-4xl font-bold text-[#2a3d66]">{lender.ourScore}</div>
+            <div className="text-4xl font-semibold text-black">{lender.ourScore}</div>
 
             {/* Stars - Green like Trustpilot */}
             <div className="flex items-center gap-0">
@@ -101,7 +101,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className="w-full bg-[#2a3d66] hover:bg-[#1f2d4d] text-white font-bold"
+              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold"
               style={{
                 padding: '8px 16px',
                 borderRadius: '6px',
@@ -117,7 +117,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             {/* Phone Number */}
             <a
               href="tel:888-501-8270"
-              className="text-xs text-slate-500 hover:text-[#2a3d66] underline"
+              className="text-xs text-slate-500 hover:text-[var(--color-primary)] underline"
             >
               (888)-501-8270
             </a>
@@ -126,7 +126,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
 
         {/* Footer Strip - Only for Rank 1 */}
         {rank === 1 && (
-          <div className="bg-[#2a3d66] text-white text-center py-2.5 px-4">
+          <div className="bg-[var(--color-primary)] text-white text-center py-2.5 px-4">
             <p className="text-xs flex items-center justify-center gap-1.5">
               <TrendingUp className="w-4 h-4" />
               <span>1407 people visited this site this week</span>
@@ -142,7 +142,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[#2a3d66] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-10 h-10 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-lg">{rank}</span>
         </div>
 
@@ -174,7 +174,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
             <div className="flex items-center gap-4 lg:w-[calc(33.333%-1rem)] lg:justify-start">
               <div className="lg:text-left">
                 <div className="flex items-baseline gap-1 lg:justify-start">
-                  <span className="text-2xl font-bold text-[#2a3d66]">{lender.ourScore}</span>
+                  <span className="text-2xl font-bold text-black">{lender.ourScore}</span>
                   <span className="text-slate-400 text-sm">/10</span>
                 </div>
                 <div className="flex items-center justify-start gap-2 mt-1">
@@ -242,7 +242,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
-              className="flex-1 sm:flex-none bg-[#2a3d66] hover:bg-[#1f2d4d] text-white rounded font-semibold text-base transition-all group"
+              className="flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded font-semibold text-base transition-all group"
               style={{
                 borderRadius: '6px',
                 fontSize: '1rem',
@@ -263,7 +263,7 @@ export default function LenderCard({ lender, rank }: LenderCardProps) {
                 href={lender.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-[#2a3d66] transition-colors"
+                className="flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-[var(--color-primary)] transition-colors"
               >
                 Visit {lender.name}
                 <ExternalLink className="w-3.5 h-3.5" />

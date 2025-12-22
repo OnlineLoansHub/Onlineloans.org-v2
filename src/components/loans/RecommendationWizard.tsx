@@ -123,7 +123,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
         <div className="w-full">
           <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
-            <div className="bg-[#235675] text-white p-6 py-8">
+            <div className="bg-[var(--color-primary)] text-white p-6 py-8">
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-4 h-4 flex-shrink-0" />
                 <span className="text-sm font-medium opacity-90">
@@ -151,7 +151,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                     </div>
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-[#235675] rounded-full transition-all duration-500"
+                        className="h-full bg-[var(--color-primary)] rounded-full transition-all duration-500"
                         style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
                       />
                     </div>
@@ -170,12 +170,12 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         onClick={() => handleAnswer(steps[currentStep].key, option.value)}
                         className={`w-full p-3 text-left rounded transition-all ${
                           answers[steps[currentStep].key] === option.value
-                            ? 'bg-[#235675]/5'
+                            ? 'bg-[var(--color-primary)]/5'
                             : 'hover:bg-slate-50'
                         }`}
                         style={{
                           border: `2px solid ${
-                            answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
+                            answers[steps[currentStep].key] === option.value ? 'var(--color-primary)' : '#cbd5e1'
                           }`,
                         }}
                       >
@@ -220,7 +220,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         className="flex flex-col gap-3 p-3 bg-white rounded border border-slate-200"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold flex-shrink-0">
                             {index + 1}
                           </div>
                           <div className="flex-1 min-w-0">
@@ -235,7 +235,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         </div>
                         <Button
                           variant="primary"
-                          className="bg-[#235675] hover:bg-[#1a4259] w-full"
+                          className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
                           onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
                         >
                           See Plans
@@ -305,7 +305,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                     </div>
                     <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-[#235675] rounded-full transition-all duration-500"
+                        className="h-full bg-[var(--color-primary)] rounded-full transition-all duration-500"
                         style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
                       />
                     </div>
@@ -324,12 +324,12 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         onClick={() => handleAnswer(steps[currentStep].key, option.value)}
                         className={`w-full p-4 text-left rounded transition-all ${
                           answers[steps[currentStep].key] === option.value
-                            ? 'bg-[#235675]/5'
+                            ? 'bg-[var(--color-primary)]/5'
                             : 'hover:bg-slate-50'
                         }`}
                         style={{
                           border: `2px solid ${
-                            answers[steps[currentStep].key] === option.value ? '#235675' : '#cbd5e1'
+                            answers[steps[currentStep].key] === option.value ? 'var(--color-primary)' : '#cbd5e1'
                           }`,
                         }}
                       >
@@ -369,7 +369,7 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
                         key={lender.id}
                         className="flex items-center gap-4 p-4 bg-white rounded border border-slate-200 hover:shadow-md transition-shadow"
                       >
-                        <div className="w-10 h-10 rounded-full bg-[#235675] text-white flex items-center justify-center font-bold">
+                        <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold">
                           {index + 1}
                         </div>
                         <div className="flex-1 min-w-0">

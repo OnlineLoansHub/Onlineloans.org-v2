@@ -136,7 +136,7 @@ function FilterSection({
         <div className="flex items-center gap-3">
           <span className="font-semibold text-slate-900 text-sm">{config.label}</span>
           {hasActiveFilter && (
-            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#235675] text-white text-xs font-medium">
+            <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[var(--color-primary)] text-white text-xs font-medium">
               1
             </span>
           )}
@@ -163,7 +163,7 @@ function FilterSection({
                   key={`${filterKey}-${option.value}`}
                   className={`
                     flex items-center gap-3 py-2.5 px-3 rounded cursor-pointer transition-all
-                    ${isSelected ? 'bg-[#235675]/10 border border-[#235675]/20' : 'hover:bg-slate-50'}
+                    ${isSelected ? 'bg-[var(--color-primary)]/10 border border-[var(--color-primary)]/20' : 'hover:bg-slate-50'}
                   `}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -181,11 +181,11 @@ function FilterSection({
                         e.stopPropagation();
                         handleOptionClick(e.target.value);
                       }}
-                      className="w-4 h-4 text-[#235675] border-slate-300 focus:ring-2 focus:ring-[#235675] focus:ring-offset-0 cursor-pointer"
+                      className="w-4 h-4 text-[var(--color-primary)] border-slate-300 focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-0 cursor-pointer"
                     />
                     {isSelected && (
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                        <div className="w-2 h-2 rounded-full bg-[#235675]"></div>
+                        <div className="w-2 h-2 rounded-full bg-[var(--color-primary)]"></div>
                       </div>
                     )}
                   </div>
@@ -193,7 +193,7 @@ function FilterSection({
                     htmlFor={inputId}
                     className={`
                       text-sm flex-1 cursor-pointer select-none
-                      ${isSelected ? 'text-[#235675] font-medium' : 'text-slate-700'}
+                      ${isSelected ? 'text-[var(--color-primary)] font-medium' : 'text-slate-700'}
                     `}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -270,8 +270,8 @@ export default function FilterModule({
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200">
         <div className="flex items-center gap-2.5">
-          <div className="p-1.5 bg-[#235675]/10 rounded">
-            <Filter className="w-4 h-4 text-[#235675]" />
+          <div className="p-1.5 bg-[var(--color-primary)]/10 rounded">
+            <Filter className="w-4 h-4 text-[var(--color-primary)]" />
           </div>
           <span className="font-bold text-slate-900 text-base">Filters</span>
         </div>
@@ -279,7 +279,7 @@ export default function FilterModule({
           <button
             type="button"
             onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[#235675] hover:bg-slate-100 rounded transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[var(--color-primary)] hover:bg-slate-100 rounded transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset
@@ -346,7 +346,7 @@ export default function FilterModule({
           <Filter className="w-3.5 h-3.5" />
           <span>Filters</span>
           {activeFilterCount > 0 && (
-            <span className="bg-[#235675] text-white text-xs px-1.5 py-0.5 rounded-full">
+            <span className="bg-[var(--color-primary)] text-white text-xs px-1.5 py-0.5 rounded-full">
               {activeFilterCount}
             </span>
           )}
@@ -391,7 +391,7 @@ export default function FilterModule({
               <div className="px-5 py-4 border-t border-slate-200 flex-shrink-0 bg-slate-50/50">
                 <Button
                   variant="primary"
-                  className="w-full bg-[#235675] hover:bg-[#1a4259] text-white font-semibold py-3 rounded shadow-sm"
+                  className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-semibold py-3 rounded shadow-sm"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   Show {resultCount} Results

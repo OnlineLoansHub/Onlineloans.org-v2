@@ -39,7 +39,7 @@
   width: 100%;
   background: var(--color-gray-light);
   padding: 130px 90px 60px 90px;
-  color: var(--color-white);
+  color: var(--color-black);
   margin-top: -70px;
   overflow: visible;
   flex-shrink: 0;
@@ -63,7 +63,7 @@
   font-size: 46px;
   line-height: 54px;
   animation: header-title 0.5s forwards;
-  color: var(--color-primary);
+  color: var(--color-black);
   margin-bottom: 20px;
 }
 
@@ -219,12 +219,14 @@
   font-size: 16px;
   line-height: 18px;
   margin-bottom: 10px;
+  color: var(--color-black);
 }
 
 .headerCardTxt {
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
+  color: var(--color-black);
 }
 
 // Partner Groups Section
@@ -238,7 +240,7 @@
   font-family: var(--tikTok);
   font-size: 32px;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-black);
   margin-bottom: 16px;
   text-align: center;
 }

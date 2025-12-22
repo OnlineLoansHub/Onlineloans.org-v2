@@ -8,7 +8,12 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-primary) 0%, #1e2d4d 50%, #152238 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 50%,
+    var(--color-primary-darker) 100%
+  );
 }
 
 .stripedPattern {
@@ -523,15 +528,6 @@
   border: 2px solid #d4eaf2;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   padding: 2rem;
-  transition: all 0.3s;
-
-  &:hover {
-    box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    transform: translateY(-0.5rem);
-    border-color: var(--color-primary);
-  }
 }
 
 .stepNumber {
@@ -550,11 +546,6 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   border-top-left-radius: 1rem;
   border-bottom-right-radius: 0.5rem;
-  transition: transform 0.3s;
-
-  .card:hover & {
-    transform: scale(1.1);
-  }
 }
 
 .gradientOverlay {
@@ -562,12 +553,6 @@
   inset: 0;
   background: transparent;
   border-radius: 1rem;
-  transition: all 0.3s;
-
-  .card:hover & {
-    background: linear-gradient(to bottom right, var(--color-primary) 0%, transparent 100%);
-    opacity: 0.05;
-  }
 }
 
 .illustrationWrapper {
@@ -579,11 +564,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s;
-
-  .card:hover & {
-    transform: scale(1.1);
-  }
 }
 
 .illustrationWrapper svg {
@@ -601,11 +581,6 @@
   color: #111827;
   text-align: center;
   margin-bottom: 0.75rem;
-  transition: color 0.3s;
-
-  .card:hover & {
-    color: var(--color-primary);
-  }
 }
 
 .cardDescription {
@@ -616,11 +591,6 @@
   text-align: center;
   line-height: 1.625;
   max-width: 24rem;
-  transition: color 0.3s;
-
-  .card:hover & {
-    color: #374151;
-  }
 }
 
 .bottomAccent {
@@ -629,14 +599,7 @@
   left: 0;
   right: 0;
   height: 0.25rem;
-  background-color: var(--color-primary);
-  transform: scaleX(0);
-  transition: transform 0.3s;
-  transform-origin: left;
+  background-color: transparent;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-
-  .card:hover & {
-    transform: scaleX(1);
-  }
 }

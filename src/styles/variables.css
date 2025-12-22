@@ -1,8 +1,10 @@
 :root {
   /* 🎨 Core Colors - 10 Total */
   /* Primary Colors */
-  --color-primary: #2a3d66; /* Main brand blue */
-  --color-secondary: #2a3d66; /* Main green #5ec189 */
+  --color-primary: #3d5d7d; /* Main brand blue - lighter version */
+  --color-secondary: #3d5d7d; /* Main green #5ec189 */
+  --color-primary-dark: #2d4d6d; /* Darker variant for hover states and gradients */
+  --color-primary-darker: #1d3d5d; /* Even darker variant for gradients */
   --color-black: #000;
   --color-white: #fff;
   --color-gray-dark: #161616; /* Dark text/surfaces */

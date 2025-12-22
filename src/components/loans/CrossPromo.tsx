@@ -40,9 +40,9 @@ export default function CrossPromo() {
     <section className="py-12 lg:py-16 bg-gradient-to-br from-slate-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#235675]/10 rounded mb-4">
-            <Building2 className="w-4 h-4 text-[#235675]" />
-            <span className="text-sm font-medium text-[#235675]">Related Services</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-primary)]/10 rounded mb-4">
+            <Building2 className="w-4 h-4 text-[var(--color-primary)]" />
+            <span className="text-sm font-medium text-[var(--color-primary)]">Related Services</span>
           </div>
           <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3">
             Are you looking to open a business account?
@@ -63,7 +63,7 @@ export default function CrossPromo() {
                   <span className="font-bold text-slate-700">{provider.name}</span>
                 </div>
                 <div className="text-right">
-                  <div className="text-xl font-bold text-[#235675]">{provider.score}</div>
+                  <div className="text-xl font-bold text-[var(--color-primary)]">{provider.score}</div>
                   <div className="text-xs text-slate-500">Score</div>
                 </div>
               </div>
