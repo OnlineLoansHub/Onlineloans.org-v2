@@ -119,20 +119,17 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
   return (
     <>
       {/* Mobile Version */}
-      <section className="lg:hidden py-8">
+      <section className="lg:hidden pb-8">
         <div className="w-full">
           <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
             <div className="bg-[var(--color-primary)] text-white p-6 py-8">
               <div className="flex items-center gap-2 mb-4">
                 <Sparkles className="w-4 h-4 flex-shrink-0" />
-                <span className="text-sm font-medium opacity-90">
+                <h2 className="text-[1.5rem] font-bold" style={{ fontFamily: 'Arial' }}>
                   Need help finding the right lender for you?
-                </span>
+                </h2>
               </div>
-              <h2 className="text-xl font-bold">
-                Compare and choose the best business loans for you
-              </h2>
             </div>
 
             {/* Content */}
@@ -273,20 +270,20 @@ export default function RecommendationWizard({ lenders }: RecommendationWizardPr
       </section>
 
       {/* Desktop Version */}
-      <section className="hidden lg:block py-12 lg:py-16">
+      <section className="hidden lg:block pb-12 lg:pb-16">
         <div className="w-full">
           <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
             <div className="bg-[#235675] text-white p-6 lg:p-8 py-10 lg:py-12">
               <div className="flex items-center gap-3 mb-4">
                 <Sparkles className="w-5 h-5" />
-                <span className="text-lg font-medium opacity-90">
+                <h2
+                  className="text-[1.5rem] sm:text-[2rem] lg:text-[2.5rem] font-bold"
+                  style={{ fontFamily: 'Arial' }}
+                >
                   Need help finding the right lender for you?
-                </span>
+                </h2>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold">
-                Compare and choose the best business loans for you
-              </h2>
             </div>
 
             {/* Content */}

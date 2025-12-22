@@ -7,19 +7,19 @@
   max-width: var(--max-container-width);
   margin-left: auto;
   margin-right: auto;
-  padding: 2rem 1rem;
+  padding: 2rem 1.25rem;
 
   @media (width <= 1023px) {
     padding-top: 1rem;
   }
 
   @media (min-width: 640px) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   @media (min-width: 1024px) {
-    padding: 3rem 2rem;
+    padding: 3rem 4rem;
   }
 }
 
@@ -169,6 +169,59 @@
   color: #000000;
 }
 
+// Unified Section Styles - All three sections share these
+.unifiedSection {
+  background-color: #f8fafc;
+  padding: 3rem 0;
+
+  @media (min-width: 640px) {
+    padding: 4rem 0;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 5rem 0;
+  }
+}
+
+.unifiedContainer {
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1.25rem;
+  width: 100%;
+
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.unifiedTitle {
+  font-family: Arial;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-align: left;
+  margin-bottom: 1.5rem;
+  padding: 0;
+
+  @media (min-width: 640px) {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+// Legacy styles - keeping for backward compatibility
 .recommendationSection {
   background-color: #f8fafc;
 }
@@ -187,5 +240,45 @@
   @media (min-width: 1024px) {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+.faqSection {
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 1rem;
+
+  @media (min-width: 640px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 5rem 2rem;
+  }
+}
+
+.faqContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faqTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 640px) {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    padding: 0;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.5rem;
   }
 }
