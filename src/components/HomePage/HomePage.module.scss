@@ -524,7 +524,7 @@
   align-items: center;
   overflow: hidden;
   background-color: white;
-  border-radius: 1rem;
+  border-radius: 10px;
   border: 2px solid #d4eaf2;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   padding: 2rem;
@@ -544,7 +544,7 @@
   font-weight: 700;
   font-size: 1.125rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 1rem;
+  border-top-left-radius: 10px;
   border-bottom-right-radius: 0.5rem;
 }
 
@@ -552,7 +552,7 @@
   position: absolute;
   inset: 0;
   background: transparent;
-  border-radius: 1rem;
+  border-radius: 10px;
 }
 
 .illustrationWrapper {
@@ -600,6 +600,6 @@
   right: 0;
   height: 0.25rem;
   background-color: transparent;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
