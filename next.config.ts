@@ -15,14 +15,16 @@ const nextConfig: NextConfig = {
       // STATIC LANDER FIX — rewrite clean path to index.html
       {
         source: '/business-loan/restaurant-funding/florida',
-        destination:
-          '/business-loan/restaurant-funding/florida/index.html',
+        destination: '/business-loan/restaurant-funding/florida/index.html',
       },
     ];
   },
 
   async headers() {
-    return [
+    const headers: Array<{
+      source: string;
+      headers: Array<{ key: string; value: string }>;
+    }> = [
       {
         source: '/:path*',
         headers: [
@@ -34,6 +36,32 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+
+    if (process.env.NODE_ENV === 'production') {
+      headers.push(
+        {
+          source: '/_next/static/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        {
+          source: '/:path*.:ext(svg|png|jpg|jpeg|webp|ico)',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        }
+      );
+    }
+    
+    return headers;
+    
   },
 };
 
