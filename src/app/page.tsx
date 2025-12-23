@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import HomePage from '@/components/HomePage/HomePage';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Compare Loans & Financial Products',

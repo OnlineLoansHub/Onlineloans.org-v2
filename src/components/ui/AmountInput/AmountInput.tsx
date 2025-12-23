@@ -1,7 +1,7 @@
 'use client';
 
 import { FocusEvent, useMemo, useState } from 'react';
-import { URL_CONFIG } from '@/config';
+import { URL_CONFIG } from '@/lib/urlConfig';
 import { classNames } from '@/lib';
 import { LoanTypes } from '@/types';
 import { AppLink } from '../AppLink/AppLink';

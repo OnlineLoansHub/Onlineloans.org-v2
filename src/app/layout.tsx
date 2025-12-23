@@ -6,7 +6,7 @@ import { LegacyBanner } from '@/components/layout/LegacyBanner/LegacyBanner';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/seo/StructuredData';
-import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/lib/seo';
 import { ExploreToggleProvider } from '@/contexts/ExploreToggleContext';
 import { FooterWrapper } from '@/components/layout/Footer/FooterWrapper';
 import { ImpressionTracker } from '@/components/analytics/ImpressionTracker';

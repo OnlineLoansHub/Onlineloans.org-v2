@@ -5,7 +5,7 @@ import Script from 'next/script';
 import Image from 'next/image';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import { Button } from '@/components/ui/Button/Button';
-import { SITE_URL } from '@/config/seo';
+import { SITE_URL } from '@/lib/seo';
 import cls from './page.module.scss';
 
 export default function LendingTreeReviewPage() {

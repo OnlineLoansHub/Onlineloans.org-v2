@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 const publishedDate = new Date('2025-01-15');
 const modifiedDate = new Date();

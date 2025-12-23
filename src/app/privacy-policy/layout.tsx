@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Privacy Policy - OnlineLoans.org',
@@ -10,11 +10,6 @@ export const metadata: Metadata = generateSEOMetadata({
   path: '/privacy-policy',
 });
 
-export default function PrivacyPolicyLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PrivacyPolicyLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-

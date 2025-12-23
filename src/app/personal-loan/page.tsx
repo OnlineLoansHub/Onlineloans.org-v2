@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 import { personalLoanGuides } from '@/data/personalLoanGuides';
 import { GuideCard } from '@/components/businessLoan/GuideCard/GuideCard';
 import cls from './page.module.scss';

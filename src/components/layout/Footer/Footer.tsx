@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import Logo from '@/components/ui/Logo/Logo';
-import { URL_CONFIG } from '@/config';
+import { URL_CONFIG } from '@/lib/urlConfig';
 import cls from './Footer.module.scss';
 
 interface FooterLinkItem {

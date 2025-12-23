@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { URL_CONFIG } from '@/config';
+import { URL_CONFIG } from '@/lib/urlConfig';
 import cls from './LegacyBanner.module.scss';
 
 export const LegacyBanner = () => {

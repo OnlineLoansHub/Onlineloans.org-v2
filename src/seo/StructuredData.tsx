@@ -1,4 +1,4 @@
-import { organizationSchema, websiteSchema } from '@/config/seo';
+import { organizationSchema, websiteSchema } from '@/lib/seo';
 
 interface StructuredDataProps {
   data: object | object[];
@@ -26,4 +26,3 @@ export const StructuredData = ({ data }: StructuredDataProps) => {
 export const DefaultStructuredData = () => {
   return <StructuredData data={[organizationSchema, websiteSchema]} />;
 };
-

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import BusinessLoanForm from '@/features/businessLoanForm/businessLoanForm';
 import { LoanTypes } from '@/types';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Apply for Business Loan - Fast Application',

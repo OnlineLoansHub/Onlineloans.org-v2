@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AppLink } from '@/components/ui/AppLink/AppLink';
 import Logo from '@/components/ui/Logo/Logo';
-import { URL_CONFIG } from '@/config';
+import { URL_CONFIG } from '@/lib/urlConfig';
 import { classNames } from '@/lib';
 import cls from './Header.module.scss';
 
@@ -23,7 +23,7 @@ const headerConfig: HeaderConfigItem[] = [
   {
     title: 'Partner with us',
     path: URL_CONFIG.partner,
-  }
+  },
 ];
 
 export const Header = () => {
@@ -35,11 +35,7 @@ export const Header = () => {
   return (
     <header className={cls.header}>
       <nav className={classNames(cls.nav)}>
-        <Link
-          href={URL_CONFIG.main}
-          className={cls.logo}
-          onClick={() => setIsOpen(false)}
-        >
+        <Link href={URL_CONFIG.main} className={cls.logo} onClick={() => setIsOpen(false)}>
           <Logo
             text="OnlineLoans.org"
             textColor="var(--color-primary)"
@@ -57,18 +53,11 @@ export const Header = () => {
         </button>
         <ul className={classNames(cls.navList, { [cls.open]: isOpen })}>
           {headerConfig.map((item) => {
-            const isActive = item.pathMatch
-              ? item.pathMatch.includes(path)
-              : path === item.path;
+            const isActive = item.pathMatch ? item.pathMatch.includes(path) : path === item.path;
 
             return (
               <li key={item.path} className={cls.navItem} onClick={toggleMenu}>
-                <AppLink
-                  isWithHover
-                  href={item.path}
-                  className={cls.navLink}
-                  isActive={isActive}
-                >
+                <AppLink isWithHover href={item.path} className={cls.navLink} isActive={isActive}>
                   {item.title}
                 </AppLink>
               </li>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'What is a Personal Loan? - Complete Guide | OnlineLoans.org',
@@ -14,4 +14,3 @@ export const metadata: Metadata = generateSEOMetadata({
 export default function ArticleLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-

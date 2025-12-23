@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { generateMetadata as generateSEOMetadata } from '@/config/seo';
+import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
   title: 'Best Online Banking 2026 - Compare Rates',
@@ -15,4 +15,3 @@ export const metadata: Metadata = generateSEOMetadata({
 export default function BestOnlineBankingLayout({ children }: { children: React.ReactNode }) {
   return children;
 }
-

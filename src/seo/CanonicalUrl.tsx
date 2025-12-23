@@ -1,4 +1,4 @@
-import { getCanonicalUrl } from '@/config/seo';
+import { getCanonicalUrl } from '@/lib/seo';
 import { usePathname } from 'next/navigation';
 
 interface CanonicalUrlProps {
@@ -12,4 +12,3 @@ export const CanonicalUrl = ({ path }: CanonicalUrlProps) => {
 
   return <link rel="canonical" href={url} />;
 };
-
