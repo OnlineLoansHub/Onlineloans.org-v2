@@ -145,39 +145,6 @@ export default function HomePage() {
             <div className={cls.vendorMobileLogos}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/LendingTree-logo.webp"
-                  alt="LendingTree"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 140px, 112px"
-                  priority
-                />
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
-                  src="/images/brands-logos/Sofi-logo.webp"
-                  alt="SoFi"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 140px, 80px"
-                  priority
-                />
-              </div>
-              <div className={`${cls.vendorLogoCell} ${cls.vendorTextCell}`}>
-                <span className={cls.lemonadeText}>Lemonade</span>
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
-                  src="/images/brands-logos/Credible-logo.webp"
-                  alt="Credible"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 640px) 140px, 96px"
-                  priority
-                />
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
                   src="/images/brands-logos/Fundera-logo.webp"
                   alt="Fundera"
                   fill
@@ -188,13 +155,46 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Biz2credit-logo.webp"
-                  alt="Biz2Credit"
+                  src="/images/brands-logos/Advancefundsnetwork-logo.webp"
+                  alt="Advance Funds Network"
                   fill
                   className="object-contain"
                   sizes="(max-width: 640px) 140px, 112px"
                   priority
                 />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/FundBox-logo.webp"
+                  alt="Fundbox"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 140px, 112px"
+                  priority
+                />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/ForaFinancial-logo.webp"
+                  alt="Fora Financial"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 140px, 112px"
+                  priority
+                />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/RokFinancial-logo.webp"
+                  alt="ROK Financial"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 640px) 140px, 112px"
+                  priority
+                />
+              </div>
+              <div className={`${cls.vendorLogoCell} ${cls.vendorTextCell}`}>
+                <span className={cls.lemonadeText}>Lemonade</span>
               </div>
             </div>
           </div>
@@ -217,36 +217,6 @@ export default function HomePage() {
             <div className={cls.vendorLogosContainer}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/LendingTree-logo.webp"
-                  alt="LendingTree"
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
-                  src="/images/brands-logos/Sofi-logo.webp"
-                  alt="SoFi"
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div className={`${cls.vendorLogoCell} ${cls.vendorTextCell}`}>
-                <span className={cls.lemonadeText}>Lemonade</span>
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
-                  src="/images/brands-logos/Credible-logo.webp"
-                  alt="Credible"
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <div className={cls.vendorLogoCell}>
-                <Image
                   src="/images/brands-logos/Fundera-logo.webp"
                   alt="Fundera"
                   fill
@@ -256,12 +226,42 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Biz2credit-logo.webp"
-                  alt="Biz2Credit"
+                  src="/images/brands-logos/Advancefundsnetwork-logo.webp"
+                  alt="Advance Funds Network"
                   fill
                   className="object-contain"
                   loading="lazy"
                 />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/FundBox-logo.webp"
+                  alt="Fundbox"
+                  fill
+                  className="object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/ForaFinancial-logo.webp"
+                  alt="Fora Financial"
+                  fill
+                  className="object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div className={cls.vendorLogoCell}>
+                <Image
+                  src="/images/brands-logos/RokFinancial-logo.webp"
+                  alt="ROK Financial"
+                  fill
+                  className="object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div className={`${cls.vendorLogoCell} ${cls.vendorTextCell}`}>
+                <span className={cls.lemonadeText}>Lemonade</span>
               </div>
             </div>
           </div>
