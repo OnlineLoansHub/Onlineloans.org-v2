@@ -54,8 +54,10 @@ export const lendersData: Brand[] = [
       'Minimum Credit Score: 600',
       'APR Range: 8% - 30%',
     ],
-    ctaUrl: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
-    websiteUrl: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
+    ctaUrl:
+      'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
+    websiteUrl:
+      'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
   },
   {
     id: 2,
@@ -154,7 +156,7 @@ export const lendersData: Brand[] = [
   {
     id: 5,
     name: 'SoFi',
-    logo: '/images/table/Sofi-logo.svg',
+    logo: '/images/brands-logos/Sofi-logo.svg',
     ourScore: 9.5,
     trustpilotScore: 8.6,
     brandReputation: 10,
@@ -185,7 +187,7 @@ export const lendersData: Brand[] = [
   {
     id: 6,
     name: 'LendingTree',
-    logo: '/images/table/LendingTree-logo.svg',
+    logo: '/images/brands-logos/LendingTree-logo.svg',
     ourScore: 9.4,
     trustpilotScore: 9.1,
     brandReputation: 9.5,
@@ -279,7 +281,7 @@ export const lendersData: Brand[] = [
   {
     id: 9,
     name: 'Credible',
-    logo: '/images/table/Credible-logo.svg',
+    logo: '/images/brands-logos/Credible-logo.svg',
     ourScore: 9.0,
     trustpilotScore: 8.9,
     brandReputation: 9.1,
@@ -312,7 +314,7 @@ export const lendersData: Brand[] = [
   {
     id: 10,
     name: 'LightStream',
-    logo: '/images/table/LightStream-logo.svg',
+    logo: '/images/brands-logos/LightStream-logo.svg',
     ourScore: 8.9,
     trustpilotScore: 9.3,
     brandReputation: 8.5,

@@ -6,7 +6,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 1,
     loanType: 'business' as const,
-    imgSrc: '/images/table/LendingTree-logo.svg',
+    imgSrc: '/images/brands-logos/LendingTree-logo.svg',
     alt: 'LendingTree-logo',
     height: 54,
     imgTitleElem: (
@@ -34,14 +34,12 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 2,
     loanType: 'personal' as const,
-    imgSrc: '/images/table/Credible-logo.svg',
+    imgSrc: '/images/brands-logos/Credible-logo.svg',
     alt: 'Credible-logo',
     height: 40,
 
     imgTitleElem: (
-      <p className={classNames(cls.imgTitleElem2, {}, [cls.imgTitle])}>
-        Powered by Credible
-      </p>
+      <p className={classNames(cls.imgTitleElem2, {}, [cls.imgTitle])}>Powered by Credible</p>
     ),
     title: 'Credible',
     subtitle: 'Free to use, no hidden fees',
@@ -56,7 +54,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 3,
     loanType: 'personal' as const,
-    imgSrc: '/images/table/Sofi-logo.svg',
+    imgSrc: '/images/brands-logos/Sofi-logo.svg',
     alt: 'Sofi-logo',
     height: 48,
     title: 'SoFi',
@@ -72,7 +70,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 4,
     loanType: 'business' as const,
-    imgSrc: '/images/table/LightStream-logo.svg',
+    imgSrc: '/images/brands-logos/LightStream-logo.svg',
     alt: 'LightStream-logo',
     height: 94,
     title: 'LightStream',
@@ -86,4 +84,3 @@ export const LENDER_TABLE_CONFIG = [
     ],
   },
 ];
-

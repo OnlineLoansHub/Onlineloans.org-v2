@@ -19,7 +19,8 @@ export const personalLenders: PersonalLender[] = [
     name: 'NerdWallet',
     badge: 'Best for Debt Consolidation',
     logo: '/images/brands-logos/nerd-wallet-logo.svg',
-    description: 'Reliable personal loans with fixed rates and no origination fees for debt consolidation.',
+    description:
+      'Reliable personal loans with fixed rates and no origination fees for debt consolidation.',
     loanAmountRange: '$2,500 - $40,000',
     minCreditScore: '660+',
     aprRange: '7.99% - 24.99%',
@@ -38,7 +39,8 @@ export const personalLenders: PersonalLender[] = [
     name: 'Credit Ninja',
     badge: 'Best for Fair Credit',
     logo: '/images/brands-logos/credit-ninja.svg',
-    description: 'AI-powered lending platform that considers education and work history, not just credit scores.',
+    description:
+      'AI-powered lending platform that considers education and work history, not just credit scores.',
     loanAmountRange: '$1,000 - $50,000',
     minCreditScore: '600+',
     aprRange: '6.40% - 35.99%',
@@ -57,7 +59,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'sofi',
     name: 'SoFi',
     badge: 'Best Overall',
-    logo: '/images/table/Sofi-logo.svg',
+    logo: '/images/brands-logos/Sofi-logo.svg',
     description: 'Comprehensive personal loan platform with competitive rates and member benefits.',
     loanAmountRange: '$5,000 - $100,000',
     minCreditScore: '680+',
@@ -77,7 +79,8 @@ export const personalLenders: PersonalLender[] = [
     name: 'LendingClub',
     badge: 'Best Marketplace',
     logo: '/images/brands-logos/lending-cluc-logo.svg',
-    description: 'Peer-to-peer lending marketplace connecting borrowers with investors for competitive rates.',
+    description:
+      'Peer-to-peer lending marketplace connecting borrowers with investors for competitive rates.',
     loanAmountRange: '$1,000 - $40,000',
     minCreditScore: '600+',
     aprRange: '8.05% - 36.00%',
@@ -96,7 +99,8 @@ export const personalLenders: PersonalLender[] = [
     name: 'Best Egg',
     badge: 'Fast Funding',
     logo: '/images/brands-logos/fundera-logo.svg',
-    description: 'Fast personal loans with competitive rates and quick approval for qualified borrowers.',
+    description:
+      'Fast personal loans with competitive rates and quick approval for qualified borrowers.',
     loanAmountRange: '$2,000 - $50,000',
     minCreditScore: '600+',
     aprRange: '8.99% - 35.99%',
@@ -115,7 +119,8 @@ export const personalLenders: PersonalLender[] = [
     name: 'Marcus by Goldman Sachs',
     badge: 'Best for Large Loans',
     logo: '/images/brands-logos/lendio-logo.svg',
-    description: 'No-fee personal loans with flexible terms and competitive rates from a trusted bank.',
+    description:
+      'No-fee personal loans with flexible terms and competitive rates from a trusted bank.',
     loanAmountRange: '$3,500 - $40,000',
     minCreditScore: '660+',
     aprRange: '6.99% - 24.99%',
@@ -130,4 +135,3 @@ export const personalLenders: PersonalLender[] = [
     ctaLink: 'https://www.lendio.com/',
   },
 ];
-

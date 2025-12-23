@@ -78,7 +78,8 @@ export const lenders: Lender[] = [
       'Accessible credit requirements',
       'Competitive rates',
     ],
-    ctaLink: 'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=top10&sub_id_2=',
+    ctaLink:
+      'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=top10&sub_id_2=',
   },
   {
     id: 'biz2credit',
@@ -150,7 +151,7 @@ export const lenders: Lender[] = [
     id: 'lightstream',
     name: 'LightStream',
     badge: 'Best Rates',
-    logo: '/images/table/LightStream-logo.svg',
+    logo: '/images/brands-logos/LightStream-logo.svg',
     description:
       'Low fixed rates with no fees or prepayment penalties. Fixed rate, simple interest fully amortizing installment loans for good-to-excellent credit.',
     loanAmountRange: '$5,000 - $100,000',

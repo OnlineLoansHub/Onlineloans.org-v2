@@ -84,7 +84,7 @@ export default function HomePage() {
           <div className={cls.categoryGrid}>
             {categories.map((category, index) => {
               const IconComponent = category.icon;
-              
+
               // Map category titles to their respective page URLs
               const hrefMap: Record<string, string> = {
                 'Business Loans': '/business-loan/best-business-loans',
@@ -97,7 +97,7 @@ export default function HomePage() {
                 'Online Banking': '/online-banking/best-online-banking',
                 'Gold and Silver': '/gold-and-silver/best-gold-and-silver',
               };
-              
+
               const href = hrefMap[category.title] || '#';
 
               return (
@@ -145,7 +145,7 @@ export default function HomePage() {
             <div className={cls.vendorMobileLogos}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/LendingTree-logo.svg"
+                  src="/images/brands-logos/LendingTree-logo.svg"
                   alt="LendingTree"
                   fill
                   className="object-contain"
@@ -155,7 +155,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/Sofi-logo.svg"
+                  src="/images/brands-logos/Sofi-logo.svg"
                   alt="SoFi"
                   fill
                   className="object-contain"
@@ -168,7 +168,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/Credible-logo.svg"
+                  src="/images/brands-logos/Credible-logo.svg"
                   alt="Credible"
                   fill
                   className="object-contain"
@@ -217,7 +217,7 @@ export default function HomePage() {
             <div className={cls.vendorLogosContainer}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/LendingTree-logo.svg"
+                  src="/images/brands-logos/LendingTree-logo.svg"
                   alt="LendingTree"
                   fill
                   className="object-contain"
@@ -226,7 +226,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/Sofi-logo.svg"
+                  src="/images/brands-logos/Sofi-logo.svg"
                   alt="SoFi"
                   fill
                   className="object-contain"
@@ -238,7 +238,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/table/Credible-logo.svg"
+                  src="/images/brands-logos/Credible-logo.svg"
                   alt="Credible"
                   fill
                   className="object-contain"
