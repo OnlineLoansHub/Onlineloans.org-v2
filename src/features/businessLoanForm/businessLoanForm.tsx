@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Stepper, IFinalStepData } from '@/features/stepper/Stepper';
 import { FinalStep } from '@/features/stepper/components';
 import { getBusinessLoanConfig } from './businessLoanConfig';
-import { LoanTypes } from '@/types';
+import { LoanTypes } from '@/lib/loanTypes';
 import cls from './businessLoanForm.module.scss';
 
 interface IHomePageProps {

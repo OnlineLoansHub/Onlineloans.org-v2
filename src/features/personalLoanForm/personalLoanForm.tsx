@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Stepper, IFinalStepData } from '@/features/stepper/Stepper';
 import { FinalStep } from '@/features/stepper/components';
 import { getPersonalLoanConfig } from './personalLoanConfig';
-import { LoanTypes } from '@/types';
+import { LoanTypes } from '@/lib/loanTypes';
 import cls from './personalLoanForm.module.scss';
 
 interface IPersonalLoanFormProps {
@@ -19,7 +19,7 @@ export default function PersonalLoanForm({ type: _type }: IPersonalLoanFormProps
 
   const config = useMemo(() => {
     const loanConfig = getPersonalLoanConfig(amount);
-    
+
     return {
       ...loanConfig,
       formName: 'personal-loan',
@@ -49,4 +49,3 @@ export default function PersonalLoanForm({ type: _type }: IPersonalLoanFormProps
     </div>
   );
 }
-

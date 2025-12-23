@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import AmountInputCard from '@/components/ui/AmountInput/AmountInput';
 import { classNames } from '@/lib';
-import { LoanTypes } from '@/types';
+import { LoanTypes } from '@/lib/loanTypes';
 import cls from './CreditTabs.module.scss';
 
 const tabs = [

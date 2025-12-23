@@ -3,7 +3,7 @@
 import { FocusEvent, useMemo, useState } from 'react';
 import { URL_CONFIG } from '@/lib/urlConfig';
 import { classNames } from '@/lib';
-import { LoanTypes } from '@/types';
+import { LoanTypes } from '@/lib/loanTypes';
 import { AppLink } from '../AppLink/AppLink';
 import cls from './AmountInput.module.scss';
 

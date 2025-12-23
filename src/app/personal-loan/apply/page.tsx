@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import PersonalLoanForm from '@/features/personalLoanForm/personalLoanForm';
-import { LoanTypes } from '@/types';
+import { LoanTypes } from '@/lib/loanTypes';
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateSEOMetadata({
