@@ -97,8 +97,8 @@ export const businessLoansData: Brand[] = [
       'Must have business checking account',
       'Terms vary based on business performance',
     ],
-    ctaUrl: 'https://forafinancial.pxf.io/Xm6ada',
-    websiteUrl: 'https://forafinancial.pxf.io/Xm6ada',
+    ctaUrl: 'https://forafinancial.pxf.io/c/6429639/2015280/24953',
+    websiteUrl: 'https://forafinancial.pxf.io/c/6429639/2015280/24953',
   },
   {
     id: 4,

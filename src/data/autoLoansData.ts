@@ -3,6 +3,37 @@ import type { Brand } from './brands';
 export const autoLoansData: Brand[] = [
   {
     id: 1,
+    name: 'RockSolid Funding',
+    logo: '/images/brands-logos/RockSolidFunding-logo.webp',
+    ourScore: 10.0,
+    trustpilotScore: null,
+    brandReputation: 9.8,
+    popularityScore: 9.7,
+    reviewCount: null,
+    highlight: 'Fast funding solutions for auto loans and vehicle financing',
+    productTypes: ['auto_loan', 'business_loan'],
+    minCreditScore: 'fair',
+    amount: '$10K - $5M',
+    amountRange: '50k_100k',
+    goodDetails: [
+      'Funding Speed: Same day',
+      'Collateral Required: No',
+      'Prepayment Penalty: None',
+      'Online Application: Yes',
+      'Flexible terms for auto financing',
+      'Quick approval process',
+    ],
+    badDetails: [
+      'Time in Business: 6+ months',
+      'Monthly Revenue: At least $10,000',
+      'Minimum Credit Score: 600',
+      'APR Range: 7% - 28%',
+    ],
+    ctaUrl: 'https://rocksolidfunding.sjv.io/9LN6M3',
+    websiteUrl: 'https://rocksolidfunding.sjv.io/9LN6M3',
+  },
+  {
+    id: 2,
     name: 'Capital One',
     logo: null,
     ourScore: 9.0,
@@ -32,7 +63,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.capitalone.com',
   },
   {
-    id: 2,
+    id: 3,
     name: 'Carvana',
     logo: null,
     ourScore: 9.0,
@@ -62,7 +93,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.carvana.com',
   },
   {
-    id: 3,
+    id: 4,
     name: 'CarMax Auto Finance',
     logo: null,
     ourScore: 8.9,
@@ -92,7 +123,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.carmax.com',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Auto Credit Express',
     logo: null,
     ourScore: 8.5,
@@ -122,7 +153,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.autocreditexpress.com',
   },
   {
-    id: 5,
+    id: 6,
     name: 'PenFed Credit Union',
     logo: null,
     ourScore: 9.1,
@@ -152,7 +183,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.penfed.org',
   },
   {
-    id: 6,
+    id: 7,
     name: 'Ally Clearlane',
     logo: null,
     ourScore: 8.7,
@@ -182,7 +213,7 @@ export const autoLoansData: Brand[] = [
     websiteUrl: 'https://www.ally.com',
   },
   {
-    id: 7,
+    id: 8,
     name: 'myAutoLoan',
     logo: null,
     ourScore: 8.8,
