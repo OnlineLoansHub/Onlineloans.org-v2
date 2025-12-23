@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   PawPrint,
   Home as HomeIcon,
@@ -15,6 +18,7 @@ import {
 import { ExploreIllustration } from './illustrations/ExploreIllustration';
 import { CompareIllustration } from './illustrations/CompareIllustration';
 import { ChooseIllustration } from './illustrations/ChooseIllustration';
+import { trackHeroCardClick } from '@/lib/impression';
 import cls from './HomePage.module.scss';
 
 const categories = [
@@ -30,6 +34,22 @@ const categories = [
 ];
 
 export default function HomePage() {
+  const router = useRouter();
+
+  const handleCardClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    cardName: string
+  ) => {
+    e.preventDefault();
+    // Navigate immediately - don't wait for anything
+    router.push(href);
+    // Send tracking request after navigation starts (fire and forget)
+    setTimeout(() => {
+      trackHeroCardClick(cardName);
+    }, 2000);
+  };
+
   return (
     <div className={cls.container}>
       {/* Hero Section */}
@@ -106,6 +126,7 @@ export default function HomePage() {
                   href={href}
                   className={cls.categoryCard}
                   style={{ animationDelay: `${150 + index * 30}ms` }}
+                  onClick={(e) => handleCardClick(e, href, category.title)}
                 >
                   <div className={cls.categoryIconWrapper}>
                     <IconComponent

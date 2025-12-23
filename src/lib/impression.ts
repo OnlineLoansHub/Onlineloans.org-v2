@@ -42,3 +42,26 @@ export const patchImpressionForm = async ({
     // Don't throw - we don't want to break the form flow if impression tracking fails
   }
 };
+
+export const trackHeroCardClick = (cardName: string): void => {
+  // Fire and forget - don't wait for response
+  const impressionId = localStorage.getItem(IMPRESSION_STORAGE_KEY);
+
+  if (!impressionId) {
+    return;
+  }
+
+  // Build the patch data with card name as key and true as value
+  const patchData: Record<string, boolean> = {
+    [cardName]: true,
+  };
+
+  // Send request without awaiting - navigation happens immediately
+  axios
+    .patch(`${API_URL}/${impressionId}/lp-clicks`, patchData, {
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .catch(() => {
+      // Silently fail - don't block navigation
+    });
+};
