@@ -3,7 +3,7 @@ import Image from 'next/image';
 import {
   PawPrint,
   Home as HomeIcon,
-  Heart,
+  TrendingUp,
   GraduationCap,
   Layers,
   Briefcase,
@@ -24,7 +24,7 @@ const categories = [
   { icon: Wallet, title: 'Personal Loans' },
   { icon: Layers, title: 'Debt Consolidation' },
   { icon: PawPrint, title: 'Pet Insurance' },
-  { icon: Heart, title: 'Life Insurance' },
+  { icon: TrendingUp, title: 'Credit Score' },
   { icon: Landmark, title: 'Online Banking' },
   { icon: Coins, title: 'Gold and Silver' },
 ];
@@ -93,7 +93,7 @@ export default function HomePage() {
                 'Personal Loans': '/personal-loan/best-personal-loans',
                 'Debt Consolidation': '#', // TODO: Create page when needed
                 'Pet Insurance': '/pet-insurance/best-pet-insurance',
-                'Life Insurance': '/life-insurance/best-life-insurance',
+                'Credit Score': '/credit-score/credit-score-monitoring',
                 'Online Banking': '/online-banking/best-online-banking',
                 'Gold and Silver': '/gold-and-silver/best-gold-and-silver',
               };

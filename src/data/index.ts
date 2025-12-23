@@ -7,5 +7,5 @@ export { mortgageLoansData } from './mortgageLoansData';
 export { studentLoansData } from './studentLoansData';
 export { onlineBankingData } from './onlineBankingData';
 export { petInsuranceData } from './petInsuranceData';
-export { lifeInsuranceData } from './lifeInsuranceData';
 export { goldAndSilverData } from './goldAndSilverData';
+export { creditScoreData } from './creditScoreData';
