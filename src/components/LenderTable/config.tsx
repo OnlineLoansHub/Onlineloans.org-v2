@@ -6,7 +6,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 1,
     loanType: 'business' as const,
-    imgSrc: '/images/brands-logos/LendingTree-logo.svg',
+    imgSrc: '/images/brands-logos/LendingTree-logo.webp',
     alt: 'LendingTree-logo',
     height: 54,
     imgTitleElem: (
@@ -34,7 +34,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 2,
     loanType: 'personal' as const,
-    imgSrc: '/images/brands-logos/Credible-logo.svg',
+    imgSrc: '/images/brands-logos/Credible-logo.webp',
     alt: 'Credible-logo',
     height: 40,
 
@@ -54,7 +54,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 3,
     loanType: 'personal' as const,
-    imgSrc: '/images/brands-logos/Sofi-logo.svg',
+    imgSrc: '/images/brands-logos/Sofi-logo.webp',
     alt: 'Sofi-logo',
     height: 48,
     title: 'SoFi',
@@ -70,7 +70,7 @@ export const LENDER_TABLE_CONFIG = [
   {
     id: 4,
     loanType: 'business' as const,
-    imgSrc: '/images/brands-logos/LightStream-logo.svg',
+    imgSrc: '/images/brands-logos/LightStream-logo.webp',
     alt: 'LightStream-logo',
     height: 94,
     title: 'LightStream',

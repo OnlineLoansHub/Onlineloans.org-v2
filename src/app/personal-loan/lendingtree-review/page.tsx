@@ -62,7 +62,7 @@ export default function LendingTreeReviewPage() {
       '@type': 'WebPage',
       '@id': `${SITE_URL}/personal-loan/lendingtree-review`,
     },
-    image: `${SITE_URL}/images/brands-logos/lendingtree-logo.jpg`,
+    image: `${SITE_URL}/images/brands-logos/LendingTree-logo.webp`,
   };
 
   const breadcrumbSchema = {
@@ -107,7 +107,7 @@ export default function LendingTreeReviewPage() {
           <header className={cls.header}>
             <div className={cls.coverImageWrapper}>
               <Image
-                src="/images/brands-logos/lendingtree-logo.jpg"
+                src="/images/brands-logos/LendingTree-logo.webp"
                 alt="LendingTree Review"
                 width={1200}
                 height={600}

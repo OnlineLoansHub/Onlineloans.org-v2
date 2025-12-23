@@ -12,7 +12,7 @@ export const metadata: Metadata = generateSEOMetadata({
   author: 'Sarah Martinez',
   publishedTime: '2025-12-04T00:00:00Z',
   modifiedTime: new Date().toISOString(),
-  image: '/images/brands-logos/lendingtree-logo.jpg',
+  image: '/images/brands-logos/LendingTree-logo.webp',
 });
 
 export default function LendingTreeReviewLayout({ children }: { children: React.ReactNode }) {

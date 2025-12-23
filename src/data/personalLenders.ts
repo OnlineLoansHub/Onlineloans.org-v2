@@ -18,7 +18,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'discover',
     name: 'NerdWallet',
     badge: 'Best for Debt Consolidation',
-    logo: '/images/brands-logos/nerd-wallet-logo.svg',
+    logo: '/images/brands-logos/NerdWallet-logo.webp',
     description:
       'Reliable personal loans with fixed rates and no origination fees for debt consolidation.',
     loanAmountRange: '$2,500 - $40,000',
@@ -38,7 +38,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'credit-ninja',
     name: 'Credit Ninja',
     badge: 'Best for Fair Credit',
-    logo: '/images/brands-logos/credit-ninja.svg',
+    logo: '/images/brands-logos/CreditNinja-logo.webp',
     description:
       'AI-powered lending platform that considers education and work history, not just credit scores.',
     loanAmountRange: '$1,000 - $50,000',
@@ -59,7 +59,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'sofi',
     name: 'SoFi',
     badge: 'Best Overall',
-    logo: '/images/brands-logos/Sofi-logo.svg',
+    logo: '/images/brands-logos/Sofi-logo.webp',
     description: 'Comprehensive personal loan platform with competitive rates and member benefits.',
     loanAmountRange: '$5,000 - $100,000',
     minCreditScore: '680+',
@@ -78,7 +78,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'lendingclub',
     name: 'LendingClub',
     badge: 'Best Marketplace',
-    logo: '/images/brands-logos/lending-cluc-logo.svg',
+    logo: '/images/brands-logos/LendingCluc-logo.webp',
     description:
       'Peer-to-peer lending marketplace connecting borrowers with investors for competitive rates.',
     loanAmountRange: '$1,000 - $40,000',
@@ -98,7 +98,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'best-egg',
     name: 'Best Egg',
     badge: 'Fast Funding',
-    logo: '/images/brands-logos/fundera-logo.svg',
+    logo: '/images/brands-logos/Fundera-logo.webp',
     description:
       'Fast personal loans with competitive rates and quick approval for qualified borrowers.',
     loanAmountRange: '$2,000 - $50,000',
@@ -118,7 +118,7 @@ export const personalLenders: PersonalLender[] = [
     id: 'marcus',
     name: 'Marcus by Goldman Sachs',
     badge: 'Best for Large Loans',
-    logo: '/images/brands-logos/lendio-logo.svg',
+    logo: '/images/brands-logos/Lendio-logo.webp',
     description:
       'No-fee personal loans with flexible terms and competitive rates from a trusted bank.',
     loanAmountRange: '$3,500 - $40,000',

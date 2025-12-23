@@ -29,7 +29,7 @@ export const lendersData: Brand[] = [
   {
     id: 1,
     name: 'Advance Funds Network',
-    logo: '/images/brands-logos/advancefundsnetwork.png',
+    logo: '/images/brands-logos/Advancefundsnetwork-logo.webp',
     ourScore: 9.6,
     trustpilotScore: 9.3,
     brandReputation: 9.5,
@@ -62,7 +62,7 @@ export const lendersData: Brand[] = [
   {
     id: 2,
     name: 'ROK Financial',
-    logo: '/images/brands-logos/rok-financial-logo.png',
+    logo: '/images/brands-logos/RokFinancial-logo.webp',
     ourScore: 9.8,
     trustpilotScore: 9.5,
     brandReputation: 9.8,
@@ -93,7 +93,7 @@ export const lendersData: Brand[] = [
   {
     id: 3,
     name: 'Biz2Credit',
-    logo: '/images/brands-logos/Biz2credit-logo.svg',
+    logo: '/images/brands-logos/Biz2credit-logo.webp',
     ourScore: 9.7,
     trustpilotScore: 9.4,
     brandReputation: 9.7,
@@ -124,7 +124,7 @@ export const lendersData: Brand[] = [
   {
     id: 4,
     name: 'Fundera',
-    logo: '/images/brands-logos/fundera-logo.svg',
+    logo: '/images/brands-logos/Fundera-logo.webp',
     ourScore: 9.5,
     trustpilotScore: 9.2,
     brandReputation: 9.6,
@@ -156,7 +156,7 @@ export const lendersData: Brand[] = [
   {
     id: 5,
     name: 'SoFi',
-    logo: '/images/brands-logos/Sofi-logo.svg',
+    logo: '/images/brands-logos/Sofi-logo.webp',
     ourScore: 9.5,
     trustpilotScore: 8.6,
     brandReputation: 10,
@@ -187,7 +187,7 @@ export const lendersData: Brand[] = [
   {
     id: 6,
     name: 'LendingTree',
-    logo: '/images/brands-logos/LendingTree-logo.svg',
+    logo: '/images/brands-logos/LendingTree-logo.webp',
     ourScore: 9.4,
     trustpilotScore: 9.1,
     brandReputation: 9.5,
@@ -218,7 +218,7 @@ export const lendersData: Brand[] = [
   {
     id: 7,
     name: 'Fundbox',
-    logo: '/images/brands-logos/fund-box.svg',
+    logo: '/images/brands-logos/FundBox-logo.webp',
     ourScore: 9.2,
     trustpilotScore: 9.2,
     brandReputation: 8.8,
@@ -249,7 +249,7 @@ export const lendersData: Brand[] = [
   {
     id: 8,
     name: 'Lendio',
-    logo: '/images/brands-logos/lendio-logo.svg',
+    logo: '/images/brands-logos/Lendio-logo.webp',
     ourScore: 9.1,
     trustpilotScore: 9.0,
     brandReputation: 9.0,
@@ -281,7 +281,7 @@ export const lendersData: Brand[] = [
   {
     id: 9,
     name: 'Credible',
-    logo: '/images/brands-logos/Credible-logo.svg',
+    logo: '/images/brands-logos/Credible-logo.webp',
     ourScore: 9.0,
     trustpilotScore: 8.9,
     brandReputation: 9.1,
@@ -314,7 +314,7 @@ export const lendersData: Brand[] = [
   {
     id: 10,
     name: 'LightStream',
-    logo: '/images/brands-logos/LightStream-logo.svg',
+    logo: '/images/brands-logos/LightStream-logo.webp',
     ourScore: 8.9,
     trustpilotScore: 9.3,
     brandReputation: 8.5,
@@ -345,7 +345,7 @@ export const lendersData: Brand[] = [
   {
     id: 11,
     name: 'Lending Club',
-    logo: '/images/brands-logos/lending-cluc-logo.svg',
+    logo: '/images/brands-logos/LendingCluc-logo.webp',
     ourScore: 8.8,
     trustpilotScore: 8.7,
     brandReputation: 8.9,
@@ -378,7 +378,7 @@ export const lendersData: Brand[] = [
   {
     id: 12,
     name: 'NerdWallet',
-    logo: '/images/brands-logos/nerd-wallet-logo.svg',
+    logo: '/images/brands-logos/NerdWallet-logo.webp',
     ourScore: 8.7,
     trustpilotScore: 8.5,
     brandReputation: 9.2,
@@ -409,7 +409,7 @@ export const lendersData: Brand[] = [
   {
     id: 13,
     name: 'QuickCapital',
-    logo: '/images/brands-logos/fund-box.svg',
+    logo: '/images/brands-logos/FundBox-logo.webp',
     ourScore: 7.5,
     trustpilotScore: 7.2,
     brandReputation: 7.8,
@@ -440,7 +440,7 @@ export const lendersData: Brand[] = [
   {
     id: 14,
     name: 'StartupFund',
-    logo: '/images/brands-logos/credit-ninja.svg',
+    logo: '/images/brands-logos/CreditNinja-logo.webp',
     ourScore: 7.8,
     trustpilotScore: 7.5,
     brandReputation: 8.0,
@@ -471,7 +471,7 @@ export const lendersData: Brand[] = [
   {
     id: 15,
     name: 'FlexiLoans',
-    logo: '/images/brands-logos/lendio-logo.svg',
+    logo: '/images/brands-logos/Lendio-logo.webp',
     ourScore: 8.2,
     trustpilotScore: 8.0,
     brandReputation: 8.3,

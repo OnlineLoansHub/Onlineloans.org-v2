@@ -19,7 +19,7 @@ export const lenders: Lender[] = [
     id: 'fundbox',
     name: 'Fundbox',
     badge: 'Best for Invoice Financing',
-    logo: '/images/brands-logos/fund-box.svg',
+    logo: '/images/brands-logos/FundBox-logo.webp',
     description: 'Fast invoice financing and lines of credit for small businesses and freelancers.',
     loanAmountRange: '$1,000 - $250,000',
     minCreditScore: 'Not specified',
@@ -40,7 +40,7 @@ export const lenders: Lender[] = [
     id: 'rok-financial',
     name: 'Rok Financial',
     badge: 'Top Lender',
-    logo: '/images/brands-logos/rok-financial-logo.png',
+    logo: '/images/brands-logos/RokFinancial-logo.webp',
     description:
       'Comprehensive business financing solutions with competitive rates and flexible terms.',
     loanAmountRange: '$10,000 - $5,000,000',
@@ -62,7 +62,7 @@ export const lenders: Lender[] = [
     id: 'advance-funds-network',
     name: 'Advance Funds Network',
     badge: 'Fast Funding',
-    logo: '/images/brands-logos/advancefundsnetwork.png',
+    logo: '/images/brands-logos/Advancefundsnetwork-logo.webp',
     description:
       'Quick and accessible business financing solutions with flexible terms and fast approval process.',
     loanAmountRange: '$5,000 - $5,000,000',
@@ -85,7 +85,7 @@ export const lenders: Lender[] = [
     id: 'biz2credit',
     name: 'Biz2Credit',
     badge: 'Top Pick',
-    logo: '/images/brands-logos/Biz2credit-logo.svg',
+    logo: '/images/brands-logos/Biz2credit-logo.webp',
     description:
       'Biz2Credit has helped tens of thousands of small businesses get more than $8 billion in business loans and commercial financing.',
     loanAmountRange: '$25,000 - $1,000,000+',
@@ -107,7 +107,7 @@ export const lenders: Lender[] = [
     id: 'lendio',
     name: 'Lendio',
     badge: 'Best Marketplace',
-    logo: '/images/brands-logos/lendio-logo.svg',
+    logo: '/images/brands-logos/Lendio-logo.webp',
     description:
       "Nation's leading small business financing platform. Connect with 75+ lenders through one simple application. Over $16 billion facilitated.",
     loanAmountRange: '$1 - $1,000,000+',
@@ -129,7 +129,7 @@ export const lenders: Lender[] = [
     id: 'fundera',
     name: 'Fundera',
     badge: 'Best for Small Business',
-    logo: '/images/brands-logos/fundera-logo.svg',
+    logo: '/images/brands-logos/Fundera-logo.webp',
     description:
       'Business loan marketplace helping small businesses find the right financing solutions. Over $5.9 billion secured through Fundera.',
     loanAmountRange: '$5,000 - $600,000',
@@ -151,7 +151,7 @@ export const lenders: Lender[] = [
     id: 'lightstream',
     name: 'LightStream',
     badge: 'Best Rates',
-    logo: '/images/brands-logos/LightStream-logo.svg',
+    logo: '/images/brands-logos/LightStream-logo.webp',
     description:
       'Low fixed rates with no fees or prepayment penalties. Fixed rate, simple interest fully amortizing installment loans for good-to-excellent credit.',
     loanAmountRange: '$5,000 - $100,000',

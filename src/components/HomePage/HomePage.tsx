@@ -145,7 +145,7 @@ export default function HomePage() {
             <div className={cls.vendorMobileLogos}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/LendingTree-logo.svg"
+                  src="/images/brands-logos/LendingTree-logo.webp"
                   alt="LendingTree"
                   fill
                   className="object-contain"
@@ -155,7 +155,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Sofi-logo.svg"
+                  src="/images/brands-logos/Sofi-logo.webp"
                   alt="SoFi"
                   fill
                   className="object-contain"
@@ -168,7 +168,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Credible-logo.svg"
+                  src="/images/brands-logos/Credible-logo.webp"
                   alt="Credible"
                   fill
                   className="object-contain"
@@ -178,7 +178,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/fundera-logo.svg"
+                  src="/images/brands-logos/Fundera-logo.webp"
                   alt="Fundera"
                   fill
                   className="object-contain"
@@ -188,7 +188,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Biz2credit-logo.svg"
+                  src="/images/brands-logos/Biz2credit-logo.webp"
                   alt="Biz2Credit"
                   fill
                   className="object-contain"
@@ -217,7 +217,7 @@ export default function HomePage() {
             <div className={cls.vendorLogosContainer}>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/LendingTree-logo.svg"
+                  src="/images/brands-logos/LendingTree-logo.webp"
                   alt="LendingTree"
                   fill
                   className="object-contain"
@@ -226,7 +226,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Sofi-logo.svg"
+                  src="/images/brands-logos/Sofi-logo.webp"
                   alt="SoFi"
                   fill
                   className="object-contain"
@@ -238,7 +238,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Credible-logo.svg"
+                  src="/images/brands-logos/Credible-logo.webp"
                   alt="Credible"
                   fill
                   className="object-contain"
@@ -247,7 +247,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/fundera-logo.svg"
+                  src="/images/brands-logos/Fundera-logo.webp"
                   alt="Fundera"
                   fill
                   className="object-contain"
@@ -256,7 +256,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/Biz2credit-logo.svg"
+                  src="/images/brands-logos/Biz2credit-logo.webp"
                   alt="Biz2Credit"
                   fill
                   className="object-contain"

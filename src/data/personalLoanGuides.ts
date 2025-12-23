@@ -30,9 +30,9 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     id: 'lendingtree-review',
     title: 'LendingTree Review: Comprehensive Overview for Personal Loans',
     description:
-      'Complete LendingTree review for personal loans. Learn how LendingTree works, compare personal loan offers, understand pros and cons, and find out if it\'s the right marketplace for your borrowing needs.',
+      "Complete LendingTree review for personal loans. Learn how LendingTree works, compare personal loan offers, understand pros and cons, and find out if it's the right marketplace for your borrowing needs.",
     href: '/personal-loan/lendingtree-review',
-    image: '/images/brands-logos/lendingtree-logo.jpg',
+    image: '/images/brands-logos/LendingTree-logo.webp',
     category: 'Reviews',
   },
   {
@@ -46,4 +46,3 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
   },
   // Add more guides here as they are created
 ];
-
