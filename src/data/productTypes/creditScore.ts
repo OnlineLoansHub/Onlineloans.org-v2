@@ -101,7 +101,7 @@ export const creditScoreConfig: ProductTypeConfig = {
         name: 'CreditVana',
         score: 9.3,
         description: 'Best for guided credit monitoring',
-        ctaUrl: '#',
+        ctaUrl: 'https://creditvana.pxf.io/raVKBd',
       },
       {
         id: 2,

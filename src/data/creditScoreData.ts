@@ -24,7 +24,7 @@ export const creditScoreData: Brand[] = [
       'Subscription required for full features',
       'Limited transparency on pricing upfront',
     ],
-    ctaUrl: 'https://creditvana.com',
+    ctaUrl: 'https://creditvana.pxf.io/raVKBd',
     websiteUrl: 'https://creditvana.com',
     minCreditScore: 'All credit profiles',
     amountRange: 'Subscription',

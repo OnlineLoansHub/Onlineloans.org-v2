@@ -8,7 +8,7 @@ import {
   Layers,
   Briefcase,
   Wallet,
-  Landmark,
+  Bitcoin,
   Coins,
   Clock,
 } from 'lucide-react';
@@ -25,7 +25,7 @@ const categories = [
   { icon: Layers, title: 'Debt Consolidation' },
   { icon: PawPrint, title: 'Pet Insurance' },
   { icon: TrendingUp, title: 'Credit Score' },
-  { icon: Landmark, title: 'Online Banking' },
+  { icon: Bitcoin, title: 'Crypto Loans' },
   { icon: Coins, title: 'Gold and Silver' },
 ];
 
@@ -94,7 +94,7 @@ export default function HomePage() {
                 'Debt Consolidation': '#', // TODO: Create page when needed
                 'Pet Insurance': '/pet-insurance/best-pet-insurance',
                 'Credit Score': '/credit-score/credit-score-monitoring',
-                'Online Banking': '/online-banking/best-online-banking',
+                'Crypto Loans': '/crypto-loans/best-crypto-loans',
                 'Gold and Silver': '/gold-and-silver/best-gold-and-silver',
               };
 

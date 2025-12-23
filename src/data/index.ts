@@ -5,7 +5,7 @@ export { personalLoansData } from './personalLoansData';
 export { autoLoansData } from './autoLoansData';
 export { mortgageLoansData } from './mortgageLoansData';
 export { studentLoansData } from './studentLoansData';
-export { onlineBankingData } from './onlineBankingData';
 export { petInsuranceData } from './petInsuranceData';
 export { goldAndSilverData } from './goldAndSilverData';
 export { creditScoreData } from './creditScoreData';
+export { cryptoLoansData } from './cryptoLoansData';
