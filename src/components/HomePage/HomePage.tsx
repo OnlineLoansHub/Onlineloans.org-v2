@@ -125,7 +125,6 @@ export default function HomePage() {
                   key={index}
                   href={href}
                   className={cls.categoryCard}
-                  style={{ animationDelay: `${150 + index * 30}ms` }}
                   onClick={(e) => handleCardClick(e, href, category.title)}
                 >
                   <div className={cls.categoryIconWrapper}>
