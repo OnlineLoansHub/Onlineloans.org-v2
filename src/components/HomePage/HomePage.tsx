@@ -175,8 +175,8 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/ForaFinancial-logo.webp"
-                  alt="Fora Financial"
+                  src="/images/brands-logos/Lendio-logo.webp"
+                  alt="Lendio"
                   fill
                   className="object-contain"
                   sizes="(max-width: 640px) 140px, 112px"
@@ -185,8 +185,8 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/RokFinancial-logo.webp"
-                  alt="ROK Financial"
+                  src="/images/brands-logos/RockSolidFunding-logo.webp"
+                  alt="RockSolid"
                   fill
                   className="object-contain"
                   sizes="(max-width: 640px) 140px, 112px"
@@ -244,8 +244,8 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/ForaFinancial-logo.webp"
-                  alt="Fora Financial"
+                  src="/images/brands-logos/Lendio-logo.webp"
+                  alt="Lendio"
                   fill
                   className="object-contain"
                   loading="lazy"
@@ -253,8 +253,8 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/RokFinancial-logo.webp"
-                  alt="ROK Financial"
+                  src="/images/brands-logos/RockSolidFunding-logo.webp"
+                  alt="RockSolid"
                   fill
                   className="object-contain"
                   loading="lazy"
