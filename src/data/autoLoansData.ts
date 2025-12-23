@@ -1,4 +1,4 @@
-import type { Brand } from './lendersData';
+import type { Brand } from './brands';
 
 export const autoLoansData: Brand[] = [
   {

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
 import cls from './Hero.module.scss';
-import type { HeroConfig } from '@/config/productTypes';
+import type { HeroConfig } from '@/data/productTypes';
 
 interface HeroProps {
   heroConfig: HeroConfig;

@@ -1,4 +1,4 @@
-import type { Brand } from './lendersData';
+import type { Brand } from './brands';
 
 export const mortgageLoansData: Brand[] = [
   {
@@ -10,7 +10,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.5,
     popularityScore: 9.7,
     reviewCount: 30000,
-    highlight: 'Largest U.S. mortgage lender offering a fully online process and low down-payment options.',
+    highlight:
+      'Largest U.S. mortgage lender offering a fully online process and low down-payment options.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -39,7 +40,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.2,
     popularityScore: 8.8,
     reviewCount: 2200,
-    highlight: 'Online lender "Rate" (formerly Guaranteed Rate) known for speed—offers full underwriting approval in as little as one day.',
+    highlight:
+      'Online lender "Rate" (formerly Guaranteed Rate) known for speed—offers full underwriting approval in as little as one day.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -68,7 +70,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.4,
     popularityScore: 8.5,
     reviewCount: 2020,
-    highlight: 'National lender with a large menu of loan products and first-time buyer assistance programs.',
+    highlight:
+      'National lender with a large menu of loan products and first-time buyer assistance programs.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -97,7 +100,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.7,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Top VA lender – originates more VA mortgages than any other lender – with 24/7 customer support for military members.',
+    highlight:
+      'Top VA lender – originates more VA mortgages than any other lender – with 24/7 customer support for military members.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -111,7 +115,7 @@ export const mortgageLoansData: Brand[] = [
     badDetails: [
       'Above-average origination fees',
       'No live online chat support',
-      'Doesn\'t offer renovation or construction loans',
+      "Doesn't offer renovation or construction loans",
       'VA loans only (limited product selection)',
     ],
     ctaUrl: 'https://www.veteransunited.com',
@@ -126,7 +130,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.3,
     popularityScore: 10.0,
     reviewCount: null,
-    highlight: 'Major national bank with broad loan options and special programs (e.g., $5,000 homebuyer grants) – known for high customer satisfaction.',
+    highlight:
+      'Major national bank with broad loan options and special programs (e.g., $5,000 homebuyer grants) – known for high customer satisfaction.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -155,7 +160,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 10.0,
     reviewCount: null,
-    highlight: 'Nationwide bank offering a wide variety of mortgages plus up to $17,500 in down-payment and closing-cost assistance.',
+    highlight:
+      'Nationwide bank offering a wide variety of mortgages plus up to $17,500 in down-payment and closing-cost assistance.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -168,7 +174,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     badDetails: [
       'Mortgage origination fees higher than average',
-      'Online rate quotes don\'t adjust for credit score',
+      "Online rate quotes don't adjust for credit score",
       'Does not offer home equity loans (only HELOC)',
       'Closing Time: 30-45 days',
     ],
@@ -184,7 +190,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.6,
     popularityScore: 8.7,
     reviewCount: null,
-    highlight: 'Top credit union for VA loans with unique no-down-payment mortgages for members and 24/7 customer service.',
+    highlight:
+      'Top credit union for VA loans with unique no-down-payment mortgages for members and 24/7 customer service.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -213,7 +220,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 8.5,
     popularityScore: 7.5,
     reviewCount: 1862,
-    highlight: 'Digital mortgage lender with an all-online process, offering a wide range of loan types and generally low rates.',
+    highlight:
+      'Digital mortgage lender with an all-online process, offering a wide range of loan types and generally low rates.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -242,7 +250,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 8.0,
     popularityScore: 8.0,
     reviewCount: 4200,
-    highlight: 'One of the largest non-bank lenders with a wide range of mortgages (including renovation loans) and an easy online application.',
+    highlight:
+      'One of the largest non-bank lenders with a wide range of mortgages (including renovation loans) and an easy online application.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',
@@ -271,7 +280,8 @@ export const mortgageLoansData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 8.2,
     reviewCount: null,
-    highlight: 'National bank praised for its low-income borrower programs (3% down with no PMI) and a strong digital mortgage experience.',
+    highlight:
+      'National bank praised for its low-income borrower programs (3% down with no PMI) and a strong digital mortgage experience.',
     productTypes: ['mortgage_loan'],
     minCreditScore: 'fair',
     amount: '$100K - $5M',

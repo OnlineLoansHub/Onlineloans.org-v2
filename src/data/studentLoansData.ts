@@ -1,4 +1,4 @@
-import type { Brand } from './lendersData';
+import type { Brand } from './brands';
 
 export const studentLoansData: Brand[] = [
   {
@@ -10,7 +10,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 9.3,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Online finance company offering low-rate student loan refinancing, personal loans, and high-APY banking — all with no fees.',
+    highlight:
+      'Online finance company offering low-rate student loan refinancing, personal loans, and high-APY banking — all with no fees.',
     productTypes: ['student_loan'],
     minCreditScore: 'good',
     amount: '$5K - $500K',
@@ -39,7 +40,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 8.0,
     reviewCount: null,
-    highlight: 'Online lender for student loan refinancing and private loans, known for highly customizable repayment options.',
+    highlight:
+      'Online lender for student loan refinancing and private loans, known for highly customizable repayment options.',
     productTypes: ['student_loan'],
     minCreditScore: 'good',
     amount: '$5K - $500K',
@@ -68,7 +70,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 8.5,
     reviewCount: null,
-    highlight: 'Specialized student loan lender offering flexible terms and repayment options for undergraduates, graduates, and parents.',
+    highlight:
+      'Specialized student loan lender offering flexible terms and repayment options for undergraduates, graduates, and parents.',
     productTypes: ['student_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $500K',
@@ -97,7 +100,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.8,
     popularityScore: 9.2,
     reviewCount: null,
-    highlight: 'One of the largest private student loan providers, offering loans that cover up to 100% of education costs with multiple repayment options.',
+    highlight:
+      'One of the largest private student loan providers, offering loans that cover up to 100% of education costs with multiple repayment options.',
     productTypes: ['student_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $500K',
@@ -126,7 +130,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.5,
     popularityScore: 7.8,
     reviewCount: null,
-    highlight: 'Lender offering student loans with or without co-signers, including outcomes-based loans for upperclassmen and a 1% cashback graduation reward.',
+    highlight:
+      'Lender offering student loans with or without co-signers, including outcomes-based loans for upperclassmen and a 1% cashback graduation reward.',
     productTypes: ['student_loan'],
     minCreditScore: 'fair',
     amount: '$2K - $200K',
@@ -155,7 +160,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 9.1,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Major bank offering private student loans with no fees and unique features like a cash reward for good grades.',
+    highlight:
+      'Major bank offering private student loans with no fees and unique features like a cash reward for good grades.',
     productTypes: ['student_loan'],
     minCreditScore: 'good',
     amount: '$1K - $500K',
@@ -184,7 +190,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.7,
     popularityScore: 7.5,
     reviewCount: null,
-    highlight: 'Large regional bank providing student loans and refinances, with multi-year approval and loyalty discounts for bank customers.',
+    highlight:
+      'Large regional bank providing student loans and refinances, with multi-year approval and loyalty discounts for bank customers.',
     productTypes: ['student_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $500K',
@@ -192,7 +199,7 @@ export const studentLoansData: Brand[] = [
     goodDetails: [
       'Multi-year approval: apply once to secure funding for all college years (reduces hard credit pulls)',
       '0.25% autopay discount plus 0.25% loyalty rate discount for existing bank customers',
-      'Refinancing available for both student and parent loans (Parent PLUS can be refinanced in child\'s name)',
+      "Refinancing available for both student and parent loans (Parent PLUS can be refinanced in child's name)",
       'Online Application: Yes',
     ],
     badDetails: [
@@ -213,7 +220,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.8,
     popularityScore: 6.5,
     reviewCount: null,
-    highlight: 'Online lender (part of KeyBank) specializing in student loan refinancing for professionals, with tailored offers for doctors and dentists.',
+    highlight:
+      'Online lender (part of KeyBank) specializing in student loan refinancing for professionals, with tailored offers for doctors and dentists.',
     productTypes: ['student_loan'],
     minCreditScore: 'good',
     amount: '$5K - $500K',
@@ -242,7 +250,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.5,
     popularityScore: 6.0,
     reviewCount: null,
-    highlight: 'Marketplace platform connecting borrowers with community banks and credit unions for private student loans and refinancing at low rates.',
+    highlight:
+      'Marketplace platform connecting borrowers with community banks and credit unions for private student loans and refinancing at low rates.',
     productTypes: ['student_loan'],
     minCreditScore: 'fair',
     amount: '$5K - $500K',
@@ -271,7 +280,8 @@ export const studentLoansData: Brand[] = [
     brandReputation: 8.2,
     popularityScore: 6.5,
     reviewCount: null,
-    highlight: 'Niche lender offering student loans without co-signers for international and DACA students studying in the U.S. or Canada, based on future earning potential.',
+    highlight:
+      'Niche lender offering student loans without co-signers for international and DACA students studying in the U.S. or Canada, based on future earning potential.',
     productTypes: ['student_loan'],
     amount: '$2K - $100K',
     amountRange: '25k_50k',

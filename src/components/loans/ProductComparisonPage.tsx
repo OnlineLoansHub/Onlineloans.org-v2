@@ -12,8 +12,8 @@ import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
-import type { Brand } from './lendersData';
-import type { ProductTypeConfig } from '@/config/productTypes';
+import type { Brand } from '@/data/brands';
+import type { ProductTypeConfig } from '@/data/productTypes';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
 
 const INITIAL_DISPLAY_COUNT = 5;
@@ -110,9 +110,7 @@ export default function ProductComparisonPage({
         key.includes('coverageAmount') ||
         key.includes('priceRange')
       ) {
-        result = result.filter(
-          (l) => l.amountRange === value || l.amountRange === '100k_plus'
-        );
+        result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
       } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
         const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
         const filterIndex = revenueOrder.indexOf(value);
@@ -271,7 +269,12 @@ export default function ProductComparisonPage({
               <div className={styles.lenderCardsContainer}>
                 {displayedLenders.length > 0 ? (
                   displayedLenders.map((lender, index) => (
-                    <LenderCard key={lender.id} lender={lender} rank={index + 1} amountLabel={productConfig.amountLabel} />
+                    <LenderCard
+                      key={lender.id}
+                      lender={lender}
+                      rank={index + 1}
+                      amountLabel={productConfig.amountLabel}
+                    />
                   ))
                 ) : (
                   <div className={styles.emptyState}>

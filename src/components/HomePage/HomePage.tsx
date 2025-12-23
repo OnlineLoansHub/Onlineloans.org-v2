@@ -221,6 +221,7 @@ export default function HomePage() {
                   alt="Fundera"
                   fill
                   className="object-contain"
+                  sizes="100px"
                   loading="lazy"
                 />
               </div>

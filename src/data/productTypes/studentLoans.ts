@@ -127,4 +127,3 @@ export const studentLoansConfig: ProductTypeConfig = {
   },
   amountLabel: 'Loan Amount',
 };
-

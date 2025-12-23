@@ -1,4 +1,4 @@
-import type { Brand } from './lendersData';
+import type { Brand } from './brands';
 
 export const onlineBankingData: Brand[] = [
   {
@@ -10,7 +10,8 @@ export const onlineBankingData: Brand[] = [
     brandReputation: 9.3,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Online finance company offering low-rate student loan refinancing, personal loans, and high-APY banking — all with no fees.',
+    highlight:
+      'Online finance company offering low-rate student loan refinancing, personal loans, and high-APY banking — all with no fees.',
     productTypes: ['online_banking'],
     amount: '4.60% APY',
     amountRange: '0',
@@ -38,7 +39,8 @@ export const onlineBankingData: Brand[] = [
     brandReputation: 9.1,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Major bank offering private student loans with no fees and unique features like a cash reward for good grades, plus online banking services.',
+    highlight:
+      'Major bank offering private student loans with no fees and unique features like a cash reward for good grades, plus online banking services.',
     productTypes: ['online_banking'],
     amount: '4.35% APY',
     amountRange: '0',
@@ -66,7 +68,8 @@ export const onlineBankingData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 9.5,
     reviewCount: null,
-    highlight: 'Major bank offering both auto financing (via Auto Navigator for dealer purchases) and a full suite of online banking services with no fees.',
+    highlight:
+      'Major bank offering both auto financing (via Auto Navigator for dealer purchases) and a full suite of online banking services with no fees.',
     productTypes: ['online_banking'],
     amount: '4.25% APY',
     amountRange: '0',
@@ -94,7 +97,8 @@ export const onlineBankingData: Brand[] = [
     brandReputation: 8.6,
     popularityScore: 8.0,
     reviewCount: null,
-    highlight: 'Digital auto loan platform from Ally offering online refinancing and lease buyout loans, leveraging Ally\'s extensive auto financing experience, plus full online banking.',
+    highlight:
+      "Digital auto loan platform from Ally offering online refinancing and lease buyout loans, leveraging Ally's extensive auto financing experience, plus full online banking.",
     productTypes: ['online_banking'],
     amount: '4.25% APY',
     amountRange: '0',

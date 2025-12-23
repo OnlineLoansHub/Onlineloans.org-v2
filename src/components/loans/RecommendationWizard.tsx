@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Sparkles, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
-import type { Brand } from './lendersData';
+import type { Brand } from '@/data/brands';
 
-import type { WizardConfig, WizardStep } from '@/config/productTypes';
+import type { WizardConfig, WizardStep } from '@/data/productTypes';
 
 interface RecommendationWizardProps {
   lenders: Brand[];
@@ -171,7 +171,9 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                         }`}
                         style={{
                           border: `2px solid ${
-                            answers[steps[currentStep].key] === option.value ? 'var(--color-primary)' : '#cbd5e1'
+                            answers[steps[currentStep].key] === option.value
+                              ? 'var(--color-primary)'
+                              : '#cbd5e1'
                           }`,
                         }}
                       >
@@ -325,7 +327,9 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                         }`}
                         style={{
                           border: `2px solid ${
-                            answers[steps[currentStep].key] === option.value ? 'var(--color-primary)' : '#cbd5e1'
+                            answers[steps[currentStep].key] === option.value
+                              ? 'var(--color-primary)'
+                              : '#cbd5e1'
                           }`,
                         }}
                       >

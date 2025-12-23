@@ -1,4 +1,4 @@
-import type { Brand } from './lendersData';
+import type { Brand } from './brands';
 
 export const personalLoansData: Brand[] = [
   {
@@ -10,14 +10,15 @@ export const personalLoansData: Brand[] = [
     brandReputation: 9.0,
     popularityScore: 8.0,
     reviewCount: null,
-    highlight: 'SunTrust/Truist Bank\'s online lending arm offering low-interest personal loans for excellent-credit borrowers, with a Rate Beat program and zero fees.',
+    highlight:
+      "SunTrust/Truist Bank's online lending arm offering low-interest personal loans for excellent-credit borrowers, with a Rate Beat program and zero fees.",
     productTypes: ['personal_loan'],
     minCreditScore: 'excellent',
     amount: '$5K - $100K',
     amountRange: '50k_100k',
     goodDetails: [
       'Very low interest rates for good to excellent credit borrowers (often lowest in market)',
-      'Rate Beat program – will beat a competitor\'s rate by 0.10% if criteria met',
+      "Rate Beat program – will beat a competitor's rate by 0.10% if criteria met",
       'No fees of any kind (no origination fee, no late fees or prepayment penalties)',
       'Online Application: Yes',
     ],
@@ -39,7 +40,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 9.1,
     popularityScore: 8.5,
     reviewCount: null,
-    highlight: 'No-fee personal loans from Goldman Sachs – flexible payment options and a skip-a-payment feature after a year of timely payments.',
+    highlight:
+      'No-fee personal loans from Goldman Sachs – flexible payment options and a skip-a-payment feature after a year of timely payments.',
     productTypes: ['personal_loan'],
     minCreditScore: 'good',
     amount: '$3.5K - $40K',
@@ -52,7 +54,7 @@ export const personalLoansData: Brand[] = [
     ],
     badDetails: [
       'No co-signer or joint applications allowed',
-      'Funding isn\'t same-day – typically takes a few days to receive funds',
+      "Funding isn't same-day – typically takes a few days to receive funds",
       'Loan availability capped at $40,000 maximum',
       'Funding Speed: 1-3 business days',
     ],
@@ -68,7 +70,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.5,
     popularityScore: 7.5,
     reviewCount: null,
-    highlight: 'Online lender focusing on fast personal loans for fair-credit borrowers – offers both unsecured loans and a secured loan option for homeowners.',
+    highlight:
+      'Online lender focusing on fast personal loans for fair-credit borrowers – offers both unsecured loans and a secured loan option for homeowners.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$2K - $50K',
@@ -97,7 +100,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.7,
     popularityScore: 8.0,
     reviewCount: null,
-    highlight: 'AI-driven online lender that considers education and job history to approve borrowers with limited credit history for personal loans.',
+    highlight:
+      'AI-driven online lender that considers education and job history to approve borrowers with limited credit history for personal loans.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $50K',
@@ -126,7 +130,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.5,
     popularityScore: 9.0,
     reviewCount: null,
-    highlight: 'Established peer-to-peer lending platform (now a bank) offering personal loans including joint applications, ideal for debt consolidation.',
+    highlight:
+      'Established peer-to-peer lending platform (now a bank) offering personal loans including joint applications, ideal for debt consolidation.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $40K',
@@ -155,7 +160,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.8,
     popularityScore: 8.5,
     reviewCount: null,
-    highlight: 'Online lender offering personal loans with credit-building features and direct payment to creditors, suitable for borrowers with fair credit.',
+    highlight:
+      'Online lender offering personal loans with credit-building features and direct payment to creditors, suitable for borrowers with fair credit.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$1K - $50K',
@@ -169,7 +175,7 @@ export const personalLoansData: Brand[] = [
     badDetails: [
       'Origination fee of 2.9%–8% is deducted from loan proceeds',
       'Maximum loan amount of $50,000 (some competitors offer more)',
-      'Lowest APRs require autopay and checking account through Upgrade\'s platform',
+      "Lowest APRs require autopay and checking account through Upgrade's platform",
       'Funding Speed: 1-3 business days',
     ],
     ctaUrl: 'https://www.upgrade.com',
@@ -184,7 +190,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.3,
     popularityScore: 7.8,
     reviewCount: null,
-    highlight: 'Mid-sized online lender catering to borrowers with lower credit scores – offers personal loans with quick funding and flexible eligibility.',
+    highlight:
+      'Mid-sized online lender catering to borrowers with lower credit scores – offers personal loans with quick funding and flexible eligibility.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$2K - $35K',
@@ -213,7 +220,8 @@ export const personalLoansData: Brand[] = [
     brandReputation: 8.4,
     popularityScore: 7.5,
     reviewCount: null,
-    highlight: 'One of the original peer-to-peer lending marketplaces, offering fixed-rate personal loans with no prepayment penalty and the ability to add a co-borrower.',
+    highlight:
+      'One of the original peer-to-peer lending marketplaces, offering fixed-rate personal loans with no prepayment penalty and the ability to add a co-borrower.',
     productTypes: ['personal_loan'],
     minCreditScore: 'fair',
     amount: '$2K - $50K',

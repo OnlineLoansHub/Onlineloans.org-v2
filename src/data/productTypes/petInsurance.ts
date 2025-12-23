@@ -127,4 +127,3 @@ export const petInsuranceConfig: ProductTypeConfig = {
   },
   amountLabel: 'Monthly Premium',
 };
-

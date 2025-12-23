@@ -1,5 +1,5 @@
 // Helper function to generate placeholder brand data
-import type { Brand } from '@/components/loans/lendersData';
+import type { Brand } from '@/data/brands';
 
 export function generatePlaceholderLenders(count: number, productType: string): Brand[] {
   const names = [
@@ -17,10 +17,10 @@ export function generatePlaceholderLenders(count: number, productType: string): 
     id: i + 1,
     name: names[i] || `${productType} Lender ${i + 1}`,
     logo: null, // Placeholder - will use text fallback
-    ourScore: 9.5 - (i * 0.1),
-    trustpilotScore: 9.0 - (i * 0.15),
-    brandReputation: 9.3 - (i * 0.12),
-    popularityScore: 9.2 - (i * 0.1),
+    ourScore: 9.5 - i * 0.1,
+    trustpilotScore: 9.0 - i * 0.15,
+    brandReputation: 9.3 - i * 0.12,
+    popularityScore: 9.2 - i * 0.1,
     reviewCount: 5000 + i * 1000,
     highlight: `Top-rated ${productType} provider with competitive rates`,
     productTypes: [productType.toLowerCase().replace(/\s+/g, '_')],
@@ -45,4 +45,3 @@ export function generatePlaceholderLenders(count: number, productType: string): 
     websiteUrl: '#',
   }));
 }
-

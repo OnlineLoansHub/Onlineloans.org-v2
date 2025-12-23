@@ -133,4 +133,3 @@ export const personalLoansConfig: ProductTypeConfig = {
   },
   amountLabel: 'Loan Amount',
 };
-

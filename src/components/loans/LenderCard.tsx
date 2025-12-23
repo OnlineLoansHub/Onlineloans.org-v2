@@ -6,7 +6,7 @@ import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X } from 'lucide-rea
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
-import type { Brand } from './lendersData';
+import type { Brand } from '@/data/brands';
 
 interface LenderCardProps {
   lender: Brand;

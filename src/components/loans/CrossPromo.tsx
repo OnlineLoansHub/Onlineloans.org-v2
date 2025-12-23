@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
-import type { CrossPromoConfig } from '@/config/productTypes';
+import type { CrossPromoConfig } from '@/data/productTypes';
 import * as LucideIcons from 'lucide-react';
 
 interface CrossPromoProps {
@@ -11,8 +11,10 @@ interface CrossPromoProps {
 
 export default function CrossPromo({ crossPromoConfig }: CrossPromoProps) {
   // Get icon component dynamically
-  const IconComponent = crossPromoConfig.icon 
-    ? (LucideIcons[crossPromoConfig.icon as keyof typeof LucideIcons] as React.ComponentType<{ className?: string }>)
+  const IconComponent = crossPromoConfig.icon
+    ? (LucideIcons[crossPromoConfig.icon as keyof typeof LucideIcons] as React.ComponentType<{
+        className?: string;
+      }>)
     : Building2;
 
   return (
@@ -21,14 +23,14 @@ export default function CrossPromo({ crossPromoConfig }: CrossPromoProps) {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--color-primary)]/10 rounded mb-4">
             <IconComponent className="w-4 h-4 text-[var(--color-primary)]" />
-            <span className="text-sm font-medium text-[var(--color-primary)]">Related Services</span>
+            <span className="text-sm font-medium text-[var(--color-primary)]">
+              Related Services
+            </span>
           </div>
           <h2 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3">
             {crossPromoConfig.title}
           </h2>
-          <p className="text-lg text-slate-600">
-            {crossPromoConfig.description}
-          </p>
+          <p className="text-lg text-slate-600">{crossPromoConfig.description}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -42,7 +44,9 @@ export default function CrossPromo({ crossPromoConfig }: CrossPromoProps) {
                   <span className="font-bold text-slate-700">{provider.name}</span>
                 </div>
                 <div className="text-right">
-                  <div className="text-xl font-bold text-[var(--color-primary)]">{provider.score}</div>
+                  <div className="text-xl font-bold text-[var(--color-primary)]">
+                    {provider.score}
+                  </div>
                   <div className="text-xs text-black">Score</div>
                 </div>
               </div>

@@ -352,12 +352,28 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden; // Ensure images don't overflow
 
   // Next.js Image with fill prop needs absolute positioning
   // object-fit: contain ensures logos don't stretch or overflow
-  img {
-    object-fit: contain;
-    object-position: center;
+  :global(img) {
+    object-fit: contain !important;
+    object-position: center !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  // Ensure Next.js Image wrapper span is properly positioned
+  :global(span) {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
   }
 
   // Desktop: Larger logo size

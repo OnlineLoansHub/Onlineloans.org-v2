@@ -58,4 +58,3 @@ export interface ProductTypeConfig {
   crossPromo: CrossPromoConfig;
   amountLabel?: string; // Label for the amount field (e.g., "Loan Amount", "Monthly Premium", "Coverage Amount", "APY", "Price Range")
 }
-

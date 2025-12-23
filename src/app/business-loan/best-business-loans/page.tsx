@@ -12,8 +12,8 @@ import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
-import { lendersData } from '@/components/loans/lendersData';
-import { businessLoansConfig } from '@/config/productTypes/businessLoans';
+import { businessLoansData } from '@/data/businessLoansData';
+import { businessLoansConfig } from '@/data/productTypes/businessLoans';
 import styles from './page.module.scss';
 
 const INITIAL_DISPLAY_COUNT = 5;
@@ -173,7 +173,7 @@ export default function BestBusinessLoansPage() {
 
   // Filter and sort lenders
   const filteredLenders = useMemo(() => {
-    let result = [...lendersData];
+    let result = [...businessLoansData];
 
     // Apply filters
     if (filters.loanType !== 'all') {
@@ -372,7 +372,10 @@ export default function BestBusinessLoansPage() {
         <section className={styles.unifiedSection}>
           <div className={styles.unifiedContainer}>
             <h2 className={styles.unifiedTitle}>Find Your Perfect Business Loan Match</h2>
-            <RecommendationWizard lenders={lendersData} wizardConfig={businessLoansConfig.wizard} />
+            <RecommendationWizard
+              lenders={businessLoansData}
+              wizardConfig={businessLoansConfig.wizard}
+            />
           </div>
         </section>
 
