@@ -132,8 +132,8 @@ export default function ProductComparisonPage({
 
     // Apply sorting
     if (sortBy === 'ourScore') {
-      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2);
-      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2);
+      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2 || l.id === 3);
+      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2 && l.id !== 3);
       otherLenders.sort((a, b) => b.ourScore - a.ourScore);
       const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
 
