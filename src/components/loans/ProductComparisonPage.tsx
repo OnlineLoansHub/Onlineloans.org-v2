@@ -131,26 +131,17 @@ export default function ProductComparisonPage({
     });
 
     // Apply sorting
-    if (sortBy === 'ourScore') {
-      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2 || l.id === 3);
-      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2 && l.id !== 3);
-      otherLenders.sort((a, b) => b.ourScore - a.ourScore);
-      const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
+    result.sort((a, b) => {
+      const aValue = a[sortBy as keyof typeof a] as number | null;
+      const bValue = b[sortBy as keyof typeof b] as number | null;
+      if (aValue === null && bValue === null) return 0;
+      if (aValue === null) return 1;
+      if (bValue === null) return -1;
 
-      return [...sortedPriority, ...otherLenders];
-    } else {
-      result.sort((a, b) => {
-        const aValue = a[sortBy as keyof typeof a] as number | null;
-        const bValue = b[sortBy as keyof typeof b] as number | null;
-        if (aValue === null && bValue === null) return 0;
-        if (aValue === null) return 1;
-        if (bValue === null) return -1;
+      return bValue - aValue;
+    });
 
-        return bValue - aValue;
-      });
-
-      return result;
-    }
+    return result;
   }, [filters, sortBy, lendersData]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
