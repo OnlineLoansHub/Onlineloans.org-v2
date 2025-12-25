@@ -62,31 +62,22 @@ export const flushEventQueue = (impressionId: string): void => {
 };
 
 /**
- * Send tracking data using sendBeacon (best for navigation) with fallback
+ * Send tracking data using fetch with keepalive (production-ready)
+ * Uses fetch instead of sendBeacon for better reliability and Network tab visibility
  */
 const sendTrackingData = (endpoint: string, data: Record<string, any>): boolean => {
   const url = `${API_URL}/${endpoint}`;
-  console.log('[sendTrackingData] Sending to:', url, data);
 
-  // Use fetch with keepalive for better visibility in Network tab and debugging
-  // sendBeacon doesn't show in Network tab, so using fetch for now
+  // Use fetch with keepalive for reliable tracking during navigation
   if ('fetch' in window) {
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
       keepalive: true, // Important: keeps request alive during navigation
-    })
-      .then((response) => {
-        if (!response.ok) {
-          console.error('[sendTrackingData] Request failed:', response.status, response.statusText);
-        } else {
-          console.log('[sendTrackingData] Request successful');
-        }
-      })
-      .catch((error) => {
-        console.error('[sendTrackingData] Request error:', error);
-      });
+    }).catch(() => {
+      // Silently fail - don't block user experience
+    });
 
     return true;
   }
@@ -106,9 +97,7 @@ const sendTrackingData = (endpoint: string, data: Record<string, any>): boolean 
     xhr.send(JSON.stringify(data));
 
     return true;
-  } catch (error) {
-    console.error('[sendTrackingData] XHR error:', error);
-
+  } catch {
     return false;
   }
 };
@@ -206,7 +195,6 @@ export const trackBrandClick = (
 
   if (!impressionId) {
     // Queue event to be sent when impression ID becomes available
-    console.log('[trackBrandClick] No impressionId, queuing event:', { brandName, pageName });
     queueEvent({
       type: 'brand-click',
       data: { brandName, pageName },
@@ -216,16 +204,11 @@ export const trackBrandClick = (
     return;
   }
 
-  // Send immediately using sendBeacon (non-blocking)
-  console.log('[trackBrandClick] Sending brand click:', { impressionId, pageName, brandName });
-  const sent = sendTrackingData('brand-clicks', {
+  // Send immediately using fetch with keepalive (non-blocking)
+  sendTrackingData('brand-clicks', {
     impressionId,
     pageName,
     brandName,
     timestamp: new Date().toISOString(),
   });
-
-  if (!sent) {
-    console.warn('[trackBrandClick] Failed to send tracking data');
-  }
 };
