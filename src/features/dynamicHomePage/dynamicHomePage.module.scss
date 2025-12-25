@@ -66,20 +66,8 @@
   font-weight: var(--font-weight-bold);
   line-height: normal;
   font-size: var(--title-size-large);
-  opacity: 0;
-  transform: translateY(-8px);
-  will-change: opacity, transform;
-  transition:
-    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 0.6s;
-  transition-delay: 0.05s;
-
-  /* Make visible on mobile immediately */
-  @media (max-width: 993px) {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;
+  transform: translateY(0);
 
   /* 📱 MOBILE (phones + small tablets) */
   @media (max-width: 430px) {
@@ -120,11 +108,6 @@
   @media (min-width: 1025px) and (max-width: 1600px) {
     font-size: var(--title-size-laptop);
   }
-}
-
-.titleVisible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .reviews {
