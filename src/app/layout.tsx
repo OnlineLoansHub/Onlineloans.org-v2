@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { Header } from '@/components/layout/Header/Header';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
+import { AccessibilityWidget } from '@/components/accessibility/AccessibilityWidget';
 import { DefaultStructuredData } from '@/components/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/lib/seo';
 import { ExploreToggleProvider } from '@/contexts/ExploreToggleContext';
@@ -66,11 +67,8 @@ export default function RootLayout({
             gtag('config', 'G-CW0NYXW5S0');
           `}
         </Script>
-        {/* Accessibility Widget */}
-        <Script
-          src="https://dash.accessiblyapp.com/widget/019b565f-e784-73ed-a16a-6e4c0fb950ae/autoload.js"
-          strategy="lazyOnload"
-        />
+        {/* Accessibility Widget - Desktop Only */}
+        <AccessibilityWidget />
         <ImpressionProvider>
           <ExploreToggleProvider>
             <ImpressionTracker />
