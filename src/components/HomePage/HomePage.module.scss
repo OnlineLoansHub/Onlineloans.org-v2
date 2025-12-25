@@ -156,10 +156,8 @@
   max-width: var(--max-container-width);
   margin-left: auto;
   margin-right: auto;
-  // Animation only on desktop
-  @media (min-width: 1024px) {
-    animation: fadeInUp 1s ease-out 150ms both;
-  }
+  // Page load animation works on all devices
+  animation: fadeInUp 1s ease-out 150ms both;
 
   @media (min-width: 640px) {
     gap: 1.5rem;
