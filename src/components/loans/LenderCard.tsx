@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
@@ -56,6 +56,29 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
     () => processCtaUrl(lender.ctaUrl, lender.name),
     [lender.ctaUrl, lender.name]
   );
+
+  // Wiggle animation state
+  const [shouldWiggle, setShouldWiggle] = useState(false);
+
+  useEffect(() => {
+    // First wiggle after 2 seconds
+    const initialTimeout = setTimeout(() => {
+      setShouldWiggle(true);
+      setTimeout(() => setShouldWiggle(false), 600);
+    }, 2000);
+
+    // Then wiggle every 10 seconds
+    const interval = setInterval(() => {
+      setShouldWiggle(true);
+      // Reset after animation completes (0.6s)
+      setTimeout(() => setShouldWiggle(false), 600);
+    }, 10000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>
@@ -146,7 +169,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold"
+              className={`w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold ${
+                shouldWiggle ? 'animate-wiggle' : ''
+              }`}
               style={{
                 padding: '8px 16px',
                 borderRadius: '6px',
@@ -296,7 +321,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
-              className="flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded font-semibold text-base transition-all group"
+              className={`flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded font-semibold text-base transition-all group ${
+                shouldWiggle ? 'animate-wiggle' : ''
+              }`}
               style={{
                 borderRadius: '6px',
                 fontSize: '1rem',
