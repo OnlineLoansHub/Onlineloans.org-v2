@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: baseUrl,
-      lastModified: new Date('2025-12-08'),
+      lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 1.0,
     },
@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/business-loan/best-business-loans`,
-      lastModified: new Date('2025-12-07'),
+      lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -69,7 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/personal-loan/best-personal-loans`,
-      lastModified: new Date('2025-12-04'),
+      lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
