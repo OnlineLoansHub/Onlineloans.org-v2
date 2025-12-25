@@ -229,33 +229,7 @@ export const Footer = () => {
               website.
             </p>
             <p className={cls.legalParagraph}>
-              Insurance services are offered through Natural Intelligence Technologies Inc., a
-              licensed insurance producer (NPN: 19016703). Services may not be available in all
-              states. Additional licensing information can be found{' '}
-              <AppLink href="/licensing" className={cls.inlineLink}>
-                here
-              </AppLink>
-              . Insurance products are governed by the terms in the applicable insurance policy.
-              Approval for coverage, premiums, commissions and fees, and other policy obligations
-              are the sole responsibility of the underwriting insurer. The information on this site
-              does not modify any insurance policy terms in any way.
-            </p>
-            <p className={cls.legalParagraph}>
               Reproduction in whole or in part is strictly prohibited.
-            </p>
-          </div>
-          <div className={cls.advertisingDisclosure}>
-            <h3 className={cls.disclosureTitle}>Advertising Disclosure</h3>
-            <p className={cls.legalParagraph}>
-              This site is a free online resource that strives to offer helpful content and
-              comparison features to our visitors. We accept advertising compensation from companies
-              that appear on the site, which may impact the location and order in which brands
-              (and/or their products) are presented, and may also impact the score that is assigned
-              to it. Company listings on this page DO NOT imply endorsement. We do not feature all
-              providers on the market. Except as expressly set forth in our Terms of Use, all
-              representations and warranties regarding the information presented on this page are
-              disclaimed. The information, including pricing, which appears on this site is subject
-              to change at any time.
             </p>
           </div>
         </div>
