@@ -99,7 +99,6 @@
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  animation: fadeInUp 1s ease-out 50ms both;
 
   // Mobile: Fluid font size with clamp to prevent overflow
   // Forces exactly 2 lines - full width container
@@ -189,87 +188,15 @@
   border: 1px solid #f3f4f6;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  // Professional piano-like cascade animation
-  opacity: 0;
-  animation: pianoReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-
-  // Elegant staggered delays - like piano keys (0.08s between each card)
-  &:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  &:nth-child(2) {
-    animation-delay: 0.18s;
-  }
-  &:nth-child(3) {
-    animation-delay: 0.26s;
-  }
-  &:nth-child(4) {
-    animation-delay: 0.34s;
-  }
-  &:nth-child(5) {
-    animation-delay: 0.42s;
-  }
-  &:nth-child(6) {
-    animation-delay: 0.5s;
-  }
-  &:nth-child(7) {
-    animation-delay: 0.58s;
-  }
-  &:nth-child(8) {
-    animation-delay: 0.66s;
-  }
-  &:nth-child(9) {
-    animation-delay: 0.74s;
-  }
-  &:nth-child(10) {
-    animation-delay: 0.82s;
-  }
-
   @media (min-width: 1024px) {
     flex-direction: row;
     justify-content: flex-start;
     gap: 1rem;
     padding: 1.5rem 1.25rem;
-    // Slightly faster on desktop but still elegant
-    animation-duration: 0.7s;
-
-    // Tighter stagger on desktop (0.06s between cards)
-    &:nth-child(1) {
-      animation-delay: 0.08s;
-    }
-    &:nth-child(2) {
-      animation-delay: 0.14s;
-    }
-    &:nth-child(3) {
-      animation-delay: 0.2s;
-    }
-    &:nth-child(4) {
-      animation-delay: 0.26s;
-    }
-    &:nth-child(5) {
-      animation-delay: 0.32s;
-    }
-    &:nth-child(6) {
-      animation-delay: 0.38s;
-    }
-    &:nth-child(7) {
-      animation-delay: 0.44s;
-    }
-    &:nth-child(8) {
-      animation-delay: 0.5s;
-    }
-    &:nth-child(9) {
-      animation-delay: 0.56s;
-    }
-    &:nth-child(10) {
-      animation-delay: 0.62s;
-    }
   }
 
-  // Hover animations only on devices that support hover (desktop with mouse)
+  // Instant hover feedback on desktop (no transitions for speed)
   @media (min-width: 1024px) and (hover: hover) {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
     &:hover {
       transform: translateY(-10px) scale(1.03);
       box-shadow:
@@ -295,10 +222,8 @@
     height: 3rem;
   }
 
-  // Hover effect only on devices that support hover
+  // Instant hover effect on desktop
   @media (min-width: 1024px) and (hover: hover) {
-    transition: background-color 0.2s;
-
     .categoryCard:hover & {
       background-color: #dceef5;
     }
@@ -327,10 +252,8 @@
     text-align: left;
   }
 
-  // Hover effect only on devices that support hover
+  // Instant hover effect on desktop
   @media (min-width: 1024px) and (hover: hover) {
-    transition: color 0.2s;
-
     .categoryCard:hover & {
       color: var(--color-primary);
     }
@@ -349,7 +272,6 @@
   border: 1px solid #e5e7eb;
   opacity: 0.7;
   cursor: default;
-  animation: fadeInUp 0.6s ease-out both;
 
   .categoryIconWrapper {
     background-color: #f3f4f6;
