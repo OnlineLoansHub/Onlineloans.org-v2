@@ -30,8 +30,10 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Link',
+            // Keep only critical preconnects (max 4): fonts for above-the-fold content
+            // Analytics preconnects removed - they're loaded lazily anyway
             value:
-              '<https://fonts.googleapis.com>; rel=preconnect, <https://fonts.gstatic.com>; rel=preconnect; crossorigin, <https://fonts.gstatic.com>; rel=dns-prefetch, <https://t.contentsquare.net>; rel=preconnect, <https://www.googletagmanager.com>; rel=preconnect, <https://server-ol-v2-fcaa9dab215e.herokuapp.com>; rel=preconnect',
+              '<https://fonts.googleapis.com>; rel=preconnect, <https://fonts.gstatic.com>; rel=preconnect; crossorigin',
           },
         ],
       },

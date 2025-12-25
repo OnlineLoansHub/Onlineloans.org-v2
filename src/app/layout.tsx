@@ -41,9 +41,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon-2.png',
   },
   manifest: '/manifest.json',
-  other: {
-    'dns-prefetch': 'https://fonts.gstatic.com',
-  },
+  // Removed dns-prefetch - already handled by preconnect in next.config.ts
 };
 
 export default function RootLayout({
