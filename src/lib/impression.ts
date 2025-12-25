@@ -3,8 +3,8 @@ const API_URL = 'https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/impression'
 
 // Event queue for tracking events that occur before impression ID is ready
 interface QueuedEvent {
-  type: 'lp-click';
-  data: { cardName: string };
+  type: 'lp-click' | 'brand-click';
+  data: { cardName?: string; brandName?: string };
   timestamp: number;
 }
 
@@ -22,10 +22,16 @@ export const queueEvent = (event: QueuedEvent): void => {
  */
 export const flushEventQueue = (impressionId: string): void => {
   eventQueue.forEach((event) => {
-    if (event.type === 'lp-click') {
-      sendTrackingData('lp-clicks', {
+    if (event.type === 'lp-click' && event.data.cardName) {
+      sendTrackingData('homepage-clicks', {
         impressionId,
         [event.data.cardName]: true,
+        timestamp: new Date(event.timestamp).toISOString(),
+      });
+    } else if (event.type === 'brand-click' && event.data.brandName) {
+      sendTrackingData('brand-clicks', {
+        impressionId,
+        [event.data.brandName]: true,
         timestamp: new Date(event.timestamp).toISOString(),
       });
     }
@@ -142,9 +148,41 @@ export const trackHeroCardClick = (
   }
 
   // Send immediately using sendBeacon (non-blocking)
-  sendTrackingData('lp-clicks', {
+  sendTrackingData('homepage-clicks', {
     impressionId,
     [cardName]: true,
+    timestamp: new Date().toISOString(),
+  });
+};
+
+/**
+ * Track brand click with memory-first approach
+ * Checks context impressionId first, then localStorage, then queues if neither exists
+ */
+export const trackBrandClick = (
+  brandName: string,
+  contextImpressionId: string | null = null
+): void => {
+  // Memory-first: Check context impressionId, then localStorage fallback
+  const impressionId =
+    contextImpressionId ||
+    (typeof window !== 'undefined' ? localStorage.getItem(IMPRESSION_STORAGE_KEY) : null);
+
+  if (!impressionId) {
+    // Queue event to be sent when impression ID becomes available
+    queueEvent({
+      type: 'brand-click',
+      data: { brandName },
+      timestamp: Date.now(),
+    });
+
+    return;
+  }
+
+  // Send immediately using sendBeacon (non-blocking)
+  sendTrackingData('brand-clicks', {
+    impressionId,
+    [brandName]: true,
     timestamp: new Date().toISOString(),
   });
 };

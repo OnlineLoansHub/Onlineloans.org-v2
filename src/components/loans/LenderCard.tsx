@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
 import type { Brand } from '@/data/brands';
+import { useImpression } from '@/contexts/ImpressionContext';
+import { trackBrandClick } from '@/lib/impression';
 
 interface LenderCardProps {
   lender: Brand;
@@ -51,6 +53,8 @@ function processCtaUrl(baseUrl: string, lenderName: string): string {
 }
 
 export default function LenderCard({ lender, rank, amountLabel }: LenderCardProps) {
+  const { impressionId } = useImpression();
+
   // Process CTA URL to include gclid/fclid in sub_id_1 (only for Advance Funds Network)
   const processedCtaUrl = useMemo(
     () => processCtaUrl(lender.ctaUrl, lender.name),
@@ -179,7 +183,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 height: 'auto',
                 fontWeight: '900',
               }}
-              onClick={() => window.open(processedCtaUrl || '#', '_blank')}
+              onClick={() => {
+                trackBrandClick(lender.name, impressionId);
+                window.open(processedCtaUrl || '#', '_blank');
+              }}
             >
               EXPLORE
               <span className="ml-1">&gt;&gt;</span>
@@ -192,6 +199,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
+                onClick={() => trackBrandClick(lender.name, impressionId)}
               >
                 <Phone className="w-2.5 h-2.5" />
                 {lender.phoneNumber}
@@ -335,7 +343,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 margin: '0',
                 border: '0',
               }}
-              onClick={() => window.open(processedCtaUrl || '#', '_blank')}
+              onClick={() => {
+                trackBrandClick(lender.name, impressionId);
+                window.open(processedCtaUrl || '#', '_blank');
+              }}
             >
               See Plans
               <span className="ml-2">&gt;&gt;</span>
@@ -346,6 +357,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 text-sm text-black hover:text-[var(--color-primary)] transition-colors"
+                onClick={() => trackBrandClick(lender.name, impressionId)}
               >
                 Visit {lender.name}
                 <ExternalLink className="w-3.5 h-3.5" />
