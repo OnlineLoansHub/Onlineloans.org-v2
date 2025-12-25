@@ -279,7 +279,9 @@ export default function PersonalLoanIframeLandingPage() {
                 alt="Michael Thompson"
                 width={200}
                 height={200}
+                sizes="200px"
                 className={cls.authorImageLarge}
+                loading="lazy"
               />
             </div>
             <div className={cls.authorDetails}>

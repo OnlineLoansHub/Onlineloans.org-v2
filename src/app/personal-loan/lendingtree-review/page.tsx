@@ -173,7 +173,9 @@ export default function LendingTreeReviewPage() {
                   alt="Michael Thompson"
                   width={64}
                   height={64}
+                  sizes="64px"
                   className={cls.authorImage}
+                  loading="lazy"
                 />
                 <div className={cls.authorName}>
                   <p>Michael Thompson</p>
