@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { Header } from '@/components/layout/Header/Header';
-import { LegacyBanner } from '@/components/layout/LegacyBanner/LegacyBanner';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/components/seo/StructuredData';
@@ -55,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.variable}>
-        {/* Performance: Defer analytics scripts until after page load to prevent render-blocking */}
+        {/* Performance: Defer analytics scripts until after page load */}
         <Script src="https://t.contentsquare.net/uxa/9cb737e1b8a22.js" strategy="lazyOnload" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CW0NYXW5S0"
@@ -69,6 +68,11 @@ export default function RootLayout({
             gtag('config', 'G-CW0NYXW5S0');
           `}
         </Script>
+        {/* Accessibility Widget */}
+        <Script
+          src="https://dash.accessiblyapp.com/widget/019b565f-e784-73ed-a16a-6e4c0fb950ae/autoload.js"
+          strategy="lazyOnload"
+        />
         <ImpressionProvider>
           <ExploreToggleProvider>
             <ImpressionTracker />
