@@ -30,6 +30,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.rocketmortgage.com',
     websiteUrl: 'https://www.rocketmortgage.com',
+    phoneNumber: '(888) 555-3400',
   },
   {
     id: 2,
@@ -60,6 +61,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.rate.com',
     websiteUrl: 'https://www.rate.com',
+    phoneNumber: '(888) 555-3401',
   },
   {
     id: 3,
@@ -90,6 +92,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.newamericanfunding.com',
     websiteUrl: 'https://www.newamericanfunding.com',
+    phoneNumber: '(888) 555-3402',
   },
   {
     id: 4,
@@ -120,6 +123,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.veteransunited.com',
     websiteUrl: 'https://www.veteransunited.com',
+    phoneNumber: '(888) 555-3403',
   },
   {
     id: 5,
@@ -150,6 +154,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.chase.com',
     websiteUrl: 'https://www.chase.com',
+    phoneNumber: '(888) 555-3404',
   },
   {
     id: 6,
@@ -180,6 +185,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.bankofamerica.com',
     websiteUrl: 'https://www.bankofamerica.com',
+    phoneNumber: '(888) 555-3405',
   },
   {
     id: 7,
@@ -210,6 +216,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.navyfederal.org',
     websiteUrl: 'https://www.navyfederal.org',
+    phoneNumber: '(888) 555-3406',
   },
   {
     id: 8,
@@ -240,6 +247,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.better.com',
     websiteUrl: 'https://www.better.com',
+    phoneNumber: '(888) 555-3407',
   },
   {
     id: 9,
@@ -270,6 +278,7 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.loandepot.com',
     websiteUrl: 'https://www.loandepot.com',
+    phoneNumber: '(888) 555-3408',
   },
   {
     id: 10,
@@ -300,5 +309,6 @@ export const mortgageLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.pnc.com',
     websiteUrl: 'https://www.pnc.com',
+    phoneNumber: '(888) 555-3409',
   },
 ];

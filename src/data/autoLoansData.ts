@@ -31,6 +31,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://rocksolidfunding.sjv.io/9LN6M3',
     websiteUrl: 'https://rocksolidfunding.sjv.io/9LN6M3',
+    phoneNumber: '(888) 555-3000',
   },
   {
     id: 2,
@@ -61,6 +62,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.capitalone.com/cars',
     websiteUrl: 'https://www.capitalone.com',
+    phoneNumber: '(888) 555-3001',
   },
   {
     id: 3,
@@ -91,6 +93,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.carvana.com',
     websiteUrl: 'https://www.carvana.com',
+    phoneNumber: '(888) 555-3002',
   },
   {
     id: 4,
@@ -121,6 +124,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.carmax.com/car-financing',
     websiteUrl: 'https://www.carmax.com',
+    phoneNumber: '(888) 555-3003',
   },
   {
     id: 5,
@@ -151,6 +155,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.autocreditexpress.com',
     websiteUrl: 'https://www.autocreditexpress.com',
+    phoneNumber: '(888) 555-3004',
   },
   {
     id: 6,
@@ -181,6 +186,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.penfed.org/auto-loans',
     websiteUrl: 'https://www.penfed.org',
+    phoneNumber: '(888) 555-3005',
   },
   {
     id: 7,
@@ -211,6 +217,7 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.ally.com/auto',
     websiteUrl: 'https://www.ally.com',
+    phoneNumber: '(888) 555-3006',
   },
   {
     id: 8,
@@ -241,5 +248,6 @@ export const autoLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.myautoloan.com',
     websiteUrl: 'https://www.myautoloan.com',
+    phoneNumber: '(888) 555-3007',
   },
 ];

@@ -6,33 +6,29 @@ export const businessLoansData: Brand[] = [
     name: 'Advance Funds Network',
     logo: '/images/brands-logos/Advancefundsnetwork-logo.webp',
     ourScore: 10.0,
-    trustpilotScore: 9.3,
-    brandReputation: 9.5,
-    popularityScore: 9.5,
-    reviewCount: 8500,
+    trustpilotScore: 10,
+    brandReputation: 9.1,
+    popularityScore: 9.1,
+    reviewCount: 1595,
     highlight: 'Quick access to working capital for growing businesses',
     productTypes: ['business_loan', 'working_capital'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
     minTimeInBusiness: '6m_1y',
     amountRange: '50k_100k',
-    amount: '$5K - $2M',
+    amount: '$10K - $5M',
     goodDetails: [
       'Funding Speed: 24-48 hours',
       'Collateral Required: No',
       'Prepayment Penalty: None',
-      'Online Application: Yes',
+      'Minimum Credit Score: 500',
     ],
-    badDetails: [
-      'Time in Business: 6+ months',
-      'Monthly Revenue: At least $10,000',
-      'Minimum Credit Score: 600',
-      'APR Range: 8% - 30%',
-    ],
+    badDetails: ['Time in Business: 12+ months', 'Monthly Revenue: At least $15,000'],
     ctaUrl:
       'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
     websiteUrl:
       'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
+    phoneNumber: '(888) 555-2000',
   },
   {
     id: 2,
@@ -64,6 +60,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP&sub_id_1=',
     websiteUrl: 'https://go.mypartner.io/business-financing/?ref=001Qk00000XYAGdIAP&sub_id_1=',
+    phoneNumber: '(888) 555-2001',
   },
   {
     id: 18,
@@ -95,6 +92,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: 'https://uplyftcapital.sjv.io/JK1NMr',
     websiteUrl: 'https://uplyftcapital.sjv.io/JK1NMr',
+    phoneNumber: '(888) 555-2002',
   },
   {
     id: 3,
@@ -130,6 +128,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: 'https://forafinancial.pxf.io/c/6429639/2015280/24953',
     websiteUrl: 'https://forafinancial.pxf.io/c/6429639/2015280/24953',
+    phoneNumber: '(888) 555-2003',
   },
   {
     id: 4,
@@ -165,6 +164,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: 'https://cardiffinc.sjv.io/4G30Go',
     websiteUrl: 'https://cardiffinc.sjv.io/4G30Go',
+    phoneNumber: '(888) 555-2004',
   },
   {
     id: 5,
@@ -196,6 +196,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2005',
   },
   {
     id: 6,
@@ -228,6 +229,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2006',
   },
   {
     id: 7,
@@ -259,6 +261,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2007',
   },
   {
     id: 8,
@@ -290,6 +293,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2008',
   },
   {
     id: 9,
@@ -321,6 +325,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2009',
   },
   {
     id: 10,
@@ -353,6 +358,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2010',
   },
   {
     id: 11,
@@ -386,6 +392,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2011',
   },
   {
     id: 12,
@@ -417,6 +424,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2012',
   },
   {
     id: 13,
@@ -450,6 +458,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2013',
   },
   {
     id: 14,
@@ -481,6 +490,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2014',
   },
   {
     id: 15,
@@ -512,6 +522,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2015',
   },
   {
     id: 16,
@@ -543,6 +554,7 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2016',
   },
   {
     id: 17,
@@ -575,5 +587,6 @@ export const businessLoansData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-2017',
   },
 ];

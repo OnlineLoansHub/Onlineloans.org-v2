@@ -30,6 +30,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.sofi.com',
     websiteUrl: 'https://www.sofi.com',
+    phoneNumber: '(888) 555-3600',
   },
   {
     id: 2,
@@ -60,6 +61,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.earnest.com',
     websiteUrl: 'https://www.earnest.com',
+    phoneNumber: '(888) 555-3601',
   },
   {
     id: 3,
@@ -90,6 +92,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.collegeavestudentloans.com',
     websiteUrl: 'https://www.collegeavestudentloans.com',
+    phoneNumber: '(888) 555-3602',
   },
   {
     id: 4,
@@ -120,6 +123,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.salliemae.com',
     websiteUrl: 'https://www.salliemae.com',
+    phoneNumber: '(888) 555-3603',
   },
   {
     id: 5,
@@ -150,6 +154,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.ascentfunding.com',
     websiteUrl: 'https://www.ascentfunding.com',
+    phoneNumber: '(888) 555-3604',
   },
   {
     id: 6,
@@ -180,6 +185,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.discover.com/student-loans',
     websiteUrl: 'https://www.discover.com',
+    phoneNumber: '(888) 555-3605',
   },
   {
     id: 7,
@@ -210,6 +216,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.citizensbank.com/student-loans',
     websiteUrl: 'https://www.citizensbank.com',
+    phoneNumber: '(888) 555-3606',
   },
   {
     id: 8,
@@ -240,6 +247,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.laurelroad.com',
     websiteUrl: 'https://www.laurelroad.com',
+    phoneNumber: '(888) 555-3607',
   },
   {
     id: 9,
@@ -270,6 +278,7 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.lendkey.com',
     websiteUrl: 'https://www.lendkey.com',
+    phoneNumber: '(888) 555-3608',
   },
   {
     id: 10,
@@ -299,5 +308,6 @@ export const studentLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.mpowerfinancing.com',
     websiteUrl: 'https://www.mpowerfinancing.com',
+    phoneNumber: '(888) 555-3609',
   },
 ];

@@ -17,6 +17,7 @@ export interface Brand {
   badDetails: string[];
   ctaUrl: string;
   websiteUrl: string;
+  phoneNumber?: string; // Phone number for contact
   // Optional loan-specific fields
   minCreditScore?: string;
   minRevenue?: string; // For business loans

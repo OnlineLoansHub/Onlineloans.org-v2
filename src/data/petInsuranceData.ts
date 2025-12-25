@@ -29,6 +29,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.healthypaws.com',
     websiteUrl: 'https://www.healthypaws.com',
+    phoneNumber: '(888) 555-3500',
   },
   {
     id: 2,
@@ -58,6 +59,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.trupanion.com',
     websiteUrl: 'https://www.trupanion.com',
+    phoneNumber: '(888) 555-3501',
   },
   {
     id: 3,
@@ -87,6 +89,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.embracepetinsurance.com',
     websiteUrl: 'https://www.embracepetinsurance.com',
+    phoneNumber: '(888) 555-3502',
   },
   {
     id: 4,
@@ -116,6 +119,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.fetchpet.com',
     websiteUrl: 'https://www.fetchpet.com',
+    phoneNumber: '(888) 555-3503',
   },
   {
     id: 5,
@@ -145,6 +149,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.spotpetins.com',
     websiteUrl: 'https://www.spotpetins.com',
+    phoneNumber: '(888) 555-3504',
   },
   {
     id: 6,
@@ -174,6 +179,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.aspcapetinsurance.com',
     websiteUrl: 'https://www.aspcapetinsurance.com',
+    phoneNumber: '(888) 555-3505',
   },
   {
     id: 7,
@@ -203,6 +209,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.lemonade.com/pet',
     websiteUrl: 'https://www.lemonade.com',
+    phoneNumber: '(888) 555-3506',
   },
   {
     id: 8,
@@ -232,6 +239,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.petinsurance.com',
     websiteUrl: 'https://www.petinsurance.com',
+    phoneNumber: '(888) 555-3507',
   },
   {
     id: 9,
@@ -261,6 +269,7 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.petsbest.com',
     websiteUrl: 'https://www.petsbest.com',
+    phoneNumber: '(888) 555-3508',
   },
   {
     id: 10,
@@ -290,5 +299,6 @@ export const petInsuranceData: Brand[] = [
     ],
     ctaUrl: 'https://www.figopetinsurance.com',
     websiteUrl: 'https://www.figopetinsurance.com',
+    phoneNumber: '(888) 555-3509',
   },
 ];

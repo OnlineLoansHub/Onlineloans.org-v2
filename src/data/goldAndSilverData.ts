@@ -31,6 +31,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3300',
   },
   {
     id: 2,
@@ -62,6 +63,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3301',
   },
   {
     id: 3,
@@ -93,6 +95,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3302',
   },
   {
     id: 4,
@@ -124,6 +127,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3303',
   },
   {
     id: 5,
@@ -155,6 +159,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3304',
   },
   {
     id: 6,
@@ -186,6 +191,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3305',
   },
   {
     id: 7,
@@ -217,6 +223,7 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3306',
   },
   {
     id: 8,
@@ -248,5 +255,6 @@ export const goldAndSilverData: Brand[] = [
     ],
     ctaUrl: '#',
     websiteUrl: '#',
+    phoneNumber: '(888) 555-3307',
   },
 ];

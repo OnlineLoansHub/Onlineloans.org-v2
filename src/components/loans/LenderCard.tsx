@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X } from 'lucide-react';
+import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
@@ -160,12 +160,17 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             </Button>
 
             {/* Phone Number */}
-            <a
-              href="tel:888-501-8270"
-              className="text-xs text-black hover:text-[var(--color-primary)] underline"
-            >
-              (888)-501-8270
-            </a>
+            {lender.phoneNumber && lender.websiteUrl && (
+              <a
+                href={lender.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
+              >
+                <Phone className="w-2.5 h-2.5" />
+                {lender.phoneNumber}
+              </a>
+            )}
           </div>
         </div>
 

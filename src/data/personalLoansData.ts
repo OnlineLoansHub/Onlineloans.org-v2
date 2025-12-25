@@ -30,6 +30,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.lightstream.com',
     websiteUrl: 'https://www.lightstream.com',
+    phoneNumber: '(888) 555-0100',
   },
   {
     id: 2,
@@ -60,6 +61,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.marcus.com',
     websiteUrl: 'https://www.marcus.com',
+    phoneNumber: '(888) 555-0101',
   },
   {
     id: 3,
@@ -90,6 +92,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.bestegg.com',
     websiteUrl: 'https://www.bestegg.com',
+    phoneNumber: '(888) 555-0102',
   },
   {
     id: 4,
@@ -120,6 +123,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.upstart.com',
     websiteUrl: 'https://www.upstart.com',
+    phoneNumber: '(888) 555-0103',
   },
   {
     id: 5,
@@ -150,6 +154,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.lendingclub.com',
     websiteUrl: 'https://www.lendingclub.com',
+    phoneNumber: '(888) 555-0104',
   },
   {
     id: 6,
@@ -180,6 +185,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.upgrade.com',
     websiteUrl: 'https://www.upgrade.com',
+    phoneNumber: '(888) 555-0105',
   },
   {
     id: 7,
@@ -210,6 +216,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.avant.com',
     websiteUrl: 'https://www.avant.com',
+    phoneNumber: '(888) 555-0106',
   },
   {
     id: 8,
@@ -240,6 +247,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.prosper.com',
     websiteUrl: 'https://www.prosper.com',
+    phoneNumber: '(888) 555-0107',
   },
   {
     id: 9,
@@ -270,6 +278,7 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.nerdwallet.com',
     websiteUrl: 'https://www.nerdwallet.com',
+    phoneNumber: '(888) 555-0108',
   },
   {
     id: 10,
@@ -300,5 +309,6 @@ export const personalLoansData: Brand[] = [
     ],
     ctaUrl: 'https://www.creditninja.com',
     websiteUrl: 'https://www.creditninja.com',
+    phoneNumber: '(888) 555-0109',
   },
 ];
