@@ -81,6 +81,9 @@ export default function Hero({ heroConfig, validDate }: HeroProps) {
             width={350}
             height={53}
             className={cls.trustBadgesImage}
+            priority
+            loading="eager"
+            fetchPriority="high"
           />
         </div>
       </div>
