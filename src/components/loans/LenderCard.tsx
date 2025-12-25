@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ExternalLink, Check, ArrowRight, Info, TrendingUp, X, Phone } from 'lucide-react';
+import { ExternalLink, Check, Info, TrendingUp, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
@@ -169,7 +169,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className={`w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold ${
+              className={`w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold ${
                 shouldWiggle ? 'animate-wiggle' : ''
               }`}
               style={{
@@ -177,11 +177,12 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 borderRadius: '6px',
                 fontSize: '16px',
                 height: 'auto',
+                fontWeight: '900',
               }}
               onClick={() => window.open(processedCtaUrl || '#', '_blank')}
             >
               EXPLORE
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <span className="ml-1">&gt;&gt;</span>
             </Button>
 
             {/* Phone Number */}
@@ -337,7 +338,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               onClick={() => window.open(processedCtaUrl || '#', '_blank')}
             >
               See Plans
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              <span className="ml-2">&gt;&gt;</span>
             </Button>
             {lender.websiteUrl && (
               <a
