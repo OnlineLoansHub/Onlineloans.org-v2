@@ -2,13 +2,14 @@
 
 import React, { useMemo, useState, useEffect } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { ExternalLink, Check, Info, TrendingUp, X, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
 import type { Brand } from '@/data/brands';
 import { useImpression } from '@/contexts/ImpressionContext';
-import { trackBrandClick } from '@/lib/impression';
+import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 
 interface LenderCardProps {
   lender: Brand;
@@ -54,6 +55,8 @@ function processCtaUrl(baseUrl: string, lenderName: string): string {
 
 export default function LenderCard({ lender, rank, amountLabel }: LenderCardProps) {
   const { impressionId } = useImpression();
+  const pathname = usePathname();
+  const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
 
   // Process CTA URL to include gclid/fclid in sub_id_1 (only for Advance Funds Network)
   const processedCtaUrl = useMemo(
@@ -184,7 +187,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 fontWeight: '900',
               }}
               onClick={() => {
-                trackBrandClick(lender.name, impressionId);
+                trackBrandClick(lender.name, pageName, impressionId);
                 window.open(processedCtaUrl || '#', '_blank');
               }}
             >
@@ -199,7 +202,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
-                onClick={() => trackBrandClick(lender.name, impressionId)}
+                onClick={() => trackBrandClick(lender.name, pageName, impressionId)}
               >
                 <Phone className="w-2.5 h-2.5" />
                 {lender.phoneNumber}
@@ -344,7 +347,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 border: '0',
               }}
               onClick={() => {
-                trackBrandClick(lender.name, impressionId);
+                trackBrandClick(lender.name, pageName, impressionId);
                 window.open(processedCtaUrl || '#', '_blank');
               }}
             >
@@ -357,7 +360,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-1.5 text-sm text-black hover:text-[var(--color-primary)] transition-colors"
-                onClick={() => trackBrandClick(lender.name, impressionId)}
+                onClick={() => trackBrandClick(lender.name, pageName, impressionId)}
               >
                 Visit {lender.name}
                 <ExternalLink className="w-3.5 h-3.5" />

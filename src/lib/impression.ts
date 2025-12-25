@@ -1,10 +1,31 @@
 const IMPRESSION_STORAGE_KEY = 'impression_id';
 const API_URL = 'https://server-ol-v2-fcaa9dab215e.herokuapp.com/api/impression';
 
+/**
+ * Get page name from route pathname
+ */
+export const getPageNameFromRoute = (pathname: string): string => {
+  if (!pathname) return 'unknown';
+
+  const path = pathname.toLowerCase();
+
+  if (path.includes('/business-loan')) return 'businessLoans';
+  if (path.includes('/personal-loan')) return 'personalLoans';
+  if (path.includes('/auto-loan')) return 'autoLoans';
+  if (path.includes('/student-loan')) return 'studentLoans';
+  if (path.includes('/mortgage-loan')) return 'mortgageLoans';
+  if (path.includes('/crypto-loans')) return 'cryptoLoans';
+  if (path.includes('/gold-and-silver')) return 'goldAndSilver';
+  if (path.includes('/pet-insurance')) return 'petInsurance';
+  if (path.includes('/credit-score')) return 'creditScore';
+
+  return 'unknown';
+};
+
 // Event queue for tracking events that occur before impression ID is ready
 interface QueuedEvent {
   type: 'lp-click' | 'brand-click';
-  data: { cardName?: string; brandName?: string };
+  data: { cardName?: string; brandName?: string; pageName?: string };
   timestamp: number;
 }
 
@@ -28,10 +49,11 @@ export const flushEventQueue = (impressionId: string): void => {
         [event.data.cardName]: true,
         timestamp: new Date(event.timestamp).toISOString(),
       });
-    } else if (event.type === 'brand-click' && event.data.brandName) {
+    } else if (event.type === 'brand-click' && event.data.brandName && event.data.pageName) {
       sendTrackingData('brand-clicks', {
         impressionId,
-        [event.data.brandName]: true,
+        pageName: event.data.pageName,
+        brandName: event.data.brandName,
         timestamp: new Date(event.timestamp).toISOString(),
       });
     }
@@ -161,6 +183,7 @@ export const trackHeroCardClick = (
  */
 export const trackBrandClick = (
   brandName: string,
+  pageName: string,
   contextImpressionId: string | null = null
 ): void => {
   // Memory-first: Check context impressionId, then localStorage fallback
@@ -172,7 +195,7 @@ export const trackBrandClick = (
     // Queue event to be sent when impression ID becomes available
     queueEvent({
       type: 'brand-click',
-      data: { brandName },
+      data: { brandName, pageName },
       timestamp: Date.now(),
     });
 
@@ -182,7 +205,8 @@ export const trackBrandClick = (
   // Send immediately using sendBeacon (non-blocking)
   sendTrackingData('brand-clicks', {
     impressionId,
-    [brandName]: true,
+    pageName,
+    brandName,
     timestamp: new Date().toISOString(),
   });
 };
