@@ -256,20 +256,23 @@ export default function BestBusinessLoansPage() {
 
   return (
     <>
-      {/* Structured Data Scripts */}
+      {/* Structured Data Scripts - Non-blocking */}
       <Script
         id="faq-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Script
         id="financial-product-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
       />
       <Script
         id="breadcrumb-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 

@@ -114,8 +114,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                     fill
                     className="object-contain"
                     sizes="(max-width: 768px) 100px, 150px"
-                    priority={rank === 1}
-                    loading={rank === 1 ? 'eager' : 'lazy'}
+                    priority={rank <= 3}
+                    loading={rank <= 3 ? 'eager' : 'lazy'}
+                    fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
                   />
                 </div>
               ) : (
@@ -224,7 +225,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
 
       {/* Desktop Card - Full Layout */}
       <div
-        className={`hidden lg:block bg-white rounded shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative ${
+        className={`hidden lg:block bg-white rounded shadow-lg hover:shadow-xl overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border border-slate-200'
         }`}
       >
@@ -247,8 +248,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                       fill
                       className="object-contain"
                       sizes="(max-width: 1024px) 160px, 280px"
-                      priority={rank === 1}
-                      loading={rank === 1 ? 'eager' : 'lazy'}
+                      priority={rank <= 3}
+                      loading={rank <= 3 ? 'eager' : 'lazy'}
+                      fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
                     />
                   </div>
                 ) : (
