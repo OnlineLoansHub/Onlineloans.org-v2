@@ -132,6 +132,17 @@
   }
 }
 
+@keyframes pianoReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .headlineSpan {
   // Mobile: Blocks stack vertically (2 lines)
   // white-space: nowrap prevents text from wrapping within each span
@@ -156,8 +167,6 @@
   max-width: var(--max-container-width);
   margin-left: auto;
   margin-right: auto;
-  // Page load animation works on all devices
-  animation: fadeInUp 1s ease-out 150ms both;
 
   @media (min-width: 640px) {
     gap: 1.5rem;
@@ -180,12 +189,81 @@
   border: 1px solid #f3f4f6;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   cursor: pointer;
+  // Professional piano-like cascade animation
+  opacity: 0;
+  animation: pianoReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+
+  // Elegant staggered delays - like piano keys (0.08s between each card)
+  &:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  &:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.26s;
+  }
+  &:nth-child(4) {
+    animation-delay: 0.34s;
+  }
+  &:nth-child(5) {
+    animation-delay: 0.42s;
+  }
+  &:nth-child(6) {
+    animation-delay: 0.5s;
+  }
+  &:nth-child(7) {
+    animation-delay: 0.58s;
+  }
+  &:nth-child(8) {
+    animation-delay: 0.66s;
+  }
+  &:nth-child(9) {
+    animation-delay: 0.74s;
+  }
+  &:nth-child(10) {
+    animation-delay: 0.82s;
+  }
 
   @media (min-width: 1024px) {
     flex-direction: row;
     justify-content: flex-start;
     gap: 1rem;
     padding: 1.5rem 1.25rem;
+    // Slightly faster on desktop but still elegant
+    animation-duration: 0.7s;
+
+    // Tighter stagger on desktop (0.06s between cards)
+    &:nth-child(1) {
+      animation-delay: 0.08s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.14s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.26s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.32s;
+    }
+    &:nth-child(6) {
+      animation-delay: 0.38s;
+    }
+    &:nth-child(7) {
+      animation-delay: 0.44s;
+    }
+    &:nth-child(8) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(9) {
+      animation-delay: 0.56s;
+    }
+    &:nth-child(10) {
+      animation-delay: 0.62s;
+    }
   }
 
   // Hover animations only on devices that support hover (desktop with mouse)
