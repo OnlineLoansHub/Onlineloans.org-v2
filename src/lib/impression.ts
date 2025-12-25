@@ -66,25 +66,36 @@ export const flushEventQueue = (impressionId: string): void => {
  */
 const sendTrackingData = (endpoint: string, data: Record<string, any>): boolean => {
   const url = `${API_URL}/${endpoint}`;
-  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+  console.log('[sendTrackingData] Sending to:', url, data);
 
-  // Use sendBeacon if available (best for navigation scenarios)
-  if (navigator.sendBeacon) {
-    return navigator.sendBeacon(url, blob);
-  }
-
-  // Fallback: Use fetch with keepalive (works but less reliable during navigation)
+  // Use fetch with keepalive for better visibility in Network tab and debugging
+  // sendBeacon doesn't show in Network tab, so using fetch for now
   if ('fetch' in window) {
     fetch(url, {
       method: 'POST',
-      body: blob,
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
       keepalive: true, // Important: keeps request alive during navigation
-    }).catch(() => {
-      // Silently fail
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.error('[sendTrackingData] Request failed:', response.status, response.statusText);
+        } else {
+          console.log('[sendTrackingData] Request successful');
+        }
+      })
+      .catch((error) => {
+        console.error('[sendTrackingData] Request error:', error);
+      });
 
     return true;
+  }
+
+  // Fallback: Use sendBeacon if fetch not available
+  if (navigator.sendBeacon) {
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+
+    return navigator.sendBeacon(url, blob);
   }
 
   // Last resort: XMLHttpRequest (synchronous, but works)
@@ -95,7 +106,9 @@ const sendTrackingData = (endpoint: string, data: Record<string, any>): boolean 
     xhr.send(JSON.stringify(data));
 
     return true;
-  } catch {
+  } catch (error) {
+    console.error('[sendTrackingData] XHR error:', error);
+
     return false;
   }
 };
@@ -193,6 +206,7 @@ export const trackBrandClick = (
 
   if (!impressionId) {
     // Queue event to be sent when impression ID becomes available
+    console.log('[trackBrandClick] No impressionId, queuing event:', { brandName, pageName });
     queueEvent({
       type: 'brand-click',
       data: { brandName, pageName },
@@ -203,10 +217,15 @@ export const trackBrandClick = (
   }
 
   // Send immediately using sendBeacon (non-blocking)
-  sendTrackingData('brand-clicks', {
+  console.log('[trackBrandClick] Sending brand click:', { impressionId, pageName, brandName });
+  const sent = sendTrackingData('brand-clicks', {
     impressionId,
     pageName,
     brandName,
     timestamp: new Date().toISOString(),
   });
+
+  if (!sent) {
+    console.warn('[trackBrandClick] Failed to send tracking data');
+  }
 };
