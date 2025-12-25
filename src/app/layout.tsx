@@ -8,6 +8,7 @@ import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { DefaultStructuredData } from '@/components/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/lib/seo';
 import { ExploreToggleProvider } from '@/contexts/ExploreToggleContext';
+import { ImpressionProvider } from '@/contexts/ImpressionContext';
 import { FooterWrapper } from '@/components/layout/Footer/FooterWrapper';
 import { ImpressionTracker } from '@/components/analytics/ImpressionTracker';
 import '@/styles/index.css';
@@ -68,18 +69,20 @@ export default function RootLayout({
             gtag('config', 'G-CW0NYXW5S0');
           `}
         </Script>
-        <ExploreToggleProvider>
-          <ImpressionTracker />
-          <DefaultStructuredData />
-          <SkipToContent />
-          <Header />
-          {/* <LegacyBanner /> */}
-          <main id="main-content" className="main-container">
-            {children}
-          </main>
-          <ExploreToggle />
-          <FooterWrapper />
-        </ExploreToggleProvider>
+        <ImpressionProvider>
+          <ExploreToggleProvider>
+            <ImpressionTracker />
+            <DefaultStructuredData />
+            <SkipToContent />
+            <Header />
+            {/* <LegacyBanner /> */}
+            <main id="main-content" className="main-container">
+              {children}
+            </main>
+            <ExploreToggle />
+            <FooterWrapper />
+          </ExploreToggleProvider>
+        </ImpressionProvider>
       </body>
     </html>
   );

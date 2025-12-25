@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
-import axios from 'axios';
+import { useEffect, useRef } from 'react';
+import { useImpression } from '@/contexts/ImpressionContext';
+import { flushEventQueue } from '@/lib/impression';
 
 const IMPRESSION_STORAGE_KEY = 'impression_id';
 const IMPRESSION_TIMESTAMP_KEY = 'impression_timestamp';
@@ -28,10 +29,23 @@ const safeLocalStorageSet = (key: string, value: string): void => {
 };
 
 export const ImpressionTracker = () => {
+  const { impressionId, setImpressionId } = useImpression();
+  const isCreatingRef = useRef(false);
+
   useEffect(() => {
     // Performance: Defer execution until after first paint to prevent layout blocking
     const trackImpression = async () => {
       try {
+        // If impression ID already exists in context, skip creation
+        if (impressionId) {
+          return;
+        }
+
+        // Prevent duplicate creation if already in progress
+        if (isCreatingRef.current) {
+          return;
+        }
+
         // Performance: Use safe localStorage access to prevent blocking
         const storedId = safeLocalStorageGet(IMPRESSION_STORAGE_KEY);
         const storedTimestamp = safeLocalStorageGet(IMPRESSION_TIMESTAMP_KEY);
@@ -43,35 +57,49 @@ export const ImpressionTracker = () => {
 
           // If less than 24 hours have passed, use existing ID
           if (timeElapsed < IMPRESSION_DURATION) {
+            // Set in context (for memory-first access)
+            setImpressionId(storedId);
             return;
           }
         }
         
+        // Mark as creating to prevent duplicates
+        isCreatingRef.current = true;
+
         // Get current URL with all query parameters as referrer
         const currentUrl =
           typeof window !== 'undefined'
             ? `${document.referrer || window.location.origin}${window.location.pathname}${window.location.search}`
             : '';
         
-        // Create new impression
-        const response = await axios.post(
-          API_URL,
-          {},
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Referrer': currentUrl,
-            },
-          }
-        );
+        // Create new impression using fetch with keepalive
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Referrer': currentUrl,
+          },
+          body: JSON.stringify({}),
+          keepalive: true, // Prevents blocking during navigation
+        });
 
-        if (response.data?.id) {
-          // Save ID and timestamp to localStorage using safe wrapper
-          safeLocalStorageSet(IMPRESSION_STORAGE_KEY, response.data.id);
-          safeLocalStorageSet(IMPRESSION_TIMESTAMP_KEY, Date.now().toString());
+        if (response.ok) {
+          const data = await response.json();
+          if (data?.id) {
+            // Set in context FIRST (memory)
+            setImpressionId(data.id);
+            // Then persist to localStorage SECOND (for page reloads)
+            safeLocalStorageSet(IMPRESSION_STORAGE_KEY, data.id);
+            safeLocalStorageSet(IMPRESSION_TIMESTAMP_KEY, Date.now().toString());
+            
+            // Flush queued events now that impression ID is available
+            flushEventQueue(data.id);
+          }
         }
       } catch (error) {
         console.error('Failed to track impression:', error);
+      } finally {
+        isCreatingRef.current = false;
       }
     };
 
@@ -87,7 +115,7 @@ export const ImpressionTracker = () => {
         });
       }
     }
-  }, []);
+  }, [impressionId, setImpressionId]);
 
   return null;
 };

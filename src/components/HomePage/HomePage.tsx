@@ -19,6 +19,7 @@ import { ExploreIllustration } from './illustrations/ExploreIllustration';
 import { CompareIllustration } from './illustrations/CompareIllustration';
 import { ChooseIllustration } from './illustrations/ChooseIllustration';
 import { trackHeroCardClick } from '@/lib/impression';
+import { useImpression } from '@/contexts/ImpressionContext';
 import cls from './HomePage.module.scss';
 
 const categories = [
@@ -35,6 +36,7 @@ const categories = [
 
 export default function HomePage() {
   const router = useRouter();
+  const { impressionId } = useImpression();
 
   const handleCardClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -42,12 +44,10 @@ export default function HomePage() {
     cardName: string
   ) => {
     e.preventDefault();
-    // Navigate immediately - don't wait for anything
+    // Track BEFORE navigation (uses sendBeacon, non-blocking)
+    trackHeroCardClick(cardName, impressionId);
+    // Navigate immediately after tracking is sent
     router.push(href);
-    // Send tracking request after navigation starts (fire and forget)
-    setTimeout(() => {
-      trackHeroCardClick(cardName);
-    }, 2000);
   };
 
   return (
