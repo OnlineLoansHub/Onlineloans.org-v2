@@ -9,7 +9,7 @@ export const autoLoansData: Brand[] = [
     trustpilotScore: 9.5,
     brandReputation: 9.8,
     popularityScore: 9.7,
-    reviewCount: null,
+    reviewCount: 1650,
     highlight: 'Fast funding solutions for auto loans and vehicle financing',
     productTypes: ['auto_loan', 'business_loan'],
     minCreditScore: 'fair',
