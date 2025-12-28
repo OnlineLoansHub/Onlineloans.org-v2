@@ -66,8 +66,8 @@
   font-weight: var(--font-weight-bold);
   line-height: normal;
   font-size: var(--title-size-large);
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
 
   /* 📱 MOBILE (phones + small tablets) */
   @media (max-width: 430px) {

@@ -46,44 +46,44 @@ const nextConfig: NextConfig = {
     ];
 
     // Performance: Long cache lifetime for all static assets (speeds up repeat visits)
-    headers.push(
-      {
-        source: '/_next/static/:path*',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
+      headers.push(
+        {
+          source: '/_next/static/:path*',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        {
         source: '/:path*.:ext(svg|png|jpg|jpeg|webp|ico|avif)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
       // Performance: Cache CSS files - long cache lifetime
-      {
-        source: '/:path*\\.css',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+        {
+          source: '/:path*\\.css',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
       // Performance: Cache JS files - long cache lifetime
-      {
-        source: '/:path*\\.js',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
+        {
+          source: '/:path*\\.js',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
       },
       // Performance: Cache font files
       {
@@ -94,8 +94,8 @@ const nextConfig: NextConfig = {
             value: 'public, max-age=31536000, immutable',
           },
         ],
-      }
-    );
+        }
+      );
 
     // Production-only headers
     if (process.env.NODE_ENV === 'production') {

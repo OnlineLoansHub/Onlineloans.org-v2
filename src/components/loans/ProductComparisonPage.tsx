@@ -131,17 +131,17 @@ export default function ProductComparisonPage({
     });
 
     // Apply sorting
-    result.sort((a, b) => {
-      const aValue = a[sortBy as keyof typeof a] as number | null;
-      const bValue = b[sortBy as keyof typeof b] as number | null;
-      if (aValue === null && bValue === null) return 0;
-      if (aValue === null) return 1;
-      if (bValue === null) return -1;
+      result.sort((a, b) => {
+        const aValue = a[sortBy as keyof typeof a] as number | null;
+        const bValue = b[sortBy as keyof typeof b] as number | null;
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null) return 1;
+        if (bValue === null) return -1;
 
-      return bValue - aValue;
-    });
+        return bValue - aValue;
+      });
 
-    return result;
+      return result;
   }, [filters, sortBy, lendersData]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);

@@ -198,7 +198,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
 
             {/* Phone Number */}
             {lender.phoneNumber && lender.websiteUrl && (
-              <a
+            <a
                 href={lender.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
