@@ -67,6 +67,23 @@ export default function RootLayout({
             gtag('config', 'G-CW0NYXW5S0');
           `}
         </Script>
+        {/* Google Ads Conversion Tracking */}
+        <Script id="google-ads-conversion" strategy="lazyOnload">
+          {`
+            function gtag_report_conversion(url) {
+              var callback = function () {
+                if (typeof(url) != 'undefined') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'conversion', {
+                  'send_to': 'AW-17771286555/WQhxCL7syNgbEJuggZpC',
+                  'event_callback': callback
+              });
+              return false;
+            }
+          `}
+        </Script>
         {/* Accessibility Widget - Desktop Only */}
         <AccessibilityWidget />
         <ImpressionProvider>
