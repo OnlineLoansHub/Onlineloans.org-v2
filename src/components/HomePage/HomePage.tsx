@@ -24,13 +24,13 @@ import cls from './HomePage.module.scss';
 
 const categories = [
   { icon: Briefcase, title: 'Business Loans' },
-  { icon: HomeIcon, title: 'Mortgage Loans' },
-  { icon: GraduationCap, title: 'Student Loans' },
-  { icon: Wallet, title: 'Personal Loans' },
-  { icon: Car, title: 'Auto Loans' },
-  { icon: PawPrint, title: 'Pet Insurance' },
   { icon: TrendingUp, title: 'Credit Score' },
+  { icon: Wallet, title: 'Personal Loans' },
   { icon: Bitcoin, title: 'Crypto Loans' },
+  { icon: Car, title: 'Auto Loans' },
+  { icon: GraduationCap, title: 'Student Loans' },
+  { icon: HomeIcon, title: 'Mortgage Loans' },
+  { icon: PawPrint, title: 'Pet Insurance' },
   { icon: Coins, title: 'Gold and Silver' },
 ];
 
