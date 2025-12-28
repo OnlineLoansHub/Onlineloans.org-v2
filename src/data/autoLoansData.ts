@@ -6,7 +6,7 @@ export const autoLoansData: Brand[] = [
     name: 'RockSolid Funding',
     logo: '/images/brands-logos/RockSolidFunding-logo.webp',
     ourScore: 10.0,
-    trustpilotScore: null,
+    trustpilotScore: 9.5,
     brandReputation: 9.8,
     popularityScore: 9.7,
     reviewCount: null,
