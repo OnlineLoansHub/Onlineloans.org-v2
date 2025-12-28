@@ -66,7 +66,7 @@ export const personalLoansData: Brand[] = [
   {
     id: 3,
     name: 'Grant Cash Advance',
-    logo: '/images/brands-logos/Grantcash-logo.png',
+    logo: '/images/brands-logos/Grantcash-logo.webp',
     ourScore: 9.8,
     trustpilotScore: 9.3,
     brandReputation: 8.5,
