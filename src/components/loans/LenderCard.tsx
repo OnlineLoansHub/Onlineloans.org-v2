@@ -20,9 +20,9 @@ interface LenderCardProps {
 
 /**
  * Processes CTA URL to append gclid or fclid to tracking parameters
- * Applies sub_id_1 for Advance Funds Network and ROK Financial
+ * Applies sub_id_1 and sub1 to all brands
  */
-function processCtaUrl(baseUrl: string, lenderName: string): string {
+function processCtaUrl(baseUrl: string): string {
   if (!baseUrl || baseUrl === '#') return baseUrl;
 
   try {
@@ -39,11 +39,9 @@ function processCtaUrl(baseUrl: string, lenderName: string): string {
     // Parse the base URL
     const url = new URL(baseUrl);
 
-    // Apply sub_id_1 for Advance Funds Network and ROK Financial
-    if (lenderName === 'Advance Funds Network' || lenderName === 'ROK Financial') {
-      url.searchParams.set('sub_id_1', trackingId);
-    }
-    // For other brands, you can add different parameter logic here if needed
+    // Apply sub_id_1 and sub1 to all brands
+    url.searchParams.set('sub_id_1', trackingId);
+    url.searchParams.set('sub1', trackingId);
 
     return url.toString();
   } catch (error) {
@@ -59,11 +57,8 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
 
-  // Process CTA URL to include gclid/fclid in sub_id_1 (only for Advance Funds Network)
-  const processedCtaUrl = useMemo(
-    () => processCtaUrl(lender.ctaUrl, lender.name),
-    [lender.ctaUrl, lender.name]
-  );
+  // Process CTA URL to include gclid/fclid in sub_id_1 and sub1 for all brands
+  const processedCtaUrl = useMemo(() => processCtaUrl(lender.ctaUrl), [lender.ctaUrl]);
 
   // Wiggle animation state
   const [shouldWiggle, setShouldWiggle] = useState(false);
