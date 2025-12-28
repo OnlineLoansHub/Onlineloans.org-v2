@@ -250,8 +250,8 @@ export const businessLoansData: Brand[] = [
       'Minimum Credit Score: 600',
       'APR Range: 8% - 30%',
     ],
-    ctaUrl: '#',
-    websiteUrl: '#',
+    ctaUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/?source_id=YourPUBID&sub3=YourCLICKID',
+    websiteUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/?source_id=YourPUBID&sub3=YourCLICKID',
     phoneNumber: '(888) 555-2014',
   },
   {
@@ -282,8 +282,8 @@ export const businessLoansData: Brand[] = [
       'Minimum Credit Score: 550',
       'APR Range: 12% - 35%',
     ],
-    ctaUrl: '#',
-    websiteUrl: '#',
+    ctaUrl: 'https://www.swagtrk.com/DC5H4JF/7CQKNN64/?source_id=YourPUBID&sub3=YourCLICKID',
+    websiteUrl: 'https://www.swagtrk.com/DC5H4JF/7CQKNN64/?source_id=YourPUBID&sub3=YourCLICKID',
     phoneNumber: '(888) 555-2016',
   },
 ];
