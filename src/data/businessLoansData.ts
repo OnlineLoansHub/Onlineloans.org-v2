@@ -46,7 +46,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 2,
     name: 'ROK Financial',
-    logo: '/images/brands-logos/Rokfinancial-logo.webp',
+    logo: '/images/brands-logos/Rokfinancial.webp',
     ourScore: 9.9,
     trustpilotScore: 9.9,
     brandReputation: 9.2,
