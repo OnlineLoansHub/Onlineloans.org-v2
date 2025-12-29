@@ -288,7 +288,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 8,
     name: 'CreditNinja',
-    logo: '/images/brands-logos/Creditninja-logo.webp',
+    logo: '/images/brands-logos/CreditNinja.webp',
     ourScore: 9.3,
     trustpilotScore: 8.9,
     brandReputation: 8.9,

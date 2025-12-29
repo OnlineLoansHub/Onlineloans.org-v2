@@ -35,7 +35,7 @@ export const personalLoansData: Brand[] = [
   {
     id: 2,
     name: 'Credit Ninja',
-    logo: '/images/brands-logos/Creditninja-logo.webp',
+    logo: '/images/brands-logos/CreditNinja.webp',
     ourScore: 9.9,
     trustpilotScore: 9.4,
     brandReputation: 8.9,
@@ -66,7 +66,7 @@ export const personalLoansData: Brand[] = [
   {
     id: 3,
     name: 'Grant Cash Advance',
-    logo: '/images/brands-logos/GrantCash-logo.webp',
+    logo: '/images/brands-logos/grantCash.webp',
     ourScore: 9.8,
     trustpilotScore: 9.3,
     brandReputation: 8.9,
