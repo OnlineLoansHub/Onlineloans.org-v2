@@ -4,7 +4,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 1,
     name: 'Advance Funds Network',
-    logo: '/images/brands-logos/Advancefundsnetwork-logo.webp',
+    logo: '/images/brands-logos/advance_funds_network-logo.webp',
     ourScore: 10.0,
     trustpilotScore: 10,
     brandReputation: 9.1,
@@ -46,7 +46,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 2,
     name: 'ROK Financial',
-    logo: '/images/brands-logos/RokFinancial-logo.webp',
+    logo: '/images/brands-logos/Rokfinancial-logo.webp',
     ourScore: 9.9,
     trustpilotScore: 9.9,
     brandReputation: 9.2,
@@ -88,7 +88,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 3,
     name: 'Uplyft',
-    logo: '/images/brands-logos/Upify-logo.webp',
+    logo: '/images/brands-logos/Uplyftcapital-logo.webp',
     ourScore: 9.8,
     trustpilotScore: 9.8,
     brandReputation: 9.3,
@@ -133,7 +133,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 4,
     name: 'Fora Financial',
-    logo: '/images/brands-logos/ForaFinancial-logo.webp',
+    logo: '/images/brands-logos/Fora-logo.webp',
     ourScore: 9.7,
     trustpilotScore: 9.5,
     brandReputation: 9.5,
@@ -257,7 +257,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 7,
     name: 'CreditNinja',
-    logo: '/images/brands-logos/CreditNinja-logo.webp',
+    logo: '/images/brands-logos/Creditninja-logo.webp',
     ourScore: 9.4,
     trustpilotScore: 8.9,
     brandReputation: 8.9,

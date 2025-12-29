@@ -4,7 +4,7 @@ export const cryptoLoansData: Brand[] = [
   {
     id: 201,
     name: 'Nexo',
-    logo: '/images/brands-logos/NexoNexoLogoFull-logo.webp',
+    logo: '/images/brands-logos/Nexo-logo.webp',
     ourScore: 10.0,
     trustpilotScore: 9.5,
     brandReputation: 9.4,
@@ -134,7 +134,7 @@ export const cryptoLoansData: Brand[] = [
   {
     id: 205,
     name: 'Figure Markets',
-    logo: '/images/brands-logos/Figure-logo.webp',
+    logo: '/images/brands-logos/Figure markets-logo.webp',
     ourScore: 9.6,
     trustpilotScore: 9.1,
     brandReputation: 9.3,
