@@ -19,20 +19,22 @@ interface LenderCardProps {
 }
 
 /**
- * Processes CTA URL to append gclid or fclid to tracking parameters
+ * Processes CTA URL to append gclid, fclid, wbraid, or fbclid to tracking parameters
  * Applies sub_id_1 and sub1 to all brands
  */
 function processCtaUrl(baseUrl: string): string {
   if (!baseUrl || baseUrl === '#') return baseUrl;
 
   try {
-    // Get gclid or fclid from current page URL
+    // Get gclid, fclid, wbraid, or fbclid from current page URL
     const urlParams = new URLSearchParams(
       typeof window !== 'undefined' ? window.location.search : ''
     );
     const gclid = urlParams.get('gclid');
     const fclid = urlParams.get('fclid');
-    const trackingId = gclid || fclid;
+    const wbraid = urlParams.get('wbraid');
+    const fbclid = urlParams.get('fbclid');
+    const trackingId = gclid || fclid || wbraid || fbclid;
 
     if (!trackingId) return baseUrl;
 
