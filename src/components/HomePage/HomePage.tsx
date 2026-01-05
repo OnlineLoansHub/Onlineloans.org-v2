@@ -175,7 +175,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/advance_funds_network-logo.webp"
+                  src="/images/brands-logos/Afn-logo.webp"
                   alt="Advance Funds Network"
                   fill
                   className="object-contain"
@@ -247,7 +247,7 @@ export default function HomePage() {
               </div>
               <div className={cls.vendorLogoCell}>
                 <Image
-                  src="/images/brands-logos/advance_funds_network-logo.webp"
+                  src="/images/brands-logos/Afn-logo.webp"
                   alt="Advance Funds Network"
                   fill
                   className="object-contain"

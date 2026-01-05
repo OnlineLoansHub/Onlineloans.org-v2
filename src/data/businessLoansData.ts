@@ -4,7 +4,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 1,
     name: 'Advance Funds Network',
-    logo: '/images/brands-logos/advance_funds_network-logo.webp',
+    logo: '/images/brands-logos/Afn-logo.webp',
     ourScore: 10.0,
     trustpilotScore: 10,
     brandReputation: 9.1,
