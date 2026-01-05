@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { ArrowLeft, ArrowRight, Sparkles, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
@@ -110,10 +111,11 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
 
   // Simple recommendation logic - in real app, this would be more sophisticated
   const getRecommendedLenders = () => {
-    return lenders.slice(0, 3);
+    return lenders.slice(0, 1);
   };
 
   const recommendedLenders = getRecommendedLenders();
+  const recommendedLender = recommendedLenders[0];
 
   return (
     <>
@@ -210,38 +212,45 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                     </p>
                   </div>
 
-                  {/* Recommended Lenders */}
-                  <div className="space-y-3">
-                    {recommendedLenders.map((lender, index) => (
-                      <div
-                        key={lender.id}
-                        className="flex flex-col gap-3 p-3 bg-white rounded border border-slate-200"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold flex-shrink-0">
-                            {index + 1}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-base text-slate-900">
-                              {lender.name}
-                            </h4>
-                            <div className="flex items-center gap-2 mt-1">
-                              <StarRating score={lender.ourScore} />
-                              <span className="text-sm text-black">{lender.ourScore}/10</span>
-                            </div>
+                  {/* Recommended Lender */}
+                  {recommendedLender && (
+                    <div className="flex flex-col gap-4 p-4 bg-white rounded border border-slate-200">
+                      {/* Logo */}
+                      {recommendedLender.logo && (
+                        <div className="flex justify-center mb-2">
+                          <div className="relative w-full max-w-[200px] h-16">
+                            <Image
+                              src={recommendedLender.logo}
+                              alt={recommendedLender.name}
+                              fill
+                              className="object-contain"
+                              sizes="200px"
+                            />
                           </div>
                         </div>
-                        <Button
-                          variant="primary"
-                          className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
-                          onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
-                        >
-                          See Plans
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </Button>
+                      )}
+                      
+                      {/* Lender Info */}
+                      <div className="text-center">
+                        <h4 className="font-semibold text-lg text-slate-900 mb-2">
+                          {recommendedLender.name}
+                        </h4>
+                        <div className="flex items-center justify-center gap-2 mb-3">
+                          <StarRating score={recommendedLender.ourScore} />
+                          <span className="text-base text-black">{recommendedLender.ourScore}/10</span>
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                      
+                      <Button
+                        variant="primary"
+                        className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
+                        onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
+                      >
+                        See Plans
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  )}
 
                   {/* Disclaimer */}
                   <p className="mt-4 text-sm text-black text-center italic px-2">
@@ -362,34 +371,43 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                     </p>
                   </div>
 
-                  {/* Recommended Lenders */}
-                  <div className="space-y-4">
-                    {recommendedLenders.map((lender, index) => (
-                      <div
-                        key={lender.id}
-                        className="flex items-center gap-4 p-4 bg-white rounded border border-slate-200 hover:shadow-md transition-shadow"
-                      >
-                        <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center font-bold">
-                          {index + 1}
+                  {/* Recommended Lender */}
+                  {recommendedLender && (
+                    <div className="flex flex-col items-center gap-6 p-6 bg-white rounded border border-slate-200 hover:shadow-md transition-shadow">
+                      {/* Logo */}
+                      {recommendedLender.logo && (
+                        <div className="relative w-full max-w-[300px] h-24">
+                          <Image
+                            src={recommendedLender.logo}
+                            alt={recommendedLender.name}
+                            fill
+                            className="object-contain"
+                            sizes="300px"
+                          />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-xl text-slate-900">{lender.name}</h4>
-                          <div className="flex items-center gap-2 mt-1">
-                            <StarRating score={lender.ourScore} />
-                            <span className="text-lg text-black">{lender.ourScore}/10</span>
-                          </div>
+                      )}
+                      
+                      {/* Lender Info */}
+                      <div className="text-center">
+                        <h4 className="font-semibold text-2xl text-slate-900 mb-3">
+                          {recommendedLender.name}
+                        </h4>
+                        <div className="flex items-center justify-center gap-2 mb-4">
+                          <StarRating score={recommendedLender.ourScore} />
+                          <span className="text-xl text-black">{recommendedLender.ourScore}/10</span>
                         </div>
-                        <Button
-                          variant="primary"
-                          className="bg-[#235675] hover:bg-[#1a4259]"
-                          onClick={() => window.open(lender.ctaUrl || '#', '_blank')}
-                        >
-                          See Plans
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </Button>
                       </div>
-                    ))}
-                  </div>
+                      
+                      <Button
+                        variant="primary"
+                        className="bg-[#235675] hover:bg-[#1a4259]"
+                        onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
+                      >
+                        See Plans
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </div>
+                  )}
 
                   {/* Disclaimer */}
                   <p className="mt-6 text-base text-black text-center italic">
