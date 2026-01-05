@@ -88,7 +88,7 @@ export const businessLoansData: Brand[] = [
   {
     id: 3,
     name: 'Cardiff',
-    logo: '/images/brands-logos/Cardiff-logo.webp',
+    logo: '/images/brands-logos/Cardiff2-logo.webp',
     ourScore: 9.8,
     trustpilotScore: 9.4,
     brandReputation: 9.6,
