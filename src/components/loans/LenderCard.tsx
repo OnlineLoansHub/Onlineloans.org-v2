@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 // import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { ExternalLink, Check, Info, TrendingUp, X, Phone } from 'lucide-react';
+import { ExternalLink, Check, Info, TrendingUp, X, Phone, ChevronsRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import ScoreBreakdown from './ScoreBreakdown';
 import StarRating from './StarRating';
@@ -176,16 +176,16 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold"
+              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold group"
               // className={`w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold ${
               //   shouldWiggle ? 'animate-wiggle' : ''
               // }`}
               style={{
-                padding: '6px 16px',
+                padding: '8px 11px',
                 borderRadius: '6px',
-                fontSize: '15px',
+                fontSize: '14px',
                 height: 'auto',
-                fontWeight: '900',
+                fontWeight: '700',
               }}
               onClick={() => {
                 trackBrandClick(lender.name, pageName, impressionId);
@@ -194,8 +194,14 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 window.open(processedCtaUrl || '#', '_blank');
               }}
             >
-              EXPLORE
-              <span className="ml-1">&gt;&gt;</span>
+              <span className="inline-flex items-center">
+                EXPLORE
+                <ChevronsRight
+                  className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                />
+              </span>
             </Button>
 
             {/* Phone Number */}
