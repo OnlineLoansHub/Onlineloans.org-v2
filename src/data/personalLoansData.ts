@@ -28,8 +28,8 @@ export const personalLoansData: Brand[] = [
       'May receive multiple offers requiring individual evaluation',
       'Funding Speed: Varies by lender',
     ],
-    ctaUrl: 'https://www.nerdwallet.com',
-    websiteUrl: 'https://www.nerdwallet.com',
+    ctaUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/',
+    websiteUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/',
     phoneNumber: '(888) 555-0108',
   },
   {
