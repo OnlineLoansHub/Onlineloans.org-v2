@@ -181,9 +181,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               //   shouldWiggle ? 'animate-wiggle' : ''
               // }`}
               style={{
-                padding: '8px 16px',
+                padding: '6px 16px',
                 borderRadius: '6px',
-                fontSize: '16px',
+                fontSize: '15px',
                 height: 'auto',
                 fontWeight: '900',
               }}
