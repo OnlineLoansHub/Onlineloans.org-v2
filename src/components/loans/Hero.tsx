@@ -1,6 +1,5 @@
 import React from 'react';
 import Image from 'next/image';
-import { WrittenBy } from '@/components/WrittenBy/WrittenBy';
 import cls from './Hero.module.scss';
 import type { HeroConfig } from '@/data/productTypes';
 
@@ -51,6 +50,31 @@ export default function Hero({ heroConfig, validDate }: HeroProps) {
       </div>
 
       <div className={cls.container}>
+        {/* Last Updated */}
+        {validDate && (
+          <div className={cls.lastUpdated}>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={cls.lastUpdatedIcon}
+            >
+              <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <path
+                d="M5 8L7 10L11 6"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+            Last Updated: {validDate}
+          </div>
+        )}
+
         {/* Main heading */}
         <h1 className={cls.title}>
           {heroConfig.title}{' '}
@@ -59,19 +83,6 @@ export default function Hero({ heroConfig, validDate }: HeroProps) {
           )}{' '}
           of {monthYear}
         </h1>
-
-        {/* Written by section */}
-        <div className={cls.writtenByWrapper}>
-          <WrittenBy
-            name={heroConfig.authorName}
-            role={heroConfig.authorRole}
-            imageUrl={heroConfig.authorImageUrl}
-            variant="dark"
-          />
-        </div>
-
-        {/* Last Updated */}
-        {validDate && <div className={cls.lastUpdated}>Last Updated: {validDate}</div>}
 
         {/* BBB and Trustpilot badges */}
         <div className={cls.trustBadges}>
