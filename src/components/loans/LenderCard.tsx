@@ -22,6 +22,7 @@ interface LenderCardProps {
 /**
  * Processes CTA URL to append gclid, fclid, wbraid, or fbclid to tracking parameters
  * Applies sub_id_1 and sub1 to all brands
+ * For Lendzi URLs, populates click_id parameter with tracking ID
  */
 function processCtaUrl(baseUrl: string): string {
   if (!baseUrl || baseUrl === '#') return baseUrl;
@@ -37,14 +38,23 @@ function processCtaUrl(baseUrl: string): string {
     const fbclid = urlParams.get('fbclid');
     const trackingId = gclid || fclid || wbraid || fbclid;
 
-    if (!trackingId) return baseUrl;
-
     // Parse the base URL
     const url = new URL(baseUrl);
 
-    // Apply sub_id_1 and sub1 to all brands
-    url.searchParams.set('sub_id_1', trackingId);
-    url.searchParams.set('sub1', trackingId);
+    // Handle Lendzi URL format - populate click_id parameter
+    if (url.hostname.includes('lendzi.com') && url.searchParams.has('click_id')) {
+      const clickIdValue = url.searchParams.get('click_id');
+      // If click_id is empty or exists, populate it with tracking ID
+      if (trackingId && (clickIdValue === '' || clickIdValue === null)) {
+        url.searchParams.set('click_id', trackingId);
+      }
+    }
+
+    // Apply sub_id_1 and sub1 to all brands (only if tracking ID exists)
+    if (trackingId) {
+      url.searchParams.set('sub_id_1', trackingId);
+      url.searchParams.set('sub1', trackingId);
+    }
 
     return url.toString();
   } catch (error) {

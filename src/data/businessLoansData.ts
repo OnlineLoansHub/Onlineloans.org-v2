@@ -49,8 +49,8 @@ export const businessLoansData: Brand[] = [
       'Crypto or Blockchain-Based Loans',
       'Grants or Free Government Funding',
     ],
-    ctaUrl: 'https://app.lendzi.com/web/v3?lead_source=onlineloans.org&click_id=SUBIDHERE',
-    websiteUrl: 'https://app.lendzi.com/web/v3?lead_source=onlineloans.org&click_id=SUBIDHERE',
+    ctaUrl: 'https://app.lendzi.com/web/v2?lead_source=onlineloans.org&click_id=',
+    websiteUrl: 'https://app.lendzi.com/web/v2?lead_source=onlineloans.org&click_id=',
     phoneNumber: '(888) 555-2020',
   },
   {
