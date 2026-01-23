@@ -204,7 +204,7 @@ export default function FilterModule({
   const activeFilterCount = Object.values(filters).filter((v) => v !== 'all').length;
 
   const filterContent = (
-    <div className="bg-white rounded border border-slate-200 shadow-sm overflow-hidden">
+    <div className="bg-white rounded border border-slate-200 shadow-xl overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200">
         <div className="flex items-center gap-2.5">

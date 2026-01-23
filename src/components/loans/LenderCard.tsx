@@ -52,8 +52,8 @@ function processCtaUrl(baseUrl: string): string {
 
     // Apply sub_id_1 and sub1 to all brands (only if tracking ID exists)
     if (trackingId) {
-      url.searchParams.set('sub_id_1', trackingId);
-      url.searchParams.set('sub1', trackingId);
+    url.searchParams.set('sub_id_1', trackingId);
+    url.searchParams.set('sub1', trackingId);
     }
 
     return url.toString();
@@ -100,23 +100,23 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
     <>
       {/* Mobile Card - Simple Layout */}
       <div
-        className={`lg:hidden bg-white rounded shadow-lg overflow-hidden relative ${
+        className={`lg:hidden bg-white rounded shadow-2xl overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[var(--color-primary)]/70' : 'border-2 border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
-          <span className="text-white font-bold text-lg">{rank}</span>
+        <div className="absolute top-0 left-0 w-7 h-7 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
+          <span className="text-white font-bold text-sm">{rank}</span>
         </div>
 
         {/* Main Content - Two Column Layout */}
-        <div className="p-5 pt-12 flex gap-4">
+        <div className="p-4 pt-10 flex gap-3">
           {/* Left Column */}
           <div className="flex-[1.5] flex flex-col items-center">
             {/* Logo */}
-            <div className="flex items-center justify-center min-h-[50px] w-full">
+            <div className="flex items-center justify-center min-h-[40px] w-full">
               {lender.logo ? (
-                <div className="relative w-full h-20">
+                <div className="relative w-full h-16">
                   <Image
                     src={lender.logo}
                     alt={lender.name}
@@ -150,7 +150,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
           {/* Right Column */}
           <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
             {/* Rating Number */}
-            <div className="text-4xl font-semibold text-black">{lender.ourScore}</div>
+            <div className="text-3xl font-semibold text-black">{lender.ourScore}</div>
 
             {/* Stars - Green like Trustpilot */}
             <div className="flex items-center gap-0">
@@ -205,7 +205,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               }}
             >
               <span className="inline-flex items-center">
-                EXPLORE
+              EXPLORE
                 <ChevronsRight
                   className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
                   strokeWidth={2.5}
@@ -214,13 +214,13 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               </span>
             </Button>
 
-            {/* Phone Number */}
+            {/* Phone Number - Hidden on Mobile */}
             {lender.phoneNumber && lender.websiteUrl && (
               <a
                 href={lender.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
+                className="hidden lg:flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
                 onClick={() => {
                   trackBrandClick(lender.name, pageName, impressionId);
                   // Report Google Ads conversion
@@ -247,7 +247,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
 
       {/* Desktop Card - Full Layout */}
       <div
-        className={`hidden lg:block bg-white rounded shadow-lg hover:shadow-xl overflow-hidden relative ${
+        className={`hidden lg:block bg-white rounded shadow-2xl hover:shadow-2xl overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border border-slate-200'
         }`}
       >

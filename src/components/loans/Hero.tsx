@@ -84,6 +84,9 @@ export default function Hero({ heroConfig, validDate }: HeroProps) {
           of {monthYear}
         </h1>
 
+        {/* Sub-hero text */}
+        <p className={cls.subHeroText}>Find funding that fits your business</p>
+
         {/* BBB and Trustpilot badges */}
         <div className={cls.trustBadges}>
           <Image

@@ -241,15 +241,15 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                         </div>
                       </div>
                       
-                      <Button
-                        variant="primary"
-                        className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
+                        <Button
+                          variant="primary"
+                          className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
                         onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
-                      >
-                        See Plans
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </div>
+                        >
+                          See Plans
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Button>
+                      </div>
                   )}
 
                   {/* Disclaimer */}
@@ -398,15 +398,15 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                         </div>
                       </div>
                       
-                      <Button
-                        variant="primary"
-                        className="bg-[#235675] hover:bg-[#1a4259]"
+                        <Button
+                          variant="primary"
+                          className="bg-[#235675] hover:bg-[#1a4259]"
                         onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
-                      >
-                        See Plans
-                        <ArrowRight className="w-4 h-4 ml-1" />
-                      </Button>
-                    </div>
+                        >
+                          See Plans
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </Button>
+                      </div>
                   )}
 
                   {/* Disclaimer */}

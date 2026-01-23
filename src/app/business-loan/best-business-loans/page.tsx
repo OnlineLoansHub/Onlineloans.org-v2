@@ -277,6 +277,14 @@ export default function BestBusinessLoansPage() {
       />
 
       <div className={styles.page}>
+        {/* Advertising Disclosure - Mobile Only */}
+        <div className={styles.advertisingDisclosure}>
+          <p className={styles.disclosureText}>
+            We earn commissions from brands listed on this site, which influences how listings are
+            presented. Advertising Disclosure
+          </p>
+        </div>
+
         <Hero heroConfig={businessLoansConfig.hero} validDate={lastUpdated} />
 
         {/* Main Content */}
