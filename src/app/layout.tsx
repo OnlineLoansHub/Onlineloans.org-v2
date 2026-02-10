@@ -33,13 +33,13 @@ export const metadata: Metadata = {
   }),
   icons: {
     icon: [
-      { url: '/favicon-2.ico', sizes: 'any' },
-      { url: '/favicon-16x16-2.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32-2.png', sizes: '32x32', type: 'image/png' },
-      { url: '/android-chrome-192x192-2.png', sizes: '192x192', type: 'image/png' },
-      { url: '/android-chrome-512x512-2.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon-3.ico', sizes: 'any' },
+      { url: '/favicon-16x16-3.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32-3.png', sizes: '32x32', type: 'image/png' },
+      { url: '/android-chrome-192x192-3.png', sizes: '192x192', type: 'image/png' },
+      { url: '/android-chrome-512x512-3.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon-2.png',
+    apple: '/apple-touch-icon-3.png',
   },
   manifest: '/manifest.json',
   // Removed dns-prefetch - already handled by preconnect in next.config.ts
