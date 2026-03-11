@@ -3,16 +3,16 @@
   background-color: white;
 }
 
-// Hide header on mobile and remove body padding
-:global(header) {
-  @media (width <= 768px) {
-    display: none !important;
-  }
-}
-
-:global(body) {
+// Hide header on mobile and remove body padding - scoped to this page only
+// Using :has() selector to ensure these styles only apply when this page is active
+// The .page class reference will be replaced with the scoped class name by CSS modules
+:global(body[data-page="best-business-loans"]) {
   @media (width <= 768px) {
     padding-top: 0 !important;
+
+    > header {
+      display: none !important;
+    }
   }
 }
 

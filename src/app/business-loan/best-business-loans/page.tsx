@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Script from 'next/script';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
@@ -154,6 +154,12 @@ export default function BestBusinessLoansPage() {
   });
   const [sortBy, setSortBy] = useState('ourScore');
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
+  useEffect(() => {
+    document.body.setAttribute("data-page", "best-business-loans");
+    return () => {
+      document.body.removeAttribute("data-page");
+    };
+  }, []);
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
