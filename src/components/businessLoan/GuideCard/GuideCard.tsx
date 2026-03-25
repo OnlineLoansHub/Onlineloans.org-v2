@@ -9,19 +9,27 @@ interface GuideCardProps {
 }
 
 export const GuideCard = ({ guide }: GuideCardProps) => {
+  const coverText = guide.coverLabel ?? guide.title;
+  const hasCoverImage = Boolean(guide.coverImage);
+
   return (
     <AppLink href={guide.href} className={cls.card}>
-      {guide.image && (
-        <div className={cls.imageWrapper}>
-          <Image
-            src={guide.image}
-            alt={guide.title}
-            width={400}
-            height={250}
-            className={cls.image}
-          />
-        </div>
-      )}
+      <div className={cls.cover} aria-hidden="true">
+        <div className={cls.coverStripes} />
+        {hasCoverImage ? (
+          <div className={cls.coverImageWrap}>
+            <Image
+              src={guide.coverImage as string}
+              alt=""
+              width={240}
+              height={96}
+              className={cls.coverImage}
+            />
+          </div>
+        ) : (
+          <p className={cls.coverText}>{coverText}</p>
+        )}
+      </div>
       <div className={cls.content}>
         {guide.category && <span className={cls.category}>{guide.category}</span>}
         <h3 className={cls.title}>{guide.title}</h3>
@@ -31,4 +39,3 @@ export const GuideCard = ({ guide }: GuideCardProps) => {
     </AppLink>
   );
 };
-

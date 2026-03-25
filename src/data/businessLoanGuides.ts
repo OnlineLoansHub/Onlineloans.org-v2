@@ -3,8 +3,11 @@ export interface BusinessLoanGuide {
   title: string;
   description: string;
   href: string;
-  image?: string;
   category?: string;
+  /** Short text on the cover; defaults to `title` when no `coverImage` */
+  coverLabel?: string;
+  /** If set, cover shows this image (e.g. brand logo) instead of text */
+  coverImage?: string;
 }
 
 export const businessLoanGuides: BusinessLoanGuide[] = [
@@ -14,7 +17,6 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     description:
       'Compare top business loan providers and find the right funding option for your company. See ratings, terms, and funding speed.',
     href: '/business-loan/best-business-loans',
-    image: '/images/table/best-business-loans-2025.png',
     category: 'Comparison',
   },
   {
@@ -23,7 +25,6 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     description:
       'Complete guide to restaurant funding: Learn how restaurant loans work, types of restaurant financing, how to apply, and find the best lenders.',
     href: '/business-loan/restaurant-funding',
-    image: '/images/article/image-chef-kitchen.jpg',
     category: 'Industry-Specific',
   },
   {
@@ -32,7 +33,6 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     description:
       'Complete guide to construction business loans: Learn how construction loans work, types of construction financing, how to apply, and find the best lenders.',
     href: '/business-loan/construction-funding',
-    image: '/images/article/article_home.png',
     category: 'Industry-Specific',
   },
   {
@@ -41,7 +41,6 @@ export const businessLoanGuides: BusinessLoanGuide[] = [
     description:
       'Learn the difference between fixed and variable rate business loans. Compare pros, cons, and real examples to choose the best option for your small business financing needs.',
     href: '/business-loan/fixed-vs-variable',
-    image: '/images/article/fixed-vs-variable.png',
     category: 'Guides',
   },
   // Add more guides here as they are created

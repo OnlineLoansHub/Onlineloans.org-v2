@@ -21,18 +21,75 @@
   }
 }
 
-.imageWrapper {
+.cover {
+  position: relative;
   width: 100%;
   height: 200px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 1rem;
+  background-color: var(--color-primary);
   overflow: hidden;
-  background: var(--color-gray-light, #f3f4f6);
-  position: relative;
 }
 
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.coverStripes {
+  position: absolute;
+  inset: 0;
+  opacity: 0.14;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 14px,
+      rgba(255, 255, 255, 0.45) 14px,
+      rgba(255, 255, 255, 0.45) 15px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 20px,
+      rgba(255, 255, 255, 0.2) 20px,
+      rgba(255, 255, 255, 0.2) 21px
+    );
+}
+
+.coverText {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--color-white);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  text-wrap: balance;
+}
+
+.coverImageWrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.coverImage {
+  width: auto !important;
+  height: auto !important;
+  max-width: min(240px, 88%);
+  max-height: 88px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
 }
 
 .content {
@@ -75,8 +132,20 @@
 }
 
 @media (width <= 768px) {
-  .imageWrapper {
+  .cover {
     height: 180px;
+    padding: 1rem 0.75rem;
+  }
+
+  .coverText {
+    font-size: 1.15rem;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+  }
+
+  .coverImage {
+    max-height: 76px;
+    max-width: min(200px, 90%);
   }
 
   .content {
@@ -96,4 +165,3 @@
     font-size: 14px;
   }
 }
-

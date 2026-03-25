@@ -3,8 +3,11 @@ export interface PersonalLoanGuide {
   title: string;
   description: string;
   href: string;
-  image?: string;
   category?: string;
+  /** Short text on the cover; defaults to `title` when no `coverImage` */
+  coverLabel?: string;
+  /** If set, cover shows this image (e.g. brand logo) instead of text */
+  coverImage?: string;
 }
 
 export const personalLoanGuides: PersonalLoanGuide[] = [
@@ -14,7 +17,6 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     description:
       'Compare top personal loan providers and find the right funding option for your needs. See ratings, rates, and funding speed.',
     href: '/personal-loan/best-personal-loans',
-    image: '/images/table/best-personal-loans-2025.png',
     category: 'Comparison',
   },
   {
@@ -23,7 +25,6 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     description:
       'Complete guide to personal loans: Learn how personal loans work, types of personal loans, how to apply, and find the best lenders.',
     href: '/personal-loan/what-is-a-personal-loan',
-    image: '/images/article/article_man.png',
     category: 'Guides',
   },
   {
@@ -32,7 +33,7 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     description:
       "Complete LendingTree review for personal loans. Learn how LendingTree works, compare personal loan offers, understand pros and cons, and find out if it's the right marketplace for your borrowing needs.",
     href: '/personal-loan/lendingtree-review',
-    image: '/images/brands-logos/LendingTree-logo.webp',
+    coverLabel: 'LendingTree Review',
     category: 'Reviews',
   },
   {
@@ -41,7 +42,6 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     description:
       'Complete guide to payday loans in California. Learn about state laws, legality, fees, and compare the best online payday loan providers including Advance America, ACE Cash Express, Check n Go, and more.',
     href: '/personal-loan/payday-loans/california',
-    image: '/images/paydayloans-california/paydayloans-california.png',
     category: 'Guides',
   },
   // Add more guides here as they are created
