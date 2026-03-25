@@ -85,7 +85,12 @@ export default function Hero({
         {/* Main heading */}
         <h1 className={cls.title}>
           {comparisonTitle ? (
-            comparisonTitle
+            comparisonTitle.split('\n').map((line, idx) => (
+              <React.Fragment key={idx}>
+                {idx > 0 && <br />}
+                {line}
+              </React.Fragment>
+            ))
           ) : (
             <>
               {heroConfig.title}{' '}
