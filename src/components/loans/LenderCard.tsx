@@ -303,11 +303,11 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               variant="primary"
               className={[
                 'w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                'text-white font-extrabold group',
+                'text-white font-extrabold group rounded-none',
               ].join(' ')}
               style={{
                 padding: '8px 11px',
-                borderRadius: '10px',
+                borderRadius: 0,
                 fontSize: '14px',
                 height: 'auto',
                 fontWeight: '700',
@@ -462,14 +462,14 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   variant="primary"
                   className={[
                     'bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                    'text-white font-semibold transition-all rounded-md',
+                    'text-white font-semibold transition-all rounded-none',
                     'transform-gpu will-change-transform',
                     'duration-200 ease-out',
                     'hover:-translate-y-0.5 hover:scale-[1.02]',
                     'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
                     'h-10 w-full text-sm whitespace-nowrap',
                   ].join(' ')}
-                  style={{ margin: 0, border: 0 }}
+                  style={{ margin: 0, border: 0, borderRadius: 0 }}
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId);
                     gtag_report_conversion();
