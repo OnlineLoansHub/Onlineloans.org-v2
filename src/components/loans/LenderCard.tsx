@@ -209,9 +209,13 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
   //   };
   // }, []);
 
+  /** Home “We make things easier” card hover — this wrapper is `hidden lg:block` only */
+  const homeCardMotionDesktop =
+    'shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:-translate-y-[10px] hover:scale-[1.03] hover:shadow-[0_20px_25px_-5px_rgba(0,0,0,0.15),0_10px_10px_-5px_rgba(0,0,0,0.1)]';
+
   return (
     <>
-      {/* Mobile Card - Simple Layout */}
+      {/* Mobile Card - Simple Layout (no card-level hover motion) */}
       <div
         className={`lg:hidden bg-white rounded-md shadow-lg overflow-hidden relative ${
           rank === 1 ? 'border-2 border-[var(--color-primary)]/70' : 'border border-slate-200'
@@ -369,8 +373,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
       {/* Desktop Card - Full Layout */}
       <div
-        className={`hidden lg:block bg-white rounded shadow-lg hover:shadow-xl overflow-hidden relative ${
-          rank === 1 ? 'border-2 border-[#2a3d66]/70' : 'border border-slate-200'
+        className={`hidden lg:block bg-white rounded overflow-hidden relative ${homeCardMotionDesktop} ${
+          rank === 1
+            ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'
+            : 'border-2 border-[#d4eaf2] hover:border-[var(--color-primary)]'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
