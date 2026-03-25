@@ -106,7 +106,7 @@ export const Header = () => {
 
               <li className={cls.navItem} onClick={toggleMenu}>
                 <AppLink
-                  href="https://apply.onlineloans.org/"
+                  href="https://apply.onlineloans.org/apply"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cls.navLink}
