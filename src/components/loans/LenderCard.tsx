@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 // import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Info, TrendingUp, Phone, ChevronsRight, Check, Star } from 'lucide-react';
+import { Info, TrendingUp, ChevronsRight, Check, Star } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
 import type { Brand } from '@/data/brands';
@@ -16,6 +16,17 @@ interface LenderCardProps {
   lender: Brand;
   rank: number;
   amountLabel?: string;
+  onReadMore?: (lender: Brand) => void;
+}
+
+export function getLenderDeepDiveId(lender: Pick<Brand, 'id' | 'name'>): string {
+  const slug = lender.name
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+  return `lender-${lender.id}-${slug}`;
 }
 
 function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
@@ -165,7 +176,7 @@ function processCtaUrl(baseUrl: string): string {
   }
 }
 
-export default function LenderCard({ lender, rank, amountLabel }: LenderCardProps) {
+export default function LenderCard({ lender, rank, amountLabel, onReadMore }: LenderCardProps) {
   const { impressionId } = useImpression();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
@@ -296,7 +307,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               ].join(' ')}
               style={{
                 padding: '8px 11px',
-                borderRadius: '6px',
+                borderRadius: '10px',
                 fontSize: '14px',
                 height: 'auto',
                 fontWeight: '700',
@@ -318,23 +329,28 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               </span>
             </Button>
 
-            {/* Phone Number - Hidden on Mobile */}
-            {lender.phoneNumber && lender.websiteUrl && (
+            {lender.websiteUrl ? (
               <a
-                href={lender.websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:flex items-center gap-1 text-[10px] text-black hover:text-[var(--color-primary)] underline"
-                onClick={() => {
+                href="#"
+                className="text-[11px] text-slate-600 hover:underline"
+                role="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onReadMore) {
+                    onReadMore(lender);
+
+                    return;
+                  }
+
                   trackBrandClick(lender.name, pageName, impressionId);
-                  // Report Google Ads conversion
                   gtag_report_conversion();
+                  window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                 }}
               >
-                <Phone className="w-2.5 h-2.5" />
-                {lender.phoneNumber}
+                Or read more
               </a>
-            )}
+            ) : null}
+
           </div>
         </div>
 
@@ -446,14 +462,14 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                   variant="primary"
                   className={[
                     'bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                    'text-white rounded-none font-semibold transition-all',
+                    'text-white font-semibold transition-all rounded-md',
                     'transform-gpu will-change-transform',
                     'duration-200 ease-out',
                     'hover:-translate-y-0.5 hover:scale-[1.02]',
                     'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
                     'h-10 w-full text-sm whitespace-nowrap',
                   ].join(' ')}
-                  style={{ margin: 0, border: 0, borderRadius: 0 }}
+                  style={{ margin: 0, border: 0 }}
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId);
                     gtag_report_conversion();
@@ -465,13 +481,20 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
 
                 {lender.websiteUrl && (
                   <a
-                    href={lender.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#"
                     className="text-xs text-slate-600 hover:underline"
-                    onClick={() => {
+                    role="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onReadMore) {
+                        onReadMore(lender);
+
+                        return;
+                      }
+
                       trackBrandClick(lender.name, pageName, impressionId);
                       gtag_report_conversion();
+                      window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                     }}
                   >
                     Or read more

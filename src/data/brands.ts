@@ -18,6 +18,9 @@ export interface Brand {
   ctaUrl: string;
   websiteUrl: string;
   phoneNumber?: string; // Phone number for contact
+  companyOverview?: string; // Rich "About the company" paragraph
+  foundedYear?: number;
+  headquarters?: string;
   // Optional loan-specific fields
   minCreditScore?: string;
   minRevenue?: string; // For business loans

@@ -11,6 +11,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 10,
     reviewCount: 1389,
     highlight: 'Fast and flexible business funding solutions with competitive rates',
+    foundedYear: 2020,
+    headquarters: 'Los Angeles, California',
+    companyOverview:
+      'Lendzi (founded 2020, based in Los Angeles) is an online business lending marketplace that connects small businesses with a network of lending partners. It’s best known for helping borrowers compare multiple funding options—such as term loans, lines of credit, SBA loans, equipment financing, and more—through a streamlined online process.',
     productTypes: [
       'term_loan',
       'line_of_credit',
@@ -63,6 +67,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 9.5,
     reviewCount: 850,
     highlight: 'Same day approval and funding - $12+ billion funded to small businesses',
+    foundedYear: 2004,
+    headquarters: 'San Diego, California',
+    companyOverview:
+      'Cardiff (founded 2004, based in San Diego) provides small business financing across multiple products, including working capital, term loans, and other funding solutions. The company highlights a fast online application experience and positions its underwriting around real business performance, aiming to help established small businesses access capital quickly when timing matters.',
     productTypes: [
       'term_loan',
       'line_of_credit',
@@ -111,6 +119,10 @@ export const businessLoansData: Brand[] = [
     reviewCount: 1595,
     highlight:
       'A range of funding options for your business - funding in just 4 hours with no hidden fees',
+    foundedYear: 2007,
+    headquarters: 'Brooklyn, New York',
+    companyOverview:
+      'Advance Funds Network (founded 2007, based in Brooklyn, NY) offers a range of small business funding options such as working capital, term loans, lines of credit, equipment financing, and merchant cash advances. The brand emphasizes speed and simplicity—often marketing fast approvals and a straightforward application process for revenue-generating businesses.',
     productTypes: [
       'term_loan',
       'working_capital',
@@ -152,6 +164,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 9.2,
     reviewCount: 1085,
     highlight: "You don't need perfect credit to get an offer - instant pre-approval available",
+    foundedYear: 2020,
+    headquarters: 'Great River, New York',
+    companyOverview:
+      'ROK Financial (founded 2020, based in Great River, NY) is a business financing brokerage that helps small businesses access capital through a network of lenders. It supports multiple financing types—like term loans, lines of credit, equipment financing, and SBA options—and is positioned for borrowers who want to compare offers and move quickly from application to funding.',
     productTypes: [
       'term_loan',
       'line_of_credit',
@@ -195,6 +211,10 @@ export const businessLoansData: Brand[] = [
     reviewCount: 969,
     highlight:
       'More than 55,000 companies funded - Growth potential more important than credit score',
+    foundedYear: 2008,
+    headquarters: 'New York, New York',
+    companyOverview:
+      'Fora Financial (founded 2008, based in New York City) is a small business funding company that began as Paramount Merchant Funding and rebranded to Fora Financial in 2013. It’s known as a direct funder in the alternative financing space, offering capital solutions for small and mid-sized businesses with decisions often made quickly—especially for businesses that can demonstrate strong revenue performance.',
     productTypes: [
       'term_loan',
       'line_of_credit',
@@ -239,6 +259,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 8.9,
     reviewCount: 720,
     highlight: 'Fast and flexible business funding solutions',
+    foundedYear: 2003,
+    headquarters: 'Las Vegas, Nevada',
+    companyOverview:
+      'BriteCap Financial (founded 2003, based in Las Vegas) is a technology-enabled small business financing provider focused on fast, flexible funding. The company offers solutions like term loans and lines of credit, and it’s often positioned as a fit for established small businesses that want a streamlined application and repayment options aligned with cash flow.',
     productTypes: ['term_loan', 'line_of_credit', 'working_capital'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
@@ -271,6 +295,10 @@ export const businessLoansData: Brand[] = [
     reviewCount: 605,
     highlight:
       '87% approval rate - No hard credit check required, funding in as little as same day',
+    foundedYear: 2012,
+    headquarters: 'South Florida (Dania Beach area)',
+    companyOverview:
+      'Uplyft Capital (founded 2012, based in South Florida) provides small business funding products such as merchant cash advances, lines of credit, and term-loan options. The company markets flexible underwriting and a fast process, aiming to help revenue-generating businesses get access to capital without lengthy paperwork.',
     productTypes: [
       'merchant_cash_advance',
       'line_of_credit',
@@ -315,6 +343,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 8.9,
     reviewCount: 15678,
     highlight: 'Comprehensive comparison platform with expert financial advice',
+    foundedYear: 2009,
+    headquarters: 'San Francisco, California',
+    companyOverview:
+      'NerdWallet (founded 2009, based in San Francisco) is a public personal finance company that helps consumers and small businesses compare financial products and learn through editorial guidance. In the small business space, NerdWallet expanded its marketplace capabilities by acquiring Fundera (a small business loan marketplace), enabling borrowers to compare business financing options alongside educational resources.',
     productTypes: ['term_loan', 'sba_loan', 'line_of_credit'],
     minCreditScore: 'fair',
     minRevenue: '10k_20k',
@@ -347,6 +379,10 @@ export const businessLoansData: Brand[] = [
     popularityScore: 8.9,
     reviewCount: 2345,
     highlight: 'Specialized loans for startups and new businesses',
+    foundedYear: 2018,
+    headquarters: 'Chicago, Illinois',
+    companyOverview:
+      'CreditNinja (founded 2018, based in Chicago) is primarily known as an online lender offering installment-style loan products and a digital application experience. On this page, it’s included for businesses seeking smaller-dollar, faster-access funding scenarios—especially where traditional bank financing may not be an option.',
     productTypes: ['term_loan', 'other'],
     minCreditScore: 'poor',
     minRevenue: 'less_10k',

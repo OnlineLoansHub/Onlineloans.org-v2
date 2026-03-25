@@ -2,6 +2,9 @@ import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import Hero from '@/components/loans/Hero';
 import LenderCard from '@/components/loans/LenderCard';
+import LenderDeepDiveSections, {
+  useLenderDeepDiveScroll,
+} from '@/components/loans/LenderDeepDiveSections';
 import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
@@ -104,6 +107,7 @@ export function ProductComparisonPageDesktop({
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
   const comparisonTitle = `Our Best ${productConfig.displayName}\nLenders for ${comparisonMonth} 2026`;
   const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
+  const scrollToLender = useLenderDeepDiveScroll();
 
   return (
     <>
@@ -169,6 +173,7 @@ export function ProductComparisonPageDesktop({
                     lender={lender}
                     rank={index + 1}
                     amountLabel={productConfig.amountLabel}
+                    onReadMore={scrollToLender}
                   />
                 ))
               ) : (
@@ -206,6 +211,16 @@ export function ProductComparisonPageDesktop({
           </main>
         </div>
       </section>
+
+      {/* Lender Deep Dives */}
+      {lendersData.length > 0 ? (
+        <section className={styles.unifiedSection}>
+          <div className={styles.unifiedContainer}>
+            <h2 className={styles.unifiedTitle}>Read more about each lender</h2>
+            <LenderDeepDiveSections lenders={lendersData} />
+          </div>
+        </section>
+      ) : null}
 
       {/* Recommendation Wizard */}
       <section className={styles.unifiedSection}>
