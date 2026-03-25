@@ -136,33 +136,5 @@ export const businessLoansConfig: ProductTypeConfig = {
     resultsTitle: 'Based on your answers, we recommend',
     resultsSubtitle: 'These lenders match your business profile',
   },
-  crossPromo: {
-    title: 'Are you looking to open a business account?',
-    description: 'Explore the best online business checking accounts',
-    icon: 'Building2',
-    relatedProviders: [
-      {
-        id: 1,
-        name: 'Mercury',
-        score: 9.6,
-        description: 'Best for startups and tech companies',
-        ctaUrl: '#',
-      },
-      {
-        id: 2,
-        name: 'Bluevine',
-        score: 9.4,
-        description: 'Best for small business checking',
-        ctaUrl: '#',
-      },
-      {
-        id: 3,
-        name: 'Relay',
-        score: 9.2,
-        description: 'Best for expense management',
-        ctaUrl: '#',
-      },
-    ],
-  },
   amountLabel: 'Loan Amount',
 };

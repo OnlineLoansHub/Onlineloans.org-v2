@@ -55,7 +55,7 @@ export interface ProductTypeConfig {
   filters: Record<string, FilterConfig>;
   filterOrder: string[];
   wizard: WizardConfig;
-  crossPromo: CrossPromoConfig;
+  crossPromo?: CrossPromoConfig;
   // Label for the amount field (e.g. "Loan Amount", "Monthly Premium", "Coverage Amount", "APY").
   amountLabel?: string;
 }

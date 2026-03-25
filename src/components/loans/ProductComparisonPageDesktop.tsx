@@ -112,6 +112,8 @@ export function ProductComparisonPageDesktop({
         validDate={lastUpdated}
         comparisonTitle={comparisonTitle}
         comparisonSubtitle={comparisonSubtitle}
+        desktopRightImageSrc="/images/form/onlineloans-form-image.svg"
+        desktopRightImageAlt="Business funding illustration"
       />
 
       <section className={styles.mainContent}>
@@ -125,8 +127,7 @@ export function ProductComparisonPageDesktop({
                   Are you eligible for a better rate?
                 </div>
                 <div className={styles.desktopFilterBarMeta}>
-                  Showing{' '}
-                  <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+                  Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
                   <span className={styles.resultsCount}>{filteredCount}</span> lenders
                 </div>
               </div>
@@ -225,7 +226,9 @@ export function ProductComparisonPageDesktop({
       </section>
 
       {/* Cross Promo Section */}
-      <CrossPromo crossPromoConfig={productConfig.crossPromo} />
+      {productConfig.crossPromo ? (
+        <CrossPromo crossPromoConfig={productConfig.crossPromo} />
+      ) : null}
 
       {/* FAQ Section */}
       <section className={styles.unifiedSection}>
@@ -237,4 +240,3 @@ export function ProductComparisonPageDesktop({
     </>
   );
 }
-

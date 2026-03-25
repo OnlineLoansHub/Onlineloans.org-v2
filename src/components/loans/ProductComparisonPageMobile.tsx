@@ -155,7 +155,9 @@ export function ProductComparisonPageMobile({
       </section>
 
       {/* Cross Promo Section */}
-      <CrossPromo crossPromoConfig={productConfig.crossPromo} />
+      {productConfig.crossPromo ? (
+        <CrossPromo crossPromoConfig={productConfig.crossPromo} />
+      ) : null}
 
       {/* FAQ Section */}
       <section className={styles.unifiedSection}>
