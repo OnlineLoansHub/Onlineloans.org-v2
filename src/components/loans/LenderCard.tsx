@@ -40,7 +40,7 @@ function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
       <span
         className={[
           'font-extrabold tracking-tight',
-          isMobile ? 'text-2xl' : 'text-[2.75rem]',
+          isMobile ? 'text-3xl' : 'text-[2.75rem]',
           'text-[#0B3A57]',
           'leading-none',
         ].join(' ')}
@@ -50,7 +50,7 @@ function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
       <span
         className={[
           'font-extrabold tracking-tight',
-          isMobile ? 'text-2xl' : 'text-[2.75rem]',
+          isMobile ? 'text-3xl' : 'text-[2.75rem]',
           'text-[#E7803E]',
           'leading-none',
         ].join(' ')}
@@ -229,11 +229,18 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         {/* Main Content - Two Column Layout */}
         <div className="p-4 pt-10 flex gap-3">
           {/* Left Column */}
-          <div className="flex-[1.5] flex flex-col items-center">
+          <div className="flex-[1.5] flex flex-col items-center min-h-0">
             {/* Logo */}
-            <div className="flex items-center justify-center min-h-[40px] w-full">
+            <div
+              className={[
+                'flex items-center justify-center min-h-[40px] w-full',
+                isBriteCap ? 'items-end pb-1' : 'items-center',
+              ].join(' ')}
+            >
               {isBriteCap ? (
-                <BriteCapLogo size="mobile" />
+                <div className="translate-y-[8px]">
+                  <BriteCapLogo size="mobile" />
+                </div>
               ) : lender.logo ? (
                 <div className="relative w-full h-16">
                   <Image
@@ -256,7 +263,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
             {/* Amount Field - Mobile Only */}
             {lender.amount && amountLabel && (
-              <div className="text-center mt-2 lg:hidden">
+              <div className="text-center lg:hidden my-auto -translate-y-2">
                 <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
                 <p className="text-2xl font-bold text-black">{lender.amount}</p>
               </div>

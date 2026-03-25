@@ -84,7 +84,7 @@ export const businessLoansData: Brand[] = [
     minRevenue: '25k',
     minTimeInBusiness: '1y',
     amountRange: '50k_100k',
-    amount: '$10K - $500k',
+    amount: '$10K - $1M',
     goodDetails: [
       '$12+ billion funded to small businesses',
       'Same day approval and funding* (by 5:00 p.m. ET)',
