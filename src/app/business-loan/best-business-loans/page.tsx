@@ -130,7 +130,7 @@ export default function BestBusinessLoansPage() {
       productConfig={businessLoansConfig}
       lendersData={businessLoansData}
       faqItems={faqItems}
-      pinnedLenderIds={[1, 2]}
+      pinnedLenderIds={[1, 6, 4, 3]}
       structuredData={{ faqSchema, financialProductSchema, breadcrumbSchema }}
     />
   );

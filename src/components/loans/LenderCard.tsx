@@ -18,6 +18,42 @@ interface LenderCardProps {
   amountLabel?: string;
 }
 
+function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+
+  return (
+    <div
+      className={[
+        'inline-flex items-center justify-center',
+        'gap-0',
+        'select-none',
+      ].join(' ')}
+      aria-label="BriteCap"
+    >
+      <span
+        className={[
+          'font-extrabold tracking-tight',
+          isMobile ? 'text-2xl' : 'text-[2.75rem]',
+          'text-[#0B3A57]',
+          'leading-none',
+        ].join(' ')}
+      >
+        BRITE
+      </span>
+      <span
+        className={[
+          'font-extrabold tracking-tight',
+          isMobile ? 'text-2xl' : 'text-[2.75rem]',
+          'text-[#E7803E]',
+          'leading-none',
+        ].join(' ')}
+      >
+        CAP
+      </span>
+    </div>
+  );
+}
+
 function pickDesktopBullets(lender: Brand): string[] {
   const bullets: string[] = [];
 
@@ -137,6 +173,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
   const { impressionId } = useImpression();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
+  const isBriteCap = lender.id === 6 || lender.name.toLowerCase() === 'britecap';
 
   // Process CTA URL to include gclid/fclid in sub_id_1 and sub1 for all brands
   const processedCtaUrl = useMemo(() => processCtaUrl(lender.ctaUrl), [lender.ctaUrl]);
@@ -183,13 +220,17 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
           <div className="flex-[1.5] flex flex-col items-center">
             {/* Logo */}
             <div className="flex items-center justify-center min-h-[40px] w-full">
-              {lender.logo ? (
+              {isBriteCap ? (
+                <BriteCapLogo size="mobile" />
+              ) : lender.logo ? (
                 <div className="relative w-full h-16">
                   <Image
                     src={lender.logo}
                     alt={lender.name}
                     fill
-                    className="object-contain"
+                    className={[
+                      'object-contain',
+                    ].join(' ')}
                     sizes="(max-width: 768px) 100px, 150px"
                     priority={rank <= 3}
                     loading={rank <= 3 ? 'eager' : 'lazy'}
@@ -328,13 +369,19 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
           <div className="grid grid-cols-[220px_1fr_240px] gap-6">
             {/* Logo (left) */}
             <div className="flex items-start justify-center pt-4">
-              {lender.logo ? (
-                <div className="relative w-[200px] h-[64px]">
+              {isBriteCap ? (
+                <div className="w-[250px] h-[78px] flex items-center justify-center mt-2">
+                  <BriteCapLogo size="desktop" />
+                </div>
+              ) : lender.logo ? (
+                <div className="relative w-[200px] h-[64px] overflow-visible">
                   <Image
                     src={lender.logo}
                     alt={lender.name}
                     fill
-                    className="object-contain object-center"
+                    className={[
+                      'object-contain object-center',
+                    ].join(' ')}
                     sizes="200px"
                     priority={rank <= 3}
                     loading={rank <= 3 ? 'eager' : 'lazy'}

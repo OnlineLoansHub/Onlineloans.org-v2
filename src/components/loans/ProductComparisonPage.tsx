@@ -275,8 +275,8 @@ export default function ProductComparisonPage({
       return bValue - aValue;
     });
 
-    // Optional: pin specific lenders to the top when sorting by Our Score
-    if (sortBy === 'ourScore' && pinnedLenderIds && pinnedLenderIds.length > 0) {
+    // Optional: pin specific lenders to the top (always, regardless of sort)
+    if (pinnedLenderIds && pinnedLenderIds.length > 0) {
       const pinnedSet = new Set(pinnedLenderIds);
       const pinned = result
         .filter((l) => pinnedSet.has(l.id))
