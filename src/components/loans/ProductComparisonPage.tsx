@@ -17,6 +17,8 @@ interface FAQItem {
 
 type JsonObject = Record<string, unknown>;
 
+type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore';
+
 interface ProductComparisonPageProps {
   productConfig: ProductTypeConfig;
   lendersData: Brand[];
@@ -66,6 +68,52 @@ export default function ProductComparisonPage({
   const lastUpdated = getLastUpdated();
   const isDesktop = useMediaQuery('(min-width: 1024px)', true);
 
+  const parseMinRevenue = (minRevenue?: string): number | null => {
+    if (!minRevenue) return null;
+    const normalized = String(minRevenue).trim().toLowerCase();
+    const match = normalized.match(/(\d+(?:\.\d+)?)\s*k/);
+    if (match) return Math.round(parseFloat(match[1]) * 1000);
+
+    const asNumber = Number(normalized);
+
+    return Number.isFinite(asNumber) ? asNumber : null;
+  };
+
+  const parseMinTimeInBusinessMonths = (minTimeInBusiness?: string): number | null => {
+    if (!minTimeInBusiness) return null;
+    const v = String(minTimeInBusiness).trim().toLowerCase();
+    const map: Record<string, number> = {
+      '0_6m': 0,
+      '6m_1y': 6,
+      '1y': 12,
+      '1_2': 12,
+      '2_plus': 24,
+    };
+    if (v in map) return map[v];
+
+    const yearMatch = v.match(/(\d+)\s*y/);
+    if (yearMatch) return Number(yearMatch[1]) * 12;
+
+    const monthMatch = v.match(/(\d+)\s*m/);
+    if (monthMatch) return Number(monthMatch[1]);
+
+    return null;
+  };
+
+  const normalizeCreditCategory = (minCreditScore?: string): 'poor' | 'fair' | 'good' | 'excellent' | null => {
+    if (!minCreditScore) return null;
+    const v = String(minCreditScore).trim().toLowerCase();
+    if (v === 'poor' || v === 'fair' || v === 'good' || v === 'excellent') return v;
+    const n = Number(v.replace(/[^\d]/g, ''));
+    if (!Number.isFinite(n) || n <= 0) return null;
+
+    if (n >= 720) return 'excellent';
+    if (n >= 690) return 'good';
+    if (n >= 630) return 'fair';
+
+    return 'poor';
+  };
+
   // Initialize filters based on filterOrder
   const initialFilters: Record<string, string> = {};
   productConfig.filterOrder.forEach((key) => {
@@ -76,8 +124,20 @@ export default function ProductComparisonPage({
   const [sortBy, setSortBy] = useState('ourScore');
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
+  const [desktopFilters, setDesktopFilters] = useState<Record<DesktopFilterKey, string>>({
+    loanType: 'all',
+    monthlyRevenue: 'all',
+    timeInBusiness: 'all',
+    creditScore: 'all',
+  });
+
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
+    setDisplayCount(INITIAL_DISPLAY_COUNT);
+  };
+
+  const handleDesktopFilterChange = (key: DesktopFilterKey, value: string) => {
+    setDesktopFilters((prev) => ({ ...prev, [key]: value }));
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 
@@ -90,57 +150,119 @@ export default function ProductComparisonPage({
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 
+  const handleDesktopReset = () => {
+    setDesktopFilters({
+      loanType: 'all',
+      monthlyRevenue: 'all',
+      timeInBusiness: 'all',
+      creditScore: 'all',
+    });
+    setDisplayCount(INITIAL_DISPLAY_COUNT);
+  };
+
   // Filter and sort lenders
   const filteredLenders = useMemo(() => {
     let result = [...lendersData];
 
-    // Apply filters dynamically
-    Object.entries(filters).forEach(([key, value]) => {
-      if (value === 'all') return;
+    if (isDesktop) {
+      const { loanType, monthlyRevenue, timeInBusiness, creditScore } = desktopFilters;
 
-      if (key === 'creditScore') {
-        const creditOrder = ['poor', 'fair', 'good', 'excellent'];
-        const filterIndex = creditOrder.indexOf(value);
+      if (loanType !== 'all') {
+        result = result.filter((l) => l.productTypes?.includes(loanType));
+      }
+
+      if (monthlyRevenue !== 'all') {
+        const revenueMap: Record<string, number> = {
+          less_10k: 9999,
+          '10k_20k': 20000,
+          '20k_30k': 30000,
+          more_30k: Number.POSITIVE_INFINITY,
+        };
+        const userRevenue = revenueMap[monthlyRevenue];
         result = result.filter((l) => {
-          const lenderIndex = creditOrder.indexOf(l.minCreditScore || '');
+          const min = parseMinRevenue(l.minRevenue);
+          if (min == null) return true;
 
-          return lenderIndex <= filterIndex;
-        });
-      } else if (
-        key.includes('loanType') ||
-        key.includes('loanPurpose') ||
-        key.includes('vehicleType') ||
-        key.includes('policyType') ||
-        key.includes('metalType') ||
-        key.includes('accountType') ||
-        key.includes('petType') ||
-        key.includes('coverageType')
-      ) {
-        result = result.filter((l) => l.productTypes?.includes(value));
-      } else if (
-        key.includes('loanAmount') ||
-        key.includes('coverageAmount') ||
-        key.includes('priceRange')
-      ) {
-        result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
-      } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
-        const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
-        const filterIndex = revenueOrder.indexOf(value);
-        result = result.filter((l) => {
-          const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
-
-          return lenderIndex <= filterIndex;
-        });
-      } else if (key.includes('timeInBusiness')) {
-        const timeOrder = ['0_6m', '6m_1y', '1_2', '2_plus'];
-        const filterIndex = timeOrder.indexOf(value);
-        result = result.filter((l) => {
-          const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
-
-          return lenderIndex <= filterIndex;
+          return min <= userRevenue;
         });
       }
-    });
+
+      if (timeInBusiness !== 'all') {
+        const userMonthsMap: Record<string, number> = {
+          '0_6m': 0,
+          '6m_1y': 6,
+          '1_2': 12,
+          '2_plus': 24,
+        };
+        const userMonths = userMonthsMap[timeInBusiness];
+        result = result.filter((l) => {
+          const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
+          if (minMonths == null) return true;
+
+          return minMonths <= userMonths;
+        });
+      }
+
+      if (creditScore !== 'all') {
+        const creditOrder = ['poor', 'fair', 'good', 'excellent'] as const;
+        const userIndex = creditOrder.indexOf(creditScore as (typeof creditOrder)[number]);
+        result = result.filter((l) => {
+          const cat = normalizeCreditCategory(l.minCreditScore);
+          if (!cat) return true;
+          const lenderIndex = creditOrder.indexOf(cat);
+
+          return lenderIndex <= userIndex;
+        });
+      }
+    } else {
+      // Apply filters dynamically (mobile + existing behavior)
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value === 'all') return;
+
+        if (key === 'creditScore') {
+          const creditOrder = ['poor', 'fair', 'good', 'excellent'];
+          const filterIndex = creditOrder.indexOf(value);
+          result = result.filter((l) => {
+            const lenderIndex = creditOrder.indexOf(normalizeCreditCategory(l.minCreditScore) || '');
+
+            return lenderIndex <= filterIndex;
+          });
+        } else if (
+          key.includes('loanType') ||
+          key.includes('loanPurpose') ||
+          key.includes('vehicleType') ||
+          key.includes('policyType') ||
+          key.includes('metalType') ||
+          key.includes('accountType') ||
+          key.includes('petType') ||
+          key.includes('coverageType')
+        ) {
+          result = result.filter((l) => l.productTypes?.includes(value));
+        } else if (
+          key.includes('loanAmount') ||
+          key.includes('coverageAmount') ||
+          key.includes('priceRange')
+        ) {
+          result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
+        } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
+          const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
+          const filterIndex = revenueOrder.indexOf(value);
+          result = result.filter((l) => {
+            const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
+
+            return lenderIndex <= filterIndex;
+          });
+        } else if (key.includes('timeInBusiness')) {
+          const timeOrder = ['0_6m', '6m_1y', '1_2', '2_plus'];
+          const filterIndex = timeOrder.indexOf(value);
+          result = result.filter((l) => {
+            const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
+
+            return lenderIndex <= filterIndex;
+          });
+        }
+      });
+    }
 
     // Apply sorting
     result.sort((a, b) => {
@@ -165,7 +287,7 @@ export default function ProductComparisonPage({
     }
 
     return result;
-  }, [filters, sortBy, lendersData, pinnedLenderIds]);
+  }, [filters, sortBy, lendersData, pinnedLenderIds, isDesktop, desktopFilters]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
   const hasMore = displayCount < filteredLenders.length;
@@ -242,13 +364,13 @@ export default function ProductComparisonPage({
             lendersData={lendersData}
             faqItems={faqItems}
             lastUpdated={lastUpdated}
-            filters={filters}
+            filters={desktopFilters}
             sortBy={sortBy}
             displayedLenders={displayedLenders}
             filteredCount={filteredLenders.length}
             onSortChange={setSortBy}
-            onFilterChange={handleFilterChange}
-            onReset={handleReset}
+            onFilterChange={handleDesktopFilterChange}
+            onReset={handleDesktopReset}
             onShowMore={() => setDisplayCount((prev) => prev + 5)}
             hasMore={hasMore}
           />

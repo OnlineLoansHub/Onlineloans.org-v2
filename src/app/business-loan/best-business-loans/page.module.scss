@@ -54,7 +54,7 @@
   }
 
   @media (min-width: 1024px) {
-    padding: 3rem 4rem;
+    padding: 1.1rem 4rem 3rem;
   }
 }
 
@@ -64,8 +64,8 @@
   gap: 0;
 
   @media (min-width: 1024px) {
-    flex-direction: row;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 }
 
@@ -74,8 +74,7 @@
   display: none;
 
   @media (min-width: 1024px) {
-    display: block;
-    width: 18rem;
+    display: none;
   }
 }
 
@@ -150,6 +149,105 @@
 .resultsCount {
   font-weight: 600;
   color: #0f172a;
+}
+
+.desktopFilterBar {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 0.25rem;
+  box-shadow:
+    0 18px 40px rgba(2, 6, 23, 0.12),
+    0 2px 10px rgba(2, 6, 23, 0.08);
+  padding: 0.75rem 0.9rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.desktopFilterBarHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.desktopFilterBarTitle {
+  font-weight: 500;
+  color: #0f172a;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.desktopFilterBarMeta {
+  font-size: 0.8125rem;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.desktopFilterBarControls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  gap: 0.6rem;
+  align-items: stretch;
+
+  @media (max-width: 1279px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+  }
+}
+
+.desktopFilterControl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.desktopFilterLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: none;
+}
+
+.desktopFilterSelect {
+  width: 100%;
+  height: 34px;
+  padding: 0 2.25rem 0 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.875rem;
+  outline: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(61, 93, 125, 0.18);
+  }
+}
+
+.desktopFilterReset {
+  height: 34px;
+  padding: 0 0.85rem;
+  border-radius: 0.25rem;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  align-self: end;
+
+  &:hover {
+    background: #eef2f7;
+    border-color: #cbd5e1;
+  }
 }
 
 .lenderCardsContainer {

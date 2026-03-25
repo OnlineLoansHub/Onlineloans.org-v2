@@ -2,8 +2,6 @@ import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import Hero from '@/components/loans/Hero';
 import LenderCard from '@/components/loans/LenderCard';
-import FilterModule from '@/components/loans/FilterModule';
-import SortControl from '@/components/loans/SortControl';
 import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
@@ -17,19 +15,71 @@ interface FAQItem {
   answer: string;
 }
 
+type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore';
+
+const DESKTOP_FILTER_OPTIONS: Record<
+  DesktopFilterKey,
+  { label: string; options: Array<{ value: string; label: string }> }
+> = {
+  loanType: {
+    label: 'Loan type',
+    options: [
+      { value: 'all', label: 'All' },
+      { value: 'term_loan', label: 'Term loan' },
+      { value: 'line_of_credit', label: 'Line of credit' },
+      { value: 'working_capital', label: 'Working capital' },
+      { value: 'merchant_cash_advance', label: 'Merchant cash advance' },
+      { value: 'invoice_financing', label: 'Invoice financing' },
+      { value: 'equipment_financing', label: 'Equipment financing' },
+      { value: 'sba_loan', label: 'SBA loan' },
+      { value: 'other', label: 'Other' },
+    ],
+  },
+  monthlyRevenue: {
+    label: 'Monthly revenue',
+    options: [
+      { value: 'all', label: 'All' },
+      { value: 'less_10k', label: 'Less than $10K' },
+      { value: '10k_20k', label: '$10K–$20K' },
+      { value: '20k_30k', label: '$20K–$30K' },
+      { value: 'more_30k', label: 'More than $30K' },
+    ],
+  },
+  timeInBusiness: {
+    label: 'Time in business',
+    options: [
+      { value: 'all', label: 'All' },
+      { value: '0_6m', label: '0–6 months' },
+      { value: '6m_1y', label: '6 months–1 year' },
+      { value: '1_2', label: '1–2 years' },
+      { value: '2_plus', label: '2+ years' },
+    ],
+  },
+  creditScore: {
+    label: 'Credit score',
+    options: [
+      { value: 'all', label: 'All' },
+      { value: 'poor', label: 'Poor (350–629)' },
+      { value: 'fair', label: 'Fair (630–689)' },
+      { value: 'good', label: 'Good (690–719)' },
+      { value: 'excellent', label: 'Excellent (720–850)' },
+    ],
+  },
+};
+
 interface ProductComparisonPageDesktopProps {
   productConfig: ProductTypeConfig;
   lendersData: Brand[];
   faqItems: FAQItem[];
   lastUpdated: string;
 
-  filters: Record<string, string>;
+  filters: Record<DesktopFilterKey, string>;
   sortBy: string;
   displayedLenders: Brand[];
   filteredCount: number;
 
   onSortChange: (value: string) => void;
-  onFilterChange: (key: string, value: string) => void;
+  onFilterChange: (key: DesktopFilterKey, value: string) => void;
   onReset: () => void;
   onShowMore: () => void;
 
@@ -42,10 +92,10 @@ export function ProductComparisonPageDesktop({
   faqItems,
   lastUpdated,
   filters,
-  sortBy,
+  sortBy: _sortBy,
   displayedLenders,
   filteredCount,
-  onSortChange,
+  onSortChange: _onSortChange,
   onFilterChange,
   onReset,
   onShowMore,
@@ -57,29 +107,47 @@ export function ProductComparisonPageDesktop({
 
       <section className={styles.mainContent}>
         <div className={styles.contentWrapper}>
-          {/* Sidebar Filters - Desktop */}
-          <aside className={styles.sidebar}>
-            <div className={styles.stickySidebar}>
-              <FilterModule
-                filters={filters}
-                filterConfig={productConfig.filters}
-                filterOrder={productConfig.filterOrder}
-                onFilterChange={onFilterChange}
-                onReset={onReset}
-                resultCount={filteredCount}
-              />
-            </div>
-          </aside>
-
           {/* Main Content Area */}
           <main className={styles.mainArea}>
-            {/* Sort Control - Desktop */}
-            <div className={styles.sortControlContainer}>
-              <div className={styles.resultsText}>
-                Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                <span className={styles.resultsCount}>{filteredCount}</span> lenders
+            {/* Desktop filter bar */}
+            <div className={styles.desktopFilterBar}>
+              <div className={styles.desktopFilterBarHeader}>
+                <div className={styles.desktopFilterBarTitle}>
+                  Are you eligible for a better rate?
+                </div>
+                <div className={styles.desktopFilterBarMeta}>
+                  Showing{' '}
+                  <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+                  <span className={styles.resultsCount}>{filteredCount}</span> lenders
+                </div>
               </div>
-              <SortControl sortBy={sortBy} onSortChange={onSortChange} />
+
+              <div className={styles.desktopFilterBarControls}>
+                {(Object.keys(DESKTOP_FILTER_OPTIONS) as DesktopFilterKey[]).map((key) => {
+                  const config = DESKTOP_FILTER_OPTIONS[key];
+
+                  return (
+                    <label key={key} className={styles.desktopFilterControl}>
+                      <span className={styles.desktopFilterLabel}>{config.label}</span>
+                      <select
+                        className={styles.desktopFilterSelect}
+                        value={filters[key]}
+                        onChange={(e) => onFilterChange(key, e.target.value)}
+                      >
+                        {config.options.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  );
+                })}
+
+                <button type="button" className={styles.desktopFilterReset} onClick={onReset}>
+                  Reset
+                </button>
+              </div>
             </div>
 
             {/* Lender Cards */}
