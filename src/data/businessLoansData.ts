@@ -253,7 +253,7 @@ export const businessLoansData: Brand[] = [
     id: 6,
     name: 'BriteCap',
     logo: '/images/brands-logos/BriteCap-logo.webp',
-    ourScore: 9.6,
+    ourScore: 9.9,
     trustpilotScore: 9.1,
     brandReputation: 8.9,
     popularityScore: 8.9,
