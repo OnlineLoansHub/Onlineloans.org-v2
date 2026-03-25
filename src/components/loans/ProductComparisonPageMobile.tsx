@@ -60,7 +60,9 @@ export function ProductComparisonPageMobile({
   advertisingDisclosureText,
 }: ProductComparisonPageMobileProps) {
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
-  const comparisonTitle = `Our Best ${productConfig.displayName}\nLenders for ${comparisonMonth} 2026`;
+  const comparisonTitlePrefix = 'Best ';
+  const comparisonTitleHighlightText = productConfig.displayName;
+  const comparisonTitleSuffix = ` of ${comparisonMonth} ${new Date().getFullYear()}`;
   const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
   const scrollToLender = useLenderDeepDiveScroll();
 
@@ -75,7 +77,9 @@ export function ProductComparisonPageMobile({
       <Hero
         heroConfig={productConfig.hero}
         validDate={lastUpdated}
-        comparisonTitle={comparisonTitle}
+        comparisonTitlePrefix={comparisonTitlePrefix}
+        comparisonTitleHighlightText={comparisonTitleHighlightText}
+        comparisonTitleSuffix={comparisonTitleSuffix}
         comparisonSubtitle={comparisonSubtitle}
       />
 
@@ -91,6 +95,11 @@ export function ProductComparisonPageMobile({
             onReset={onReset}
             resultCount={filteredCount}
           />
+        </div>
+
+        <div className={styles.mobileResultsMeta}>
+          Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+          <span className={styles.resultsCount}>{filteredCount}</span> lenders
         </div>
 
         <div className={styles.contentWrapper}>

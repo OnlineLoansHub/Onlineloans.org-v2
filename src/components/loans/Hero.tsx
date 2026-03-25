@@ -7,6 +7,9 @@ interface HeroProps {
   heroConfig: HeroConfig;
   validDate?: string;
   comparisonTitle?: string;
+  comparisonTitlePrefix?: string;
+  comparisonTitleHighlightText?: string;
+  comparisonTitleSuffix?: string;
   comparisonSubtitle?: string;
   desktopRightImageSrc?: string;
   desktopRightImageAlt?: string;
@@ -16,6 +19,9 @@ export default function Hero({
   heroConfig,
   validDate,
   comparisonTitle,
+  comparisonTitlePrefix,
+  comparisonTitleHighlightText,
+  comparisonTitleSuffix,
   comparisonSubtitle,
   desktopRightImageSrc,
   desktopRightImageAlt = '',
@@ -96,7 +102,13 @@ export default function Hero({
 
             {/* Main heading */}
             <h1 className={hasDesktopRightImage ? cls.titleWithImage : cls.title}>
-              {comparisonTitle ? (
+              {comparisonTitleHighlightText ? (
+                <>
+                  {comparisonTitlePrefix ?? ''}
+                  <span className={cls.titleHighlight}>{comparisonTitleHighlightText}</span>
+                  {comparisonTitleSuffix ?? ''}
+                </>
+              ) : comparisonTitle ? (
                 comparisonTitle.split('\n').map((line, idx) => (
                   <React.Fragment key={idx}>
                     {idx > 0 && <br />}

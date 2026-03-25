@@ -111,6 +111,17 @@
   }
 }
 
+.mobileResultsMeta {
+  display: block;
+  margin: 0.25rem 0 0.9rem;
+  font-size: 0.875rem;
+  color: #475569;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
 .sortControlContainer {
   display: flex;
   flex-direction: column;

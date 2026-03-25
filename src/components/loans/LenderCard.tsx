@@ -213,8 +213,8 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
     <>
       {/* Mobile Card - Simple Layout */}
       <div
-        className={`lg:hidden bg-white rounded shadow-2xl overflow-hidden relative ${
-          rank === 1 ? 'border-2 border-[var(--color-primary)]/70' : 'border-2 border-slate-200'
+        className={`lg:hidden bg-white rounded-md shadow-lg overflow-hidden relative ${
+          rank === 1 ? 'border-2 border-[var(--color-primary)]/70' : 'border border-slate-200'
         }`}
       >
         {/* Rank Number - Top Left Corner */}
@@ -265,7 +265,9 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
           {/* Right Column */}
           <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
             {/* Rating Number */}
-            <div className="text-3xl font-semibold text-black">{lender.ourScore}</div>
+            <div className="text-4xl font-bold text-slate-900 leading-none">
+              {lender.ourScore.toFixed(1)}
+            </div>
 
             {/* Stars - Green like Trustpilot */}
             <div className="flex items-center gap-0">
@@ -286,10 +288,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               })}
             </div>
             <div className="flex items-center gap-1">
-              <p className="text-xs text-black">Our score</p>
+              <p className="text-xs text-slate-700">Our score</p>
               <div className="relative group">
                 <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                  <Info className="w-3.5 h-3.5 text-black" />
+                  <Info className="w-3.5 h-3.5 text-slate-700" />
                 </button>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
                   Our score combines Trustpilot ratings, brand reputation, and popularity to give
@@ -303,10 +305,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               variant="primary"
               className={[
                 'w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                'text-white font-extrabold group rounded-none',
+                'text-white font-semibold group rounded-none',
               ].join(' ')}
               style={{
-                padding: '8px 11px',
+                padding: '10px 11px',
                 borderRadius: 0,
                 fontSize: '14px',
                 height: 'auto',
@@ -320,7 +322,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               }}
             >
               <span className="inline-flex items-center">
-                View Rates
+                EXPLORE
                 <ChevronsRight
                   className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
                   strokeWidth={2.5}
