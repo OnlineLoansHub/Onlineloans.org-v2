@@ -92,7 +92,7 @@ function humanizeMinTimeInBusiness(minTimeInBusiness?: string): string | null {
   const v = String(minTimeInBusiness).trim();
   const map: Record<string, string> = {
     '0_6m': '0–6 months',
-    '6m_1y': '6 months–1 year',
+    '6m_1y': '6+ months',
     '1_2': '1–2 years',
     '2_plus': '2+ years',
     '1y': '1+ year',
@@ -118,7 +118,7 @@ function humanizeMinCreditScore(minCreditScore?: string): string | null {
   if (!minCreditScore) return null;
   const v = String(minCreditScore).trim();
   const n = Number(v.replace(/[^\d]/g, ''));
-  if (Number.isFinite(n) && n > 0) return String(n);
+  if (Number.isFinite(n) && n > 0) return `${n}+`;
   const map: Record<string, string> = {
     poor: '350–629',
     fair: '630–689',
