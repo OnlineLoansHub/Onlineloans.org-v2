@@ -23,11 +23,7 @@ function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
 
   return (
     <div
-      className={[
-        'inline-flex items-center justify-center',
-        'gap-0',
-        'select-none',
-      ].join(' ')}
+      className={['inline-flex items-center justify-center', 'gap-0', 'select-none'].join(' ')}
       aria-label="BriteCap"
     >
       <span
@@ -156,8 +152,8 @@ function processCtaUrl(baseUrl: string): string {
 
     // Apply sub_id_1 and sub1 to all brands (only if tracking ID exists)
     if (trackingId) {
-    url.searchParams.set('sub_id_1', trackingId);
-    url.searchParams.set('sub1', trackingId);
+      url.searchParams.set('sub_id_1', trackingId);
+      url.searchParams.set('sub1', trackingId);
     }
 
     return url.toString();
@@ -174,6 +170,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
   const isBriteCap = lender.id === 6 || lender.name.toLowerCase() === 'britecap';
+  const isLendzi = lender.id === 1 || lender.name.toLowerCase() === 'lendzi';
 
   // Process CTA URL to include gclid/fclid in sub_id_1 and sub1 for all brands
   const processedCtaUrl = useMemo(() => processCtaUrl(lender.ctaUrl), [lender.ctaUrl]);
@@ -228,9 +225,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                     src={lender.logo}
                     alt={lender.name}
                     fill
-                    className={[
-                      'object-contain',
-                    ].join(' ')}
+                    className={['object-contain'].join(' ')}
                     sizes="(max-width: 768px) 100px, 150px"
                     priority={rank <= 3}
                     loading={rank <= 3 ? 'eager' : 'lazy'}
@@ -314,7 +309,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               }}
             >
               <span className="inline-flex items-center">
-              View Rates
+                View Rates
                 <ChevronsRight
                   className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
                   strokeWidth={2.5}
@@ -361,8 +356,8 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-10 h-10 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
-          <span className="text-white font-bold text-lg">{rank}</span>
+        <div className="absolute top-0 left-0 w-[34px] h-[34px] bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
+          <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
         </div>
 
         <div className="px-6 pt-5 pb-4">
@@ -374,14 +369,17 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                   <BriteCapLogo size="desktop" />
                 </div>
               ) : lender.logo ? (
-                <div className="relative w-[200px] h-[64px] overflow-visible">
+                <div
+                  className={[
+                    'relative w-[200px] h-[64px] overflow-visible',
+                    isLendzi ? 'mt-2' : '',
+                  ].join(' ')}
+                >
                   <Image
                     src={lender.logo}
                     alt={lender.name}
                     fill
-                    className={[
-                      'object-contain object-center',
-                    ].join(' ')}
+                    className={['object-contain object-center'].join(' ')}
                     sizes="200px"
                     priority={rank <= 3}
                     loading={rank <= 3 ? 'eager' : 'lazy'}
@@ -494,7 +492,9 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               <div className="text-xs text-slate-500">Min. Credit Score</div>
 
               {/* Row 2: values (and More Details aligned with values) */}
-              <div className="text-base font-semibold text-slate-700 text-center">More Details:</div>
+              <div className="text-base font-semibold text-slate-700 text-center">
+                More Details:
+              </div>
               <div className="text-base font-semibold text-slate-900">{lender.amount ?? '—'}</div>
               <div className="text-base font-semibold text-slate-900">
                 {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
