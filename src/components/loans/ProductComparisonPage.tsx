@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
@@ -67,6 +67,39 @@ export default function ProductComparisonPage({
 }: ProductComparisonPageProps) {
   const lastUpdated = getLastUpdated();
   const isDesktop = useMediaQuery('(min-width: 1024px)', true);
+  const [geoState, setGeoState] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const run = async () => {
+      try {
+        const res = await fetch('/api/geo', { signal: controller.signal });
+        if (!res.ok) {
+          return;
+        }
+
+        const data = (await res.json()) as { state?: unknown };
+        const state = typeof data.state === 'string' && data.state.trim() ? data.state.trim() : null;
+
+        if (!isMounted) {
+          return;
+        }
+
+        setGeoState(state);
+      } catch {
+        // ignore
+      }
+    };
+
+    run();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
 
   const parseMinRevenue = (minRevenue?: string): number | null => {
     if (!minRevenue) return null;
@@ -364,6 +397,7 @@ export default function ProductComparisonPage({
             lendersData={lendersData}
             faqItems={faqItems}
             lastUpdated={lastUpdated}
+            geoState={geoState}
             filters={desktopFilters}
             sortBy={sortBy}
             displayedLenders={displayedLenders}
@@ -380,6 +414,7 @@ export default function ProductComparisonPage({
             lendersData={lendersData}
             faqItems={faqItems}
             lastUpdated={lastUpdated}
+            geoState={geoState}
             filters={filters}
             sortBy={sortBy}
             displayedLenders={displayedLenders}

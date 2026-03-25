@@ -22,6 +22,7 @@ interface ProductComparisonPageMobileProps {
   lendersData: Brand[];
   faqItems: FAQItem[];
   lastUpdated: string;
+  geoState?: string | null;
 
   filters: Record<string, string>;
   sortBy: string;
@@ -44,6 +45,7 @@ export function ProductComparisonPageMobile({
   lendersData,
   faqItems,
   lastUpdated,
+  geoState,
   filters,
   sortBy,
   displayedLenders,
@@ -56,6 +58,9 @@ export function ProductComparisonPageMobile({
   showAdvertisingDisclosure,
   advertisingDisclosureText,
 }: ProductComparisonPageMobileProps) {
+  const comparisonTitle = `Our Best ${productConfig.displayName} Lenders in ${geoState ?? 'your state'} 2026`;
+  const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
+
   return (
     <>
       {showAdvertisingDisclosure && (
@@ -64,7 +69,12 @@ export function ProductComparisonPageMobile({
         </div>
       )}
 
-      <Hero heroConfig={productConfig.hero} validDate={lastUpdated} />
+      <Hero
+        heroConfig={productConfig.hero}
+        validDate={lastUpdated}
+        comparisonTitle={comparisonTitle}
+        comparisonSubtitle={comparisonSubtitle}
+      />
 
       <section className={styles.mainContent}>
         {/* Mobile Filter and Sort Row */}

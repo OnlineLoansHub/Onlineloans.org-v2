@@ -3,36 +3,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import {
-  PawPrint,
-  Home as HomeIcon,
-  TrendingUp,
-  GraduationCap,
-  Car,
-  Briefcase,
-  Wallet,
-  Bitcoin,
-  Coins,
-  Clock,
-} from 'lucide-react';
+import { Clock } from 'lucide-react';
 import { ExploreIllustration } from './illustrations/ExploreIllustration';
 import { CompareIllustration } from './illustrations/CompareIllustration';
 import { ChooseIllustration } from './illustrations/ChooseIllustration';
 import { trackHeroCardClick } from '@/lib/impression';
 import { useImpression } from '@/contexts/ImpressionContext';
+import { CATEGORIES } from '@/config/categories';
 import cls from './HomePage.module.scss';
-
-const categories = [
-  { icon: Briefcase, title: 'Business Loans' },
-  { icon: TrendingUp, title: 'Credit Score' },
-  { icon: Wallet, title: 'Personal Loans' },
-  { icon: Bitcoin, title: 'Crypto Loans' },
-  { icon: Car, title: 'Auto Loans' },
-  { icon: GraduationCap, title: 'Student Loans' },
-  { icon: HomeIcon, title: 'Mortgage Loans' },
-  { icon: PawPrint, title: 'Pet Insurance' },
-  { icon: Coins, title: 'Gold and Silver' },
-];
 
 export default function HomePage() {
   const router = useRouter();
@@ -102,23 +80,9 @@ export default function HomePage() {
 
           {/* Category Grid */}
           <div className={cls.categoryGrid}>
-            {categories.map((category, index) => {
+            {CATEGORIES.map((category, index) => {
               const IconComponent = category.icon;
-
-              // Map category titles to their respective page URLs
-              const hrefMap: Record<string, string> = {
-                'Business Loans': '/business-loan/best-business-loans',
-                'Mortgage Loans': '/mortgage-loan/best-mortgage-loans',
-                'Student Loans': '/student-loan/best-student-loans',
-                'Personal Loans': '/personal-loan/best-personal-loans',
-                'Auto Loans': '/auto-loan/best-auto-loans',
-                'Pet Insurance': '/pet-insurance/best-pet-insurance',
-                'Credit Score': '/credit-score/credit-score-monitoring',
-                'Crypto Loans': '/crypto-loans/best-crypto-loans',
-                'Gold and Silver': '/gold-and-silver/best-gold-and-silver',
-              };
-
-              const href = hrefMap[category.title] || '#';
+              const href = category.href;
 
               return (
                 <Link

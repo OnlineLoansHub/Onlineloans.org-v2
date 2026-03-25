@@ -7,6 +7,7 @@ import { AppLink } from '@/components/ui/AppLink/AppLink';
 import Logo from '@/components/ui/Logo/Logo';
 import { URL_CONFIG } from '@/lib/urlConfig';
 import { classNames } from '@/lib';
+import { CATEGORIES } from '@/config/categories';
 import cls from './Header.module.scss';
 
 interface HeaderConfigItem {
@@ -28,9 +29,12 @@ const headerConfig: HeaderConfigItem[] = [
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const path = usePathname();
+  const isHome = path === URL_CONFIG.main;
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   return (
     <header className={cls.header}>
@@ -52,17 +56,67 @@ export const Header = () => {
           <span className={cls.burgerLine}></span>
         </button>
         <ul className={classNames(cls.navList, { [cls.open]: isOpen })}>
-          {headerConfig.map((item) => {
-            const isActive = item.pathMatch ? item.pathMatch.includes(path) : path === item.path;
+          {isHome ? (
+            headerConfig.map((item) => {
+              const isActive = item.pathMatch ? item.pathMatch.includes(path) : path === item.path;
 
-            return (
-              <li key={item.path} className={cls.navItem} onClick={toggleMenu}>
-                <AppLink isWithHover href={item.path} className={cls.navLink} isActive={isActive}>
-                  {item.title}
+              return (
+                <li key={item.path} className={cls.navItem} onClick={toggleMenu}>
+                  <AppLink isWithHover href={item.path} className={cls.navLink} isActive={isActive}>
+                    {item.title}
+                  </AppLink>
+                </li>
+              );
+            })
+          ) : (
+            <>
+              <li className={classNames(cls.navItem, {}, [cls.dropdown])}>
+                <button
+                  type="button"
+                  className={classNames(cls.navLink, {}, [cls.dropdownToggle])}
+                  aria-haspopup="menu"
+                  aria-expanded={isDropdownOpen}
+                  onClick={toggleDropdown}
+                >
+                  Products
+                  <span
+                    className={classNames(cls.dropdownCaret, { [cls.open]: isDropdownOpen })}
+                  >
+                    ▾
+                  </span>
+                </button>
+
+                <div className={classNames(cls.dropdownMenu, { [cls.open]: isDropdownOpen })}>
+                  {CATEGORIES.map((c) => (
+                    <AppLink
+                      key={c.href}
+                      href={c.href}
+                      className={cls.dropdownItem}
+                      isWithHover
+                      onClick={() => {
+                        setIsDropdownOpen(false);
+                        setIsOpen(false);
+                      }}
+                    >
+                      {c.title}
+                    </AppLink>
+                  ))}
+                </div>
+              </li>
+
+              <li className={cls.navItem} onClick={toggleMenu}>
+                <AppLink
+                  href="https://apply.onlineloans.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cls.navLink}
+                  isWithHover
+                >
+                  Apply Now
                 </AppLink>
               </li>
-            );
-          })}
+            </>
+          )}
         </ul>
       </nav>
     </header>

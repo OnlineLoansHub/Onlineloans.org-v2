@@ -6,9 +6,16 @@ import type { HeroConfig } from '@/data/productTypes';
 interface HeroProps {
   heroConfig: HeroConfig;
   validDate?: string;
+  comparisonTitle?: string;
+  comparisonSubtitle?: string;
 }
 
-export default function Hero({ heroConfig, validDate }: HeroProps) {
+export default function Hero({
+  heroConfig,
+  validDate,
+  comparisonTitle,
+  comparisonSubtitle,
+}: HeroProps) {
   const monthYear = 'January 2026';
 
   return (
@@ -77,15 +84,25 @@ export default function Hero({ heroConfig, validDate }: HeroProps) {
 
         {/* Main heading */}
         <h1 className={cls.title}>
-          {heroConfig.title}{' '}
-          {heroConfig.titleHighlight && (
-            <span className={cls.titleHighlight}>{heroConfig.titleHighlight}</span>
-          )}{' '}
-          of {monthYear}
+          {comparisonTitle ? (
+            comparisonTitle
+          ) : (
+            <>
+              {heroConfig.title}{' '}
+              {heroConfig.titleHighlight && (
+                <span className={cls.titleHighlight}>{heroConfig.titleHighlight}</span>
+              )}{' '}
+              of {monthYear}
+            </>
+          )}
         </h1>
 
         {/* Sub-hero text */}
-        <p className={cls.subHeroText}>Find funding that fits your business</p>
+        {comparisonSubtitle ? (
+          <p className={cls.subHeroText}>{comparisonSubtitle}</p>
+        ) : (
+          <p className={cls.subHeroText}>Find funding that fits your business</p>
+        )}
 
         {/* BBB and Trustpilot badges */}
         <div className={cls.trustBadges}>

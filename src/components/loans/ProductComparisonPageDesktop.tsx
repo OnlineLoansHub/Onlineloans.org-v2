@@ -72,6 +72,7 @@ interface ProductComparisonPageDesktopProps {
   lendersData: Brand[];
   faqItems: FAQItem[];
   lastUpdated: string;
+  geoState?: string | null;
 
   filters: Record<DesktopFilterKey, string>;
   sortBy: string;
@@ -91,6 +92,7 @@ export function ProductComparisonPageDesktop({
   lendersData,
   faqItems,
   lastUpdated,
+  geoState,
   filters,
   sortBy: _sortBy,
   displayedLenders,
@@ -101,9 +103,17 @@ export function ProductComparisonPageDesktop({
   onShowMore,
   hasMore,
 }: ProductComparisonPageDesktopProps) {
+  const comparisonTitle = `Our Best ${productConfig.displayName} Lenders in ${geoState ?? 'your state'} 2026`;
+  const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
+
   return (
     <>
-      <Hero heroConfig={productConfig.hero} validDate={lastUpdated} />
+      <Hero
+        heroConfig={productConfig.hero}
+        validDate={lastUpdated}
+        comparisonTitle={comparisonTitle}
+        comparisonSubtitle={comparisonSubtitle}
+      />
 
       <section className={styles.mainContent}>
         <div className={styles.contentWrapper}>
