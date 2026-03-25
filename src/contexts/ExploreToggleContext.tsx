@@ -31,6 +31,7 @@ export const ExploreToggleProvider = ({ children }: { children: ReactNode }) => 
           if (isMobileWidth) {
             setIsOpen(true);
           }
+
           rafId = null;
         });
       }
@@ -53,6 +54,7 @@ export const ExploreToggleProvider = ({ children }: { children: ReactNode }) => 
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }

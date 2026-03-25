@@ -59,10 +59,11 @@ export const ImpressionTracker = () => {
           if (timeElapsed < IMPRESSION_DURATION) {
             // Set in context (for memory-first access)
             setImpressionId(storedId);
+
             return;
           }
         }
-        
+
         // Mark as creating to prevent duplicates
         isCreatingRef.current = true;
 
@@ -71,7 +72,7 @@ export const ImpressionTracker = () => {
           typeof window !== 'undefined'
             ? `${document.referrer || window.location.origin}${window.location.pathname}${window.location.search}`
             : '';
-        
+
         // Create new impression using fetch with keepalive
         const response = await fetch(API_URL, {
           method: 'POST',
@@ -91,7 +92,7 @@ export const ImpressionTracker = () => {
             // Then persist to localStorage SECOND (for page reloads)
             safeLocalStorageSet(IMPRESSION_STORAGE_KEY, data.id);
             safeLocalStorageSet(IMPRESSION_TIMESTAMP_KEY, Date.now().toString());
-            
+
             // Flush queued events now that impression ID is available
             flushEventQueue(data.id);
           }

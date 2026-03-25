@@ -1,5 +1,4 @@
 import { ProductTypeConfig } from '../productTypes';
-import { Building2 } from 'lucide-react';
 
 export const businessLoansConfig: ProductTypeConfig = {
   id: 'business-loans',

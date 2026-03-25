@@ -45,6 +45,7 @@ export default function RestaurantFundingPage() {
               if (activeMenuItem !== i) {
                 setActiveMenuItem(i);
               }
+
               foundActive = true;
             }
           }
@@ -64,6 +65,7 @@ export default function RestaurantFundingPage() {
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
+
         timeoutId = setTimeout(() => func(), wait);
       };
     };
@@ -77,6 +79,7 @@ export default function RestaurantFundingPage() {
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }

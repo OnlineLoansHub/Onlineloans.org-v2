@@ -186,10 +186,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold group"
-              // className={`w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-extrabold ${
-              //   shouldWiggle ? 'animate-wiggle' : ''
-              // }`}
+              className={[
+                'w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
+                'text-white font-extrabold group',
+              ].join(' ')}
               style={{
                 padding: '8px 11px',
                 borderRadius: '6px',
@@ -357,10 +357,10 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Button
               variant="primary"
-              className="flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded font-semibold text-base transition-all group"
-              // className={`flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded font-semibold text-base transition-all group ${
-              //   shouldWiggle ? 'animate-wiggle' : ''
-              // }`}
+              className={[
+                'flex-1 sm:flex-none bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
+                'text-white rounded font-semibold text-base transition-all group',
+              ].join(' ')}
               style={{
                 borderRadius: '6px',
                 fontSize: '1rem',

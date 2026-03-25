@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable max-len */
 import { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import Image from 'next/image';
@@ -46,6 +47,7 @@ export default function ConstructionFundingPage() {
               if (activeMenuItem !== i) {
                 setActiveMenuItem(i);
               }
+
               foundActive = true;
             }
           }
@@ -65,6 +67,7 @@ export default function ConstructionFundingPage() {
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
+
         timeoutId = setTimeout(() => func(), wait);
       };
     };
@@ -78,6 +81,7 @@ export default function ConstructionFundingPage() {
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }

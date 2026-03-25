@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable max-len */
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { classNames } from '@/lib';
@@ -47,6 +48,7 @@ export default function ArticlePage() {
               if (activeMenuItem !== i) {
                 setActiveMenuItem(i);
               }
+
               foundActive = true;
             }
           }
@@ -66,6 +68,7 @@ export default function ArticlePage() {
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
+
         timeoutId = setTimeout(() => func(), wait);
       };
     };
@@ -79,6 +82,7 @@ export default function ArticlePage() {
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }

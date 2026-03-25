@@ -24,6 +24,7 @@ export const FAQAccordion: FC<FAQAccordionProps> = ({ items, variant = 'light' }
     <div className={`${cls.faqContainer} ${variant === 'dark' ? cls.faqContainerDark : ''}`}>
       {items.map((item, index) => {
         const isOpen = openIndex === index;
+
         return (
           <div key={index} className={`${cls.faqItem} ${isOpen ? cls.faqItemActive : ''}`}>
             <button

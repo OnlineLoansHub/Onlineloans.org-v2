@@ -15,6 +15,7 @@ export function useMediaQuery(query: string, defaultValue = false): boolean {
     onChange();
 
     mql.addEventListener('change', onChange);
+
     return () => mql.removeEventListener('change', onChange);
   }, [query]);
 

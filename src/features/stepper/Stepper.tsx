@@ -315,6 +315,7 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
           } else {
             setContainerHeight('auto');
           }
+
           rafId = null;
         });
       }
@@ -343,9 +344,11 @@ export const Stepper = ({ handleFormFilled, config }: IStepFormProps) => {
       if (rafId !== null) {
         cancelAnimationFrame(rafId);
       }
+
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
+
       clearTimeout(initialTimeoutId);
     };
   }, [index, formState]);

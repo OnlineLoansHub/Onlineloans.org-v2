@@ -88,7 +88,7 @@ export const FinalStep = ({
 
   return (
     <div className={cls.page}>
-      {true && (
+      {showConfetti && (
         <Confetti
           width={windowSize.width}
           height={windowSize.height}

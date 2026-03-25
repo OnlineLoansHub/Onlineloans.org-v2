@@ -14,16 +14,6 @@ interface FilterConfig {
   options: FilterOption[];
 }
 
-type FilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore' | 'loanAmount';
-
-interface Filters {
-  loanType: string;
-  monthlyRevenue: string;
-  timeInBusiness: string;
-  creditScore: string;
-  loanAmount: string;
-}
-
 interface FilterModuleProps {
   filters: Record<string, string>;
   filterConfig: Record<string, FilterConfig>;
@@ -164,7 +154,9 @@ export default function FilterModule({
     initialExpanded[key] = index === 0;
   });
 
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(initialExpanded);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>(
+    initialExpanded
+  );
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const toggleSection = useCallback((key: string) => {
@@ -206,7 +198,13 @@ export default function FilterModule({
   const filterContent = (
     <div className="bg-white rounded border border-slate-200 shadow-xl overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-slate-50 to-white border-b border-slate-200">
+      <div
+        className={[
+          'flex items-center justify-between px-5 py-4',
+          'bg-gradient-to-r from-slate-50 to-white',
+          'border-b border-slate-200',
+        ].join(' ')}
+      >
         <div className="flex items-center gap-2.5">
           <div className="p-1.5 bg-[var(--color-primary)]/10 rounded">
             <Filter className="w-4 h-4 text-[var(--color-primary)]" />
@@ -216,8 +214,13 @@ export default function FilterModule({
         {activeFilterCount > 0 && (
           <button
             type="button"
-            onClick={onReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-600 hover:text-[var(--color-primary)] hover:bg-slate-100 rounded transition-colors"
+            onClick={handleReset}
+            className={[
+              'flex items-center gap-1.5 px-3 py-1.5',
+              'text-xs font-medium text-slate-600',
+              'hover:text-[var(--color-primary)] hover:bg-slate-100',
+              'rounded transition-colors',
+            ].join(' ')}
           >
             <RotateCcw className="w-3.5 h-3.5" />
             Reset

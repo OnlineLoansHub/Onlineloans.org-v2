@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable max-len */
 import cls from './page.module.scss';
 
 export default function TermsOfUse() {

@@ -106,7 +106,9 @@ export function ProductComparisonPageDesktop({
                     </svg>
                   </div>
                   <h3 className={styles.emptyStateTitle}>No lenders found</h3>
-                  <p className={styles.emptyStateText}>Try adjusting your filters to see more results.</p>
+                  <p className={styles.emptyStateText}>
+                    Try adjusting your filters to see more results.
+                  </p>
                   <Button variant="secondary" onClick={onReset}>
                     Reset Filters
                   </Button>
@@ -130,7 +132,9 @@ export function ProductComparisonPageDesktop({
       {/* Recommendation Wizard */}
       <section className={styles.unifiedSection}>
         <div className={styles.unifiedContainer}>
-          <h2 className={styles.unifiedTitle}>Find Your Perfect {productConfig.displayName} Match</h2>
+          <h2 className={styles.unifiedTitle}>
+            Find Your Perfect {productConfig.displayName} Match
+          </h2>
           <RecommendationWizard lenders={lendersData} wizardConfig={productConfig.wizard} />
         </div>
       </section>

@@ -36,7 +36,6 @@ export default function IframeEmbed({
 }: IframeEmbedProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
-  const [iframeReady, setIframeReady] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const scriptsLoadedRef = useRef<Set<string>>(new Set());
   const styleElementRef = useRef<HTMLStyleElement | null>(null);
@@ -44,14 +43,13 @@ export default function IframeEmbed({
   const loadTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const config = getIframeConfig(iframeId);
+  const iframeReady = Boolean(config);
 
   // Timeout fallback - hide loader after 1 second even if onLoad doesn't fire
   // This handles cases where cross-origin iframes don't fire onLoad events
   // Most iframes load quickly, so we don't need a long delay
   useEffect(() => {
     if (config) {
-      // Show iframe immediately, hide loader after short delay
-      setIframeReady(true);
       loadTimeoutRef.current = setTimeout(() => {
         setIsLoading(false);
       }, 1000);

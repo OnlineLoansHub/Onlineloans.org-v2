@@ -21,6 +21,7 @@ export const ImpressionProvider = ({ children }: { children: ReactNode }) => {
         return null;
       }
     }
+
     return null;
   });
 
@@ -50,6 +51,7 @@ export const useImpression = () => {
   if (context === undefined) {
     throw new Error('useImpression must be used within ImpressionProvider');
   }
+
   return context;
 };
 
