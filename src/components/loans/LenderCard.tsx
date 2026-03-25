@@ -416,35 +416,25 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
 
           {/* Bottom details row */}
           <div className="mt-4 pt-4 border-t border-slate-200">
-            <div className="grid grid-cols-[200px_repeat(4,minmax(0,1fr))] gap-6 items-start">
-              <div className="text-sm font-semibold text-slate-700">More Details:</div>
+            <div className="grid grid-cols-[220px_repeat(4,max-content)] grid-rows-2 gap-x-8 gap-y-1 items-start">
+              {/* Row 1: labels */}
+              <div />
+              <div className="text-xs text-slate-500">Loan Amount</div>
+              <div className="text-xs text-slate-500">Time In Business</div>
+              <div className="text-xs text-slate-500">Monthly Revenue</div>
+              <div className="text-xs text-slate-500">Min. Credit Score</div>
 
-              <div className="min-w-0">
-                <div className="text-xs text-slate-500">Loan Amount</div>
-                <div className="text-base font-semibold text-slate-900">
-                  {lender.amount ?? '—'}
-                </div>
+              {/* Row 2: values (and More Details aligned with values) */}
+              <div className="text-base font-semibold text-slate-700 text-center">More Details:</div>
+              <div className="text-base font-semibold text-slate-900">{lender.amount ?? '—'}</div>
+              <div className="text-base font-semibold text-slate-900">
+                {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
               </div>
-
-              <div className="min-w-0">
-                <div className="text-xs text-slate-500">Time In Business</div>
-                <div className="text-base font-semibold text-slate-900">
-                  {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
-                </div>
+              <div className="text-base font-semibold text-slate-900">
+                {humanizeMinRevenue(lender.minRevenue) ?? '—'}
               </div>
-
-              <div className="min-w-0">
-                <div className="text-xs text-slate-500">Monthly Revenue</div>
-                <div className="text-base font-semibold text-slate-900">
-                  {humanizeMinRevenue(lender.minRevenue) ?? '—'}
-                </div>
-              </div>
-
-              <div className="min-w-0">
-                <div className="text-xs text-slate-500">Min. Credit Score</div>
-                <div className="text-base font-semibold text-slate-900">
-                  {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
-                </div>
+              <div className="text-base font-semibold text-slate-900">
+                {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
               </div>
             </div>
           </div>
