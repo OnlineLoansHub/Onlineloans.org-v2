@@ -273,7 +273,7 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
               }}
             >
               <span className="inline-flex items-center">
-              EXPLORE
+              View Rates
                 <ChevronsRight
                   className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
                   strokeWidth={2.5}
@@ -374,15 +374,16 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
             </div>
 
             {/* Right (score + CTA) */}
-            <div className="flex flex-col items-end gap-3 pt-1">
-              <div className="flex items-start gap-3">
-                <div className="text-right">
-                  <div className="text-4xl font-bold text-slate-900 leading-none">
-                    {lender.ourScore.toFixed(1)}
-                  </div>
-                  <div className="mt-1 flex items-center justify-end gap-2">
-                    <StarRating score={lender.ourScore} />
-                    <span className="text-xs text-slate-600">
+            <div className="flex flex-col items-stretch gap-4 pt-1">
+              <div className="flex items-start justify-end gap-2 w-full">
+                <div className="text-4xl font-bold text-slate-900 leading-none">
+                  {lender.ourScore.toFixed(1)}
+                </div>
+
+                <div className="flex flex-col items-end gap-1 pt-0.5">
+                  <StarRating score={lender.ourScore} />
+                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 self-start">
+                    <span>
                       {lender.ourScore >= 9
                         ? 'Excellent'
                         : lender.ourScore >= 8
@@ -395,22 +396,43 @@ export default function LenderCard({ lender, rank, amountLabel }: LenderCardProp
                 </div>
               </div>
 
-              <Button
-                variant="primary"
-                className={[
-                  'bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                  'text-white rounded font-semibold transition-all',
-                  'h-11 px-10',
-                ].join(' ')}
-                style={{ borderRadius: '0.25rem', margin: 0, border: 0 }}
-                onClick={() => {
-                  trackBrandClick(lender.name, pageName, impressionId);
-                  gtag_report_conversion();
-                  window.open(processedCtaUrl || '#', '_blank');
-                }}
-              >
-                Explore
-              </Button>
+              <div className="w-[200px] self-end flex flex-col items-center gap-2">
+                <Button
+                  variant="primary"
+                  className={[
+                    'bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
+                    'text-white rounded-none font-semibold transition-all',
+                    'transform-gpu will-change-transform',
+                    'duration-200 ease-out',
+                    'hover:-translate-y-0.5 hover:scale-[1.02]',
+                    'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
+                    'h-10 w-full text-sm whitespace-nowrap',
+                  ].join(' ')}
+                  style={{ margin: 0, border: 0, borderRadius: 0 }}
+                  onClick={() => {
+                    trackBrandClick(lender.name, pageName, impressionId);
+                    gtag_report_conversion();
+                    window.open(processedCtaUrl || '#', '_blank');
+                  }}
+                >
+                  View Rates
+                </Button>
+
+                {lender.websiteUrl && (
+                  <a
+                    href={lender.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-slate-600 hover:underline"
+                    onClick={() => {
+                      trackBrandClick(lender.name, pageName, impressionId);
+                      gtag_report_conversion();
+                    }}
+                  >
+                    Or read more
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 

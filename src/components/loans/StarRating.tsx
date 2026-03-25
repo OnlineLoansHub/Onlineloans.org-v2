@@ -17,7 +17,7 @@ export default function StarRating({ score, maxScore = 10 }: StarRatingProps) {
     <div className="flex items-center gap-0.5">
       {/* Full stars */}
       {[...Array(fullStars)].map((_, i) => (
-        <Star key={`full-${i}`} className="w-4 h-4 fill-amber-400 text-amber-400" />
+        <Star key={`full-${i}`} className="w-4 h-4 fill-emerald-500 text-emerald-500" />
       ))}
 
       {/* Partial star */}
@@ -28,7 +28,7 @@ export default function StarRating({ score, maxScore = 10 }: StarRatingProps) {
             className="absolute inset-0 overflow-hidden"
             style={{ width: `${partialStar * 100}%` }}
           >
-            <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+            <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
           </div>
         </div>
       )}
