@@ -133,12 +133,12 @@ function processCtaUrl(baseUrl: string): string {
 }
 
 function scrollToDeepDive(id: string) {
-  const el = document.getElementById(id);
+  const el = document.getElementById(id) as HTMLElement | null;
   if (!el) return;
 
   // Use native smooth scrolling, while relying on scroll-margin-top on the target
   // section so it doesn't end up hidden under a sticky header.
-  if ('scrollIntoView' in el) {
+  if (typeof el.scrollIntoView === 'function') {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }

@@ -1,9 +1,11 @@
-import type { FC, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, FC, ReactNode } from 'react';
 import Link, { type LinkProps } from 'next/link';
 import { classNames } from '@/lib';
 import cls from './AppLink.module.scss';
 
-interface AppLinkProps extends LinkProps {
+type AnchorExtras = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps | 'href'>;
+
+interface AppLinkProps extends LinkProps, AnchorExtras {
   className?: string;
   isWithHover?: boolean;
   children?: ReactNode;
