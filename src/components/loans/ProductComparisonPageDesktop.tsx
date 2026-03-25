@@ -241,9 +241,7 @@ export function ProductComparisonPageDesktop({
       </section>
 
       {/* Cross Promo Section */}
-      {productConfig.crossPromo ? (
-        <CrossPromo crossPromoConfig={productConfig.crossPromo} />
-      ) : null}
+      {productConfig.crossPromo ? <CrossPromo crossPromoConfig={productConfig.crossPromo} /> : null}
 
       {/* FAQ Section */}
       <section className={styles.unifiedSection}>

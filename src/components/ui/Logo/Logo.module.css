@@ -1,6 +1,5 @@
 .logoContainer {
   position: relative;
- 
 }
 
 .logoText {
@@ -36,7 +35,7 @@
 }
 
 .orgLetter {
-  color: var(--color-primary-dark);
+  color: #0e824c;
 }
 
 @keyframes writeIn {
@@ -75,4 +74,3 @@
     transform: scale(1) translateY(0);
   }
 }
-
