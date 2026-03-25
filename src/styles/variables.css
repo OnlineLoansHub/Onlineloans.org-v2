@@ -1,14 +1,14 @@
 :root {
   /* 🎨 Core Colors - 10 Total */
   /* Primary Colors */
-  --color-primary: #19288e;
-  --color-secondary: #19288e;
-  --color-primary-dark: #131c5b;
-  --color-primary-darker: #0c123d;
+  --color-primary: #235675;
+  --color-secondary: #006382;
+  --color-primary-dark: #1b425b;
+  --color-primary-darker: #123043;
 
   /* Hero Background */
   /* Update these in ONE place to change hero gradients app-wide */
-  --hero-gradient: linear-gradient(45deg, #19288e, #131c5b);
+  --hero-gradient: linear-gradient(131.14deg, #235675 26.69%, #8ebed5 131.72%);
   --color-black: #000;
   --color-white: #fff;
   --color-gray-dark: #161616; /* Dark text/surfaces */

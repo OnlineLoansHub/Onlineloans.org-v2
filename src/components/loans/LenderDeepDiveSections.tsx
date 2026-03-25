@@ -174,7 +174,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
           <section
             key={lender.id}
             id={id}
-            className="bg-white border border-slate-200 rounded-lg shadow-sm"
+            className="bg-white border border-slate-200 rounded-md shadow-sm"
             style={{ scrollMarginTop: 112 }}
           >
             <div className="p-6">
@@ -228,19 +228,19 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                     </p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                      <div className="bg-slate-50 rounded-md p-3 border border-slate-200">
+                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
                         <div className="text-xs text-slate-500">Loan amount</div>
                         <div className="text-sm font-semibold text-slate-900">{lender.amount ?? '—'}</div>
                       </div>
-                      <div className="bg-slate-50 rounded-md p-3 border border-slate-200">
+                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
                         <div className="text-xs text-slate-500">Min. credit score</div>
                         <div className="text-sm font-semibold text-slate-900">{lender.minCreditScore ?? '—'}</div>
                       </div>
-                      <div className="bg-slate-50 rounded-md p-3 border border-slate-200">
+                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
                         <div className="text-xs text-slate-500">Monthly revenue</div>
                         <div className="text-sm font-semibold text-slate-900">{lender.minRevenue ?? '—'}</div>
                       </div>
-                      <div className="bg-slate-50 rounded-md p-3 border border-slate-200">
+                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
                         <div className="text-xs text-slate-500">Time in business</div>
                         <div className="text-sm font-semibold text-slate-900">{lender.minTimeInBusiness ?? '—'}</div>
                       </div>
@@ -250,7 +250,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                   <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
                     <div>
                       <div className="text-sm font-bold text-slate-900 mb-2">What we like</div>
-                      <div className="overflow-hidden rounded-md border border-slate-200">
+                      <div className="overflow-hidden rounded-sm border border-slate-200">
                         <table className="w-full border-collapse">
                           <tbody>
                             {(lender.goodDetails ?? []).length ? (
@@ -273,7 +273,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                     </div>
                     <div>
                       <div className="text-sm font-bold text-slate-900 mb-2">What to consider</div>
-                      <div className="overflow-hidden rounded-md border border-slate-200">
+                      <div className="overflow-hidden rounded-sm border border-slate-200">
                         <table className="w-full border-collapse">
                           <tbody>
                             {(lender.badDetails ?? []).length ? (
@@ -300,7 +300,8 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
               <div className="mt-6 pt-5 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
                 <Button
                   variant="primary"
-                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-semibold rounded-md sm:order-2"
+                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-semibold rounded-none sm:order-2"
+                  style={{ borderRadius: 0 }}
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId);
                     gtag_report_conversion();
