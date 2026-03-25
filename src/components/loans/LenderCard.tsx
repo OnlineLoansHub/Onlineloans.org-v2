@@ -443,8 +443,8 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             </div>
 
             {/* Right (score + CTA) */}
-            <div className="flex flex-col items-stretch gap-4 pt-1">
-              <div className="flex items-start justify-end gap-2 w-full">
+            <div className="flex h-full flex-col items-center justify-center gap-4">
+              <div className="flex items-start justify-center gap-2 w-full">
                 <div className="text-4xl font-bold text-black leading-none">
                   {lender.ourScore.toFixed(1)}
                 </div>
@@ -465,7 +465,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                 </div>
               </div>
 
-              <div className="w-[200px] self-end flex flex-col items-center gap-2">
+              <div className="w-[200px] self-center flex flex-col items-center gap-2">
                 <Button
                   variant="primary"
                   className={[
