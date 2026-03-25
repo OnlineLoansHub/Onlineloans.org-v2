@@ -206,8 +206,8 @@ export default function FilterModule({
         ].join(' ')}
       >
         <div className="flex items-center gap-2.5">
-          <div className="p-1.5 bg-[var(--color-primary)]/10 rounded">
-            <Filter className="w-4 h-4 text-[var(--color-primary)]" />
+          <div className="p-1.5 bg-slate-100 rounded">
+            <Filter className="w-4 h-4 text-black" />
           </div>
           <span className="font-bold text-slate-900 text-base">Filters</span>
         </div>
@@ -284,7 +284,7 @@ export default function FilterModule({
             justifyContent: 'center',
           }}
         >
-          <Filter className="w-3.5 h-3.5" />
+          <Filter className="w-3.5 h-3.5 text-black" />
           <span>Filters</span>
           {activeFilterCount > 0 && (
             <span className="bg-[var(--color-primary)] text-white text-xs px-1.5 py-0.5 rounded-full">
@@ -332,7 +332,7 @@ export default function FilterModule({
               <div className="px-5 py-4 border-t border-slate-200 flex-shrink-0 bg-slate-50/50">
                 <Button
                   variant="primary"
-                  className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-semibold py-3 rounded shadow-sm"
+                  className="w-full text-white font-semibold py-3 rounded shadow-sm"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   Show {resultCount} Results

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
-import { Header } from '@/components/layout/Header/Header';
+import { SiteTopChrome } from '@/components/layout/SiteTopChrome/SiteTopChrome';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
 import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { AccessibilityWidget } from '@/components/accessibility/AccessibilityWidget';
@@ -91,7 +91,7 @@ export default function RootLayout({
             <ImpressionTracker />
             <DefaultStructuredData />
             <SkipToContent />
-            <Header />
+            <SiteTopChrome />
             {/* <LegacyBanner /> */}
             <main id="main-content" className="main-container">
               {children}

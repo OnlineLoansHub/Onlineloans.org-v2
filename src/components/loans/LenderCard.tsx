@@ -222,7 +222,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-7 h-7 bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-7 h-7 bg-[var(--color-black)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-sm">{rank}</span>
         </div>
 
@@ -248,7 +248,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   />
                 </div>
               ) : (
-                <span className="font-bold text-slate-700 text-base text-center">
+                <span className="font-bold text-black text-base text-center">
                   {lender.name}
                 </span>
               )}
@@ -257,8 +257,8 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             {/* Amount Field - Mobile Only */}
             {lender.amount && amountLabel && (
               <div className="text-center mt-2 lg:hidden">
-                <p className="text-xs text-slate-600 mb-1 font-medium">{amountLabel}</p>
-                <p className="text-2xl font-bold text-slate-900">{lender.amount}</p>
+                <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
+                <p className="text-2xl font-bold text-black">{lender.amount}</p>
               </div>
             )}
           </div>
@@ -269,7 +269,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
           {/* Right Column */}
           <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
             {/* Rating Number */}
-            <div className="text-4xl font-bold text-slate-900 leading-none">
+            <div className="text-4xl font-bold text-black leading-none">
               {lender.ourScore.toFixed(1)}
             </div>
 
@@ -292,10 +292,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               })}
             </div>
             <div className="flex items-center gap-1">
-              <p className="text-xs text-slate-700">Our score</p>
+              <p className="text-xs text-black">Our score</p>
               <div className="relative group">
                 <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                  <Info className="w-3.5 h-3.5 text-slate-700" />
+                  <Info className="w-3.5 h-3.5 text-black" />
                 </button>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
                   Our score combines Trustpilot ratings, brand reputation, and popularity to give
@@ -307,10 +307,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className={[
-                'w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
-                'text-white font-semibold group rounded-none',
-              ].join(' ')}
+              className={['w-full text-white font-semibold group rounded-none'].join(' ')}
               style={{
                 padding: '10px 11px',
                 borderRadius: 0,
@@ -338,7 +335,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             {lender.websiteUrl ? (
               <a
                 href="#"
-                className="text-[11px] text-slate-600 hover:underline"
+                className="text-[11px] text-black hover:underline"
                 role="button"
                 onClick={(e) => {
                   e.preventDefault();
@@ -380,7 +377,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-[34px] h-[34px] bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-[34px] h-[34px] bg-[var(--color-black)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
         </div>
 
@@ -411,22 +408,22 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   />
                 </div>
               ) : (
-                <span className="font-semibold text-slate-900 text-lg truncate">{lender.name}</span>
+                <span className="font-semibold text-black text-lg truncate">{lender.name}</span>
               )}
             </div>
 
             {/* Main (middle) */}
             <div className="min-w-0 pt-1">
-              <div className="text-base font-semibold text-slate-900">{lender.name}</div>
+              <div className="text-base font-semibold text-black">{lender.name}</div>
 
-              <div className="mt-1 flex items-center gap-2 text-sm text-slate-600">
+              <div className="mt-1 flex items-center gap-2 text-sm text-black">
                 {typeof lender.reviewCount === 'number' && (
-                  <span className="font-medium text-slate-700">
+                  <span className="font-medium text-black">
                     {lender.reviewCount.toLocaleString()} reviews
                   </span>
                 )}
                 <span>by</span>
-                <span className="inline-flex items-center gap-1 font-medium text-slate-700">
+                <span className="inline-flex items-center gap-1 font-medium text-black">
                   <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
                   Trustpilot
                 </span>
@@ -434,7 +431,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
               <div className="mt-3 flex flex-col gap-2">
                 {pickDesktopBullets(lender).map((b) => (
-                  <div key={b} className="flex items-start gap-2 text-sm text-slate-700 min-w-0">
+                  <div key={b} className="flex items-start gap-2 text-sm text-black min-w-0">
                     <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
                     <span className="truncate">{b}</span>
                   </div>
@@ -445,13 +442,13 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             {/* Right (score + CTA) */}
             <div className="flex flex-col items-stretch gap-4 pt-1">
               <div className="flex items-start justify-end gap-2 w-full">
-                <div className="text-4xl font-bold text-slate-900 leading-none">
+                <div className="text-4xl font-bold text-black leading-none">
                   {lender.ourScore.toFixed(1)}
                 </div>
 
                 <div className="flex flex-col items-end gap-1 pt-0.5">
                   <StarRating score={lender.ourScore} />
-                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 self-start">
+                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-black self-start">
                     <span>
                       {lender.ourScore >= 9
                         ? 'Excellent'
@@ -469,7 +466,6 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                 <Button
                   variant="primary"
                   className={[
-                    'bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)]',
                     'text-white font-semibold transition-all rounded-none',
                     'transform-gpu will-change-transform',
                     'duration-200 ease-out',
@@ -490,7 +486,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                 {lender.websiteUrl && (
                   <a
                     href="#"
-                    className="text-xs text-slate-600 hover:underline"
+                    className="text-xs text-black hover:underline"
                     role="button"
                     onClick={(e) => {
                       e.preventDefault();
@@ -517,23 +513,23 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             <div className="grid grid-cols-[220px_repeat(4,max-content)] grid-rows-2 gap-x-8 gap-y-1 items-start">
               {/* Row 1: labels */}
               <div />
-              <div className="text-xs text-slate-500">Loan Amount</div>
-              <div className="text-xs text-slate-500">Time In Business</div>
-              <div className="text-xs text-slate-500">Monthly Revenue</div>
-              <div className="text-xs text-slate-500">Min. Credit Score</div>
+              <div className="text-xs text-black">Loan Amount</div>
+              <div className="text-xs text-black">Time In Business</div>
+              <div className="text-xs text-black">Monthly Revenue</div>
+              <div className="text-xs text-black">Min. Credit Score</div>
 
               {/* Row 2: values (and More Details aligned with values) */}
-              <div className="text-base font-semibold text-slate-700 text-center">
+              <div className="text-base font-semibold text-black text-center">
                 More Details:
               </div>
-              <div className="text-base font-semibold text-slate-900">{lender.amount ?? '—'}</div>
-              <div className="text-base font-semibold text-slate-900">
+              <div className="text-base font-semibold text-black">{lender.amount ?? '—'}</div>
+              <div className="text-base font-semibold text-black">
                 {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
               </div>
-              <div className="text-base font-semibold text-slate-900">
+              <div className="text-base font-semibold text-black">
                 {humanizeMinRevenue(lender.minRevenue) ?? '—'}
               </div>
-              <div className="text-base font-semibold text-slate-900">
+              <div className="text-base font-semibold text-black">
                 {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
               </div>
             </div>

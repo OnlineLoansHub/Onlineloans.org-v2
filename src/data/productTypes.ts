@@ -50,6 +50,8 @@ export interface CrossPromoConfig {
 export interface ProductTypeConfig {
   id: string;
   displayName: string;
+  /** Green highlight before "Lenders" on comparison hero; defaults to displayName. */
+  comparisonHeroHighlight?: string;
   slug: string;
   hero: HeroConfig;
   filters: Record<string, FilterConfig>;

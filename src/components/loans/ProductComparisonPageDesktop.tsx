@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import Hero from '@/components/loans/Hero';
 import LenderCard from '@/components/loans/LenderCard';
@@ -105,8 +105,11 @@ export function ProductComparisonPageDesktop({
   hasMore,
 }: ProductComparisonPageDesktopProps) {
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
-  const comparisonTitle = `Our Best ${productConfig.displayName}\nLenders for ${comparisonMonth} 2026`;
+  const comparisonYear = new Date().getFullYear();
+  const comparisonLendersForMonthYear = `${comparisonMonth} ${comparisonYear}`;
   const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
+  const comparisonSubtitleSecondary =
+    'With lower rates, you can boost your business while saving thousands on payments. Compare our top lenders and lock in your rate today.';
   const scrollToLender = useLenderDeepDiveScroll();
 
   return (
@@ -114,10 +117,14 @@ export function ProductComparisonPageDesktop({
       <Hero
         heroConfig={productConfig.hero}
         validDate={lastUpdated}
-        comparisonTitle={comparisonTitle}
+        comparisonTitlePrefix="Our Best "
+        comparisonTitleHighlightText={
+          productConfig.comparisonHeroHighlight ?? productConfig.displayName
+        }
+        comparisonLendersForMonthYear={comparisonLendersForMonthYear}
         comparisonSubtitle={comparisonSubtitle}
-        desktopRightImageSrc="/images/form/onlineloans-form-image.svg"
-        desktopRightImageAlt="Business funding illustration"
+        comparisonSubtitleSecondary={comparisonSubtitleSecondary}
+        showTrustBadges={false}
       />
 
       <section className={styles.mainContent}>
@@ -128,7 +135,12 @@ export function ProductComparisonPageDesktop({
             <div className={styles.desktopFilterBar}>
               <div className={styles.desktopFilterBarHeader}>
                 <div className={styles.desktopFilterBarTitle}>
-                  Are you eligible for a better rate?
+                  <Settings
+                    className={styles.desktopFilterBarTitleIcon}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                  <span>Are you eligible for a better rate?</span>
                 </div>
                 <div className={styles.desktopFilterBarMeta}>
                   Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
@@ -178,16 +190,6 @@ export function ProductComparisonPageDesktop({
                 ))
               ) : (
                 <div className={styles.emptyState}>
-                  <div className={styles.emptyStateIcon}>
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
                   <h3 className={styles.emptyStateTitle}>No lenders found</h3>
                   <p className={styles.emptyStateText}>
                     Try adjusting your filters to see more results.
@@ -204,7 +206,6 @@ export function ProductComparisonPageDesktop({
               <div className={styles.showMoreContainer}>
                 <Button variant="secondary" onClick={onShowMore} className={styles.showMoreButton}>
                   Show More
-                  <ChevronDown className="w-4 h-4 ml-2 inline-block" />
                 </Button>
               </div>
             )}

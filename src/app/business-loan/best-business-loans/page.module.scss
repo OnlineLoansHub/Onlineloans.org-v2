@@ -10,7 +10,7 @@
   @media (width <= 768px) {
     padding-top: 0 !important;
 
-    > header {
+    [data-site-top-chrome] {
       display: none !important;
     }
   }
@@ -45,7 +45,7 @@
   padding: 2rem 1.25rem;
 
   @media (width <= 1023px) {
-    padding-top: 0.5rem;
+    padding-top: 0.35rem;
   }
 
   @media (min-width: 640px) {
@@ -54,7 +54,7 @@
   }
 
   @media (min-width: 1024px) {
-    padding: 1.1rem 4rem 3rem;
+    padding: 0.5rem 4rem 3rem;
   }
 }
 
@@ -182,10 +182,20 @@
 }
 
 .desktopFilterBarTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   font-weight: 500;
   color: #0f172a;
   font-size: 0.9rem;
   line-height: 1.2;
+}
+
+.desktopFilterBarTitleIcon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--color-black);
 }
 
 .desktopFilterBarMeta {

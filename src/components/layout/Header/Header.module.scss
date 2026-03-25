@@ -20,6 +20,15 @@
   }
 }
 
+.headerEmbedded {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
 .nav {
   position: relative;
   display: flex;

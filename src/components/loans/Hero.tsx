@@ -10,9 +10,12 @@ interface HeroProps {
   comparisonTitlePrefix?: string;
   comparisonTitleHighlightText?: string;
   comparisonTitleSuffix?: string;
+  /** With prefix + highlight: green "Lenders" + " for {month} {year}". */
+  comparisonLendersForMonthYear?: string;
   comparisonSubtitle?: string;
-  desktopRightImageSrc?: string;
-  desktopRightImageAlt?: string;
+  comparisonSubtitleSecondary?: string;
+  /** When false, BBB/Trustpilot strip is omitted (e.g. shown below the filter on comparison pages). */
+  showTrustBadges?: boolean;
 }
 
 export default function Hero({
@@ -22,12 +25,12 @@ export default function Hero({
   comparisonTitlePrefix,
   comparisonTitleHighlightText,
   comparisonTitleSuffix,
+  comparisonLendersForMonthYear,
   comparisonSubtitle,
-  desktopRightImageSrc,
-  desktopRightImageAlt = '',
+  comparisonSubtitleSecondary,
+  showTrustBadges = true,
 }: HeroProps) {
   const monthYear = 'January 2026';
-  const hasDesktopRightImage = Boolean(desktopRightImageSrc);
 
   return (
     <section className={cls.hero}>
@@ -35,45 +38,43 @@ export default function Hero({
       <div className={cls.stripedPattern} aria-hidden="true" />
 
       {/* Decorative Wave Pattern - Right Side */}
-      {!hasDesktopRightImage && (
-        <div className={cls.wavePattern}>
-          <svg
-            viewBox="0 0 400 600"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              d="M50 0C50 0 150 100 150 200C150 300 50 400 50 500C50 600 150 700 150 700"
-              stroke="var(--color-primary)"
-              strokeWidth="2"
-            />
-            <path
-              d="M100 0C100 0 200 100 200 200C200 300 100 400 100 500C100 600 200 700 200 700"
-              stroke="var(--color-primary)"
-              strokeWidth="2"
-            />
-            <path
-              d="M150 0C150 0 250 100 250 200C250 300 150 400 150 500C150 600 250 700 250 700"
-              stroke="var(--color-primary)"
-              strokeWidth="2"
-            />
-            <path
-              d="M200 0C200 0 300 100 300 200C300 300 200 400 200 500C200 600 300 700 300 700"
-              stroke="var(--color-primary)"
-              strokeWidth="2"
-            />
-            <path
-              d="M250 0C250 0 350 100 350 200C350 300 250 400 250 500C250 600 350 700 350 700"
-              stroke="var(--color-primary)"
-              strokeWidth="2"
-            />
-          </svg>
-        </div>
-      )}
+      <div className={cls.wavePattern}>
+        <svg
+          viewBox="0 0 400 600"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            d="M50 0C50 0 150 100 150 200C150 300 50 400 50 500C50 600 150 700 150 700"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <path
+            d="M100 0C100 0 200 100 200 200C200 300 100 400 100 500C100 600 200 700 200 700"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <path
+            d="M150 0C150 0 250 100 250 200C250 300 150 400 150 500C150 600 250 700 250 700"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <path
+            d="M200 0C200 0 300 100 300 200C300 300 200 400 200 500C200 600 300 700 300 700"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+          <path
+            d="M250 0C250 0 350 100 350 200C350 300 250 400 250 500C250 600 350 700 350 700"
+            stroke="currentColor"
+            strokeWidth="2"
+          />
+        </svg>
+      </div>
 
       <div className={cls.container}>
-        <div className={hasDesktopRightImage ? cls.contentGridWithImage : cls.contentGrid}>
+        <div className={cls.contentGrid}>
           <div className={cls.leftContent}>
             {/* Last Updated */}
             {validDate && (
@@ -96,17 +97,32 @@ export default function Hero({
                     fill="none"
                   />
                 </svg>
-                Last Updated: {validDate}
+                Last Updated: <span className={cls.lastUpdatedDate}>{validDate}</span>
               </div>
             )}
 
             {/* Main heading */}
-            <h1 className={hasDesktopRightImage ? cls.titleWithImage : cls.title}>
+            <h1 className={cls.title}>
               {comparisonTitleHighlightText ? (
                 <>
                   {comparisonTitlePrefix ?? ''}
-                  <span className={cls.titleHighlight}>{comparisonTitleHighlightText}</span>
+                  <span
+                    className={
+                      comparisonLendersForMonthYear
+                        ? cls.titleComparisonGreen
+                        : cls.titleHighlight
+                    }
+                  >
+                    {comparisonTitleHighlightText}
+                  </span>
                   {comparisonTitleSuffix ?? ''}
+                  {comparisonLendersForMonthYear && (
+                    <>
+                      {' '}
+                      <span className={cls.titleComparisonGreen}>Lenders</span>
+                      {` for ${comparisonLendersForMonthYear}`}
+                    </>
+                  )}
                 </>
               ) : comparisonTitle ? (
                 comparisonTitle.split('\n').map((line, idx) => (
@@ -127,41 +143,34 @@ export default function Hero({
             </h1>
 
             {/* Sub-hero text */}
-            {comparisonSubtitle ? (
-              <p className={cls.subHeroText}>{comparisonSubtitle}</p>
+            {comparisonSubtitle || comparisonSubtitleSecondary ? (
+              <div className={cls.subHeroGroup}>
+                {comparisonSubtitle ? (
+                  <p className={cls.subHeroTextLead}>{comparisonSubtitle}</p>
+                ) : null}
+                {comparisonSubtitleSecondary ? (
+                  <p className={cls.subHeroTextFollow}>{comparisonSubtitleSecondary}</p>
+                ) : null}
+              </div>
             ) : (
               <p className={cls.subHeroText}>Find funding that fits your business</p>
             )}
 
-            {/* BBB and Trustpilot badges */}
-            <div className={cls.trustBadges}>
-              <Image
-                src={heroConfig.badgeImagePath}
-                alt="BBB and Trustpilot badges"
-                width={350}
-                height={53}
-                className={cls.trustBadgesImage}
-                priority
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
-          </div>
-
-          {hasDesktopRightImage && (
-            <div className={cls.rightImageWrap} aria-hidden={!desktopRightImageAlt}>
-              <div className={cls.rightImage}>
+            {showTrustBadges ? (
+              <div className={cls.trustBadges}>
                 <Image
-                  src={desktopRightImageSrc as string}
-                  alt={desktopRightImageAlt}
-                  fill
-                  className={cls.rightImageEl}
+                  src={heroConfig.badgeImagePath}
+                  alt="BBB and Trustpilot badges"
+                  width={350}
+                  height={53}
+                  className={cls.trustBadgesImage}
                   priority
-                  sizes="(min-width: 1024px) 420px, 0px"
+                  loading="eager"
+                  fetchPriority="high"
                 />
               </div>
-            </div>
-          )}
+            ) : null}
+          </div>
         </div>
       </div>
     </section>

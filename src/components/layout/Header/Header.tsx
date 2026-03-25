@@ -27,7 +27,12 @@ const headerConfig: HeaderConfigItem[] = [
   },
 ];
 
-export const Header = () => {
+interface HeaderProps {
+  /** Parent `SiteTopChrome` is fixed; header is static inside it. */
+  embeddedInFixedStack?: boolean;
+}
+
+export const Header = ({ embeddedInFixedStack = false }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const path = usePathname();
@@ -37,7 +42,9 @@ export const Header = () => {
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   return (
-    <header className={cls.header}>
+    <header
+      className={classNames(cls.header, { [cls.headerEmbedded]: embeddedInFixedStack })}
+    >
       <nav className={classNames(cls.nav)}>
         <Link href={URL_CONFIG.main} className={cls.logo} onClick={() => setIsOpen(false)}>
           <Logo

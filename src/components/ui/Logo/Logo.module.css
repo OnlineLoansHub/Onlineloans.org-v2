@@ -35,7 +35,7 @@
 }
 
 .orgLetter {
-  color: #0e824c;
+  color: var(--color-logo-org-green);
 }
 
 @keyframes writeIn {

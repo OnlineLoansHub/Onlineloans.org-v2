@@ -7,6 +7,13 @@
   padding: 100px 0 40px 0;
   text-align: left;
 
+  /* Match header background on larger screens (no shadow) */
+  @media (min-width: 769px) {
+    background: var(--color-white);
+    color: var(--color-black);
+    box-shadow: none;
+  }
+
   @media (min-width: 1024px) {
     padding: 40px 0 45px 0;
   }
@@ -14,6 +21,38 @@
   @media (width <= 768px) {
     padding: 18px 0 8px 0;
     background: transparent;
+    color: inherit;
+  }
+}
+
+/* Comparison hero: primary-tinted accent background; tight padding above filter */
+.hero:has(.subHeroGroup) {
+  background: var(--hero-comparison-accent-bg);
+  color: var(--color-black);
+
+  @media (min-width: 769px) {
+    padding-bottom: 14px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-bottom: 10px;
+  }
+
+  @media (width <= 768px) {
+    padding-bottom: 4px;
+  }
+
+  .stripedPattern,
+  .wavePattern {
+    display: none;
+  }
+}
+
+.hero:has(.subHeroGroup) .subHeroGroup {
+  margin-bottom: 0;
+
+  @media (width <= 768px) {
+    margin-bottom: 2px;
   }
 }
 
@@ -24,6 +63,11 @@
   width: 50%;
   height: 50%;
   pointer-events: none;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+
   background-image:
     repeating-linear-gradient(
       45deg,
@@ -53,6 +97,11 @@
   width: 33.333333%;
   pointer-events: none;
   overflow: hidden;
+  color: var(--color-black);
+
+  @media (min-width: 769px) {
+    display: none;
+  }
 
   svg {
     position: absolute;
@@ -89,52 +138,30 @@
   display: block;
 }
 
-.contentGridWithImage {
-  display: block;
-
-  @media (min-width: 1024px) {
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    align-items: center;
-    gap: 32px;
-  }
-}
-
 .leftContent {
   min-width: 0;
-}
-
-.rightImageWrap {
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-}
-
-.rightImage {
-  position: relative;
-  width: 420px;
-  height: 260px;
-}
-
-.rightImageEl {
-  object-fit: contain;
-  object-position: right center;
-  filter: drop-shadow(0 18px 40px rgba(2, 6, 23, 0.25));
 }
 
 .title {
   font-family: Arial;
   font-size: 72px;
   font-weight: 700;
+
+  strong,
+  span {
+    font-weight: 700;
+  }
   margin: 0 0 24px 0;
   line-height: 1.4;
   position: relative;
   z-index: 1;
   color: var(--color-white);
+
+  @media (min-width: 769px) {
+    color: var(--color-black);
+    font-size: 38px;
+    line-height: 1.25;
+  }
 
   @media (width <= 768px) {
     font-size: 32px;
@@ -144,27 +171,76 @@
   }
 }
 
-.titleWithImage {
-  composes: title;
+.title:has(+ .subHeroGroup) {
+  margin-bottom: 6px;
+  line-height: 1.22;
 
-  @media (min-width: 1024px) {
-    font-size: 43px;
-    line-height: 1.25;
-    margin-bottom: 18px;
+  @media (width <= 768px) {
+    margin-bottom: 4px;
+    line-height: 1.24;
   }
 }
 
 .titleHighlight {
   color: var(--color-white);
 
+  @media (min-width: 769px) {
+    color: var(--color-primary);
+  }
+
   @media (width <= 768px) {
     color: var(--color-primary);
   }
 }
 
+.titleComparisonGreen {
+  color: var(--color-logo-org-green);
+  font-weight: 700;
+}
+
+.subHeroGroup {
+  position: relative;
+  z-index: 1;
+  display: none;
+
+  @media (min-width: 769px) {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  @media (width <= 768px) {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .subHeroTextLead {
+    margin-bottom: 0;
+  }
+}
+
+.subHeroGroup .subHeroTextLead + .subHeroTextFollow {
+  margin-top: 0.75rem;
+}
+
+.subHeroTextLead {
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+  color: var(--color-black);
+
+  @media (min-width: 769px) {
+    /* ~65% of 38px title — secondary headline, bolder than body */
+    font-size: 1.625rem;
+    line-height: 1.28;
+  }
+}
+
 .subHeroText {
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 400;
   margin: 0 0 24px 0;
   line-height: 1.5;
   position: relative;
@@ -172,10 +248,41 @@
   color: var(--color-primary);
   display: none;
 
+  @media (min-width: 769px) {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #475569;
+    font-weight: 400;
+  }
+
   @media (width <= 768px) {
     display: block;
     font-size: 16px;
     margin-bottom: 8px;
+    font-weight: 400;
+  }
+}
+
+.subHeroTextFollow {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.55;
+  position: relative;
+  z-index: 1;
+  color: var(--color-black);
+  display: none;
+
+  @media (min-width: 769px) {
+    display: block;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  @media (width <= 768px) {
+    display: block;
+    font-size: 16px;
   }
 }
 
@@ -196,31 +303,42 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
   position: relative;
   z-index: 1;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-black);
   font-size: 14px;
   white-space: nowrap;
 
   @media (width <= 768px) {
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     font-size: 12px;
     gap: 6px;
-    color: var(--color-primary);
   }
+}
+
+/* Comparison hero: tuck meta + headline + subtitles into one tight block */
+.leftContent:has(.subHeroGroup) .lastUpdated {
+  margin-bottom: 4px;
+}
+
+.lastUpdatedDate {
+  font-weight: 700;
 }
 
 .lastUpdatedIcon {
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-black);
+
+  @media (min-width: 769px) {
+    display: none;
+  }
 
   @media (width <= 768px) {
     width: 14px;
     height: 14px;
-    color: var(--color-primary);
   }
 }
 

@@ -19,6 +19,29 @@ type JsonObject = Record<string, unknown>;
 
 type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore';
 
+/** Initial “Are you eligible for a better rate?” presets (desktop filter bar). Reset still clears to All. */
+const DESKTOP_FILTER_DEFAULTS: Record<DesktopFilterKey, string> = {
+  loanType: 'term_loan',
+  monthlyRevenue: '10k_20k',
+  timeInBusiness: '1_2',
+  creditScore: 'good',
+};
+
+const DESKTOP_FILTERS_ALL: Record<DesktopFilterKey, string> = {
+  loanType: 'all',
+  monthlyRevenue: 'all',
+  timeInBusiness: 'all',
+  creditScore: 'all',
+};
+
+function getInitialDesktopFilters(productId: string): Record<DesktopFilterKey, string> {
+  if (productId === 'business-loans') {
+    return { ...DESKTOP_FILTER_DEFAULTS };
+  }
+
+  return { ...DESKTOP_FILTERS_ALL };
+}
+
 interface ProductComparisonPageProps {
   productConfig: ProductTypeConfig;
   lendersData: Brand[];
@@ -124,12 +147,9 @@ export default function ProductComparisonPage({
   const [sortBy, setSortBy] = useState('ourScore');
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
 
-  const [desktopFilters, setDesktopFilters] = useState<Record<DesktopFilterKey, string>>({
-    loanType: 'all',
-    monthlyRevenue: 'all',
-    timeInBusiness: 'all',
-    creditScore: 'all',
-  });
+  const [desktopFilters, setDesktopFilters] = useState<Record<DesktopFilterKey, string>>(() =>
+    getInitialDesktopFilters(productConfig.id)
+  );
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -151,12 +171,7 @@ export default function ProductComparisonPage({
   };
 
   const handleDesktopReset = () => {
-    setDesktopFilters({
-      loanType: 'all',
-      monthlyRevenue: 'all',
-      timeInBusiness: 'all',
-      creditScore: 'all',
-    });
+    setDesktopFilters({ ...DESKTOP_FILTERS_ALL });
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 

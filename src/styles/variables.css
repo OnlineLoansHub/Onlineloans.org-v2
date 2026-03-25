@@ -2,6 +2,12 @@
   /* 🎨 Core Colors - 10 Total */
   /* Primary Colors */
   --color-primary: #235675;
+  /* "org" in OnlineLoans.org logo — use for matching brand accents */
+  --color-logo-org-green: #0e824c;
+  /* Primary action buttons / CTAs (same green as .org) */
+  --color-cta: var(--color-logo-org-green);
+  --color-cta-hover: #0b6e40;
+  --color-cta-active: #095c36;
   --color-secondary: #006382;
   --color-primary-dark: #1b425b;
   --color-primary-darker: #123043;
@@ -9,6 +15,13 @@
   /* Hero Background */
   /* Update these in ONE place to change hero gradients app-wide */
   --hero-gradient: linear-gradient(131.14deg, #235675 26.69%, #8ebed5 131.72%);
+  /* Product-comparison hero: soft wash + diagonal accent from primary */
+  --hero-comparison-accent-bg: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--color-primary) 13%, var(--color-white)) 0%,
+    color-mix(in srgb, var(--color-primary) 5%, var(--color-white)) 48%,
+    var(--color-white) 100%
+  );
   --color-black: #000;
   --color-white: #fff;
   --color-gray-dark: #161616; /* Dark text/surfaces */

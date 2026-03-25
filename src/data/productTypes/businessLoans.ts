@@ -3,6 +3,7 @@ import { ProductTypeConfig } from '../productTypes';
 export const businessLoansConfig: ProductTypeConfig = {
   id: 'business-loans',
   displayName: 'Business Loans',
+  comparisonHeroHighlight: 'Business Loan',
   slug: 'business-loan/best-business-loans',
   hero: {
     title: 'Best',

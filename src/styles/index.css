@@ -30,12 +30,12 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding-top: var(--header-height);
+  padding-top: var(--site-fixed-top-height, var(--header-height));
 }
 
 @media (width <= 768px) {
   body {
-    padding-top: var(--header-height-mobile);
+    padding-top: var(--site-fixed-top-height, var(--header-height-mobile));
   }
 }
 

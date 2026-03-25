@@ -243,7 +243,7 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                       
                         <Button
                           variant="primary"
-                          className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] w-full"
+                          className="w-full"
                         onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
                         >
                           See Plans
@@ -400,8 +400,7 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
                       
                         <Button
                           variant="primary"
-                          className="bg-[#235675] hover:bg-[#1a4259]"
-                        onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
+                          onClick={() => window.open(recommendedLender.ctaUrl || '#', '_blank')}
                         >
                           See Plans
                           <ArrowRight className="w-4 h-4 ml-1" />
