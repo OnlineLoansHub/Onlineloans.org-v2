@@ -1,22 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import Script from 'next/script';
-import { ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import Hero from '@/components/loans/Hero';
-import LenderCard from '@/components/loans/LenderCard';
-import FilterModule from '@/components/loans/FilterModule';
-import SortControl from '@/components/loans/SortControl';
-import RecommendationWizard from '@/components/loans/RecommendationWizard';
-import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
-import CrossPromo from '@/components/loans/CrossPromo';
-import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
+import { useEffect } from 'react';
+import ProductComparisonPage from '@/components/loans/ProductComparisonPage';
 import { businessLoansData } from '@/data/businessLoansData';
 import { businessLoansConfig } from '@/data/productTypes/businessLoans';
-import styles from './page.module.scss';
-
-const INITIAL_DISPLAY_COUNT = 5;
 
 // FAQ items matching the reference page
 const faqItems = [
@@ -72,7 +59,6 @@ const faqItems = [
   },
 ];
 
-// Structured data schemas
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -130,291 +116,21 @@ const breadcrumbSchema = {
   ],
 };
 
-// Calculate date 7 days before current date
-const getLastUpdated = (): string => {
-  const date = new Date();
-  date.setDate(date.getDate() - 7);
-
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
-};
-
-const lastUpdated = getLastUpdated();
-
 export default function BestBusinessLoansPage() {
-  const [filters, setFilters] = useState({
-    loanType: 'all',
-    monthlyRevenue: 'all',
-    timeInBusiness: 'all',
-    creditScore: 'all',
-    loanAmount: 'all',
-  });
-  const [sortBy, setSortBy] = useState('ourScore');
-  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
   useEffect(() => {
-    document.body.setAttribute("data-page", "best-business-loans");
+    document.body.setAttribute('data-page', 'best-business-loans');
     return () => {
-      document.body.removeAttribute("data-page");
+      document.body.removeAttribute('data-page');
     };
   }, []);
 
-  const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-    setDisplayCount(INITIAL_DISPLAY_COUNT);
-  };
-
-  const handleReset = () => {
-    setFilters({
-      loanType: 'all',
-      monthlyRevenue: 'all',
-      timeInBusiness: 'all',
-      creditScore: 'all',
-      loanAmount: 'all',
-    });
-    setDisplayCount(INITIAL_DISPLAY_COUNT);
-  };
-
-  // Filter and sort lenders
-  const filteredLenders = useMemo(() => {
-    let result = [...businessLoansData];
-
-    // Apply filters
-    if (filters.loanType !== 'all') {
-      result = result.filter((l) => l.productTypes?.includes(filters.loanType));
-    }
-
-    if (filters.creditScore !== 'all') {
-      const creditOrder = ['poor', 'fair', 'good', 'excellent'];
-      const filterIndex = creditOrder.indexOf(filters.creditScore);
-
-      result = result.filter((l) => {
-        const lenderIndex = creditOrder.indexOf(l.minCreditScore || '');
-
-        return lenderIndex <= filterIndex;
-      });
-    }
-
-    if (filters.monthlyRevenue !== 'all') {
-      const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
-      const filterIndex = revenueOrder.indexOf(filters.monthlyRevenue);
-
-      result = result.filter((l) => {
-        const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
-
-        return lenderIndex <= filterIndex;
-      });
-    }
-
-    if (filters.timeInBusiness !== 'all') {
-      const timeOrder = ['0_6m', '6m_1y', '1_2', '2_plus'];
-      const filterIndex = timeOrder.indexOf(filters.timeInBusiness);
-
-      result = result.filter((l) => {
-        const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
-
-        return lenderIndex <= filterIndex;
-      });
-    }
-
-    if (filters.loanAmount !== 'all') {
-      result = result.filter(
-        (l) => l.amountRange === filters.loanAmount || l.amountRange === '100k_plus'
-      );
-    }
-
-    // Apply sorting
-    if (sortBy === 'ourScore') {
-      // Priority lenders (id: 1 and 2) stay at top when sorting by Our Score
-      const priorityLenders = result.filter((l) => l.id === 1 || l.id === 2);
-      const otherLenders = result.filter((l) => l.id !== 1 && l.id !== 2);
-
-      // Sort others by ourScore descending
-      otherLenders.sort((a, b) => b.ourScore - a.ourScore);
-
-      // Ensure priority order (id 1, then id 2)
-      const sortedPriority = priorityLenders.sort((a, b) => a.id - b.id);
-
-      return [...sortedPriority, ...otherLenders];
-    } else {
-      // Sort all lenders by selected field descending
-      result.sort((a, b) => {
-        const aValue = a[sortBy as keyof typeof a] as number | null;
-        const bValue = b[sortBy as keyof typeof b] as number | null;
-
-        // Handle null values - put them at the end
-        if (aValue === null && bValue === null) return 0;
-        if (aValue === null) return 1;
-        if (bValue === null) return -1;
-
-        // Sort in descending order (highest first)
-        return bValue - aValue;
-      });
-
-      return result;
-    }
-  }, [filters, sortBy]);
-
-  const displayedLenders = filteredLenders.slice(0, displayCount);
-  const hasMore = displayCount < filteredLenders.length;
-
   return (
-    <>
-      {/* Structured Data Scripts - Non-blocking */}
-      <Script
-        id="faq-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <Script
-        id="financial-product-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(financialProductSchema) }}
-      />
-      <Script
-        id="breadcrumb-schema"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-
-      <div className={styles.page}>
-        {/* Advertising Disclosure - Mobile Only */}
-        <div className={styles.advertisingDisclosure}>
-          <p className={styles.disclosureText}>
-            We earn commissions from brands listed on this site, which influences how listings are
-            presented. Advertising Disclosure
-          </p>
-        </div>
-
-        <Hero heroConfig={businessLoansConfig.hero} validDate={lastUpdated} />
-
-        {/* Main Content */}
-        <section className={styles.mainContent}>
-          {/* Mobile Filter and Sort Row */}
-          <div className={styles.mobileControlsRow}>
-            <SortControl sortBy={sortBy} onSortChange={setSortBy} />
-            <FilterModule
-              filters={filters}
-              filterConfig={businessLoansConfig.filters}
-              filterOrder={businessLoansConfig.filterOrder}
-              onFilterChange={handleFilterChange}
-              onReset={handleReset}
-              resultCount={filteredLenders.length}
-            />
-          </div>
-
-          <div className={styles.contentWrapper}>
-            {/* Sidebar Filters - Desktop */}
-            <aside className={styles.sidebar}>
-              <div className={styles.stickySidebar}>
-                <FilterModule
-                  filters={filters}
-                  filterConfig={businessLoansConfig.filters}
-                  filterOrder={businessLoansConfig.filterOrder}
-                  onFilterChange={handleFilterChange}
-                  onReset={handleReset}
-                  resultCount={filteredLenders.length}
-                />
-              </div>
-            </aside>
-
-            {/* Main Content Area */}
-            <main className={styles.mainArea}>
-              {/* Sort Control - Desktop */}
-              <div className={styles.sortControlContainer}>
-                <div className={styles.resultsText}>
-                  Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                  <span className={styles.resultsCount}>{filteredLenders.length}</span> lenders
-                </div>
-                <SortControl sortBy={sortBy} onSortChange={setSortBy} />
-              </div>
-
-              {/* Lender Cards */}
-              <div className={styles.lenderCardsContainer}>
-                {displayedLenders.length > 0 ? (
-                  displayedLenders.map((lender, index) => (
-                    <LenderCard
-                      key={lender.id}
-                      lender={lender}
-                      rank={index + 1}
-                      amountLabel={businessLoansConfig.amountLabel}
-                    />
-                  ))
-                ) : (
-                  <div className={styles.emptyState}>
-                    <div className={styles.emptyStateIcon}>
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className={styles.emptyStateTitle}>No lenders found</h3>
-                    <p className={styles.emptyStateText}>
-                      Try adjusting your filters to see more results.
-                    </p>
-                    <Button variant="secondary" onClick={handleReset}>
-                      Reset Filters
-                    </Button>
-                  </div>
-                )}
-              </div>
-
-              {/* Show More Button */}
-              {hasMore && (
-                <div className={styles.showMoreContainer}>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setDisplayCount((prev) => prev + 5)}
-                    className={styles.showMoreButton}
-                  >
-                    Show More
-                    <ChevronDown className="w-4 h-4 ml-2 inline-block" />
-                  </Button>
-                </div>
-              )}
-            </main>
-          </div>
-        </section>
-
-        {/* Recommendation Wizard */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>Find Your Perfect Business Loan Match</h2>
-            <RecommendationWizard
-              lenders={businessLoansData}
-              wizardConfig={businessLoansConfig.wizard}
-            />
-          </div>
-        </section>
-
-        {/* How Our Total Score Works Section */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>How Our Total Score Works</h2>
-            <ExpandableExplanation />
-          </div>
-        </section>
-
-        {/* Cross Promo Section */}
-        <CrossPromo crossPromoConfig={businessLoansConfig.crossPromo} />
-
-        {/* FAQ Section */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>Frequently Asked Questions</h2>
-            <FAQAccordion items={faqItems} />
-          </div>
-        </section>
-      </div>
-    </>
+    <ProductComparisonPage
+      productConfig={businessLoansConfig}
+      lendersData={businessLoansData}
+      faqItems={faqItems}
+      pinnedLenderIds={[1, 2]}
+      structuredData={{ faqSchema, financialProductSchema, breadcrumbSchema }}
+    />
   );
 }

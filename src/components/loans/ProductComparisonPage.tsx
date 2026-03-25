@@ -23,14 +23,19 @@ interface FAQItem {
   answer: string;
 }
 
+type JsonObject = Record<string, unknown>;
+
 interface ProductComparisonPageProps {
   productConfig: ProductTypeConfig;
   lendersData: Brand[];
   faqItems: FAQItem[];
+  pinnedLenderIds?: number[];
+  showAdvertisingDisclosure?: boolean;
+  advertisingDisclosureText?: string;
   structuredData?: {
-    faqSchema?: any;
-    financialProductSchema?: any;
-    breadcrumbSchema?: any;
+    faqSchema?: JsonObject;
+    financialProductSchema?: JsonObject;
+    breadcrumbSchema?: JsonObject;
   };
 }
 
@@ -50,6 +55,9 @@ export default function ProductComparisonPage({
   productConfig,
   lendersData,
   faqItems,
+  pinnedLenderIds,
+  showAdvertisingDisclosure = true,
+  advertisingDisclosureText = `We earn commissions from brands listed on this site, which influences how listings are presented. Advertising Disclosure`,
   structuredData,
 }: ProductComparisonPageProps) {
   const lastUpdated = getLastUpdated();
@@ -131,18 +139,29 @@ export default function ProductComparisonPage({
     });
 
     // Apply sorting
-      result.sort((a, b) => {
-        const aValue = a[sortBy as keyof typeof a] as number | null;
-        const bValue = b[sortBy as keyof typeof b] as number | null;
-        if (aValue === null && bValue === null) return 0;
-        if (aValue === null) return 1;
-        if (bValue === null) return -1;
+    result.sort((a, b) => {
+      const aValue = a[sortBy as keyof typeof a] as number | null;
+      const bValue = b[sortBy as keyof typeof b] as number | null;
+      if (aValue === null && bValue === null) return 0;
+      if (aValue === null) return 1;
+      if (bValue === null) return -1;
 
-        return bValue - aValue;
-      });
+      return bValue - aValue;
+    });
 
-      return result;
-  }, [filters, sortBy, lendersData]);
+    // Optional: pin specific lenders to the top when sorting by Our Score
+    if (sortBy === 'ourScore' && pinnedLenderIds && pinnedLenderIds.length > 0) {
+      const pinnedSet = new Set(pinnedLenderIds);
+      const pinned = result
+        .filter((l) => pinnedSet.has(l.id))
+        .sort((a, b) => pinnedLenderIds.indexOf(a.id) - pinnedLenderIds.indexOf(b.id));
+      const rest = result.filter((l) => !pinnedSet.has(l.id));
+
+      return [...pinned, ...rest];
+    }
+
+    return result;
+  }, [filters, sortBy, lendersData, pinnedLenderIds]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
   const hasMore = displayCount < filteredLenders.length;
@@ -213,6 +232,11 @@ export default function ProductComparisonPage({
       />
 
       <div className={styles.page}>
+        {showAdvertisingDisclosure && (
+          <div className={styles.advertisingDisclosure}>
+            <p className={styles.disclosureText}>{advertisingDisclosureText}</p>
+          </div>
+        )}
         <Hero heroConfig={productConfig.hero} validDate={lastUpdated} />
 
         {/* Main Content */}
@@ -251,7 +275,7 @@ export default function ProductComparisonPage({
               <div className={styles.sortControlContainer}>
                 <div className={styles.resultsText}>
                   Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                  <span className={styles.resultsCount}>{filteredLenders.length}</span> providers
+                  <span className={styles.resultsCount}>{filteredLenders.length}</span> lenders
                 </div>
                 <SortControl sortBy={sortBy} onSortChange={setSortBy} />
               </div>
@@ -279,7 +303,7 @@ export default function ProductComparisonPage({
                         />
                       </svg>
                     </div>
-                    <h3 className={styles.emptyStateTitle}>No providers found</h3>
+                    <h3 className={styles.emptyStateTitle}>No lenders found</h3>
                     <p className={styles.emptyStateText}>
                       Try adjusting your filters to see more results.
                     </p>
