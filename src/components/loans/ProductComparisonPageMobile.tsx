@@ -65,7 +65,7 @@ export function ProductComparisonPageMobile({
     productConfig.comparisonHeroHighlight ?? productConfig.displayName;
   const comparisonTitleSuffix = ` of ${comparisonMonth} ${new Date().getFullYear()}`;
   const comparisonSubtitleSecondary =
-    'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
+    'Apply in minutes. Get funded fast.';
   const scrollToLender = useLenderDeepDiveScroll();
 
   return (
