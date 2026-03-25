@@ -284,7 +284,7 @@ export default function RecommendationWizard({ lenders, wizardConfig }: Recommen
         <div className="w-full">
           <div className="bg-gradient-to-br from-slate-50 to-white rounded border-x-0 border-t border-b border-slate-200 shadow-lg overflow-hidden">
             {/* Header */}
-            <div className="bg-[#235675] text-white p-6 lg:p-8 py-10 lg:py-12">
+            <div className="bg-[var(--color-primary)] text-white p-6 lg:p-8 py-10 lg:py-12">
               <div className="flex items-center gap-3 mb-4">
                 <Sparkles className="w-5 h-5" />
                 <h2

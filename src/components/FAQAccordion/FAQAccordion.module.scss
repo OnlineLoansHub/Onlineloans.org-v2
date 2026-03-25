@@ -17,7 +17,7 @@
 }
 
 .faqItemActive {
-  border-color: var(--color-primary, #3d5d7d);
+  border-color: var(--color-primary);
 }
 
 .faqQuestion {
@@ -50,7 +50,7 @@
 .faqIcon {
   font-size: 1.25rem;
   font-weight: 400;
-  color: var(--color-primary, #3d5d7d);
+  color: var(--color-primary);
   line-height: 1;
   transition: transform 0.2s ease;
   flex-shrink: 0;
@@ -64,7 +64,7 @@
 }
 
 .faqItemActive .faqIcon {
-  color: var(--color-primary, #3d5d7d);
+  color: var(--color-primary);
   transform: rotate(45deg);
 }
 

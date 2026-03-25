@@ -1,10 +1,14 @@
 :root {
   /* 🎨 Core Colors - 10 Total */
   /* Primary Colors */
-  --color-primary: #3d5d7d; /* Main brand blue - lighter version */
-  --color-secondary: #3d5d7d; /* Main green #5ec189 */
-  --color-primary-dark: #2d4d6d; /* Darker variant for hover states and gradients */
-  --color-primary-darker: #1d3d5d; /* Even darker variant for gradients */
+  --color-primary: #19288e;
+  --color-secondary: #19288e;
+  --color-primary-dark: #131c5b;
+  --color-primary-darker: #0c123d;
+
+  /* Hero Background */
+  /* Update these in ONE place to change hero gradients app-wide */
+  --hero-gradient: linear-gradient(45deg, #19288e, #131c5b);
   --color-black: #000;
   --color-white: #fff;
   --color-gray-dark: #161616; /* Dark text/surfaces */

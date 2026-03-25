@@ -36,7 +36,7 @@
 }
 
 .orgLetter {
-  color: rgba(34,84,71,0.840843);
+  color: var(--color-primary-dark);
 }
 
 @keyframes writeIn {
