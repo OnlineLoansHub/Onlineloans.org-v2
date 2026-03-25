@@ -222,7 +222,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-7 h-7 bg-[var(--color-black)] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-7 h-7 !bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-sm">{rank}</span>
         </div>
 
@@ -307,7 +307,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             {/* Explore CTA */}
             <Button
               variant="primary"
-              className={['w-full text-white font-semibold group rounded-none'].join(' ')}
+              className={[
+                'w-full text-white font-semibold group rounded-none',
+                '!bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]',
+              ].join(' ')}
               style={{
                 padding: '10px 11px',
                 borderRadius: 0,
@@ -357,9 +360,9 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
           </div>
         </div>
 
-        {/* Footer Strip - Only for Rank 1 */}
+        {/* Footer Strip - Only for Rank 1 (mobile) */}
         {rank === 1 && (
-          <div className="bg-[var(--color-primary)] text-white text-center py-2.5 px-4">
+          <div className="!bg-[var(--color-primary)] text-white text-center py-2.5 px-4">
             <p className="text-xs flex items-center justify-center gap-1.5">
               <TrendingUp className="w-4 h-4" />
               <span>1407 people visited this site this week</span>
@@ -377,7 +380,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         }`}
       >
         {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-[34px] h-[34px] bg-[var(--color-black)] rounded-br flex items-center justify-center z-10">
+        <div className="absolute top-0 left-0 w-[34px] h-[34px] !bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
           <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
         </div>
 
@@ -467,6 +470,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   variant="primary"
                   className={[
                     'text-white font-semibold transition-all rounded-none',
+                    '!bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]',
                     'transform-gpu will-change-transform',
                     'duration-200 ease-out',
                     'hover:-translate-y-0.5 hover:scale-[1.02]',

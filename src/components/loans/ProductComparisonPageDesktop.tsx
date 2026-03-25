@@ -109,7 +109,7 @@ export function ProductComparisonPageDesktop({
   const comparisonLendersForMonthYear = `${comparisonMonth} ${comparisonYear}`;
   const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
   const comparisonSubtitleSecondary =
-    'With lower rates, you can boost your business while saving thousands on payments. Compare our top lenders and lock in your rate today.';
+    'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
   const scrollToLender = useLenderDeepDiveScroll();
 
   return (

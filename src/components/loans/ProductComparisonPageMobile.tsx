@@ -64,9 +64,8 @@ export function ProductComparisonPageMobile({
   const comparisonTitleHighlightText =
     productConfig.comparisonHeroHighlight ?? productConfig.displayName;
   const comparisonTitleSuffix = ` of ${comparisonMonth} ${new Date().getFullYear()}`;
-  const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
   const comparisonSubtitleSecondary =
-    'With lower rates, you can boost your business while saving thousands on payments. Compare our top lenders and lock in your rate today.';
+    'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
   const scrollToLender = useLenderDeepDiveScroll();
 
   return (
@@ -83,7 +82,6 @@ export function ProductComparisonPageMobile({
         comparisonTitlePrefix={comparisonTitlePrefix}
         comparisonTitleHighlightText={comparisonTitleHighlightText}
         comparisonTitleSuffix={comparisonTitleSuffix}
-        comparisonSubtitle={comparisonSubtitle}
         comparisonSubtitleSecondary={comparisonSubtitleSecondary}
         showTrustBadges={false}
       />

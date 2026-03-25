@@ -7,13 +7,20 @@ import { AppLink } from '@/components/ui/AppLink/AppLink';
 import Logo from '@/components/ui/Logo/Logo';
 import { URL_CONFIG } from '@/lib/urlConfig';
 import { classNames } from '@/lib';
-import { CATEGORIES } from '@/config/categories';
+import { HEADER_RELATED_NAV_LINKS } from '@/config/categories';
 import cls from './Header.module.scss';
 
 interface HeaderConfigItem {
   title: string;
   path: string;
   pathMatch?: string[];
+}
+
+function isRelatedNavActive(pathname: string | null, href: string): boolean {
+  if (!pathname) return false;
+  const p = pathname.replace(/\/$/, '') || '/';
+  const h = href.replace(/\/$/, '') || '/';
+  return p === h || p.startsWith(`${h}/`);
 }
 
 const headerConfig: HeaderConfigItem[] = [
@@ -34,12 +41,10 @@ interface HeaderProps {
 
 export const Header = ({ embeddedInFixedStack = false }: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const path = usePathname();
   const isHome = path === URL_CONFIG.main;
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
-  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   return (
     <header
@@ -77,39 +82,18 @@ export const Header = ({ embeddedInFixedStack = false }: HeaderProps) => {
             })
           ) : (
             <>
-              <li className={classNames(cls.navItem, {}, [cls.dropdown])}>
-                <button
-                  type="button"
-                  className={classNames(cls.navLink, {}, [cls.dropdownToggle])}
-                  aria-haspopup="menu"
-                  aria-expanded={isDropdownOpen}
-                  onClick={toggleDropdown}
-                >
-                  Products
-                  <span
-                    className={classNames(cls.dropdownCaret, { [cls.open]: isDropdownOpen })}
+              {HEADER_RELATED_NAV_LINKS.map((c) => (
+                <li key={c.href} className={cls.navItem} onClick={toggleMenu}>
+                  <AppLink
+                    href={c.href}
+                    className={cls.navLink}
+                    isWithHover
+                    isActive={isRelatedNavActive(path, c.href)}
                   >
-                    ▾
-                  </span>
-                </button>
-
-                <div className={classNames(cls.dropdownMenu, { [cls.open]: isDropdownOpen })}>
-                  {CATEGORIES.map((c) => (
-                    <AppLink
-                      key={c.href}
-                      href={c.href}
-                      className={cls.dropdownItem}
-                      isWithHover
-                      onClick={() => {
-                        setIsDropdownOpen(false);
-                        setIsOpen(false);
-                      }}
-                    >
-                      {c.title}
-                    </AppLink>
-                  ))}
-                </div>
-              </li>
+                    {c.title}
+                  </AppLink>
+                </li>
+              ))}
 
               <li className={cls.navItem} onClick={toggleMenu}>
                 <AppLink

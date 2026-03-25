@@ -300,7 +300,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
               <div className="mt-6 pt-5 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
                 <Button
                   variant="primary"
-                  className="text-white font-semibold rounded-none sm:order-2"
+                  className="text-white font-semibold rounded-none sm:order-2 !bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]"
                   style={{ borderRadius: 0 }}
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId);
@@ -312,7 +312,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                 </Button>
                 <button
                   type="button"
-                  className="text-sm text-[var(--color-cta)] font-semibold hover:underline sm:order-1"
+                  className="text-sm text-[var(--color-primary)] font-semibold hover:underline sm:order-1"
                   onClick={async () => {
                     const url = `${window.location.origin}${window.location.pathname}#${id}`;
                     await navigator.clipboard.writeText(url);

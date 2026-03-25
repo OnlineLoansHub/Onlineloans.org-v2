@@ -13,27 +13,27 @@
 
   &.primary {
     color: var(--color-white);
-    background-color: var(--color-cta);
+    background-color: var(--color-primary);
 
     &:hover {
-      background-color: var(--color-cta-hover);
+      background-color: var(--color-primary-dark);
     }
 
     &:active {
-      background-color: var(--color-cta-active);
+      background-color: var(--color-primary-darker);
     }
   }
 
   &.secondary {
-    color: var(--color-cta);
+    color: var(--color-primary);
 
     &:hover {
-      background-color: color-mix(in srgb, var(--color-cta) 10%, transparent);
+      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
     }
 
     &:active {
       color: var(--color-white);
-      background-color: var(--color-cta);
+      background-color: var(--color-primary);
     }
   }
 

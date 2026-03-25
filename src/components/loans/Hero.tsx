@@ -149,7 +149,14 @@ export default function Hero({
                   <p className={cls.subHeroTextLead}>{comparisonSubtitle}</p>
                 ) : null}
                 {comparisonSubtitleSecondary ? (
-                  <p className={cls.subHeroTextFollow}>{comparisonSubtitleSecondary}</p>
+                  <p className={cls.subHeroTextFollow}>
+                    {comparisonSubtitleSecondary.split('\n').map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        {idx > 0 && <br />}
+                        {line}
+                      </React.Fragment>
+                    ))}
+                  </p>
                 ) : null}
               </div>
             ) : (

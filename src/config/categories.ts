@@ -29,3 +29,11 @@ export const CATEGORIES: CategoryItem[] = [
   { icon: Coins, title: 'Gold and Silver', href: '/gold-and-silver/best-gold-and-silver' },
 ];
 
+/** Non-home header: four primary product links (flat nav, no dropdown). */
+export const HEADER_RELATED_NAV_LINKS: ReadonlyArray<{ title: string; href: string }> = [
+  { title: 'Business Loans', href: '/business-loan/best-business-loans' },
+  { title: 'Personal Loans', href: '/personal-loan/best-personal-loans' },
+  { title: 'Mortgage Loans', href: '/mortgage-loan/best-mortgage-loans' },
+  { title: 'Auto Loans', href: '/auto-loan/best-auto-loans' },
+];
+
