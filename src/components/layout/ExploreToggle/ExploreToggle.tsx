@@ -128,8 +128,8 @@ export const ExploreToggle = () => {
               </div>
             )}
 
-            {/* Restaurant Funding by State - Show on home page or business loan pages */}
-            {(isHomePage || loanType === 'business') && (
+            {/* Restaurant Funding by State - business loan routes only (not home) */}
+            {loanType === 'business' && (
               <div className={cls.exploreSection}>
                 <h3 className={cls.sectionTitle}>Restaurant Funding by State</h3>
                 <div className={cls.statesGrid}>
@@ -146,8 +146,8 @@ export const ExploreToggle = () => {
               </div>
             )}
 
-            {/* Construction Business Loans by State - Show on home page or business loan pages */}
-            {(isHomePage || loanType === 'business') && (
+            {/* Construction Business Loans by State - business loan routes only (not home) */}
+            {loanType === 'business' && (
               <div className={cls.exploreSection}>
                 <h3 className={cls.sectionTitle}>Construction Business Loans by State</h3>
                 <div className={cls.statesGrid}>
