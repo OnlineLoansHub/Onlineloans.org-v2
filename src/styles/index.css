@@ -80,7 +80,8 @@ body {
 
 /* Wiggle animation for buttons */
 @keyframes wiggle {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(0deg);
   }
   10% {

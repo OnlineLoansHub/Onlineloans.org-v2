@@ -25,6 +25,9 @@ export default function Hero({
 
   return (
     <section className={cls.hero}>
+      {/* Professional Diagonal Striped Pattern - Right Bottom Only */}
+      <div className={cls.stripedPattern} aria-hidden="true" />
+
       {/* Decorative Wave Pattern - Right Side */}
       {!hasDesktopRightImage && (
         <div className={cls.wavePattern}>
