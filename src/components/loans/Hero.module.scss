@@ -194,13 +194,13 @@
   }
 }
 
-/* Comparison titles: match desktop “Lenders” green for the highlighted product phrase on mobile too */
+/* Comparison titles: keep highlighted phrase + "Lenders" on brand primary */
 .hero:has(.subHeroGroup) .titleHighlight {
-  color: var(--color-logo-org-green);
+  color: var(--color-primary);
 }
 
 .titleComparisonGreen {
-  color: var(--color-logo-org-green);
+  color: var(--color-primary);
   font-weight: 700;
 }
 

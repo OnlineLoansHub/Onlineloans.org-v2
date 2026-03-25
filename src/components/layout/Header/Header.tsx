@@ -55,6 +55,7 @@ export const Header = ({ embeddedInFixedStack = false }: HeaderProps) => {
           <Logo
             text="OnlineLoans.org"
             textColor="var(--color-primary)"
+            letterSpacing="0.02em"
             className={cls.logoComponent}
           />
         </Link>

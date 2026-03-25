@@ -7,6 +7,7 @@ interface LogoProps {
   text?: string;
   textColor?: string;
   fontSize?: number;
+  letterSpacing?: string;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export default function Logo({
   text = 'OnlineLoans.org',
   textColor = 'var(--color-primary)',
   fontSize,
+  letterSpacing,
   className = '',
 }: LogoProps) {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -116,6 +118,7 @@ export default function Logo({
         style={{
           color: textColor,
           ...(fontSize && { fontSize: `${fontSize}px` }),
+          ...(letterSpacing && { letterSpacing }),
           fontFamily: 'Playwrite CU, cursive',
         }}
       />
