@@ -196,11 +196,11 @@
 
 /* Comparison titles: keep highlighted phrase + "Lenders" on brand primary */
 .hero:has(.subHeroGroup) .titleHighlight {
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
 }
 
 .titleComparisonGreen {
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   font-weight: 700;
 }
 

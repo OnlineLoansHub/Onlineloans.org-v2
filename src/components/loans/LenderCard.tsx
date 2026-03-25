@@ -308,8 +308,8 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             <Button
               variant="primary"
               className={[
-                'w-full text-white font-semibold group rounded-none',
-                '!bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]',
+                'w-[95%] text-white font-semibold group rounded-none',
+                '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
               ].join(' ')}
               style={{
                 padding: '10px 11px',
@@ -469,13 +469,13 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                 <Button
                   variant="primary"
                   className={[
-                    'text-white font-semibold transition-all rounded-none',
-                    '!bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]',
+                    'text-white font-semibold transition-all rounded-none group',
+                    '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
                     'transform-gpu will-change-transform',
                     'duration-200 ease-out',
                     'hover:-translate-y-0.5 hover:scale-[1.02]',
                     'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
-                    'h-10 w-full text-sm whitespace-nowrap',
+                    'h-10 w-[95%] text-sm whitespace-nowrap',
                   ].join(' ')}
                   style={{ margin: 0, border: 0, borderRadius: 0 }}
                   onClick={() => {
@@ -484,7 +484,14 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                     window.open(processedCtaUrl || '#', '_blank');
                   }}
                 >
-                  View Rates
+                  <span className="inline-flex items-center">
+                    View Rates
+                    <ChevronsRight
+                      className="ml-1 inline-block align-middle w-[1.05em] h-[1.05em] transition-transform duration-300 group-hover:translate-x-1"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    />
+                  </span>
                 </Button>
 
                 {lender.websiteUrl && (
