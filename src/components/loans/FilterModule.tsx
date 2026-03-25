@@ -188,7 +188,7 @@ export default function FilterModule({
     });
     setExpandedSections(resetExpanded);
     setMobileFiltersOpen(true);
-  }, []);
+  }, [filterOrder]);
 
   const handleReset = useCallback(() => {
     onReset();

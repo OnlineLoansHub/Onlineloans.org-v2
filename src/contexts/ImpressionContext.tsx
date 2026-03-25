@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 const IMPRESSION_STORAGE_KEY = 'impression_id';
 
@@ -27,7 +27,7 @@ export const ImpressionProvider = ({ children }: { children: ReactNode }) => {
   // Set impression ID in memory FIRST, then persist to localStorage SECOND
   const setImpressionId = (id: string) => {
     setImpressionIdState(id);
-    
+
     // Persist to localStorage SECOND (for page reloads)
     if (typeof window !== 'undefined') {
       try {

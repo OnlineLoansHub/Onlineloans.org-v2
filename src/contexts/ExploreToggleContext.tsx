@@ -26,6 +26,7 @@ export const ExploreToggleProvider = ({ children }: { children: ReactNode }) => 
         rafId = requestAnimationFrame(() => {
           const isMobileWidth = window.innerWidth <= 993;
           setIsMobile(isMobileWidth);
+
           // Set isOpen to true by default on mobile
           if (isMobileWidth) {
             setIsOpen(true);

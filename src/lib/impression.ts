@@ -65,7 +65,7 @@ export const flushEventQueue = (impressionId: string): void => {
  * Send tracking data using fetch with keepalive (production-ready)
  * Uses fetch instead of sendBeacon for better reliability and Network tab visibility
  */
-const sendTrackingData = (endpoint: string, data: Record<string, any>): boolean => {
+const sendTrackingData = (endpoint: string, data: Record<string, unknown>): boolean => {
   const url = `${API_URL}/${endpoint}`;
 
   // Use fetch with keepalive for reliable tracking during navigation

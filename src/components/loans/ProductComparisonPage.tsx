@@ -1,17 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Script from 'next/script';
-import { ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import Hero from '@/components/loans/Hero';
-import LenderCard from '@/components/loans/LenderCard';
-import FilterModule from '@/components/loans/FilterModule';
-import SortControl from '@/components/loans/SortControl';
-import RecommendationWizard from '@/components/loans/RecommendationWizard';
-import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
-import CrossPromo from '@/components/loans/CrossPromo';
-import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import type { Brand } from '@/data/brands';
 import type { ProductTypeConfig } from '@/data/productTypes';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
@@ -39,6 +31,17 @@ interface ProductComparisonPageProps {
   };
 }
 
+const ProductComparisonPageDesktop = dynamic(
+  () =>
+    import('@/components/loans/ProductComparisonPageDesktop').then((m) => m.ProductComparisonPageDesktop),
+  { ssr: false }
+);
+const ProductComparisonPageMobile = dynamic(
+  () =>
+    import('@/components/loans/ProductComparisonPageMobile').then((m) => m.ProductComparisonPageMobile),
+  { ssr: false }
+);
+
 // Calculate date 7 days before current date
 const getLastUpdated = (): string => {
   const date = new Date();
@@ -61,6 +64,7 @@ export default function ProductComparisonPage({
   structuredData,
 }: ProductComparisonPageProps) {
   const lastUpdated = getLastUpdated();
+  const isDesktop = useMediaQuery('(min-width: 1024px)', true);
 
   // Initialize filters based on filterOrder
   const initialFilters: Record<string, string> = {};
@@ -232,133 +236,41 @@ export default function ProductComparisonPage({
       />
 
       <div className={styles.page}>
-        {showAdvertisingDisclosure && (
-          <div className={styles.advertisingDisclosure}>
-            <p className={styles.disclosureText}>{advertisingDisclosureText}</p>
-          </div>
+        {isDesktop ? (
+          <ProductComparisonPageDesktop
+            productConfig={productConfig}
+            lendersData={lendersData}
+            faqItems={faqItems}
+            lastUpdated={lastUpdated}
+            filters={filters}
+            sortBy={sortBy}
+            displayedLenders={displayedLenders}
+            filteredCount={filteredLenders.length}
+            onSortChange={setSortBy}
+            onFilterChange={handleFilterChange}
+            onReset={handleReset}
+            onShowMore={() => setDisplayCount((prev) => prev + 5)}
+            hasMore={hasMore}
+          />
+        ) : (
+          <ProductComparisonPageMobile
+            productConfig={productConfig}
+            lendersData={lendersData}
+            faqItems={faqItems}
+            lastUpdated={lastUpdated}
+            filters={filters}
+            sortBy={sortBy}
+            displayedLenders={displayedLenders}
+            filteredCount={filteredLenders.length}
+            onSortChange={setSortBy}
+            onFilterChange={handleFilterChange}
+            onReset={handleReset}
+            onShowMore={() => setDisplayCount((prev) => prev + 5)}
+            hasMore={hasMore}
+            showAdvertisingDisclosure={showAdvertisingDisclosure}
+            advertisingDisclosureText={advertisingDisclosureText}
+          />
         )}
-        <Hero heroConfig={productConfig.hero} validDate={lastUpdated} />
-
-        {/* Main Content */}
-        <section className={styles.mainContent}>
-          {/* Mobile Filter and Sort Row */}
-          <div className={styles.mobileControlsRow}>
-            <SortControl sortBy={sortBy} onSortChange={setSortBy} />
-            <FilterModule
-              filters={filters}
-              filterConfig={productConfig.filters}
-              filterOrder={productConfig.filterOrder}
-              onFilterChange={handleFilterChange}
-              onReset={handleReset}
-              resultCount={filteredLenders.length}
-            />
-          </div>
-
-          <div className={styles.contentWrapper}>
-            {/* Sidebar Filters - Desktop */}
-            <aside className={styles.sidebar}>
-              <div className={styles.stickySidebar}>
-                <FilterModule
-                  filters={filters}
-                  filterConfig={productConfig.filters}
-                  filterOrder={productConfig.filterOrder}
-                  onFilterChange={handleFilterChange}
-                  onReset={handleReset}
-                  resultCount={filteredLenders.length}
-                />
-              </div>
-            </aside>
-
-            {/* Main Content Area */}
-            <main className={styles.mainArea}>
-              {/* Sort Control - Desktop */}
-              <div className={styles.sortControlContainer}>
-                <div className={styles.resultsText}>
-                  Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                  <span className={styles.resultsCount}>{filteredLenders.length}</span> lenders
-                </div>
-                <SortControl sortBy={sortBy} onSortChange={setSortBy} />
-              </div>
-
-              {/* Lender Cards */}
-              <div className={styles.lenderCardsContainer}>
-                {displayedLenders.length > 0 ? (
-                  displayedLenders.map((lender, index) => (
-                    <LenderCard
-                      key={lender.id}
-                      lender={lender}
-                      rank={index + 1}
-                      amountLabel={productConfig.amountLabel}
-                    />
-                  ))
-                ) : (
-                  <div className={styles.emptyState}>
-                    <div className={styles.emptyStateIcon}>
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={1.5}
-                          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className={styles.emptyStateTitle}>No lenders found</h3>
-                    <p className={styles.emptyStateText}>
-                      Try adjusting your filters to see more results.
-                    </p>
-                    <Button variant="secondary" onClick={handleReset}>
-                      Reset Filters
-                    </Button>
-                  </div>
-                )}
-              </div>
-
-              {/* Show More Button */}
-              {hasMore && (
-                <div className={styles.showMoreContainer}>
-                  <Button
-                    variant="secondary"
-                    onClick={() => setDisplayCount((prev) => prev + 5)}
-                    className={styles.showMoreButton}
-                  >
-                    Show More
-                    <ChevronDown className="w-4 h-4 ml-2 inline-block" />
-                  </Button>
-                </div>
-              )}
-            </main>
-          </div>
-        </section>
-
-        {/* Recommendation Wizard */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>
-              Find Your Perfect {productConfig.displayName} Match
-            </h2>
-            <RecommendationWizard lenders={lendersData} wizardConfig={productConfig.wizard} />
-          </div>
-        </section>
-
-        {/* How Our Total Score Works Section */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>How Our Total Score Works</h2>
-            <ExpandableExplanation />
-          </div>
-        </section>
-
-        {/* Cross Promo Section */}
-        <CrossPromo crossPromoConfig={productConfig.crossPromo} />
-
-        {/* FAQ Section */}
-        <section className={styles.unifiedSection}>
-          <div className={styles.unifiedContainer}>
-            <h2 className={styles.unifiedTitle}>Frequently Asked Questions</h2>
-            <FAQAccordion items={faqItems} />
-          </div>
-        </section>
       </div>
     </>
   );

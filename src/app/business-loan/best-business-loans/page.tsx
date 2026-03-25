@@ -119,6 +119,7 @@ const breadcrumbSchema = {
 export default function BestBusinessLoansPage() {
   useEffect(() => {
     document.body.setAttribute('data-page', 'best-business-loans');
+
     return () => {
       document.body.removeAttribute('data-page');
     };
