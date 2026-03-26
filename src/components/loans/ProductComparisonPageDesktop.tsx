@@ -42,30 +42,34 @@ const DESKTOP_FILTER_OPTIONS: Record<
     label: 'Monthly revenue',
     options: [
       { value: 'all', label: 'All' },
-      { value: 'less_10k', label: 'Less than $10K' },
-      { value: '10k_20k', label: '$10K–$20K' },
-      { value: '20k_30k', label: '$20K–$30K' },
-      { value: 'more_30k', label: 'More than $30K' },
+      { value: 'lt_5k', label: 'Less than $5K' },
+      { value: '5k_plus', label: '$5K+' },
+      { value: '10k_plus', label: '$10K+' },
+      { value: '20k_plus', label: '$20K+' },
+      { value: '30k_plus', label: '$30K+' },
     ],
   },
   timeInBusiness: {
     label: 'Time in business',
     options: [
       { value: 'all', label: 'All' },
-      { value: '0_6m', label: '0–6 months' },
-      { value: '6m_1y', label: '6 months–1 year' },
-      { value: '1_2', label: '1–2 years' },
-      { value: '2_plus', label: '2+ years' },
+      { value: 'lt_6m', label: 'Less than 6 months' },
+      { value: '6m_plus', label: '6 months+' },
+      { value: '1y_plus', label: '1 year+' },
+      { value: '5y_plus', label: '5 years+' },
+      { value: '10y_plus', label: '10 years+' },
     ],
   },
   creditScore: {
     label: 'Credit score',
     options: [
       { value: 'all', label: 'All' },
-      { value: 'poor', label: 'Poor (350–629)' },
-      { value: 'fair', label: 'Fair (630–689)' },
-      { value: 'good', label: 'Good (690–719)' },
-      { value: 'excellent', label: 'Excellent (720–850)' },
+      { value: 'lt_500', label: 'Less than 500' },
+      { value: '500_plus', label: '500+' },
+      { value: '550_plus', label: '550+' },
+      { value: '600_plus', label: '600+' },
+      { value: '650_plus', label: '650+' },
+      { value: '700_plus', label: '700+' },
     ],
   },
 };
@@ -218,7 +222,7 @@ export function ProductComparisonPageDesktop({
         <section className={styles.unifiedSection}>
           <div className={styles.unifiedContainer}>
             <h2 className={styles.unifiedTitle}>Read more about each lender</h2>
-            <LenderDeepDiveSections lenders={lendersData} />
+            <LenderDeepDiveSections lenders={displayedLenders} />
           </div>
         </section>
       ) : null}

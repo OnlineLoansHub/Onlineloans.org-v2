@@ -158,7 +158,7 @@ export function ProductComparisonPageMobile({
         <section className={styles.unifiedSection}>
           <div className={styles.unifiedContainer}>
             <h2 className={styles.unifiedTitle}>Read more about each lender</h2>
-            <LenderDeepDiveSections lenders={lendersData} />
+            <LenderDeepDiveSections lenders={displayedLenders} />
           </div>
         </section>
       ) : null}

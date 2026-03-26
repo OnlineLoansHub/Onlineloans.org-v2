@@ -286,27 +286,42 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                       </div>
                     ) : null}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
-                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
-                        <div className="text-xs text-slate-500">Loan amount</div>
-                        <div className="text-sm font-semibold text-slate-900">{lender.amount ?? '—'}</div>
-                      </div>
-                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
-                        <div className="text-xs text-slate-500">Min. credit score</div>
-                        <div className="text-sm font-semibold text-slate-900">{lender.minCreditScore ?? '—'}</div>
-                      </div>
-                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
-                        <div className="text-xs text-slate-500">Monthly revenue</div>
-                        <div className="text-sm font-semibold text-slate-900">{lender.minRevenue ?? '—'}</div>
-                      </div>
-                      <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
-                        <div className="text-xs text-slate-500">Time in business</div>
-                        <div className="text-sm font-semibold text-slate-900">{lender.minTimeInBusiness ?? '—'}</div>
+                    <div className="mt-4">
+                      <div className="text-sm font-bold text-slate-900 mb-2">Minimum requirements</div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
+                          <div className="text-xs text-slate-500">Business bank account</div>
+                          <div className="text-sm font-semibold text-slate-900">
+                            {(lender.businessBankAccountRequired ?? true) ? 'Yes' : 'No'}
+                          </div>
+                        </div>
+                        <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
+                          <div className="text-xs text-slate-500">Min. credit score</div>
+                          <div className="text-sm font-semibold text-slate-900">
+                            {lender.minCreditScore ?? '—'}
+                          </div>
+                        </div>
+                        <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
+                          <div className="text-xs text-slate-500">Time in business</div>
+                          <div className="text-sm font-semibold text-slate-900">
+                            {lender.minTimeInBusiness ?? '—'}
+                          </div>
+                        </div>
+                        <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
+                          <div className="text-xs text-slate-500">Monthly revenue</div>
+                          <div className="text-sm font-semibold text-slate-900">
+                            {lender.minRevenue ?? '—'}
+                          </div>
+                        </div>
+                        <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
+                          <div className="text-xs text-slate-500">Loan amount range</div>
+                          <div className="text-sm font-semibold text-slate-900">{lender.amount ?? '—'}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="mt-6 grid grid-cols-1 gap-6">
                     <div>
                       <div className="text-sm font-bold text-slate-900 mb-2">What we like</div>
                       <div className="overflow-hidden rounded-sm border border-slate-200">
@@ -317,29 +332,6 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                                 <tr key={d} className="border-t border-slate-200 first:border-t-0">
                                   <td className="w-10 align-top px-3 py-2">
                                     <Check className="w-4 h-4 text-emerald-600 mt-0.5" />
-                                  </td>
-                                  <td className="px-3 py-2 text-sm text-slate-700">{d}</td>
-                                </tr>
-                              ))
-                            ) : (
-                              <tr>
-                                <td className="px-3 py-2 text-sm text-slate-600">—</td>
-                              </tr>
-                            )}
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-slate-900 mb-2">What to consider</div>
-                      <div className="overflow-hidden rounded-sm border border-slate-200">
-                        <table className="w-full border-collapse">
-                          <tbody>
-                            {(lender.badDetails ?? []).length ? (
-                              lender.badDetails.map((d) => (
-                                <tr key={d} className="border-t border-slate-200 first:border-t-0">
-                                  <td className="w-10 align-top px-3 py-2">
-                                    <X className="w-4 h-4 text-rose-600 mt-0.5" />
                                   </td>
                                   <td className="px-3 py-2 text-sm text-slate-700">{d}</td>
                                 </tr>

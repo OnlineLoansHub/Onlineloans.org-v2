@@ -21,10 +21,10 @@ type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'cred
 
 /** Initial “Are you eligible for a better rate?” presets (desktop filter bar). Reset still clears to All. */
 const DESKTOP_FILTER_DEFAULTS: Record<DesktopFilterKey, string> = {
-  loanType: 'term_loan',
-  monthlyRevenue: '10k_20k',
-  timeInBusiness: '1_2',
-  creditScore: 'good',
+  loanType: 'all',
+  monthlyRevenue: '5k_plus',
+  timeInBusiness: '6m_plus',
+  creditScore: '500_plus',
 };
 
 const DESKTOP_FILTERS_ALL: Record<DesktopFilterKey, string> = {
@@ -123,6 +123,54 @@ export default function ProductComparisonPage({
     return null;
   };
 
+  const parseMinCreditScoreNumber = (minCreditScore?: string): number | null => {
+    if (!minCreditScore) return null;
+    const v = String(minCreditScore).trim().toLowerCase();
+    const n = Number(v.replace(/[^\d]/g, ''));
+    if (Number.isFinite(n) && n > 0) return n;
+    const map: Record<string, number> = {
+      poor: 350,
+      fair: 630,
+      good: 690,
+      excellent: 720,
+    };
+    return map[v] ?? null;
+  };
+
+  const getUserRevenueValue = (value: string): number | null => {
+    const map: Record<string, number> = {
+      lt_5k: 4999,
+      '5k_plus': 5000,
+      '10k_plus': 10000,
+      '20k_plus': 20000,
+      '30k_plus': 30000,
+    };
+    return map[value] ?? null;
+  };
+
+  const getUserTimeMonths = (value: string): number | null => {
+    const map: Record<string, number> = {
+      lt_6m: 5,
+      '6m_plus': 6,
+      '1y_plus': 12,
+      '5y_plus': 60,
+      '10y_plus': 120,
+    };
+    return map[value] ?? null;
+  };
+
+  const getUserCreditValue = (value: string): number | null => {
+    const map: Record<string, number> = {
+      lt_500: 499,
+      '500_plus': 500,
+      '550_plus': 550,
+      '600_plus': 600,
+      '650_plus': 650,
+      '700_plus': 700,
+    };
+    return map[value] ?? null;
+  };
+
   const normalizeCreditCategory = (minCreditScore?: string): 'poor' | 'fair' | 'good' | 'excellent' | null => {
     if (!minCreditScore) return null;
     const v = String(minCreditScore).trim().toLowerCase();
@@ -187,46 +235,31 @@ export default function ProductComparisonPage({
       }
 
       if (monthlyRevenue !== 'all') {
-        const revenueMap: Record<string, number> = {
-          less_10k: 9999,
-          '10k_20k': 20000,
-          '20k_30k': 30000,
-          more_30k: Number.POSITIVE_INFINITY,
-        };
-        const userRevenue = revenueMap[monthlyRevenue];
+        const userRevenue = getUserRevenueValue(monthlyRevenue);
         result = result.filter((l) => {
           const min = parseMinRevenue(l.minRevenue);
           if (min == null) return true;
 
-          return min <= userRevenue;
+          return userRevenue == null ? true : min <= userRevenue;
         });
       }
 
       if (timeInBusiness !== 'all') {
-        const userMonthsMap: Record<string, number> = {
-          '0_6m': 0,
-          '6m_1y': 6,
-          '1_2': 12,
-          '2_plus': 24,
-        };
-        const userMonths = userMonthsMap[timeInBusiness];
+        const userMonths = getUserTimeMonths(timeInBusiness);
         result = result.filter((l) => {
           const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
           if (minMonths == null) return true;
 
-          return minMonths <= userMonths;
+          return userMonths == null ? true : minMonths <= userMonths;
         });
       }
 
       if (creditScore !== 'all') {
-        const creditOrder = ['poor', 'fair', 'good', 'excellent'] as const;
-        const userIndex = creditOrder.indexOf(creditScore as (typeof creditOrder)[number]);
+        const userValue = getUserCreditValue(creditScore);
         result = result.filter((l) => {
-          const cat = normalizeCreditCategory(l.minCreditScore);
-          if (!cat) return true;
-          const lenderIndex = creditOrder.indexOf(cat);
-
-          return lenderIndex <= userIndex;
+          const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
+          if (lenderMin == null) return true;
+          return userValue == null ? true : lenderMin <= userValue;
         });
       }
     } else {
@@ -235,12 +268,11 @@ export default function ProductComparisonPage({
         if (value === 'all') return;
 
         if (key === 'creditScore') {
-          const creditOrder = ['poor', 'fair', 'good', 'excellent'];
-          const filterIndex = creditOrder.indexOf(value);
+          const userValue = getUserCreditValue(value);
           result = result.filter((l) => {
-            const lenderIndex = creditOrder.indexOf(normalizeCreditCategory(l.minCreditScore) || '');
-
-            return lenderIndex <= filterIndex;
+            const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
+            if (lenderMin == null) return true;
+            return userValue == null ? true : lenderMin <= userValue;
           });
         } else if (
           key.includes('loanType') ||
@@ -260,20 +292,18 @@ export default function ProductComparisonPage({
         ) {
           result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
         } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
-          const revenueOrder = ['less_10k', '10k_20k', '20k_30k', 'more_30k'];
-          const filterIndex = revenueOrder.indexOf(value);
+          const userRevenue = getUserRevenueValue(value);
           result = result.filter((l) => {
-            const lenderIndex = revenueOrder.indexOf(l.minRevenue || '');
-
-            return lenderIndex <= filterIndex;
+            const min = parseMinRevenue(l.minRevenue);
+            if (min == null) return true;
+            return userRevenue == null ? true : min <= userRevenue;
           });
         } else if (key.includes('timeInBusiness')) {
-          const timeOrder = ['0_6m', '6m_1y', '1_2', '2_plus'];
-          const filterIndex = timeOrder.indexOf(value);
+          const userMonths = getUserTimeMonths(value);
           result = result.filter((l) => {
-            const lenderIndex = timeOrder.indexOf(l.minTimeInBusiness || '');
-
-            return lenderIndex <= filterIndex;
+            const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
+            if (minMonths == null) return true;
+            return userMonths == null ? true : minMonths <= userMonths;
           });
         }
       });

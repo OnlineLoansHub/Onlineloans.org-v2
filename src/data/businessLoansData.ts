@@ -19,6 +19,8 @@ type SmallCardInfo = Pick<
   | 'minRevenue'
   | 'minTimeInBusiness'
   | 'amountRange'
+  | 'restrictedIndustries'
+  | 'restrictedStates'
 >;
 
 type SmallCardOverrides = {
@@ -41,6 +43,7 @@ type ReadMoreInfo = {
     loanType: string;
     details: string;
   }>;
+  businessBankAccountRequired?: boolean;
   foundedYear?: number;
   headquarters?: string;
   phoneNumber?: string;
@@ -73,7 +76,7 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
         'sba_loan',
       ],
       minCreditScore: '550',
-      minRevenue: '10k',
+      minRevenue: '5k',
       minTimeInBusiness: '1y',
       amountRange: '50k_100k',
       amount: '$5K - $1M+',
@@ -100,49 +103,85 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
         {
           loanType: 'Term loans',
           details:
-            'Fixed payment schedule over a set term. Typically best for larger one-time purchases, expansions, or refinancing higher-cost debt.',
+            'A loan repaid over a set term with a fixed payment schedule (can be paid off early without penalty). It may have a fixed or floating interest rate.',
         },
         {
-          loanType: 'Lines of credit',
+          loanType: 'SBA loans',
           details:
-            'Reusable credit line you draw from as needed. Often used for working capital, seasonal expenses, and smoothing cash flow.',
+            'The SBA typically doesn’t lend directly; it guarantees loans made by partner commercial lenders to reduce lender risk. The page notes the SBA may guarantee up to ~85% of the remaining balance if a borrower defaults and highlights added education/counseling benefits.',
         },
         {
-          loanType: 'SBA-backed loans',
+          loanType: 'Microloans',
           details:
-            'Issued by partner lenders with SBA guarantee framework (not directly by the SBA). Can offer favorable terms, but usually involves heavier documentation and longer timelines.',
+            'A newer option described as very small loans (the guide cites origins in crowdfunding-style microloans). The page emphasizes mission-focused lenders and that microloans can be offered via credit unions, chambers of commerce, nonprofits, and crowdfunding platforms.',
         },
         {
-          loanType: 'Equipment financing',
+          loanType: 'Merchant cash advances',
           details:
-            'Designed for purchasing equipment; the equipment may serve as collateral. Useful when you want the asset cost spread over time.',
+            'An advance based on established credit card sales, where the lender reviews past sales (the guide mentions the last 6–12 months) and advances a percentage. The page warns MCAs aren’t held to the same standards as traditional bank loans and stresses reviewing fees and repayment terms carefully.',
         },
         {
-          loanType: 'Merchant cash advance (MCA)',
+          loanType: 'Equity financing',
           details:
-            'Advance repaid from future sales (often daily/weekly). Can fund quickly, but effective cost can be higher than term financing.',
+            'Raising money by selling shares of your company. The guide notes you can also raise equity from friends/family or from angel investors and venture capitalists.',
+        },
+        {
+          loanType: 'Debt financing',
+          details:
+            'An umbrella term for borrowing money that you repay with interest (term, micro, SBA, even informal loans). The guide also notes small businesses can use debt financing to sell a bond to investors.',
         },
         {
           loanType: 'Invoice factoring',
           details:
-            'Access cash by selling unpaid invoices. Helpful for B2B businesses with long payment cycles; cost depends on invoice terms and customer quality.',
+            'A way to get paid sooner on outstanding invoices rather than waiting 30–120 days. The page describes factoring companies paying roughly 70%–90% of invoice value and cites it as a cash-flow tool for operating expenses.',
+        },
+        {
+          loanType: 'Business credit cards',
+          details:
+            'A common way owners fund purchases quickly; the guide notes some iconic businesses were bootstrapped with credit cards. It’s positioned as an alternative funding tool, but requires disciplined usage to avoid harmful debt.',
+        },
+        {
+          loanType: 'Personal loans',
+          details:
+            'If a business hasn’t established credit yet, the guide notes an owner may borrow personally and then loan the money to the business. It emphasizes careful recordkeeping for tax purposes and suggests consulting an accountant/tax adviser.',
+        },
+        {
+          loanType: 'Loans from friends and family',
+          details:
+            'Presented as potentially risky for relationships; the guide recommends treating it professionally with legal documents, clear terms, and a reasonable interest rate.',
+        },
+        {
+          loanType: 'Crowdfunding',
+          details:
+            'Platforms can raise funds through many small contributions. The guide contrasts donation-style crowdfunding (not repaid) and reward-based platforms where backers receive early products rather than cash repayment.',
+        },
+        {
+          loanType: 'Peer lending',
+          details:
+            'A peer-to-peer subset of crowdfunding focused on lending cash to small business owners, often for equipment purchases or expansion. The guide notes it’s typically not for ongoing monthly expenses like payroll or rent.',
+        },
+        {
+          loanType: 'Working capital',
+          details:
+            'Used when cash flow is restricted and day-to-day expenses need coverage. The guide highlights seasonal businesses as common users (e.g., slow-season support that’s repaid when revenue resumes).',
         },
       ],
       companyOverview:
-        'Lendzi is an online small-business financing marketplace that helps borrowers compare multiple offers through one digital application flow. Its small-business guide highlights core products such as term loans, SBA-backed loans, business lines of credit, equipment financing, merchant cash advances, invoice factoring, and related specialty funding programs. The platform also emphasizes that SBA financing is typically issued by partner lenders while the SBA provides a guarantee framework, and that timelines can vary widely by product type. Faster products (like merchant cash advances or factoring) can fund quickly in some cases, while SBA and traditional term products often require more documentation and longer underwriting. Overall, Lendzi positions itself as a matching and education-first experience for owners who want to evaluate options by funding amount, business profile, and repayment fit.',
+        'Lendzi is an online small business financing marketplace and education hub that helps owners compare common funding options in one place—like term loans, SBA loans, microloans, and faster alternatives such as merchant cash advances and invoice factoring. Its guide also clarifies that the SBA typically doesn’t lend directly; instead, partner lenders issue SBA loans with SBA guarantee support. Use the tables below to compare loan types, timelines, and requirements.',
       goodDetails: [
-        'Broad product coverage: term loans, SBA options, lines of credit, equipment financing, MCA, and factoring',
-        'Marketplace model helps compare multiple lender offers in one flow',
-        'Guidance around key qualification factors such as credit, revenue, and time in business',
-        'Supports startup and established-business funding scenarios',
-        'Highlights fast-funding alternatives for urgent cash-flow needs',
-        'Online application and lender-matching experience',
+        'Covers multiple funding paths: term loans, lines of credit, SBA-backed loans, microloans, MCA, and invoice factoring',
+        'Clear explanation of SBA loans (lender issues the loan; SBA provides a partial guarantee)',
+        'Practical eligibility guidance: credit history, time in business, revenue, and cash-flow factors like DSCR',
+        'Emphasizes preparation: gather documents, define loan purpose, and understand repayment terms before signing',
+        'Encourages comparing multiple offers and funding types to match cash-flow and business goals',
+        'Useful for both startups and established businesses (depending on product and qualifications)',
       ],
       badDetails: [
-        'SBA and traditional products can require heavier documentation and longer timelines',
-        'Rates, fees, and repayment structures vary materially by lender',
-        'Higher-cost products (for example some MCA structures) may be expensive versus term loans',
-        'Approval still depends on lender-specific underwriting and business fundamentals',
+        'Funding timelines vary widely; SBA and traditional term loans can take weeks to months in some cases',
+        'Documentation requirements can be significant (especially for SBA-backed loans)',
+        'Costs can be complex across products—fees and effective rates may differ from “headline” rates',
+        'Fast alternatives like MCA/factoring may be higher-cost than low-rate term or SBA options',
+        'Approval depends on lender underwriting and business fundamentals (revenue stability, credit profile, cash flow)',
       ],
     },
   },
@@ -217,7 +256,8 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       brandReputation: 9.1,
       popularityScore: 9.1,
       reviewCount: 1595,
-      highlight: 'A range of funding options for your business - funding in just 4 hours with no hidden fees',
+      highlight:
+        'A range of funding options for your business - funding in just 4 hours with no hidden fees',
       productTypes: [
         'term_loan',
         'working_capital',
@@ -234,7 +274,12 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
         'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
       websiteUrl:
         'https://app.advancefundsnetwork.com/affiliate-landing/9JMkP2lQY2bbyrL8waoq0T9pk2g2?sub_id_1=&sub_id_2=',
-      cardCheckmarks: ['Funding in ~4 hours', 'No hidden fees', 'Flexible options', 'No collateral required'],
+      cardCheckmarks: [
+        'Funding in ~4 hours',
+        'No hidden fees',
+        'Flexible options',
+        'No collateral required',
+      ],
     },
     readMore: {
       foundedYear: 2007,
@@ -278,7 +323,7 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
         'invoice_financing',
       ],
       minCreditScore: '500',
-      minRevenue: '7k',
+      minRevenue: '5k',
       minTimeInBusiness: '6m_1y',
       amountRange: '50k_100k',
       amount: '$5K - $10M',
@@ -329,11 +374,18 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       brandReputation: 9.5,
       popularityScore: 9.4,
       reviewCount: 969,
-      highlight: 'More than 55,000 companies funded - Growth potential more important than credit score',
-      productTypes: ['term_loan', 'line_of_credit', 'merchant_cash_advance', 'sba_loan', 'equipment_financing'],
-      minCreditScore: 'poor',
-      minRevenue: '10k_20k',
-      minTimeInBusiness: '6m_1y',
+      highlight:
+        'More than 55,000 companies funded - Growth potential more important than credit score',
+      productTypes: [
+        'term_loan',
+        'line_of_credit',
+        'merchant_cash_advance',
+        'sba_loan',
+        'equipment_financing',
+      ],
+      minCreditScore: '600',
+      minRevenue: '25k',
+      minTimeInBusiness: '1y',
       amountRange: '50k_100k',
       amount: 'Up to $1.5M',
       ctaUrl: 'https://forafinancial.pxf.io/c/6429639/2015280/24953',
@@ -384,12 +436,29 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       highlight: 'Fast and flexible business funding solutions',
       productTypes: ['term_loan', 'line_of_credit', 'working_capital'],
       minCreditScore: '500',
-      minRevenue: '7k',
+      minRevenue: '5k',
       minTimeInBusiness: '6m_1y',
       amountRange: '25k_50k',
       amount: '$5K - $10M',
       ctaUrl: 'https://britecapfinancial.sjv.io/QjBVkx',
       websiteUrl: 'https://britecapfinancial.sjv.io/QjBVkx',
+      restrictedIndustries: [
+        'Adult entertainment',
+        'Auto Dealers',
+        'Bail Bonds',
+        'Credit or Collection Services',
+        'Dating or Escort Services',
+        'Entertainment & Event Ticket Sales',
+        'Pawn Shops',
+        'Firearms',
+        'Gambling',
+        'Insurance',
+        'Marijuana/Cannabis',
+        'Money services',
+        'Non-Profits',
+        'Real Estate Agents/Brokers',
+      ],
+      restrictedStates: ['Nevada', 'North Dakota', 'Rhode Island', 'South Dakota', 'Vermont'],
       cardCheckmarks: [
         'Fast funding available',
         'Flexible repayment terms',
@@ -408,7 +477,7 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
         },
       ],
       companyOverview:
-        'BriteCap Financial is a technology-enabled funding provider focused on speed and flexibility for established small businesses. The company typically emphasizes quick application flow, business-friendly repayment design, and practical capital options for growth and operating needs.',
+        'BriteCap Financial is a technology-enabled funding provider focused on speed and flexibility for established small businesses. The company typically emphasizes quick application flow, business-friendly repayment design, and practical capital options for growth and operating needs. Prohibited industries: Adult entertainment, Auto Dealers, Bail Bonds, Credit or Collection Services, Dating or Escort Services, Entertainment & Event Ticket Sales, Pawn Shops, Firearms, Gambling, Insurance, Marijuana/Cannabis, Money services, Non-Profits, Real Estate Agents/Brokers.',
       goodDetails: [
         'Fast funding available',
         'Flexible repayment terms',
@@ -432,11 +501,18 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       brandReputation: 9.3,
       popularityScore: 9.3,
       reviewCount: 605,
-      highlight: '87% approval rate - No hard credit check required, funding in as little as same day',
-      productTypes: ['merchant_cash_advance', 'line_of_credit', 'term_loan', 'sba_loan', 'equipment_financing'],
-      minCreditScore: 'poor',
-      minRevenue: '10k_20k',
-      minTimeInBusiness: '6m_1y',
+      highlight:
+        '87% approval rate - No hard credit check required, funding in as little as same day',
+      productTypes: [
+        'merchant_cash_advance',
+        'line_of_credit',
+        'term_loan',
+        'sba_loan',
+        'equipment_financing',
+      ],
+      minCreditScore: '600',
+      minRevenue: '25k',
+      minTimeInBusiness: '1y',
       amountRange: '50k_100k',
       amount: '$5K - $2M',
       ctaUrl: 'https://uplyftcapital.sjv.io/JK1NMr',
@@ -579,4 +655,5 @@ export const businessLoansData: Brand[] = businessLoansEntries.map(({ smallCard,
   headquarters: readMore.headquarters,
   phoneNumber: readMore.phoneNumber,
   cardCheckmarks: smallCard.cardCheckmarks,
+  businessBankAccountRequired: readMore.businessBankAccountRequired,
 }));

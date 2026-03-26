@@ -313,38 +313,119 @@ function BrandWordmark({
   return null;
 }
 
-function pickDesktopBullets(lender: Brand): string[] {
-  const card = (lender.cardCheckmarks ?? []).filter(Boolean);
-  if (card.length >= 4) return card.slice(0, 4);
+function getLenderChannelBullet(lender: Brand): 'Direct lender' | 'Broker' {
+  const key = String(lender.name ?? '')
+    .trim()
+    .toLowerCase();
 
-  const bullets: string[] = [...card];
+  // User-provided classification:
+  // Direct lenders: Lendzi, BriteCap, Cardiff, Fora, Uplyft
+  if (
+    key === 'lendzi' ||
+    key === 'britecap' ||
+    key === 'cardiff' ||
+    key === 'fora financial' ||
+    key === 'uplyft' ||
+    key === 'uplyft capital'
+  ) {
+    return 'Direct lender';
+  }
+
+  return 'Broker';
+}
+
+type DesktopBullet =
+  | { type: 'loanAmount'; amount: string }
+  | { type: 'channel'; value: 'Direct lender' | 'Broker' }
+  | { type: 'restrictedIndustries'; items: string[] }
+  | { type: 'restrictedStates'; items: string[] }
+  | { type: 'text'; text: string };
+
+function asList(v: unknown): string[] {
+  if (!v) return [];
+  if (Array.isArray(v)) return v.map(String).map((s) => s.trim()).filter(Boolean);
+  return [String(v).trim()].filter(Boolean);
+}
+
+function RestrictionBullet({
+  label,
+  items,
+}: {
+  label: string;
+  items: string[];
+}) {
+  const hasItems = items.length > 0;
+  return (
+    <span className="min-w-0">
+      <span>{label} </span>
+      {hasItems ? (
+        <span className="relative inline-flex items-center group">
+          <button
+            type="button"
+            className="underline underline-offset-2 decoration-slate-300 hover:decoration-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary)]/30"
+          >
+            View list
+          </button>
+          <span className="pointer-events-auto absolute left-0 bottom-full z-[9999] mb-2 hidden w-[320px] rounded-sm border border-slate-200 bg-white p-3 text-xs text-slate-800 shadow-2xl group-hover:block group-focus-within:block">
+            <div className="font-semibold text-slate-900 mb-2">{label.trim()}</div>
+            <ul className="max-h-56 overflow-auto list-disc pl-4 space-y-1">
+              {items.map((it) => (
+                <li key={it}>{it}</li>
+              ))}
+            </ul>
+          </span>
+        </span>
+      ) : (
+        <span>None</span>
+      )}
+    </span>
+  );
+}
+
+function pickDesktopBullets(lender: Brand): DesktopBullet[] {
+  const card = (lender.cardCheckmarks ?? []).filter(Boolean);
+  const bullets: DesktopBullet[] = [];
+
+  // Always show loan amount first on desktop cards
+  if (lender.amount) bullets.push({ type: 'loanAmount', amount: lender.amount });
+
+  // Second bullet: direct lender vs broker
+  bullets.push({ type: 'channel', value: getLenderChannelBullet(lender) });
+
+  // Third & fourth bullets: restrictions (always)
+  bullets.push({ type: 'restrictedIndustries', items: asList(lender.restrictedIndustries) });
+  bullets.push({ type: 'restrictedStates', items: asList(lender.restrictedStates) });
 
   // Backfill from goodDetails if we still need more
-  for (const d of lender.goodDetails ?? []) {
+  for (const d of card.length ? card : lender.goodDetails ?? []) {
     if (bullets.length >= 4) break;
-    if (!bullets.includes(d)) bullets.push(d);
+    if (!bullets.some((b) => b.type === 'text' && b.text === d)) bullets.push({ type: 'text', text: d });
   }
 
   // Backfill from qualifiers if we still need more
   if (bullets.length < 4) {
     const revenue = humanizeMinRevenue(lender.minRevenue);
-    if (revenue) bullets.push(`Monthly revenue: ${revenue}`);
+    if (revenue) bullets.push({ type: 'text', text: `Monthly revenue: ${revenue}` });
   }
   if (bullets.length < 4) {
     const time = humanizeMinTimeInBusiness(lender.minTimeInBusiness);
-    if (time) bullets.push(`Time in business: ${time}`);
+    if (time) bullets.push({ type: 'text', text: `Time in business: ${time}` });
   }
   if (bullets.length < 4) {
     const credit = humanizeMinCreditScore(lender.minCreditScore);
-    if (credit) bullets.push(`Min. credit score: ${credit}`);
+    if (credit) bullets.push({ type: 'text', text: `Min. credit score: ${credit}` });
   }
 
   // As a last resort, include highlight
-  if (bullets.length < 4 && lender.highlight && !bullets.includes(lender.highlight)) {
-    bullets.push(lender.highlight);
+  if (
+    bullets.length < 4 &&
+    lender.highlight &&
+    !bullets.some((b) => b.type === 'text' && b.text === lender.highlight)
+  ) {
+    bullets.push({ type: 'text', text: lender.highlight });
   }
 
-  if (bullets.length === 0) bullets.push('Fast online application');
+  if (bullets.length === 0) bullets.push({ type: 'text', text: 'Fast online application' });
 
   return bullets.slice(0, 4);
 }
@@ -650,7 +731,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
       {/* Desktop Card - Full Layout */}
       <div
-        className={`hidden lg:block bg-white rounded overflow-hidden relative ${homeCardMotionDesktop} ${
+        className={`hidden lg:block bg-white rounded overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
           rank === 1
             ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'
             : 'border-2 border-[#d4eaf2] hover:border-[var(--color-primary)]'
@@ -711,9 +792,35 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
               <div className="mt-3 flex flex-col gap-2">
                 {pickDesktopBullets(lender).map((b) => (
-                  <div key={b} className="flex items-start gap-2 text-sm text-black min-w-0">
+                  <div
+                    key={
+                      b.type === 'loanAmount'
+                        ? 'loanAmount'
+                        : b.type === 'channel'
+                          ? 'channel'
+                          : b.type === 'restrictedIndustries'
+                            ? 'restrictedIndustries'
+                            : b.type === 'restrictedStates'
+                              ? 'restrictedStates'
+                              : b.text
+                    }
+                    className="flex items-start gap-2 text-sm text-black min-w-0"
+                  >
                     <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    <span className="truncate">{b}</span>
+                    {b.type === 'loanAmount' ? (
+                      <span className="truncate">
+                        <span className="underline">Loan amount</span>
+                        {`: ${b.amount}`}
+                      </span>
+                    ) : b.type === 'channel' ? (
+                      <span className="truncate">{b.value}</span>
+                    ) : b.type === 'restrictedIndustries' ? (
+                      <RestrictionBullet label="Restricted industries:" items={b.items} />
+                    ) : b.type === 'restrictedStates' ? (
+                      <RestrictionBullet label="Restricted states:" items={b.items} />
+                    ) : (
+                      <span className="truncate">{b.text}</span>
+                    )}
                   </div>
                 ))}
               </div>
@@ -801,14 +908,13 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
             <div className="grid grid-cols-[220px_repeat(4,max-content)] grid-rows-2 gap-x-8 gap-y-1 items-start">
               {/* Row 1: labels */}
               <div />
-              <div className="text-xs text-black">Loan Amount</div>
               <div className="text-xs text-black">Time In Business</div>
               <div className="text-xs text-black">Monthly Revenue</div>
               <div className="text-xs text-black">Min. Credit Score</div>
+              <div className="text-xs text-black">Business bank account</div>
 
               {/* Row 2: values (and More Details aligned with values) */}
-              <div className="text-base font-semibold text-black text-center">More Details:</div>
-              <div className="text-base font-semibold text-black">{lender.amount ?? '—'}</div>
+              <div className="text-base font-semibold text-black text-center">Requirements:</div>
               <div className="text-base font-semibold text-black">
                 {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
               </div>
@@ -817,6 +923,9 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               </div>
               <div className="text-base font-semibold text-black">
                 {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
+              </div>
+              <div className="text-base font-semibold text-black">
+                {(lender.businessBankAccountRequired ?? true) ? 'Yes' : 'No'}
               </div>
             </div>
           </div>

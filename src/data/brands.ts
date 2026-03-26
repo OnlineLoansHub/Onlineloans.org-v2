@@ -21,6 +21,8 @@ export interface Brand {
   companyOverview?: string; // Rich "About the company" paragraph
   foundedYear?: number;
   headquarters?: string;
+  restrictedIndustries?: string[];
+  restrictedStates?: string[];
   readMoreImages?: Array<{
     src: string;
     alt: string;
@@ -30,6 +32,7 @@ export interface Brand {
     details: string;
   }>;
   cardCheckmarks?: string[];
+  businessBankAccountRequired?: boolean;
   // Optional loan-specific fields
   minCreditScore?: string;
   minRevenue?: string; // For business loans
