@@ -148,7 +148,7 @@ export function ProductComparisonPageDesktop({
                 </div>
                 <div className={styles.desktopFilterBarMeta}>
                   Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                  <span className={styles.resultsCount}>{filteredCount}</span> lenders
+                  <span className={styles.resultsCount}>{lendersData.length}</span> lenders
                 </div>
               </div>
 

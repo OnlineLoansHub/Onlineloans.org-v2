@@ -23,8 +23,8 @@ type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'cred
 const DESKTOP_FILTER_DEFAULTS: Record<DesktopFilterKey, string> = {
   loanType: 'all',
   monthlyRevenue: '5k_plus',
-  timeInBusiness: '6m_plus',
-  creditScore: '500_plus',
+  timeInBusiness: '1y_plus',
+  creditScore: '550_plus',
 };
 
 const DESKTOP_FILTERS_ALL: Record<DesktopFilterKey, string> = {

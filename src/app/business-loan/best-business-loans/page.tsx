@@ -125,16 +125,16 @@ export default function BestBusinessLoansPage() {
     };
   }, []);
 
-  const lendersWithoutNerdwalletAndCreditNinja = businessLoansData.filter((l) => {
+  const lendersWithoutCreditNinja = businessLoansData.filter((l) => {
     const name = l.name.toLowerCase();
 
-    return name !== 'nerdwallet' && name !== 'creditninja';
+    return name !== 'creditninja';
   });
 
   return (
     <ProductComparisonPage
       productConfig={businessLoansConfig}
-      lendersData={lendersWithoutNerdwalletAndCreditNinja}
+      lendersData={lendersWithoutCreditNinja}
       faqItems={faqItems}
       pinnedLenderIds={[1, 6, 4, 3]}
       structuredData={{ faqSchema, financialProductSchema, breadcrumbSchema }}

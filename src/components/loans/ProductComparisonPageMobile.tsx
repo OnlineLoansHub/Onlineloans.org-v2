@@ -102,7 +102,7 @@ export function ProductComparisonPageMobile({
 
         <div className={styles.mobileResultsMeta}>
           Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-          <span className={styles.resultsCount}>{filteredCount}</span> lenders
+          <span className={styles.resultsCount}>{lendersData.length}</span> lenders
         </div>
 
         <div className={styles.contentWrapper}>
