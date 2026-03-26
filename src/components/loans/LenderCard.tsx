@@ -314,24 +314,34 @@ function BrandWordmark({
 }
 
 function pickDesktopBullets(lender: Brand): string[] {
-  const bullets: string[] = [];
+  const card = (lender.cardCheckmarks ?? []).filter(Boolean);
+  if (card.length >= 4) return card.slice(0, 4);
 
-  if (lender.highlight) bullets.push(lender.highlight);
-
-  // Prefer explicit qualifiers if present
-  const revenue = humanizeMinRevenue(lender.minRevenue);
-  if (revenue) bullets.push(`Monthly revenue: ${revenue}`);
-
-  const time = humanizeMinTimeInBusiness(lender.minTimeInBusiness);
-  if (time) bullets.push(`Time in business: ${time}`);
-
-  const credit = humanizeMinCreditScore(lender.minCreditScore);
-  if (credit) bullets.push(`Min. credit score: ${credit}`);
+  const bullets: string[] = [...card];
 
   // Backfill from goodDetails if we still need more
   for (const d of lender.goodDetails ?? []) {
     if (bullets.length >= 4) break;
     if (!bullets.includes(d)) bullets.push(d);
+  }
+
+  // Backfill from qualifiers if we still need more
+  if (bullets.length < 4) {
+    const revenue = humanizeMinRevenue(lender.minRevenue);
+    if (revenue) bullets.push(`Monthly revenue: ${revenue}`);
+  }
+  if (bullets.length < 4) {
+    const time = humanizeMinTimeInBusiness(lender.minTimeInBusiness);
+    if (time) bullets.push(`Time in business: ${time}`);
+  }
+  if (bullets.length < 4) {
+    const credit = humanizeMinCreditScore(lender.minCreditScore);
+    if (credit) bullets.push(`Min. credit score: ${credit}`);
+  }
+
+  // As a last resort, include highlight
+  if (bullets.length < 4 && lender.highlight && !bullets.includes(lender.highlight)) {
+    bullets.push(lender.highlight);
   }
 
   if (bullets.length === 0) bullets.push('Fast online application');

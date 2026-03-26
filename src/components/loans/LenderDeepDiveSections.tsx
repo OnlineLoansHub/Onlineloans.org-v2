@@ -223,9 +223,68 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                       <p className="text-sm text-slate-700 leading-relaxed">{lender.highlight}</p>
                     ) : null}
 
-                    <p className="text-sm text-slate-700 leading-relaxed">
-                      {buildCompanyParagraph(lender)}
-                    </p>
+                    {(lender.readMoreImages ?? []).length > 0 ? (
+                      <div className="mt-2 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_360px] gap-4 items-start">
+                        <p className="text-sm text-slate-700 leading-relaxed">
+                          {buildCompanyParagraph(lender)}
+                        </p>
+                        <div className="space-y-3 lg:sticky lg:top-28 self-start">
+                          {lender.readMoreImages?.map((img) => (
+                            <div key={`${lender.id}-${img.src}`} className="space-y-2">
+                              <div className="relative h-52 w-full rounded-sm overflow-hidden border border-slate-200 bg-slate-50">
+                                <Image
+                                  src={img.src}
+                                  alt={img.alt}
+                                  fill
+                                  className="object-contain p-2"
+                                  sizes="(max-width: 1024px) 100vw, 360px"
+                                />
+                              </div>
+                              <p className="text-xs text-slate-500">{img.alt}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-slate-700 leading-relaxed">
+                        {buildCompanyParagraph(lender)}
+                      </p>
+                    )}
+
+                    {(lender.readMoreLoanTable ?? []).length > 0 ? (
+                      <div className="mt-4">
+                        <div className="text-sm font-bold text-slate-900 mb-2">Loan types & details</div>
+                        <div className="overflow-hidden rounded-sm border border-slate-200">
+                          <table className="w-full border-collapse">
+                            <thead className="bg-slate-50">
+                              <tr className="border-b border-slate-200">
+                                <th className="text-left text-xs font-semibold text-slate-700 px-3 py-2 w-[38%]">
+                                  Loan type
+                                </th>
+                                <th className="text-left text-xs font-semibold text-slate-700 px-3 py-2">
+                                  Details
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {lender.readMoreLoanTable?.map((row) => (
+                                <tr
+                                  key={`${lender.id}-${row.loanType}`}
+                                  className="border-t border-slate-200 first:border-t-0"
+                                >
+                                  <td className="align-top px-3 py-3 text-sm font-semibold text-slate-900">
+                                    {row.loanType}
+                                  </td>
+                                  <td className="px-3 py-3 text-sm text-slate-700 leading-relaxed">
+                                    {row.details}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ) : null}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
                       <div className="bg-slate-50 rounded-sm p-3 border border-slate-200">
