@@ -566,7 +566,7 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       minRevenue: '0',
       minTimeInBusiness: '0_6m',
       amountRange: '50k_100k',
-      amount: '$5K - $500K',
+      amount: '$100 - $100K',
       ctaUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/?source_id=YourPUBID&sub3=YourCLICKID',
       websiteUrl: 'https://www.swagtrk.com/DC5H4JF/77N8QCQM/?source_id=YourPUBID&sub3=YourCLICKID',
       cardCheckmarks: [
@@ -580,6 +580,7 @@ export const businessLoansEntries: BusinessLoanBrandEntry[] = [
       foundedYear: 2009,
       headquarters: 'San Francisco, California',
       phoneNumber: '(888) 555-2014',
+      businessBankAccountRequired: false,
       companyOverview:
         'NerdWallet is a personal finance publisher and comparison platform that expanded small-business lending marketplace capabilities through Fundera. In this context, it is primarily a research and comparison destination rather than a direct lender.',
       goodDetails: [
