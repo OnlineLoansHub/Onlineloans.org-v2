@@ -61,6 +61,258 @@ function BriteCapLogo({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   );
 }
 
+function getWordmarkMainFontSize(size: 'mobile' | 'desktop'): number {
+  // Match BriteCap sizing: text-3xl (~30px) on mobile, 2.75rem (~44px) on desktop
+  return size === 'mobile' ? 30 : 44;
+}
+
+function LendziWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  const mainSize = baseSize + (isMobile ? 10 : 6);
+  return (
+    <span
+      className="inline-flex items-center select-none"
+      aria-label="Lendzi"
+      style={{
+        fontWeight: 800,
+        letterSpacing: '-0.02em',
+        fontSize: mainSize,
+        lineHeight: 1,
+      }}
+    >
+      <span style={{ color: '#0b0f19' }}>lend</span>
+      <span style={{ color: '#0b0f19' }}>z</span>
+      <span
+        className="relative"
+        style={{
+          color: '#0b0f19',
+          display: 'inline-block',
+          // no extra top padding; dot is absolutely positioned
+          paddingTop: 0,
+        }}
+      >
+        {/* dotless i + custom green dot */}
+        {'\u0131'}
+        <span
+          aria-hidden
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: 0,
+            transform: 'translate(-50%, -82%)',
+            width: isMobile ? 7 : 8,
+            height: isMobile ? 7 : 8,
+            borderRadius: 9999,
+            background: '#20c58a',
+          }}
+        />
+      </span>
+    </span>
+  );
+}
+
+function CardiffWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  const mainSize = baseSize + (isMobile ? 12 : 14);
+  return (
+    <span
+      aria-label="Cardiff"
+      className="select-none"
+      style={{
+        fontWeight: 900,
+        letterSpacing: '-0.02em',
+        fontSize: mainSize,
+        lineHeight: 1,
+        color: '#2848a0',
+        textTransform: 'lowercase',
+      }}
+    >
+      cardiff
+    </span>
+  );
+}
+
+function AdvanceFundsNetworkWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  return (
+    <div
+      className="inline-flex flex-col leading-none select-none"
+      aria-label="Advance Funds Network"
+      style={{
+        // Force both lines to occupy the same wordmark width
+        width: isMobile ? '12ch' : '14ch',
+        textAlign: 'center',
+      }}
+    >
+      <span
+        style={{
+          display: 'block',
+          fontWeight: 800,
+          fontSize: mainSize,
+          letterSpacing: '-0.02em',
+          color: '#1870c0',
+        }}
+      >
+        advance
+      </span>
+      <span
+        style={{
+          display: 'block',
+          marginTop: 2,
+          fontWeight: 700,
+          fontSize: isMobile ? 18 : 20,
+          letterSpacing: '-0.01em',
+          color: '#38b028',
+        }}
+      >
+        funds network
+      </span>
+    </div>
+  );
+}
+
+function RokFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  return (
+    <div
+      className="inline-flex flex-col items-center leading-none select-none"
+      aria-label="ROK Financial"
+      style={{ textAlign: 'center' }}
+    >
+      <span
+        style={{
+          display: 'block',
+          fontWeight: 900,
+          fontSize: mainSize,
+          letterSpacing: '0.02em',
+          color: '#f02028',
+        }}
+      >
+        ROK
+      </span>
+      <span
+        style={{
+          display: 'block',
+          marginTop: isMobile ? 2 : 4,
+          fontWeight: 700,
+          fontSize: isMobile ? 20 : 24,
+          letterSpacing: '0.08em',
+          color: '#0b0f19',
+        }}
+      >
+        FINANCIAL
+      </span>
+    </div>
+  );
+}
+
+function ForaFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  const mainSize = baseSize + (isMobile ? 4 : 6);
+  const foraPrimary = '#00097E';
+  const foraAccent = '#2026FF';
+  return (
+    <div className="inline-flex items-end gap-2 select-none" aria-label="Fora Financial">
+      <span
+        aria-hidden
+        className="inline-block"
+        style={{
+          width: isMobile ? 14 : 16,
+          height: isMobile ? 14 : 16,
+          borderTopLeftRadius: 4,
+          borderTopRightRadius: 10,
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 4,
+          background: '#08b850',
+        }}
+      />
+      <div className="flex flex-col leading-none">
+        <span
+          style={{
+            fontWeight: 900,
+            fontSize: mainSize,
+            letterSpacing: '-0.02em',
+            color: foraPrimary,
+          }}
+        >
+          fora
+        </span>
+        <span
+          style={{
+            marginTop: 2,
+            fontWeight: 800,
+            fontSize: isMobile ? 13 : 15,
+            letterSpacing: '0.18em',
+            color: foraAccent,
+          }}
+        >
+          FINANCIAL
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function UplyftCapitalWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  return (
+    <div
+      className="inline-flex flex-col items-center leading-none select-none"
+      aria-label="Uplyft Capital"
+      style={{ textAlign: 'center' }}
+    >
+      <span
+        style={{
+          display: 'block',
+          fontWeight: 800,
+          fontSize: mainSize,
+          letterSpacing: '-0.02em',
+          color: '#100048',
+        }}
+      >
+        uplyft
+      </span>
+      <span
+        style={{
+          display: 'block',
+          marginTop: isMobile ? 2 : 4,
+          fontWeight: 700,
+          fontSize: isMobile ? 26 : 34,
+          letterSpacing: '-0.02em',
+          color: '#b0b0c0',
+        }}
+      >
+        capital
+      </span>
+    </div>
+  );
+}
+
+function BrandWordmark({
+  lender,
+  size,
+}: {
+  lender: Pick<Brand, 'name' | 'id'>;
+  size: 'mobile' | 'desktop';
+}) {
+  const key = lender.name.toLowerCase();
+  if (key === 'britecap') return <BriteCapLogo size={size} />;
+  if (key === 'lendzi') return <LendziWordmark size={size} />;
+  if (key === 'cardiff') return <CardiffWordmark size={size} />;
+  if (key === 'advance funds network') return <AdvanceFundsNetworkWordmark size={size} />;
+  if (key === 'rok financial') return <RokFinancialWordmark size={size} />;
+  if (key === 'fora financial') return <ForaFinancialWordmark size={size} />;
+  // businessLoansData uses "Uplyft" as the name
+  if (key === 'uplyft' || key === 'uplyft capital') return <UplyftCapitalWordmark size={size} />;
+  return null;
+}
+
 function pickDesktopBullets(lender: Brand): string[] {
   const bullets: string[] = [];
 
@@ -180,8 +432,11 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
   const { impressionId } = useImpression();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
-  const isBriteCap = lender.id === 6 || lender.name.toLowerCase() === 'britecap';
   const isLendzi = lender.id === 1 || lender.name.toLowerCase() === 'lendzi';
+  const mobileLogoCentered = useMemo(() => {
+    const key = lender.name.toLowerCase();
+    return key === 'lendzi' || key === 'britecap' || key === 'cardiff';
+  }, [lender.name]);
 
   // Process CTA URL to include gclid/fclid in sub_id_1 and sub1 for all brands
   const processedCtaUrl = useMemo(() => processCtaUrl(lender.ctaUrl), [lender.ctaUrl]);
@@ -227,22 +482,22 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         </div>
 
         {/* Main Content - Two Column Layout */}
-        <div className="p-4 pt-10 flex gap-3">
+        <div className="p-4 pt-10 flex gap-3 items-stretch">
           {/* Left Column */}
           <div className="flex-[1.5] flex flex-col items-center min-h-0">
-            {/* Logo */}
-            <div
-              className={[
-                'flex items-center justify-center min-h-[40px] w-full',
-                isBriteCap ? 'items-end pb-1' : 'items-center',
-              ].join(' ')}
-            >
-              {isBriteCap ? (
-                <div className="translate-y-[8px]">
-                  <BriteCapLogo size="mobile" />
+            {/* Logo (top) */}
+            <div className="w-full h-14 flex justify-center flex-none">
+              {BrandWordmark({ lender, size: 'mobile' }) ? (
+                <div
+                  className={[
+                    'w-full h-full flex justify-center',
+                    mobileLogoCentered ? 'items-end pb-1' : 'items-start pt-1',
+                  ].join(' ')}
+                >
+                  <BrandWordmark lender={lender} size="mobile" />
                 </div>
               ) : lender.logo ? (
-                <div className="relative w-full h-16">
+                <div className="relative w-full h-14">
                   <Image
                     src={lender.logo}
                     alt={lender.name}
@@ -255,115 +510,120 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   />
                 </div>
               ) : (
-                <span className="font-bold text-black text-base text-center">
-                  {lender.name}
-                </span>
+                <span className="font-bold text-black text-base text-center">{lender.name}</span>
               )}
             </div>
 
-            {/* Amount Field - Mobile Only */}
-            {lender.amount && amountLabel && (
-              <div className="text-center lg:hidden my-auto -translate-y-2">
-                <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
-                <p className="text-2xl font-bold text-black">{lender.amount}</p>
-              </div>
-            )}
+            {/* Fixed whitespace between logo and amount */}
+            <div className="h-6" aria-hidden />
+
+            {/* Amount pinned to top of its section */}
+            <div className="w-full flex-none">
+              {lender.amount && amountLabel && (
+                <div className="text-center lg:hidden">
+                  <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
+                  <p className="text-2xl font-bold text-black">{lender.amount}</p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Vertical Separator */}
           <div className="w-px bg-slate-200" />
 
           {/* Right Column */}
-          <div className="flex-[1.2] flex flex-col items-center justify-center gap-1.5 min-w-0">
-            {/* Rating Number */}
-            <div className="text-4xl font-bold text-black leading-none">
-              {lender.ourScore.toFixed(1)}
-            </div>
+          <div className="flex-[1.2] flex flex-col items-center min-w-0">
+            {/* Score (top) */}
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="text-4xl font-bold text-black leading-none">
+                {lender.ourScore.toFixed(1)}
+              </div>
 
-            {/* Stars - Green like Trustpilot */}
-            <div className="flex items-center gap-0">
-              {[...Array(5)].map((_, i) => {
-                const starValue = (lender.ourScore / 10) * 5;
-                const isFilled = i < Math.floor(starValue);
+              <div className="flex items-center gap-0">
+                {[...Array(5)].map((_, i) => {
+                  const starValue = (lender.ourScore / 10) * 5;
+                  const isFilled = i < Math.floor(starValue);
 
-                return (
-                  <svg
-                    key={i}
-                    className="w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill={isFilled ? '#00B67A' : '#dcdce6'}
-                  >
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                );
-              })}
-            </div>
-            <div className="flex items-center gap-1">
-              <p className="text-xs text-black">Our score</p>
-              <div className="relative group">
-                <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                  <Info className="w-3.5 h-3.5 text-black" />
-                </button>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
-                  Our score combines Trustpilot ratings, brand reputation, and popularity to give
-                  you a comprehensive view of each lender's quality and reliability.
+                  return (
+                    <svg
+                      key={i}
+                      className="w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill={isFilled ? '#00B67A' : '#dcdce6'}
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center gap-1">
+                <p className="text-xs text-black">Our score</p>
+                <div className="relative group">
+                  <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
+                    <Info className="w-3.5 h-3.5 text-black" />
+                  </button>
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
+                    Our score combines Trustpilot ratings, brand reputation, and popularity to give
+                    you a comprehensive view of each lender's quality and reliability.
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Explore CTA */}
-            <Button
-              variant="primary"
-              className={[
-                'w-[95%] text-white font-semibold group rounded-none',
-                '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
-              ].join(' ')}
-              style={{
-                padding: '10px 11px',
-                borderRadius: 0,
-                fontSize: '14px',
-                height: 'auto',
-                fontWeight: '700',
-              }}
-              onClick={() => {
-                trackBrandClick(lender.name, pageName, impressionId);
-                // Report Google Ads conversion
-                gtag_report_conversion();
-                window.open(processedCtaUrl || '#', '_blank');
-              }}
-            >
-              <span className="inline-flex items-center">
-                EXPLORE
-                <ChevronsRight
-                  className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
-                  strokeWidth={2.5}
-                  aria-hidden="true"
-                />
-              </span>
-            </Button>
-
-            {lender.websiteUrl ? (
-              <a
-                href="#"
-                className="text-[11px] text-black hover:underline"
-                role="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (onReadMore) {
-                    onReadMore(lender);
-
-                    return;
-                  }
-
+            {/* CTA pinned to bottom (align with left amount) */}
+            <div className="mt-auto w-full flex flex-col items-center gap-2 pb-1">
+              <Button
+                variant="primary"
+                className={[
+                  'w-[95%] text-white font-semibold group rounded-none',
+                  '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
+                ].join(' ')}
+                style={{
+                  padding: '10px 11px',
+                  borderRadius: 0,
+                  fontSize: '14px',
+                  height: 'auto',
+                  fontWeight: '700',
+                }}
+                onClick={() => {
                   trackBrandClick(lender.name, pageName, impressionId);
                   gtag_report_conversion();
-                  window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                  window.open(processedCtaUrl || '#', '_blank');
                 }}
               >
-                Or read more
-              </a>
-            ) : null}
+                <span className="inline-flex items-center">
+                  EXPLORE
+                  <ChevronsRight
+                    className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
+                    strokeWidth={2.5}
+                    aria-hidden="true"
+                  />
+                </span>
+              </Button>
 
+              {lender.websiteUrl ? (
+                <a
+                  href="#"
+                  className="text-[11px] text-black hover:underline"
+                  role="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onReadMore) {
+                      onReadMore(lender);
+
+                      return;
+                    }
+
+                    trackBrandClick(lender.name, pageName, impressionId);
+                    gtag_report_conversion();
+                    window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                  }}
+                >
+                  Or read more
+                </a>
+              ) : null}
+            </div>
           </div>
         </div>
 
@@ -394,10 +654,10 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         <div className="px-6 pt-5 pb-4">
           <div className="grid grid-cols-[220px_1fr_240px] gap-6">
             {/* Logo (left) */}
-            <div className="flex items-start justify-center pt-4">
-              {isBriteCap ? (
-                <div className="w-[250px] h-[78px] flex items-center justify-center mt-2">
-                  <BriteCapLogo size="desktop" />
+            <div className="flex items-center justify-center">
+              {BrandWordmark({ lender, size: 'desktop' }) ? (
+                <div className="w-[250px] h-[78px] flex items-center justify-center">
+                  <BrandWordmark lender={lender} size="desktop" />
                 </div>
               ) : lender.logo ? (
                 <div
@@ -537,9 +797,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
               <div className="text-xs text-black">Min. Credit Score</div>
 
               {/* Row 2: values (and More Details aligned with values) */}
-              <div className="text-base font-semibold text-black text-center">
-                More Details:
-              </div>
+              <div className="text-base font-semibold text-black text-center">More Details:</div>
               <div className="text-base font-semibold text-black">{lender.amount ?? '—'}</div>
               <div className="text-base font-semibold text-black">
                 {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
