@@ -1,11 +1,17 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
+import { useSearchParams } from 'next/navigation';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import type { Brand } from '@/data/brands';
 import type { ProductTypeConfig } from '@/data/productTypes';
+import { ComparisonDesignVariantProvider } from '@/contexts/ComparisonDesignVariantContext';
+import {
+  parseComparisonDesignVariantFromSearchParam,
+  type ComparisonDesignVariant,
+} from '@/lib/comparisonDesignVariant';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
 
 const INITIAL_DISPLAY_COUNT = 5;
@@ -19,7 +25,7 @@ type JsonObject = Record<string, unknown>;
 
 type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore';
 
-/** Initial “Are you eligible for a better rate?” presets (desktop filter bar). Reset still clears to All. */
+/** Desktop filter bar defaults for eligibility CTA. Reset still clears to All. */
 const DESKTOP_FILTER_DEFAULTS: Record<DesktopFilterKey, string> = {
   loanType: 'all',
   monthlyRevenue: '5k_plus',
@@ -47,6 +53,8 @@ interface ProductComparisonPageProps {
   lendersData: Brand[];
   faqItems: FAQItem[];
   pinnedLenderIds?: number[];
+  /** When set, overrides `?v=` from the URL (useful for tests or forced variants). */
+  designVariant?: ComparisonDesignVariant;
   showAdvertisingDisclosure?: boolean;
   advertisingDisclosureText?: string;
   structuredData?: {
@@ -79,17 +87,28 @@ const getLastUpdated = (): string => {
   });
 };
 
-export default function ProductComparisonPage({
+function ProductComparisonPageCore({
   productConfig,
   lendersData,
   faqItems,
   pinnedLenderIds,
+  designVariant,
   showAdvertisingDisclosure = true,
   advertisingDisclosureText = `We earn commissions from brands listed on this site, which influences how listings are presented. Advertising Disclosure`,
   structuredData,
-}: ProductComparisonPageProps) {
+}: ProductComparisonPageProps & { designVariant: ComparisonDesignVariant }) {
   const lastUpdated = getLastUpdated();
   const isDesktop = useMediaQuery('(min-width: 1024px)', true);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+    if (typeof w.gtag !== 'function') return;
+    w.gtag('event', 'comparison_page_view', {
+      comparison_design_variant: designVariant,
+      page_path: window.location.pathname,
+    });
+  }, [designVariant]);
 
   const parseMinRevenue = (minRevenue?: string): number | null => {
     if (!minRevenue) return null;
@@ -134,6 +153,7 @@ export default function ProductComparisonPage({
       good: 690,
       excellent: 720,
     };
+
     return map[v] ?? null;
   };
 
@@ -145,6 +165,7 @@ export default function ProductComparisonPage({
       '20k_plus': 20000,
       '30k_plus': 30000,
     };
+
     return map[value] ?? null;
   };
 
@@ -156,6 +177,7 @@ export default function ProductComparisonPage({
       '5y_plus': 60,
       '10y_plus': 120,
     };
+
     return map[value] ?? null;
   };
 
@@ -168,21 +190,8 @@ export default function ProductComparisonPage({
       '650_plus': 650,
       '700_plus': 700,
     };
+
     return map[value] ?? null;
-  };
-
-  const normalizeCreditCategory = (minCreditScore?: string): 'poor' | 'fair' | 'good' | 'excellent' | null => {
-    if (!minCreditScore) return null;
-    const v = String(minCreditScore).trim().toLowerCase();
-    if (v === 'poor' || v === 'fair' || v === 'good' || v === 'excellent') return v;
-    const n = Number(v.replace(/[^\d]/g, ''));
-    if (!Number.isFinite(n) || n <= 0) return null;
-
-    if (n >= 720) return 'excellent';
-    if (n >= 690) return 'good';
-    if (n >= 630) return 'fair';
-
-    return 'poor';
   };
 
   // Initialize filters based on filterOrder
@@ -259,6 +268,7 @@ export default function ProductComparisonPage({
         result = result.filter((l) => {
           const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
           if (lenderMin == null) return true;
+
           return userValue == null ? true : lenderMin <= userValue;
         });
       }
@@ -272,6 +282,7 @@ export default function ProductComparisonPage({
           result = result.filter((l) => {
             const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
             if (lenderMin == null) return true;
+
             return userValue == null ? true : lenderMin <= userValue;
           });
         } else if (
@@ -296,6 +307,7 @@ export default function ProductComparisonPage({
           result = result.filter((l) => {
             const min = parseMinRevenue(l.minRevenue);
             if (min == null) return true;
+
             return userRevenue == null ? true : min <= userRevenue;
           });
         } else if (key.includes('timeInBusiness')) {
@@ -303,6 +315,7 @@ export default function ProductComparisonPage({
           result = result.filter((l) => {
             const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
             if (minMonths == null) return true;
+
             return userMonths == null ? true : minMonths <= userMonths;
           });
         }
@@ -402,43 +415,67 @@ export default function ProductComparisonPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <div className={styles.page}>
-        {isDesktop ? (
-          <ProductComparisonPageDesktop
-            productConfig={productConfig}
-            lendersData={lendersData}
-            faqItems={faqItems}
-            lastUpdated={lastUpdated}
-            filters={desktopFilters}
-            sortBy={sortBy}
-            displayedLenders={displayedLenders}
-            filteredCount={filteredLenders.length}
-            onSortChange={setSortBy}
-            onFilterChange={handleDesktopFilterChange}
-            onReset={handleDesktopReset}
-            onShowMore={() => setDisplayCount((prev) => prev + 5)}
-            hasMore={hasMore}
-          />
-        ) : (
-          <ProductComparisonPageMobile
-            productConfig={productConfig}
-            lendersData={lendersData}
-            faqItems={faqItems}
-            lastUpdated={lastUpdated}
-            filters={filters}
-            sortBy={sortBy}
-            displayedLenders={displayedLenders}
-            filteredCount={filteredLenders.length}
-            onSortChange={setSortBy}
-            onFilterChange={handleFilterChange}
-            onReset={handleReset}
-            onShowMore={() => setDisplayCount((prev) => prev + 5)}
-            hasMore={hasMore}
-            showAdvertisingDisclosure={showAdvertisingDisclosure}
-            advertisingDisclosureText={advertisingDisclosureText}
-          />
-        )}
-      </div>
+      <ComparisonDesignVariantProvider value={designVariant}>
+        <div className={styles.page} data-comparison-variant={designVariant}>
+          {isDesktop ? (
+            <ProductComparisonPageDesktop
+              productConfig={productConfig}
+              lendersData={lendersData}
+              faqItems={faqItems}
+              lastUpdated={lastUpdated}
+              filters={desktopFilters}
+              sortBy={sortBy}
+              displayedLenders={displayedLenders}
+              filteredCount={filteredLenders.length}
+              onSortChange={setSortBy}
+              onFilterChange={handleDesktopFilterChange}
+              onReset={handleDesktopReset}
+              onShowMore={() => setDisplayCount((prev) => prev + 5)}
+              hasMore={hasMore}
+            />
+          ) : (
+            <ProductComparisonPageMobile
+              productConfig={productConfig}
+              lendersData={lendersData}
+              faqItems={faqItems}
+              lastUpdated={lastUpdated}
+              filters={filters}
+              sortBy={sortBy}
+              displayedLenders={displayedLenders}
+              filteredCount={filteredLenders.length}
+              onSortChange={setSortBy}
+              onFilterChange={handleFilterChange}
+              onReset={handleReset}
+              onShowMore={() => setDisplayCount((prev) => prev + 5)}
+              hasMore={hasMore}
+              showAdvertisingDisclosure={showAdvertisingDisclosure}
+              advertisingDisclosureText={advertisingDisclosureText}
+            />
+          )}
+        </div>
+      </ComparisonDesignVariantProvider>
     </>
+  );
+}
+
+function ProductComparisonPageUrlVariant(props: ProductComparisonPageProps) {
+  const searchParams = useSearchParams();
+  const fromUrl = parseComparisonDesignVariantFromSearchParam(searchParams.get('v'));
+  const { designVariant: designVariantProp, ...rest } = props;
+  const designVariant = designVariantProp ?? fromUrl;
+
+  return <ProductComparisonPageCore {...rest} designVariant={designVariant} />;
+}
+
+export default function ProductComparisonPage(props: ProductComparisonPageProps) {
+  const { designVariant: designVariantProp, ...rest } = props;
+  const fallbackVariant = designVariantProp ?? '1';
+
+  return (
+    <Suspense
+      fallback={<ProductComparisonPageCore {...rest} designVariant={fallbackVariant} />}
+    >
+      <ProductComparisonPageUrlVariant {...props} />
+    </Suspense>
   );
 }

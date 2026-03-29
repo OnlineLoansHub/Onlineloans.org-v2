@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button/Button';
 import StarRating from './StarRating';
 import type { Brand } from '@/data/brands';
 import { useImpression } from '@/contexts/ImpressionContext';
+import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
 import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 import { gtag_report_conversion } from '@/lib/googleAds';
 
@@ -521,6 +522,7 @@ function processCtaUrl(baseUrl: string): string {
 
 export default function LenderCard({ lender, rank, amountLabel, onReadMore }: LenderCardProps) {
   const { impressionId } = useImpression();
+  const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
   const isLendzi = lender.id === 1 || lender.name.toLowerCase() === 'lendzi';
@@ -678,7 +680,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   fontWeight: '700',
                 }}
                 onClick={() => {
-                  trackBrandClick(lender.name, pageName, impressionId);
+                  trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                   gtag_report_conversion();
                   window.open(processedCtaUrl || '#', '_blank');
                 }}
@@ -706,7 +708,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                       return;
                     }
 
-                    trackBrandClick(lender.name, pageName, impressionId);
+                    trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                     gtag_report_conversion();
                     window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                   }}
@@ -863,7 +865,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                   ].join(' ')}
                   style={{ margin: 0, border: 0, borderRadius: 0 }}
                   onClick={() => {
-                    trackBrandClick(lender.name, pageName, impressionId);
+                    trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                     gtag_report_conversion();
                     window.open(processedCtaUrl || '#', '_blank');
                   }}
@@ -891,7 +893,7 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
                         return;
                       }
 
-                      trackBrandClick(lender.name, pageName, impressionId);
+                      trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                       gtag_report_conversion();
                       window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                     }}

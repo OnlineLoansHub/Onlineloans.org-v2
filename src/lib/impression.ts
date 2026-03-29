@@ -25,7 +25,12 @@ export const getPageNameFromRoute = (pathname: string): string => {
 // Event queue for tracking events that occur before impression ID is ready
 interface QueuedEvent {
   type: 'lp-click' | 'brand-click';
-  data: { cardName?: string; brandName?: string; pageName?: string };
+  data: {
+    cardName?: string;
+    brandName?: string;
+    pageName?: string;
+    comparisonDesignVariant?: string;
+  };
   timestamp: number;
 }
 
@@ -54,6 +59,9 @@ export const flushEventQueue = (impressionId: string): void => {
         impressionId,
         pageName: event.data.pageName,
         brandName: event.data.brandName,
+        ...(event.data.comparisonDesignVariant && {
+          comparisonDesignVariant: event.data.comparisonDesignVariant,
+        }),
         timestamp: new Date(event.timestamp).toISOString(),
       });
     }
@@ -186,18 +194,21 @@ export const trackHeroCardClick = (
 export const trackBrandClick = (
   brandName: string,
   pageName: string,
-  contextImpressionId: string | null = null
+  contextImpressionId: string | null = null,
+  options?: { comparisonDesignVariant?: string }
 ): void => {
   // Memory-first: Check context impressionId, then localStorage fallback
   const impressionId =
     contextImpressionId ||
     (typeof window !== 'undefined' ? localStorage.getItem(IMPRESSION_STORAGE_KEY) : null);
 
+  const comparisonDesignVariant = options?.comparisonDesignVariant;
+
   if (!impressionId) {
     // Queue event to be sent when impression ID becomes available
     queueEvent({
       type: 'brand-click',
-      data: { brandName, pageName },
+      data: { brandName, pageName, comparisonDesignVariant },
       timestamp: Date.now(),
     });
 
@@ -209,6 +220,7 @@ export const trackBrandClick = (
     impressionId,
     pageName,
     brandName,
+    ...(comparisonDesignVariant && { comparisonDesignVariant }),
     timestamp: new Date().toISOString(),
   });
 };

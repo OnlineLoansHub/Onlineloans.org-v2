@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import type { Brand } from '@/data/brands';
 import { Button } from '@/components/ui/Button/Button';
 import { useImpression } from '@/contexts/ImpressionContext';
+import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
 import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 import { gtag_report_conversion } from '@/lib/googleAds';
 import { getLenderDeepDiveId } from '@/components/loans/LenderCard';
@@ -157,6 +158,7 @@ export function useLenderDeepDiveScroll() {
 
 export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }) {
   const { impressionId } = useImpression();
+  const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
 
@@ -354,7 +356,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
                   className="text-white font-semibold rounded-none sm:order-2 !bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]"
                   style={{ borderRadius: 0 }}
                   onClick={() => {
-                    trackBrandClick(lender.name, pageName, impressionId);
+                    trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                     gtag_report_conversion();
                     window.open(processedCtaUrl || '#', '_blank');
                   }}

@@ -1,6 +1,12 @@
 .page {
   min-height: 100vh;
   background-color: white;
+
+  /* Query-param design variants (?v=2 | ?v=3): add overrides here or in product-specific modules */
+  &[data-comparison-variant='2'],
+  &[data-comparison-variant='3'] {
+    isolation: isolate;
+  }
 }
 
 // Hide header on mobile and remove body padding - scoped to this page only
