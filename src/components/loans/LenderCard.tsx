@@ -12,12 +12,17 @@ import { useImpression } from '@/contexts/ImpressionContext';
 import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
 import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 import { gtag_report_conversion } from '@/lib/googleAds';
+import { processCtaUrl } from '@/lib/processCtaUrl';
 
 interface LenderCardProps {
   lender: Brand;
   rank: number;
   amountLabel?: string;
   onReadMore?: (lender: Brand) => void;
+  /** Desktop: simplified conversion layout (business comparison v1). */
+  conversionDesktop?: boolean;
+  /** Desktop: featured / recommended treatment (conversion layout). */
+  conversionFeatured?: boolean;
 }
 
 export function getLenderDeepDiveId(lender: Pick<Brand, 'id' | 'name'>): string {
@@ -474,53 +479,55 @@ function humanizeMinCreditScore(minCreditScore?: string): string | null {
   return map[key] ?? v;
 }
 
-/**
- * Processes CTA URL to append gclid, fclid, wbraid, or fbclid to tracking parameters
- * Applies sub_id_1 and sub1 to all brands
- * For Lendzi URLs, populates click_id parameter with tracking ID
- */
-function processCtaUrl(baseUrl: string): string {
-  if (!baseUrl || baseUrl === '#') return baseUrl;
+type ConversionBullet =
+  | { type: 'loanAmount'; amount: string }
+  | { type: 'channel'; value: 'Direct lender' | 'Broker' }
+  | { type: 'text'; text: string };
 
-  try {
-    // Get gclid, fclid, wbraid, or fbclid from current page URL
-    const urlParams = new URLSearchParams(
-      typeof window !== 'undefined' ? window.location.search : ''
-    );
-    const gclid = urlParams.get('gclid');
-    const fclid = urlParams.get('fclid');
-    const wbraid = urlParams.get('wbraid');
-    const fbclid = urlParams.get('fbclid');
-    const trackingId = gclid || fclid || wbraid || fbclid;
+function pickConversionBullets(lender: Brand): ConversionBullet[] {
+  const bullets: ConversionBullet[] = [];
+  if (lender.amount) bullets.push({ type: 'loanAmount', amount: lender.amount });
+  bullets.push({ type: 'channel', value: getLenderChannelBullet(lender) });
 
-    // Parse the base URL
-    const url = new URL(baseUrl);
+  const usedTexts = new Set<string>();
+  const textCandidates: string[] = [
+    ...(lender.cardCheckmarks ?? []).filter(Boolean).map(String),
+    ...(lender.goodDetails ?? []).filter(Boolean).map(String),
+  ];
+  if (lender.highlight) textCandidates.push(lender.highlight);
 
-    // Handle Lendzi URL format - populate click_id parameter
-    if (url.hostname.includes('lendzi.com') && url.searchParams.has('click_id')) {
-      const clickIdValue = url.searchParams.get('click_id');
-      // If click_id is empty or exists, populate it with tracking ID
-      if (trackingId && (clickIdValue === '' || clickIdValue === null)) {
-        url.searchParams.set('click_id', trackingId);
-      }
-    }
-
-    // Apply sub_id_1 and sub1 to all brands (only if tracking ID exists)
-    if (trackingId) {
-      url.searchParams.set('sub_id_1', trackingId);
-      url.searchParams.set('sub1', trackingId);
-    }
-
-    return url.toString();
-  } catch (error) {
-    // If URL parsing fails, return original URL
-    console.error('Error processing CTA URL:', error);
-
-    return baseUrl;
+  for (const raw of textCandidates) {
+    if (bullets.length >= 4) break;
+    const s = raw.trim();
+    if (!s || usedTexts.has(s)) continue;
+    usedTexts.add(s);
+    bullets.push({ type: 'text', text: s });
   }
+
+  const fallbacks = [
+    'Fast online application',
+    'Flexible terms available',
+    'Dedicated support team',
+    'Secure application process',
+  ];
+  for (const t of fallbacks) {
+    if (bullets.length >= 4) break;
+    if (usedTexts.has(t)) continue;
+    usedTexts.add(t);
+    bullets.push({ type: 'text', text: t });
+  }
+
+  return bullets.slice(0, 4);
 }
 
-export default function LenderCard({ lender, rank, amountLabel, onReadMore }: LenderCardProps) {
+export default function LenderCard({
+  lender,
+  rank,
+  amountLabel,
+  onReadMore,
+  conversionDesktop = false,
+  conversionFeatured = false,
+}: LenderCardProps) {
   const { impressionId } = useImpression();
   const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
@@ -731,160 +738,126 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
         )}
       </div>
 
-      {/* Desktop Card - Full Layout */}
-      <div
-        className={`hidden lg:block bg-white rounded overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
-          rank === 1
-            ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'
-            : 'border-2 border-[#d4eaf2] hover:border-[var(--color-primary)]'
-        }`}
-      >
-        {/* Rank Number - Top Left Corner */}
-        <div className="absolute top-0 left-0 w-[34px] h-[34px] !bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
-          <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
-        </div>
+      {/* Desktop card */}
+      {conversionDesktop ? (
+        <div
+          className={[
+            'hidden lg:block rounded-lg overflow-visible relative isolate',
+            conversionFeatured
+              ? 'border-2 border-[#0e824c]/40 bg-gradient-to-br from-emerald-50/95 to-white shadow-[0_12px_40px_rgba(14,130,76,0.12)] hover:shadow-[0_16px_48px_rgba(14,130,76,0.16)] transition-shadow duration-200'
+              : 'bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200',
+          ].join(' ')}
+        >
+          <div
+            className={[
+              'absolute top-0 left-0 z-10 flex h-9 w-9 items-center justify-center rounded-br',
+              conversionFeatured ? 'bg-[#0e824c]' : '!bg-[var(--color-primary)]',
+            ].join(' ')}
+          >
+            <span className="text-base font-bold leading-none text-white">{rank}</span>
+          </div>
 
-        <div className="px-6 pt-5 pb-4">
-          <div className="grid grid-cols-[220px_1fr_240px] gap-6">
-            {/* Logo (left) */}
-            <div className="flex items-center justify-center">
-              {BrandWordmark({ lender, size: 'desktop' }) ? (
-                <div className="w-[250px] h-[78px] flex items-center justify-center">
-                  <BrandWordmark lender={lender} size="desktop" />
-                </div>
-              ) : lender.logo ? (
-                <div
-                  className={[
-                    'relative w-[200px] h-[64px] overflow-visible',
-                    isLendzi ? 'mt-2' : '',
-                  ].join(' ')}
-                >
-                  <Image
-                    src={lender.logo}
-                    alt={lender.name}
-                    fill
-                    className={['object-contain object-center'].join(' ')}
-                    sizes="200px"
-                    priority={rank <= 3}
-                    loading={rank <= 3 ? 'eager' : 'lazy'}
-                    fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
-                  />
-                </div>
-              ) : (
-                <span className="font-semibold text-black text-lg truncate">{lender.name}</span>
-              )}
-            </div>
-
-            {/* Main (middle) */}
-            <div className="min-w-0 pt-1">
-              <div className="text-base font-semibold text-black">{lender.name}</div>
-
-              <div className="mt-1 flex items-center gap-2 text-sm text-black">
-                {typeof lender.reviewCount === 'number' && (
-                  <span className="font-medium text-black">
-                    {lender.reviewCount.toLocaleString()} reviews
-                  </span>
-                )}
-                <span>by</span>
-                <span className="inline-flex items-center gap-1 font-medium text-black">
-                  <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
-                  Trustpilot
-                </span>
-              </div>
-
-              <div className="mt-3 flex flex-col gap-2">
-                {pickDesktopBullets(lender).map((b) => (
+          <div className="px-6 pb-6 pt-8 sm:px-8 lg:pt-9">
+            <div className="grid grid-cols-[minmax(200px,230px)_minmax(0,1fr)_280px] items-start gap-x-8 gap-y-6 xl:grid-cols-[minmax(210px,240px)_minmax(0,1fr)_300px] xl:gap-x-12">
+              <div className="flex min-h-[4.5rem] items-center justify-center pt-1">
+                {BrandWordmark({ lender, size: 'desktop' }) ? (
+                  <div className="w-[220px] h-[72px] flex items-center justify-center">
+                    <BrandWordmark lender={lender} size="desktop" />
+                  </div>
+                ) : lender.logo ? (
                   <div
-                    key={
-                      b.type === 'loanAmount'
-                        ? 'loanAmount'
-                        : b.type === 'channel'
-                          ? 'channel'
-                          : b.type === 'restrictedIndustries'
-                            ? 'restrictedIndustries'
-                            : b.type === 'restrictedStates'
-                              ? 'restrictedStates'
-                              : b.text
-                    }
-                    className="flex items-start gap-2 text-sm text-black min-w-0"
-                  >
-                    <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
-                    {b.type === 'loanAmount' ? (
-                      <span className="truncate">
-                        <span className="underline">Loan amount</span>
-                        {`: ${b.amount}`}
-                      </span>
-                    ) : b.type === 'channel' ? (
-                      <span className="truncate">{b.value}</span>
-                    ) : b.type === 'restrictedIndustries' ? (
-                      <RestrictionBullet label="Restricted industries:" items={b.items} />
-                    ) : b.type === 'restrictedStates' ? (
-                      <RestrictionBullet label="Restricted states:" items={b.items} />
-                    ) : (
-                      <span className="truncate">{b.text}</span>
+                    className={['relative w-[180px] h-[60px] overflow-visible', isLendzi ? 'mt-1' : ''].join(
+                      ' '
                     )}
+                  >
+                    <Image
+                      src={lender.logo}
+                      alt={lender.name}
+                      fill
+                      className="object-contain object-center"
+                      sizes="180px"
+                      priority={rank <= 3}
+                      loading={rank <= 3 ? 'eager' : 'lazy'}
+                      fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
+                    />
                   </div>
-                ))}
+                ) : (
+                  <span className="font-semibold text-slate-900 text-base truncate">{lender.name}</span>
+                )}
               </div>
-            </div>
 
-            {/* Right (score + CTA) */}
-            <div className="flex h-full flex-col items-center justify-center gap-4">
-              <div className="flex items-start justify-center gap-2 w-full">
-                <div className="text-4xl font-bold text-black leading-none">
-                  {lender.ourScore.toFixed(1)}
+              <div className="min-w-0 pt-0.5 lg:max-w-none">
+                <div className="mb-2 flex min-h-[2.625rem] flex-wrap items-center gap-x-3 gap-y-1.5">
+                  {conversionFeatured ? (
+                    <>
+                      <span className="inline-flex items-center rounded-full border border-[#0e824c]/25 bg-[#0e824c]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0e824c]">
+                        Best overall
+                      </span>
+                      <span className="text-xs font-medium text-slate-600">Recommended for you</span>
+                    </>
+                  ) : null}
                 </div>
-
-                <div className="flex flex-col items-end gap-1 pt-0.5">
-                  <StarRating score={lender.ourScore} />
-                  <div className="inline-flex items-center gap-1 text-xs font-semibold text-black self-start">
-                    <span>
-                      {lender.ourScore >= 9
-                        ? 'Excellent'
-                        : lender.ourScore >= 8
-                          ? 'Great'
-                          : lender.ourScore >= 7
-                            ? 'Good'
-                            : 'Fair'}
+                <div className="text-lg font-bold text-slate-900">{lender.name}</div>
+                <p className="mt-1 text-xs text-slate-500 flex flex-wrap items-center gap-x-1.5 gap-y-0">
+                  <span className="text-slate-600">Our score {lender.ourScore.toFixed(1)}</span>
+                  <span className="text-slate-300" aria-hidden>
+                    ·
+                  </span>
+                  {typeof lender.reviewCount === 'number' ? (
+                    <span>{lender.reviewCount.toLocaleString()} Trustpilot reviews</span>
+                  ) : (
+                    <span className="inline-flex items-center gap-0.5">
+                      <Star className="w-3 h-3 fill-emerald-500 text-emerald-500" aria-hidden />
+                      Trustpilot
                     </span>
-                  </div>
-                </div>
+                  )}
+                </p>
+
+                <ul className="mt-3 flex list-none flex-col gap-2 p-0">
+                  {pickConversionBullets(lender).map((b, bi) => (
+                    <li
+                      key={`conv-${bi}-${b.type}`}
+                      className="flex items-start gap-2 text-sm text-slate-800 min-w-0"
+                    >
+                      <Check className="w-4 h-4 text-[#0e824c] mt-0.5 flex-shrink-0" aria-hidden />
+                      {b.type === 'loanAmount' ? (
+                        <span className="leading-snug">
+                          <span className="font-medium">Loan amount:</span> {b.amount}
+                        </span>
+                      ) : b.type === 'channel' ? (
+                        <span className="leading-snug">{b.value}</span>
+                      ) : (
+                        <span className="leading-snug">{b.text}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <div className="w-[200px] self-center flex flex-col items-center gap-2">
-                <Button
-                  variant="primary"
-                  className={[
-                    'text-white font-semibold transition-all rounded-none group',
-                    '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
-                    'transform-gpu will-change-transform',
-                    'duration-200 ease-out',
-                    'hover:-translate-y-0.5 hover:scale-[1.02]',
-                    'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
-                    'h-10 w-[95%] text-sm whitespace-nowrap',
-                  ].join(' ')}
-                  style={{ margin: 0, border: 0, borderRadius: 0 }}
+              <div className="flex flex-col items-stretch justify-start gap-3 pt-1 lg:self-stretch lg:border-l lg:border-slate-200/80 lg:pt-2 lg:pl-6 xl:pl-8">
+                <button
+                  type="button"
+                  className="group w-full min-h-[48px] px-5 rounded-lg bg-[#0e824c] text-white text-[15px] font-bold shadow-[0_4px_14px_rgba(14,130,76,0.35)] hover:bg-[#0c7344] hover:shadow-[0_6px_20px_rgba(14,130,76,0.42)] active:translate-y-px transition-all duration-200 flex items-center justify-center gap-1.5"
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                     gtag_report_conversion();
                     window.open(processedCtaUrl || '#', '_blank');
                   }}
                 >
-                  <span className="inline-flex items-center">
-                    View Rates
-                    <ChevronsRight
-                      className="ml-1 inline-block align-middle w-[1.05em] h-[1.05em] transition-transform duration-300 group-hover:translate-x-1"
-                      strokeWidth={2.5}
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Button>
-
-                {lender.websiteUrl && (
-                  <a
-                    href="#"
-                    className="text-xs text-black hover:underline"
-                    role="button"
+                  Check your rates
+                  <ChevronsRight
+                    className="w-[1.1em] h-[1.1em] shrink-0 transition-transform group-hover:translate-x-0.5"
+                    strokeWidth={2.5}
+                    aria-hidden
+                  />
+                </button>
+                <p className="text-center text-[11px] text-slate-500 leading-snug px-0.5">
+                  Takes 60 seconds · No credit impact
+                </p>
+                {lender.websiteUrl ? (
+                  <button
+                    type="button"
+                    className="text-xs text-slate-600 hover:text-[#0e824c] underline underline-offset-2 text-center mt-1 pt-3 border-t border-slate-200/90 leading-normal"
                     onClick={(e) => {
                       e.preventDefault();
                       if (onReadMore) {
@@ -892,47 +865,250 @@ export default function LenderCard({ lender, rank, amountLabel, onReadMore }: Le
 
                         return;
                       }
-
                       trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                       gtag_report_conversion();
                       window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                     }}
                   >
-                    Or read more
-                  </a>
-                )}
+                    Visit lender site
+                  </button>
+                ) : null}
               </div>
             </div>
+
+            <details className="mt-6 pt-5 border-t border-slate-200/90">
+              <summary className="cursor-pointer list-none flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
+                <span className="text-[#0e824c] inline-block font-bold" aria-hidden>
+                  +
+                </span>
+                View requirements
+              </summary>
+              <div className="mt-4 pl-1 sm:pl-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
+                  <div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Time in business</div>
+                    <div className="font-semibold text-slate-900 mt-0.5">
+                      {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Monthly revenue</div>
+                    <div className="font-semibold text-slate-900 mt-0.5">
+                      {humanizeMinRevenue(lender.minRevenue) ?? '—'}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Min. credit</div>
+                    <div className="font-semibold text-slate-900 mt-0.5">
+                      {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">Business bank acct.</div>
+                    <div className="font-semibold text-slate-900 mt-0.5">
+                      {(lender.businessBankAccountRequired ?? true) ? 'Required' : 'Not required'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+        </div>
+      ) : (
+        <div
+          className={`hidden lg:block bg-white rounded overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
+            rank === 1
+              ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'
+              : 'border-2 border-[#d4eaf2] hover:border-[var(--color-primary)]'
+          }`}
+        >
+          <div className="absolute top-0 left-0 w-[34px] h-[34px] !bg-[var(--color-primary)] rounded-br flex items-center justify-center z-10">
+            <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
           </div>
 
-          {/* Bottom details row */}
-          <div className="mt-4 pt-4 border-t border-slate-200">
-            <div className="grid grid-cols-[220px_repeat(4,max-content)] grid-rows-2 gap-x-8 gap-y-1 items-start">
-              {/* Row 1: labels */}
-              <div />
-              <div className="text-xs text-black">Time In Business</div>
-              <div className="text-xs text-black">Monthly Revenue</div>
-              <div className="text-xs text-black">Min. Credit Score</div>
-              <div className="text-xs text-black">Business bank account</div>
+          <div className="px-6 pt-5 pb-4">
+            <div className="grid grid-cols-[220px_1fr_240px] gap-6">
+              <div className="flex items-center justify-center">
+                {BrandWordmark({ lender, size: 'desktop' }) ? (
+                  <div className="w-[250px] h-[78px] flex items-center justify-center">
+                    <BrandWordmark lender={lender} size="desktop" />
+                  </div>
+                ) : lender.logo ? (
+                  <div
+                    className={['relative w-[200px] h-[64px] overflow-visible', isLendzi ? 'mt-2' : ''].join(
+                      ' '
+                    )}
+                  >
+                    <Image
+                      src={lender.logo}
+                      alt={lender.name}
+                      fill
+                      className={['object-contain object-center'].join(' ')}
+                      sizes="200px"
+                      priority={rank <= 3}
+                      loading={rank <= 3 ? 'eager' : 'lazy'}
+                      fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
+                    />
+                  </div>
+                ) : (
+                  <span className="font-semibold text-black text-lg truncate">{lender.name}</span>
+                )}
+              </div>
 
-              {/* Row 2: values (and More Details aligned with values) */}
-              <div className="text-base font-semibold text-black text-center">Requirements:</div>
-              <div className="text-base font-semibold text-black">
-                {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
+              <div className="min-w-0 pt-1">
+                <div className="text-base font-semibold text-black">{lender.name}</div>
+
+                <div className="mt-1 flex items-center gap-2 text-sm text-black">
+                  {typeof lender.reviewCount === 'number' && (
+                    <span className="font-medium text-black">
+                      {lender.reviewCount.toLocaleString()} reviews
+                    </span>
+                  )}
+                  <span>by</span>
+                  <span className="inline-flex items-center gap-1 font-medium text-black">
+                    <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
+                    Trustpilot
+                  </span>
+                </div>
+
+                <div className="mt-3 flex flex-col gap-2">
+                  {pickDesktopBullets(lender).map((b) => (
+                    <div
+                      key={
+                        b.type === 'loanAmount'
+                          ? 'loanAmount'
+                          : b.type === 'channel'
+                            ? 'channel'
+                            : b.type === 'restrictedIndustries'
+                              ? 'restrictedIndustries'
+                              : b.type === 'restrictedStates'
+                                ? 'restrictedStates'
+                                : b.text
+                      }
+                      className="flex items-start gap-2 text-sm text-black min-w-0"
+                    >
+                      <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                      {b.type === 'loanAmount' ? (
+                        <span className="truncate">
+                          <span className="underline">Loan amount</span>
+                          {`: ${b.amount}`}
+                        </span>
+                      ) : b.type === 'channel' ? (
+                        <span className="truncate">{b.value}</span>
+                      ) : b.type === 'restrictedIndustries' ? (
+                        <RestrictionBullet label="Restricted industries:" items={b.items} />
+                      ) : b.type === 'restrictedStates' ? (
+                        <RestrictionBullet label="Restricted states:" items={b.items} />
+                      ) : (
+                        <span className="truncate">{b.text}</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="text-base font-semibold text-black">
-                {humanizeMinRevenue(lender.minRevenue) ?? '—'}
+
+              <div className="flex h-full flex-col items-center justify-center gap-4">
+                <div className="flex items-start justify-center gap-2 w-full">
+                  <div className="text-4xl font-bold text-black leading-none">
+                    {lender.ourScore.toFixed(1)}
+                  </div>
+
+                  <div className="flex flex-col items-end gap-1 pt-0.5">
+                    <StarRating score={lender.ourScore} />
+                    <div className="inline-flex items-center gap-1 text-xs font-semibold text-black self-start">
+                      <span>
+                        {lender.ourScore >= 9
+                          ? 'Excellent'
+                          : lender.ourScore >= 8
+                            ? 'Great'
+                            : lender.ourScore >= 7
+                              ? 'Good'
+                              : 'Fair'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="w-[200px] self-center flex flex-col items-center gap-2">
+                  <Button
+                    variant="primary"
+                    className={[
+                      'text-white font-semibold transition-all rounded-none group',
+                      '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
+                      'transform-gpu will-change-transform',
+                      'duration-200 ease-out',
+                      'hover:-translate-y-0.5 hover:scale-[1.02]',
+                      'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
+                      'h-10 w-[95%] text-sm whitespace-nowrap',
+                    ].join(' ')}
+                    style={{ margin: 0, border: 0, borderRadius: 0 }}
+                    onClick={() => {
+                      trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                      gtag_report_conversion();
+                      window.open(processedCtaUrl || '#', '_blank');
+                    }}
+                  >
+                    <span className="inline-flex items-center">
+                      View Rates
+                      <ChevronsRight
+                        className="ml-1 inline-block align-middle w-[1.05em] h-[1.05em] transition-transform duration-300 group-hover:translate-x-1"
+                        strokeWidth={2.5}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Button>
+
+                  {lender.websiteUrl && (
+                    <a
+                      href="#"
+                      className="text-xs text-black hover:underline"
+                      role="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (onReadMore) {
+                          onReadMore(lender);
+
+                          return;
+                        }
+
+                        trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                        gtag_report_conversion();
+                        window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                      }}
+                    >
+                      Or read more
+                    </a>
+                  )}
+                </div>
               </div>
-              <div className="text-base font-semibold text-black">
-                {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
-              </div>
-              <div className="text-base font-semibold text-black">
-                {(lender.businessBankAccountRequired ?? true) ? 'Yes' : 'No'}
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-slate-200">
+              <div className="grid grid-cols-[220px_repeat(4,max-content)] grid-rows-2 gap-x-8 gap-y-1 items-start">
+                <div />
+                <div className="text-xs text-black">Time In Business</div>
+                <div className="text-xs text-black">Monthly Revenue</div>
+                <div className="text-xs text-black">Min. Credit Score</div>
+                <div className="text-xs text-black">Business bank account</div>
+
+                <div className="text-base font-semibold text-black text-center">Requirements:</div>
+                <div className="text-base font-semibold text-black">
+                  {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
+                </div>
+                <div className="text-base font-semibold text-black">
+                  {humanizeMinRevenue(lender.minRevenue) ?? '—'}
+                </div>
+                <div className="text-base font-semibold text-black">
+                  {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
+                </div>
+                <div className="text-base font-semibold text-black">
+                  {(lender.businessBankAccountRequired ?? true) ? 'Yes' : 'No'}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

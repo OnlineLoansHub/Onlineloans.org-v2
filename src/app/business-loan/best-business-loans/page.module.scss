@@ -9,6 +9,219 @@
   }
 }
 
+/* —— Business desktop conversion layout (design v1) —— */
+.conversionHero {
+  background: linear-gradient(165deg, #ecfdf5 0%, #f8fafc 38%, #ffffff 100%);
+  border-bottom: 1px solid #cbd5e1;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.055);
+  /* Horizontal alignment: same box model as Header `.nav` and `.mainContent` (padding inside max-width). */
+  padding: 2rem 0 2.5rem;
+
+  @media (min-width: 1024px) {
+    padding: 3rem 0 3.25rem;
+  }
+}
+
+.conversionHeroInner {
+  max-width: var(--max-container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.conversionHeroGrid {
+  display: grid;
+  gap: 1.75rem;
+  align-items: stretch;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 1.12fr) minmax(300px, 400px);
+    gap: 2.25rem 3.5rem;
+    align-items: center;
+  }
+}
+
+.conversionHeroCopy {
+  max-width: 36rem;
+
+  @media (min-width: 1024px) {
+    max-width: none;
+  }
+}
+
+.conversionHeroAside {
+  min-width: 0;
+}
+
+.conversionHeroTitle {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.5vw + 1rem, 2.35rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.conversionHeroSub {
+  margin: 1rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+.conversionUrgencyRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.conversionUrgencyItem {
+  font-weight: 500;
+}
+
+.conversionUrgencyDot {
+  color: #cbd5e1;
+}
+
+.conversionCtaBlock {
+  margin-top: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  max-width: 22rem;
+}
+
+.conversionCtaBlockAlignStart {
+  align-items: flex-start;
+}
+
+.conversionStepsCard {
+  height: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem 1.4rem 1.45rem;
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.04),
+    0 14px 36px rgba(14, 130, 76, 0.08);
+}
+
+.conversionStepsCardTitle {
+  margin: 0 0 1rem;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0e824c;
+}
+
+.conversionSteps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.35;
+  }
+}
+
+.conversionStepsInCard {
+  margin: 0;
+}
+
+.conversionStepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background: #0e824c;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.mainContentConversion {
+  background-color: #fafafa;
+
+  @media (min-width: 1024px) {
+    margin-top: 0 !important;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+.featuredLenderWrap {
+  margin-bottom: 2.5rem;
+  max-width: 100%;
+}
+
+.conversionSectionTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.conversionSectionSub {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.midConversionCta {
+  margin: 2rem 0 2.5rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1fae5;
+  background: linear-gradient(180deg, #f8fffc 0%, #ffffff 100%);
+  text-align: center;
+}
+
+.midConversionCtaTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.filtersBelowFoldLabel {
+  margin: 0 0 0.65rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
 // Hide header on mobile and remove body padding - scoped to this page only
 // Using :has() selector to ensure these styles only apply when this page is active
 // The .page class reference will be replaced with the scoped class name by CSS modules

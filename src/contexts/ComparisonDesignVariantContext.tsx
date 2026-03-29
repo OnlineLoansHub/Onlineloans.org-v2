@@ -3,7 +3,7 @@
 import { createContext, useContext, type ReactNode } from 'react';
 import type { ComparisonDesignVariant } from '@/lib/comparisonDesignVariant';
 
-const ComparisonDesignVariantContext = createContext<ComparisonDesignVariant>('1');
+const ComparisonDesignVariantContext = createContext<ComparisonDesignVariant>('default');
 
 export function ComparisonDesignVariantProvider({
   value,

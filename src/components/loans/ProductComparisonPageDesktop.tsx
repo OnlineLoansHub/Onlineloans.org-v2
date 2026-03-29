@@ -9,6 +9,11 @@ import RecommendationWizard from '@/components/loans/RecommendationWizard';
 import ExpandableExplanation from '@/components/loans/ExpandableExplanation';
 import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
+import {
+  BusinessDesktopConversionHero,
+  BusinessLoanPrimaryCta,
+} from '@/components/loans/BusinessDesktopConversionHero';
+import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
 import type { Brand } from '@/data/brands';
 import type { ProductTypeConfig } from '@/data/productTypes';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
@@ -108,6 +113,12 @@ export function ProductComparisonPageDesktop({
   onShowMore,
   hasMore,
 }: ProductComparisonPageDesktopProps) {
+  const designVariant = useComparisonDesignVariant();
+  const isBusinessConversionV1 =
+    productConfig.id === 'business-loans' && designVariant === '1';
+  const featuredLender = displayedLenders[0];
+  const otherLenders = displayedLenders.slice(1);
+
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
   const comparisonYear = new Date().getFullYear();
   const comparisonLendersForMonthYear = `${comparisonMonth} ${comparisonYear}`;
@@ -116,96 +127,173 @@ export function ProductComparisonPageDesktop({
     'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
   const scrollToLender = useLenderDeepDiveScroll();
 
+  const desktopFilterBar = (
+    <div className={styles.desktopFilterBar}>
+      <div className={styles.desktopFilterBarHeader}>
+        <div className={styles.desktopFilterBarTitle}>
+          <Settings className={styles.desktopFilterBarTitleIcon} strokeWidth={2} aria-hidden />
+          <span>Are you eligible for a better rate?</span>
+        </div>
+        <div className={styles.desktopFilterBarMeta}>
+          Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
+          <span className={styles.resultsCount}>{lendersData.length}</span> lenders
+        </div>
+      </div>
+
+      <div className={styles.desktopFilterBarControls}>
+        {(Object.keys(DESKTOP_FILTER_OPTIONS) as DesktopFilterKey[]).map((key) => {
+          const config = DESKTOP_FILTER_OPTIONS[key];
+
+          return (
+            <label key={key} className={styles.desktopFilterControl}>
+              <span className={styles.desktopFilterLabel}>{config.label}</span>
+              <select
+                className={styles.desktopFilterSelect}
+                value={filters[key]}
+                onChange={(e) => onFilterChange(key, e.target.value)}
+              >
+                {config.options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          );
+        })}
+
+        <button type="button" className={styles.desktopFilterReset} onClick={onReset}>
+          Reset
+        </button>
+      </div>
+    </div>
+  );
+
+  const mainContentClassName = isBusinessConversionV1
+    ? `${styles.mainContent} ${styles.mainContentConversion}`
+    : styles.mainContent;
+
   return (
     <>
-      <Hero
-        heroConfig={productConfig.hero}
-        validDate={lastUpdated}
-        comparisonTitlePrefix="Our Best "
-        comparisonTitleHighlightText={
-          productConfig.comparisonHeroHighlight ?? productConfig.displayName
-        }
-        comparisonLendersForMonthYear={comparisonLendersForMonthYear}
-        comparisonSubtitle={comparisonSubtitle}
-        comparisonSubtitleSecondary={comparisonSubtitleSecondary}
-        showTrustBadges={false}
-      />
+      {isBusinessConversionV1 ? (
+        <BusinessDesktopConversionHero
+          featuredLender={featuredLender}
+          filteredLenderCount={filteredCount}
+        />
+      ) : (
+        <Hero
+          heroConfig={productConfig.hero}
+          validDate={lastUpdated}
+          comparisonTitlePrefix="Our Best "
+          comparisonTitleHighlightText={
+            productConfig.comparisonHeroHighlight ?? productConfig.displayName
+          }
+          comparisonLendersForMonthYear={comparisonLendersForMonthYear}
+          comparisonSubtitle={comparisonSubtitle}
+          comparisonSubtitleSecondary={comparisonSubtitleSecondary}
+          showTrustBadges={false}
+        />
+      )}
 
-      <section className={styles.mainContent}>
+      <section className={mainContentClassName}>
         <div className={styles.contentWrapper}>
-          {/* Main Content Area */}
           <main className={styles.mainArea}>
-            {/* Desktop filter bar */}
-            <div className={styles.desktopFilterBar}>
-              <div className={styles.desktopFilterBarHeader}>
-                <div className={styles.desktopFilterBarTitle}>
-                  <Settings
-                    className={styles.desktopFilterBarTitleIcon}
-                    strokeWidth={2}
-                    aria-hidden
-                  />
-                  <span>Are you eligible for a better rate?</span>
+            {isBusinessConversionV1 ? (
+              <>
+                {featuredLender ? (
+                  <div id="featured-lender-card" className={styles.featuredLenderWrap}>
+                    <LenderCard
+                      key={featuredLender.id}
+                      lender={featuredLender}
+                      rank={1}
+                      amountLabel={productConfig.amountLabel}
+                      onReadMore={scrollToLender}
+                      conversionDesktop
+                      conversionFeatured
+                    />
+                  </div>
+                ) : null}
+
+                {otherLenders.length > 0 ? (
+                  <>
+                    <h2 className={styles.conversionSectionTitle}>More financing options</h2>
+                    <p className={styles.conversionSectionSub}>
+                      Compare additional lenders when you&apos;re ready.
+                    </p>
+                  </>
+                ) : null}
+
+                <div className={styles.lenderCardsContainer}>
+                  {otherLenders.length > 0 ? (
+                    otherLenders.map((lender, index) => (
+                      <LenderCard
+                        key={lender.id}
+                        lender={lender}
+                        rank={index + 2}
+                        amountLabel={productConfig.amountLabel}
+                        onReadMore={scrollToLender}
+                        conversionDesktop
+                      />
+                    ))
+                  ) : !featuredLender ? (
+                    <div className={styles.emptyState}>
+                      <h3 className={styles.emptyStateTitle}>No lenders found</h3>
+                      <p className={styles.emptyStateText}>
+                        Try adjusting your filters below to see more results.
+                      </p>
+                      <Button variant="secondary" onClick={onReset}>
+                        Reset Filters
+                      </Button>
+                    </div>
+                  ) : null}
                 </div>
-                <div className={styles.desktopFilterBarMeta}>
-                  Showing <span className={styles.resultsCount}>{displayedLenders.length}</span> of{' '}
-                  <span className={styles.resultsCount}>{lendersData.length}</span> lenders
+
+                {featuredLender && displayedLenders.length > 0 ? (
+                  <div className={styles.midConversionCta}>
+                    <p className={styles.midConversionCtaTitle}>Still comparing? Lock in your top pick.</p>
+                    <div className="flex justify-center">
+                      <BusinessLoanPrimaryCta
+                        lender={featuredLender}
+                        label="Check your rates"
+                        className="w-full max-w-md"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                <p className={styles.filtersBelowFoldLabel}>Refine your matches</p>
+                {desktopFilterBar}
+              </>
+            ) : (
+              <>
+                {desktopFilterBar}
+
+                <div className={styles.lenderCardsContainer}>
+                  {displayedLenders.length > 0 ? (
+                    displayedLenders.map((lender, index) => (
+                      <LenderCard
+                        key={lender.id}
+                        lender={lender}
+                        rank={index + 1}
+                        amountLabel={productConfig.amountLabel}
+                        onReadMore={scrollToLender}
+                      />
+                    ))
+                  ) : (
+                    <div className={styles.emptyState}>
+                      <h3 className={styles.emptyStateTitle}>No lenders found</h3>
+                      <p className={styles.emptyStateText}>
+                        Try adjusting your filters to see more results.
+                      </p>
+                      <Button variant="secondary" onClick={onReset}>
+                        Reset Filters
+                      </Button>
+                    </div>
+                  )}
                 </div>
-              </div>
+              </>
+            )}
 
-              <div className={styles.desktopFilterBarControls}>
-                {(Object.keys(DESKTOP_FILTER_OPTIONS) as DesktopFilterKey[]).map((key) => {
-                  const config = DESKTOP_FILTER_OPTIONS[key];
-
-                  return (
-                    <label key={key} className={styles.desktopFilterControl}>
-                      <span className={styles.desktopFilterLabel}>{config.label}</span>
-                      <select
-                        className={styles.desktopFilterSelect}
-                        value={filters[key]}
-                        onChange={(e) => onFilterChange(key, e.target.value)}
-                      >
-                        {config.options.map((opt) => (
-                          <option key={opt.value} value={opt.value}>
-                            {opt.label}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                  );
-                })}
-
-                <button type="button" className={styles.desktopFilterReset} onClick={onReset}>
-                  Reset
-                </button>
-              </div>
-            </div>
-
-            {/* Lender Cards */}
-            <div className={styles.lenderCardsContainer}>
-              {displayedLenders.length > 0 ? (
-                displayedLenders.map((lender, index) => (
-                  <LenderCard
-                    key={lender.id}
-                    lender={lender}
-                    rank={index + 1}
-                    amountLabel={productConfig.amountLabel}
-                    onReadMore={scrollToLender}
-                  />
-                ))
-              ) : (
-                <div className={styles.emptyState}>
-                  <h3 className={styles.emptyStateTitle}>No lenders found</h3>
-                  <p className={styles.emptyStateText}>
-                    Try adjusting your filters to see more results.
-                  </p>
-                  <Button variant="secondary" onClick={onReset}>
-                    Reset Filters
-                  </Button>
-                </div>
-              )}
-            </div>
-
-            {/* Show More Button */}
             {hasMore && (
               <div className={styles.showMoreContainer}>
                 <Button variant="secondary" onClick={onShowMore} className={styles.showMoreButton}>

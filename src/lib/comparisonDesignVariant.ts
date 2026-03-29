@@ -1,17 +1,21 @@
 /**
- * Comparison page design variants (?v=1 | ?v=2 | ?v=3).
- * Invalid or missing values default to v1 (production).
+ * Comparison page design variants from `?v=`.
+ * - Missing or invalid `v` → `default` (original / legacy layout).
+ * - `?v=1` → conversion layout where implemented (e.g. business loans desktop).
+ * - `?v=2` | `?v=3` → reserved for experiments; same legacy shell with variant ID for analytics.
  */
-export const COMPARISON_DESIGN_VARIANTS = ['1', '2', '3'] as const;
+export const COMPARISON_DESIGN_VARIANTS_URL = ['1', '2', '3'] as const;
 
-export type ComparisonDesignVariant = (typeof COMPARISON_DESIGN_VARIANTS)[number];
+export type ComparisonDesignVariantUrl = (typeof COMPARISON_DESIGN_VARIANTS_URL)[number];
 
-const ALLOWED = new Set<string>(COMPARISON_DESIGN_VARIANTS);
+export type ComparisonDesignVariant = 'default' | ComparisonDesignVariantUrl;
+
+const ALLOWED = new Set<string>(COMPARISON_DESIGN_VARIANTS_URL);
 
 export function parseComparisonDesignVariantFromSearchParam(
   raw: string | null | undefined
 ): ComparisonDesignVariant {
-  if (raw == null || raw === '') return '1';
+  if (raw == null || raw === '') return 'default';
   const v = String(raw).trim();
-  return ALLOWED.has(v) ? (v as ComparisonDesignVariant) : '1';
+  return ALLOWED.has(v) ? (v as ComparisonDesignVariantUrl) : 'default';
 }

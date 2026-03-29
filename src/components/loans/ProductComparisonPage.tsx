@@ -469,7 +469,7 @@ function ProductComparisonPageUrlVariant(props: ProductComparisonPageProps) {
 
 export default function ProductComparisonPage(props: ProductComparisonPageProps) {
   const { designVariant: designVariantProp, ...rest } = props;
-  const fallbackVariant = designVariantProp ?? '1';
+  const fallbackVariant = designVariantProp ?? 'default';
 
   return (
     <Suspense
