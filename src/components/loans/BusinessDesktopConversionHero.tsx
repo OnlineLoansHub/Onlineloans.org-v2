@@ -9,6 +9,7 @@ import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantCo
 import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 import { gtag_report_conversion } from '@/lib/googleAds';
 import { processCtaUrl } from '@/lib/processCtaUrl';
+import type { ComparisonConversionHeroCopy } from '@/lib/comparisonConversionHeroCopy';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
 
 export function BusinessLoanPrimaryCta({
@@ -68,11 +69,13 @@ export function BusinessLoanPrimaryCta({
 interface BusinessDesktopConversionHeroProps {
   featuredLender: Brand | undefined;
   filteredLenderCount: number;
+  heroCopy: ComparisonConversionHeroCopy;
 }
 
 export function BusinessDesktopConversionHero({
   featuredLender,
   filteredLenderCount,
+  heroCopy,
 }: BusinessDesktopConversionHeroProps) {
   const ratesLine = useMemo(
     () =>
@@ -106,12 +109,13 @@ export function BusinessDesktopConversionHero({
       <div className={styles.conversionHeroInner}>
         <div className={styles.conversionHeroGrid}>
           <div className={styles.conversionHeroCopy}>
-            <h1 className={styles.conversionHeroTitle}>
-              Get funded faster—with offers matched to your business
-            </h1>
+            <h1 className={styles.conversionHeroTitle}>{heroCopy.headline}</h1>
             <p className={styles.conversionHeroSub}>
-              See potential options with <strong>no credit impact</strong>. Fast approvals. Funding from{' '}
-              <strong>$5K–$1M+</strong> depending on your profile.
+              {heroCopy.subPrefix}
+              <strong>{heroCopy.subBold1}</strong>
+              {heroCopy.subMiddle}
+              <strong>{heroCopy.subBold2}</strong>
+              {heroCopy.subSuffix}
             </p>
 
             <div className={styles.conversionUrgencyRow}>
@@ -120,7 +124,7 @@ export function BusinessDesktopConversionHero({
                 ·
               </span>
               <span className={styles.conversionUrgencyItem}>
-                {filteredLenderCount} lender{filteredLenderCount === 1 ? '' : 's'} available for your profile
+                {filteredLenderCount} option{filteredLenderCount === 1 ? '' : 's'} available for your profile
               </span>
             </div>
 

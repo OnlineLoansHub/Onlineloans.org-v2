@@ -437,14 +437,19 @@
 }
 
 .desktopFilterBarControls {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
   gap: 0.6rem;
-  align-items: stretch;
+}
 
-  @media (max-width: 1279px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
-  }
+.desktopFilterBarSelects {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: flex-end;
+  min-width: 0;
 }
 
 .desktopFilterControl {

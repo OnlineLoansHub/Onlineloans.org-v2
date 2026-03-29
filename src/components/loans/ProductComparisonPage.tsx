@@ -23,29 +23,18 @@ interface FAQItem {
 
 type JsonObject = Record<string, unknown>;
 
-type DesktopFilterKey = 'loanType' | 'monthlyRevenue' | 'timeInBusiness' | 'creditScore';
-
-/** Desktop filter bar defaults for eligibility CTA. Reset still clears to All. */
-const DESKTOP_FILTER_DEFAULTS: Record<DesktopFilterKey, string> = {
-  loanType: 'all',
-  monthlyRevenue: '5k_plus',
-  timeInBusiness: '1y_plus',
-  creditScore: '550_plus',
-};
-
-const DESKTOP_FILTERS_ALL: Record<DesktopFilterKey, string> = {
-  loanType: 'all',
-  monthlyRevenue: 'all',
-  timeInBusiness: 'all',
-  creditScore: 'all',
-};
-
-function getInitialDesktopFilters(productId: string): Record<DesktopFilterKey, string> {
-  if (productId === 'business-loans') {
-    return { ...DESKTOP_FILTER_DEFAULTS };
+function buildInitialFilters(productConfig: { id: string; filterOrder: string[] }): Record<string, string> {
+  const initial: Record<string, string> = {};
+  productConfig.filterOrder.forEach((key) => {
+    initial[key] = 'all';
+  });
+  if (productConfig.id === 'business-loans') {
+    if ('monthlyRevenue' in initial) initial.monthlyRevenue = '5k_plus';
+    if ('timeInBusiness' in initial) initial.timeInBusiness = '1y_plus';
+    if ('creditScore' in initial) initial.creditScore = '550_plus';
   }
 
-  return { ...DESKTOP_FILTERS_ALL };
+  return initial;
 }
 
 interface ProductComparisonPageProps {
@@ -194,41 +183,17 @@ function ProductComparisonPageCore({
     return map[value] ?? null;
   };
 
-  // Initialize filters based on filterOrder
-  const initialFilters: Record<string, string> = {};
-  productConfig.filterOrder.forEach((key) => {
-    initialFilters[key] = 'all';
-  });
-
-  const [filters, setFilters] = useState(initialFilters);
+  const [filters, setFilters] = useState(() => buildInitialFilters(productConfig));
   const [sortBy, setSortBy] = useState('ourScore');
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY_COUNT);
-
-  const [desktopFilters, setDesktopFilters] = useState<Record<DesktopFilterKey, string>>(() =>
-    getInitialDesktopFilters(productConfig.id)
-  );
 
   const handleFilterChange = (key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 
-  const handleDesktopFilterChange = (key: DesktopFilterKey, value: string) => {
-    setDesktopFilters((prev) => ({ ...prev, [key]: value }));
-    setDisplayCount(INITIAL_DISPLAY_COUNT);
-  };
-
   const handleReset = () => {
-    const resetFilters: Record<string, string> = {};
-    productConfig.filterOrder.forEach((key) => {
-      resetFilters[key] = 'all';
-    });
-    setFilters(resetFilters);
-    setDisplayCount(INITIAL_DISPLAY_COUNT);
-  };
-
-  const handleDesktopReset = () => {
-    setDesktopFilters({ ...DESKTOP_FILTERS_ALL });
+    setFilters(buildInitialFilters(productConfig));
     setDisplayCount(INITIAL_DISPLAY_COUNT);
   };
 
@@ -236,25 +201,44 @@ function ProductComparisonPageCore({
   const filteredLenders = useMemo(() => {
     let result = [...lendersData];
 
-    if (isDesktop) {
-      const { loanType, monthlyRevenue, timeInBusiness, creditScore } = desktopFilters;
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value === 'all') return;
 
-      if (loanType !== 'all') {
-        result = result.filter((l) => l.productTypes?.includes(loanType));
-      }
+      if (key === 'creditScore') {
+        const userValue = getUserCreditValue(value);
+        result = result.filter((l) => {
+          const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
+          if (lenderMin == null) return true;
 
-      if (monthlyRevenue !== 'all') {
-        const userRevenue = getUserRevenueValue(monthlyRevenue);
+          return userValue == null ? true : lenderMin <= userValue;
+        });
+      } else if (
+        key.includes('loanType') ||
+        key.includes('loanPurpose') ||
+        key.includes('vehicleType') ||
+        key.includes('policyType') ||
+        key.includes('metalType') ||
+        key.includes('accountType') ||
+        key.includes('petType') ||
+        key.includes('coverageType')
+      ) {
+        result = result.filter((l) => l.productTypes?.includes(value));
+      } else if (
+        key.includes('loanAmount') ||
+        key.includes('coverageAmount') ||
+        key.includes('priceRange')
+      ) {
+        result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
+      } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
+        const userRevenue = getUserRevenueValue(value);
         result = result.filter((l) => {
           const min = parseMinRevenue(l.minRevenue);
           if (min == null) return true;
 
           return userRevenue == null ? true : min <= userRevenue;
         });
-      }
-
-      if (timeInBusiness !== 'all') {
-        const userMonths = getUserTimeMonths(timeInBusiness);
+      } else if (key.includes('timeInBusiness')) {
+        const userMonths = getUserTimeMonths(value);
         result = result.filter((l) => {
           const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
           if (minMonths == null) return true;
@@ -262,65 +246,7 @@ function ProductComparisonPageCore({
           return userMonths == null ? true : minMonths <= userMonths;
         });
       }
-
-      if (creditScore !== 'all') {
-        const userValue = getUserCreditValue(creditScore);
-        result = result.filter((l) => {
-          const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
-          if (lenderMin == null) return true;
-
-          return userValue == null ? true : lenderMin <= userValue;
-        });
-      }
-    } else {
-      // Apply filters dynamically (mobile + existing behavior)
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value === 'all') return;
-
-        if (key === 'creditScore') {
-          const userValue = getUserCreditValue(value);
-          result = result.filter((l) => {
-            const lenderMin = parseMinCreditScoreNumber(l.minCreditScore);
-            if (lenderMin == null) return true;
-
-            return userValue == null ? true : lenderMin <= userValue;
-          });
-        } else if (
-          key.includes('loanType') ||
-          key.includes('loanPurpose') ||
-          key.includes('vehicleType') ||
-          key.includes('policyType') ||
-          key.includes('metalType') ||
-          key.includes('accountType') ||
-          key.includes('petType') ||
-          key.includes('coverageType')
-        ) {
-          result = result.filter((l) => l.productTypes?.includes(value));
-        } else if (
-          key.includes('loanAmount') ||
-          key.includes('coverageAmount') ||
-          key.includes('priceRange')
-        ) {
-          result = result.filter((l) => l.amountRange === value || l.amountRange === '100k_plus');
-        } else if (key.includes('monthlyRevenue') || key.includes('minRevenue')) {
-          const userRevenue = getUserRevenueValue(value);
-          result = result.filter((l) => {
-            const min = parseMinRevenue(l.minRevenue);
-            if (min == null) return true;
-
-            return userRevenue == null ? true : min <= userRevenue;
-          });
-        } else if (key.includes('timeInBusiness')) {
-          const userMonths = getUserTimeMonths(value);
-          result = result.filter((l) => {
-            const minMonths = parseMinTimeInBusinessMonths(l.minTimeInBusiness);
-            if (minMonths == null) return true;
-
-            return userMonths == null ? true : minMonths <= userMonths;
-          });
-        }
-      });
-    }
+    });
 
     // Apply sorting
     result.sort((a, b) => {
@@ -345,7 +271,7 @@ function ProductComparisonPageCore({
     }
 
     return result;
-  }, [filters, sortBy, lendersData, pinnedLenderIds, isDesktop, desktopFilters]);
+  }, [filters, sortBy, lendersData, pinnedLenderIds]);
 
   const displayedLenders = filteredLenders.slice(0, displayCount);
   const hasMore = displayCount < filteredLenders.length;
@@ -423,13 +349,13 @@ function ProductComparisonPageCore({
               lendersData={lendersData}
               faqItems={faqItems}
               lastUpdated={lastUpdated}
-              filters={desktopFilters}
+              filters={filters}
               sortBy={sortBy}
               displayedLenders={displayedLenders}
               filteredCount={filteredLenders.length}
               onSortChange={setSortBy}
-              onFilterChange={handleDesktopFilterChange}
-              onReset={handleDesktopReset}
+              onFilterChange={handleFilterChange}
+              onReset={handleReset}
               onShowMore={() => setDisplayCount((prev) => prev + 5)}
               hasMore={hasMore}
             />
