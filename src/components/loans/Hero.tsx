@@ -38,7 +38,12 @@ export default function Hero({
   const monthYear = 'January 2026';
 
   return (
-    <section className={[cls.hero, designVariant === '2' ? cls.heroFundV2 : ''].join(' ')}>
+    <section
+      className={[
+        cls.hero,
+        designVariant === '2' || designVariant === 'default' ? cls.heroFundV2 : '',
+      ].join(' ')}
+    >
       {/* Professional Diagonal Striped Pattern - Right Bottom Only */}
       <div className={cls.stripedPattern} aria-hidden="true" />
 
@@ -177,7 +182,7 @@ export default function Hero({
               <p className={cls.subHeroText}>Find funding that fits your business</p>
             )}
 
-            {designVariant === '2' ? (
+            {designVariant === '2' || designVariant === 'default' ? (
               <>
                 <ul className={cls.fundV2Chips} aria-label="Key benefits">
                   <li className={cls.fundV2Chip}>No impact to credit score</li>

@@ -33,6 +33,11 @@ body {
   padding-top: var(--site-fixed-top-height, var(--header-height));
 }
 
+/* Comparison design variants: control top chrome visibility */
+body[data-comparison-variant='default'] [aria-label='Advertising disclosure'] {
+  display: none !important;
+}
+
 @media (width <= 768px) {
   body {
     padding-top: var(--site-fixed-top-height, var(--header-height-mobile));

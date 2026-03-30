@@ -73,12 +73,15 @@ export function ProductComparisonPageDesktop({
   const comparisonYear = new Date().getFullYear();
   const comparisonLendersForMonthYear = `${comparisonMonth} ${comparisonYear}`;
   const isFundHeroV2 = designVariant === '2' && productConfig.id === 'business-loans';
-  const comparisonSubtitle = isFundHeroV2
+  const isFundHeroDefault =
+    designVariant === 'default' && productConfig.id === 'business-loans';
+  const isFundHero = isFundHeroV2 || isFundHeroDefault;
+  const comparisonSubtitle = isFundHero
     ? 'Find funding that fits your business'
     : 'Apply in minutes. Get funded fast.';
   const comparisonSubtitleSecondary =
     'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
-  const comparisonSubtitleSecondaryV2 = isFundHeroV2
+  const comparisonSubtitleSecondaryV2 = isFundHero
     ? undefined
     : comparisonSubtitleSecondary;
   const scrollToLender = useLenderDeepDiveScroll();
@@ -148,20 +151,20 @@ export function ProductComparisonPageDesktop({
           heroConfig={productConfig.hero}
           validDate={lastUpdated}
           comparisonTitle={
-            isFundHeroV2
+            isFundHero
               ? `Best Business Loans of ${comparisonLendersForMonthYear}`
               : undefined
           }
-          comparisonTitlePrefix={isFundHeroV2 ? undefined : 'Our Best '}
+          comparisonTitlePrefix={isFundHero ? undefined : 'Our Best '}
           comparisonTitleHighlightText={
-            isFundHeroV2
+            isFundHero
               ? undefined
               : (productConfig.comparisonHeroHighlight ?? productConfig.displayName)
           }
-          comparisonLendersForMonthYear={isFundHeroV2 ? undefined : comparisonLendersForMonthYear}
+          comparisonLendersForMonthYear={isFundHero ? undefined : comparisonLendersForMonthYear}
           comparisonSubtitle={comparisonSubtitle}
           comparisonSubtitleSecondary={comparisonSubtitleSecondaryV2}
-          showTrustBadges={isFundHeroV2 ? true : false}
+          showTrustBadges={isFundHero ? true : false}
           designVariant={designVariant}
         />
       )}

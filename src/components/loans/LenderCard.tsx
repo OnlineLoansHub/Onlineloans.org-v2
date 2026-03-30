@@ -542,7 +542,7 @@ export default function LenderCard({
   const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
-  const isV2 = comparisonDesignVariant === '2';
+  const isV2 = comparisonDesignVariant === '2' || comparisonDesignVariant === 'default';
   const isLendzi = lender.id === 1 || lender.name.toLowerCase() === 'lendzi';
   const v2HeadlineOptions = useMemo(
     () => [
