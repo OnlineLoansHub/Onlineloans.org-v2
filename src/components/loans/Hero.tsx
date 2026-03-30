@@ -186,7 +186,10 @@ export default function Hero({
                 </ul>
 
                 <div className={cls.fundV2CtaRow}>
-                  <Link href="/business-loan/apply" className={cls.fundV2PrimaryCta}>
+                  <Link
+                    href="https://apply.onlineloans.org/apply"
+                    className={cls.fundV2PrimaryCta}
+                  >
                     Check your rates
                     <span className={cls.fundV2CtaArrow} aria-hidden>
                       →
