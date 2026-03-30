@@ -1041,7 +1041,7 @@ export default function LenderCard({
                       'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
                       'h-10 w-[95%] text-sm whitespace-nowrap',
                     ].join(' ')}
-                    style={{ margin: 0, border: 0, borderRadius: 0 }}
+                    style={{ margin: 0, border: 0, borderRadius: 0, fontSize: 14 }}
                     onClick={() => {
                       trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                       gtag_report_conversion();
