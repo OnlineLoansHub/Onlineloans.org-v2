@@ -185,38 +185,46 @@ function AdvanceFundsNetworkWordmark({ size = 'desktop' }: { size?: 'mobile' | '
 
 function RokFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   const isMobile = size === 'mobile';
-  const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  // Match the visual weight/scale of the BriteCap wordmark on desktop.
+  const mainSize = baseSize + (isMobile ? 4 : 0);
+  const bizSize = Math.round(mainSize * (isMobile ? 0.52 : 0.46));
 
   return (
     <div
-      className="inline-flex flex-col items-center leading-none select-none"
-      aria-label="ROK Financial"
+      className="inline-flex items-center leading-none select-none"
+      aria-label="ROK.biz"
       style={{ textAlign: 'center' }}
     >
-      <span
-        style={{
-          display: 'block',
-          fontWeight: 900,
-          fontSize: mainSize,
-          letterSpacing: '0.02em',
-          color: '#f02028',
-        }}
-      >
+      <span style={{ fontWeight: 900, fontSize: mainSize, letterSpacing: '0.02em', color: '#f02028' }}>
         ROK
       </span>
-      <span
-        style={{
-          display: 'block',
-          marginTop: isMobile ? 2 : 4,
-          fontWeight: 700,
-          fontSize: isMobile ? 20 : 24,
-          letterSpacing: '0.08em',
-          color: '#0b0f19',
-        }}
-      >
-        FINANCIAL
+      <span style={{ fontWeight: 900, fontSize: bizSize, letterSpacing: '-0.01em', color: '#0b0f19' }}>
+        .biz
       </span>
     </div>
+  );
+}
+
+function NerdWalletWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
+  const isMobile = size === 'mobile';
+  const base = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+  const fontSize = Math.round(base * (isMobile ? 0.78 : 0.7));
+
+  return (
+    <span
+      className="inline-flex items-center select-none"
+      aria-label="NerdWallet"
+      style={{
+        fontWeight: 900,
+        letterSpacing: '-0.02em',
+        fontSize,
+        lineHeight: 1,
+        color: '#8CCB32',
+      }}
+    >
+      NERDWALLET
+    </span>
   );
 }
 
@@ -319,6 +327,7 @@ function BrandWordmark({
   if (key === 'cardiff') return <CardiffWordmark size={size} />;
   if (key === 'advance funds network') return <AdvanceFundsNetworkWordmark size={size} />;
   if (key === 'rok financial') return <RokFinancialWordmark size={size} />;
+  if (key === 'nerdwallet') return <NerdWalletWordmark size={size} />;
   if (key === 'fora financial') return <ForaFinancialWordmark size={size} />;
   // businessLoansData uses "Uplyft" as the name
   if (key === 'uplyft' || key === 'uplyft capital') return <UplyftCapitalWordmark size={size} />;
@@ -1015,9 +1024,7 @@ export default function LenderCard({
                   <div className="w-full h-[74px] flex items-center justify-center">
                     {BrandWordmark({ lender, size: 'desktop' }) ? (
                       <div className="w-[230px] h-[74px] flex items-center justify-center">
-                        <div className={isRokFinancial ? 'scale-[0.9]' : ''}>
-                          <BrandWordmark lender={lender} size="desktop" />
-                        </div>
+                        <BrandWordmark lender={lender} size="desktop" />
                       </div>
                     ) : lender.logo ? (
                       <div
