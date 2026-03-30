@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import cls from './Hero.module.scss';
 import type { HeroConfig } from '@/data/productTypes';
+import type { ComparisonDesignVariant } from '@/lib/comparisonDesignVariant';
 
 interface HeroProps {
   heroConfig: HeroConfig;
@@ -16,6 +17,8 @@ interface HeroProps {
   comparisonSubtitleSecondary?: string;
   /** When false, BBB/Trustpilot strip is omitted (e.g. shown below the filter on comparison pages). */
   showTrustBadges?: boolean;
+  /** Comparison design variant, used for background experiments. */
+  designVariant?: ComparisonDesignVariant;
 }
 
 export default function Hero({
@@ -29,11 +32,12 @@ export default function Hero({
   comparisonSubtitle,
   comparisonSubtitleSecondary,
   showTrustBadges = true,
+  designVariant = 'default',
 }: HeroProps) {
   const monthYear = 'January 2026';
 
   return (
-    <section className={cls.hero}>
+    <section className={[cls.hero, designVariant === '2' ? cls.heroFundV2 : ''].join(' ')}>
       {/* Professional Diagonal Striped Pattern - Right Bottom Only */}
       <div className={cls.stripedPattern} aria-hidden="true" />
 

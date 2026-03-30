@@ -49,6 +49,69 @@
   }
 }
 
+/* Increase specificity over `.hero:has(.subHeroGroup)` for comparison heroes. */
+.hero.heroFundV2,
+.hero.heroFundV2:has(.subHeroGroup) {
+  /* Fund.com-style split background: blue left + image right (full width). */
+  @media (min-width: 769px) {
+    background-color: #0b1f34;
+    /* Give the background more vertical presence on desktop. */
+    min-height: 320px;
+    background:
+      /* soft blend between panels */
+      linear-gradient(
+        90deg,
+        rgba(11, 31, 52, 0.96) 0%,
+        rgba(11, 31, 52, 0.96) 52%,
+        rgba(11, 31, 52, 0.58) 60%,
+        rgba(11, 31, 52, 0) 72%
+      ),
+      url('/images/article/gorgeous-german-female1.jpeg');
+    /* Make the image behave like a right-side panel (fills the hero height). */
+    background-size: 100% 100%, cover;
+    /* Keep the subject (face) in frame vs the countertop. */
+    background-position: center, 82% 32%;
+    background-repeat: no-repeat;
+    color: var(--color-white);
+  }
+
+  /* Wider screens: show more of the subject (reduce zoom slightly). */
+  @media (min-width: 1280px) {
+    min-height: 360px;
+    background-position: center, 80% 30%;
+  }
+
+  /* Ultra-wide: keep the subject anchored right and prevent over-cropping. */
+  @media (min-width: 1600px) {
+    min-height: 380px;
+    background-position: center, 78% 28%;
+  }
+
+  /* Force readable text on the dark panel */
+  @media (min-width: 769px) {
+    .title,
+    .subHeroTextLead,
+    .subHeroTextFollow,
+    .subHeroText,
+    .lastUpdated {
+      color: var(--color-white);
+    }
+
+    .titleHighlight,
+    .titleComparisonGreen {
+      color: rgba(255, 255, 255, 0.96);
+    }
+
+    .lastUpdatedIcon {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .lastUpdatedDate {
+      color: rgba(255, 255, 255, 0.96);
+    }
+  }
+}
+
 .hero:has(.subHeroGroup) .subHeroGroup {
   margin-bottom: 0;
 

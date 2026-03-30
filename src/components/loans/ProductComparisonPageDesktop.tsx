@@ -75,6 +75,10 @@ export function ProductComparisonPageDesktop({
   const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
   const comparisonSubtitleSecondary =
     'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
+  const isFundHeroV2 = designVariant === '2' && productConfig.id === 'business-loans';
+  const comparisonSubtitleSecondaryV2 = isFundHeroV2
+    ? 'With lower rates, you can boost your business\nwhile saving thousands on payments.\nCompare our top lenders and lock in your rate today.'
+    : comparisonSubtitleSecondary;
   const scrollToLender = useLenderDeepDiveScroll();
 
   const moreOptionsTitle = heroCopy.moreOptionsTitle ?? 'More financing options';
@@ -141,14 +145,22 @@ export function ProductComparisonPageDesktop({
         <Hero
           heroConfig={productConfig.hero}
           validDate={lastUpdated}
-          comparisonTitlePrefix="Our Best "
-          comparisonTitleHighlightText={
-            productConfig.comparisonHeroHighlight ?? productConfig.displayName
+          comparisonTitle={
+            isFundHeroV2
+              ? `Best Business Loans of ${comparisonLendersForMonthYear}`
+              : undefined
           }
-          comparisonLendersForMonthYear={comparisonLendersForMonthYear}
+          comparisonTitlePrefix={isFundHeroV2 ? undefined : 'Our Best '}
+          comparisonTitleHighlightText={
+            isFundHeroV2
+              ? undefined
+              : (productConfig.comparisonHeroHighlight ?? productConfig.displayName)
+          }
+          comparisonLendersForMonthYear={isFundHeroV2 ? undefined : comparisonLendersForMonthYear}
           comparisonSubtitle={comparisonSubtitle}
-          comparisonSubtitleSecondary={comparisonSubtitleSecondary}
+          comparisonSubtitleSecondary={comparisonSubtitleSecondaryV2}
           showTrustBadges={false}
+          designVariant={designVariant}
         />
       )}
 

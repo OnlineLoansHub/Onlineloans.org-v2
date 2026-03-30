@@ -9,6 +9,11 @@
   }
 }
 
+/* v2: keep the filter bar visually quieter (no heavy shadow). */
+.page[data-comparison-variant='2'] .desktopFilterBar {
+  box-shadow: none;
+}
+
 /* —— Business desktop conversion layout (design v1) —— */
 .conversionHero {
   background: linear-gradient(165deg, #ecfdf5 0%, #f8fafc 38%, #ffffff 100%);
