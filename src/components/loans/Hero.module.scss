@@ -183,16 +183,111 @@
   }
 }
 
-/* v2 desktop: left-column meta (logo, last-updated, authority icons) */
-.fundV2LogoRow {
-  margin: 0 0 32px 0;
+/* v2 desktop: left-column content */
+.fundV2BrandRow {
+  margin: 0 0 26px 0;
+}
 
-  @media (min-width: 769px) {
-    /* Keep the animated logo compact */
-    :global(.logoText) {
-      font-size: 22px;
-      letter-spacing: 0.2px;
-    }
+.fundV2BrandText {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.fundV2BrandDot {
+  opacity: 0.75;
+}
+
+.fundV2BrandOrg {
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 700;
+}
+
+.fundV2Chips {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.fundV2Chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.fundV2CtaRow {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+}
+
+.fundV2PrimaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #0e824c;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.32),
+    0 2px 0 rgba(255, 255, 255, 0.12) inset;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+.fundV2PrimaryCta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow:
+    0 18px 36px rgba(0, 0, 0, 0.36),
+    0 2px 0 rgba(255, 255, 255, 0.14) inset;
+}
+
+.fundV2PrimaryCta:active {
+  transform: translateY(0);
+}
+
+.fundV2CtaArrow {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+.fundV2CtaNote {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.82);
+
+  strong {
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 800;
   }
 }
 

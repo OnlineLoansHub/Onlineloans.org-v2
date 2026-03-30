@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import cls from './Hero.module.scss';
 import type { HeroConfig } from '@/data/productTypes';
 import type { ComparisonDesignVariant } from '@/lib/comparisonDesignVariant';
-import Logo from '@/components/ui/Logo/Logo';
 
 interface HeroProps {
   heroConfig: HeroConfig;
@@ -107,8 +107,11 @@ export default function Hero({
             )}
 
             {designVariant === '2' ? (
-              <div className={cls.fundV2LogoRow} aria-label="OnlineLoans.org">
-                <Logo text="OnlineLoans.org" textColor="rgba(255,255,255,0.95)" />
+              <div className={cls.fundV2BrandRow} aria-label="OnlineLoans.org">
+                <span className={cls.fundV2BrandText}>
+                  OnlineLoans<span className={cls.fundV2BrandDot}>.</span>
+                  <span className={cls.fundV2BrandOrg}>org</span>
+                </span>
               </div>
             ) : null}
 
@@ -174,13 +177,35 @@ export default function Hero({
               <p className={cls.subHeroText}>Find funding that fits your business</p>
             )}
 
-            {designVariant === '2' && validDate ? (
-              <div className={cls.fundV2MetaRow}>
-                <div className={cls.fundV2UpdatedBlock}>
-                  <span className={cls.fundV2UpdatedLabel}>Last Updated:</span>
-                  <span className={cls.fundV2UpdatedDate}>{validDate}</span>
+            {designVariant === '2' ? (
+              <>
+                <ul className={cls.fundV2Chips} aria-label="Key benefits">
+                  <li className={cls.fundV2Chip}>No impact to credit score</li>
+                  <li className={cls.fundV2Chip}>Compare lenders in minutes</li>
+                  <li className={cls.fundV2Chip}>From $5,000 to $1M+</li>
+                </ul>
+
+                <div className={cls.fundV2CtaRow}>
+                  <Link href="/business-loan/apply" className={cls.fundV2PrimaryCta}>
+                    Check your rates
+                    <span className={cls.fundV2CtaArrow} aria-hidden>
+                      →
+                    </span>
+                  </Link>
+                  <p className={cls.fundV2CtaNote}>
+                    Free to apply. Takes about <strong>2 minutes</strong>.
+                  </p>
                 </div>
-              </div>
+
+                {validDate ? (
+                  <div className={cls.fundV2MetaRow}>
+                    <div className={cls.fundV2UpdatedBlock}>
+                      <span className={cls.fundV2UpdatedLabel}>Last Updated</span>
+                      <span className={cls.fundV2UpdatedDate}>{validDate}</span>
+                    </div>
+                  </div>
+                ) : null}
+              </>
             ) : null}
 
             {showTrustBadges ? (
