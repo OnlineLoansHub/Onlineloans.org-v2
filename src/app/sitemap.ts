@@ -98,6 +98,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${baseUrl}/affiliates`,
+      lastModified: new Date('2026-03-30'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/contact`,
       lastModified: new Date('2025-12-04'),
       changeFrequency: 'monthly',
