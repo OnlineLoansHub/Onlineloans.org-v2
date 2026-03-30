@@ -183,7 +183,7 @@ export default function Hero({
             )}
 
             {designVariant === '2' || designVariant === 'default' ? (
-              <>
+              <div className={cls.fundV2DesktopOnly}>
                 <ul className={cls.fundV2Chips} aria-label="Key benefits">
                   <li className={cls.fundV2Chip}>No impact to credit score</li>
                   <li className={cls.fundV2Chip}>Compare lenders in minutes</li>
@@ -213,7 +213,7 @@ export default function Hero({
                     </div>
                   </div>
                 ) : null}
-              </>
+              </div>
             ) : null}
 
             {showTrustBadges ? (

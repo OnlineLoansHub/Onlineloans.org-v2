@@ -216,6 +216,14 @@
   gap: 10px;
 }
 
+.fundV2DesktopOnly {
+  display: none;
+
+  @media (min-width: 769px) {
+    display: block;
+  }
+}
+
 .fundV2Chip {
   display: inline-flex;
   align-items: center;
@@ -319,6 +327,11 @@
 .fundV2AuthorityBadges {
   margin-top: 10px;
   opacity: 0.98;
+  display: none;
+
+  @media (min-width: 769px) {
+    display: block;
+  }
 }
 
 .hero:has(.subHeroGroup) .subHeroGroup {
