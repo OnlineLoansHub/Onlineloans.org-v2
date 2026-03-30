@@ -56,39 +56,110 @@
   @media (min-width: 769px) {
     background-color: #0b1f34;
     /* Give the background more vertical presence on desktop. */
-    min-height: 320px;
+    min-height: 520px;
+    padding-top: 72px;
+    padding-bottom: 92px;
     background:
-      /* soft blend between panels */
+      /* soft blend between panels (long + smooth) */
       linear-gradient(
         90deg,
-        rgba(11, 31, 52, 0.96) 0%,
-        rgba(11, 31, 52, 0.96) 52%,
-        rgba(11, 31, 52, 0.58) 60%,
-        rgba(11, 31, 52, 0) 72%
+        rgba(11, 31, 52, 1) 0%,
+        rgba(11, 31, 52, 1) 46%,
+        rgba(11, 31, 52, 0.86) 56%,
+        rgba(11, 31, 52, 0.56) 66%,
+        rgba(11, 31, 52, 0.22) 76%,
+        rgba(11, 31, 52, 0) 86%
       ),
-      url('/images/article/gorgeous-german-female1.jpeg');
-    /* Make the image behave like a right-side panel (fills the hero height). */
-    background-size: 100% 100%, cover;
-    /* Keep the subject (face) in frame vs the countertop. */
-    background-position: center, 82% 32%;
+      /* subtle vignette over the image panel (premium, reduces harsh edge) */
+        linear-gradient(90deg, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.18) 100%),
+      url('/images/article/gorgeous-german-female.jpeg');
+    /* Make the image a right-side panel (Fund.com-style, stable framing). */
+    background-size:
+      100% 100%,
+      100% 100%,
+      54% 100%;
+    background-position:
+      center,
+      center,
+      right center;
     background-repeat: no-repeat;
     color: var(--color-white);
   }
 
+  /* Smaller desktop screens: avoid image distortion ("skinny" effect). */
+  @media (min-width: 769px) and (max-width: 1199px) {
+    background-size:
+      100% 100%,
+      100% 100%,
+      auto 92%;
+    background-position:
+      center,
+      center,
+      right 26% center;
+  }
+
   /* Wider screens: show more of the subject (reduce zoom slightly). */
   @media (min-width: 1280px) {
-    min-height: 360px;
-    background-position: center, 80% 30%;
+    min-height: 560px;
+    background-size:
+      100% 100%,
+      100% 100%,
+      70% 100%;
+    background-position:
+      center,
+      center,
+      right center;
   }
 
   /* Ultra-wide: keep the subject anchored right and prevent over-cropping. */
   @media (min-width: 1600px) {
-    min-height: 380px;
-    background-position: center, 78% 28%;
+    min-height: 600px;
+    background-size:
+      100% 100%,
+      100% 100%,
+      58% 100%;
+    background-position:
+      center,
+      center,
+      right center;
   }
 
   /* Force readable text on the dark panel */
   @media (min-width: 769px) {
+    .contentGrid {
+      display: grid;
+      grid-template-columns: minmax(0, 560px) 1fr;
+      align-items: center;
+      column-gap: 40px;
+    }
+
+    .leftContent {
+      /* Keep content from drifting too far into the image side. */
+      max-width: 560px;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* v2 hero title should stay on one row */
+    .title {
+      white-space: nowrap;
+      font-size: 38px;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .subHeroGroup {
+      margin-bottom: 0;
+    }
+
+    .subHeroTextLead {
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
     .title,
     .subHeroTextLead,
     .subHeroTextFollow,
@@ -110,6 +181,49 @@
       color: rgba(255, 255, 255, 0.96);
     }
   }
+}
+
+/* v2 desktop: left-column meta (logo, last-updated, authority icons) */
+.fundV2LogoRow {
+  margin: 0 0 32px 0;
+
+  @media (min-width: 769px) {
+    /* Keep the animated logo compact */
+    :global(.logoText) {
+      font-size: 22px;
+      letter-spacing: 0.2px;
+    }
+  }
+}
+
+.fundV2MetaRow {
+  /* Big intentional gap between subtitle and meta block */
+  margin: 34px 0 0 0;
+}
+
+.fundV2UpdatedBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fundV2UpdatedLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.fundV2UpdatedDate {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+.fundV2AuthorityBadges {
+  margin-top: 10px;
+  opacity: 0.98;
 }
 
 .hero:has(.subHeroGroup) .subHeroGroup {

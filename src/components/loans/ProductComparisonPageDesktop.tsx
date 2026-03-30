@@ -72,12 +72,14 @@ export function ProductComparisonPageDesktop({
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
   const comparisonYear = new Date().getFullYear();
   const comparisonLendersForMonthYear = `${comparisonMonth} ${comparisonYear}`;
-  const comparisonSubtitle = 'Apply in minutes. Get funded fast.';
+  const isFundHeroV2 = designVariant === '2' && productConfig.id === 'business-loans';
+  const comparisonSubtitle = isFundHeroV2
+    ? 'Find funding that fits your business'
+    : 'Apply in minutes. Get funded fast.';
   const comparisonSubtitleSecondary =
     'With lower rates, you can boost your business while saving thousands on payments. Compare our top\nlenders and lock in your rate today.';
-  const isFundHeroV2 = designVariant === '2' && productConfig.id === 'business-loans';
   const comparisonSubtitleSecondaryV2 = isFundHeroV2
-    ? 'With lower rates, you can boost your business\nwhile saving thousands on payments.\nCompare our top lenders and lock in your rate today.'
+    ? undefined
     : comparisonSubtitleSecondary;
   const scrollToLender = useLenderDeepDiveScroll();
 
@@ -159,7 +161,7 @@ export function ProductComparisonPageDesktop({
           comparisonLendersForMonthYear={isFundHeroV2 ? undefined : comparisonLendersForMonthYear}
           comparisonSubtitle={comparisonSubtitle}
           comparisonSubtitleSecondary={comparisonSubtitleSecondaryV2}
-          showTrustBadges={false}
+          showTrustBadges={isFundHeroV2 ? true : false}
           designVariant={designVariant}
         />
       )}

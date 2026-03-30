@@ -99,6 +99,18 @@ function ProductComparisonPageCore({
     });
   }, [designVariant]);
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.body.setAttribute('data-comparison-variant', designVariant);
+
+    return () => {
+      // Only remove if we still own the current value (avoid clobbering another page instance).
+      if (document.body.getAttribute('data-comparison-variant') === designVariant) {
+        document.body.removeAttribute('data-comparison-variant');
+      }
+    };
+  }, [designVariant]);
+
   const parseMinRevenue = (minRevenue?: string): number | null => {
     if (!minRevenue) return null;
     const normalized = String(minRevenue).trim().toLowerCase();

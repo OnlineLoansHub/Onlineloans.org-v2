@@ -741,6 +741,8 @@ export default function LenderCard({
       {/* Desktop card */}
       {conversionDesktop ? (
         <div
+          data-lender-card="desktop"
+          data-rank={rank}
           className={[
             'hidden lg:block rounded-lg overflow-visible relative isolate',
             conversionFeatured
@@ -916,6 +918,8 @@ export default function LenderCard({
         </div>
       ) : (
         <div
+          data-lender-card="desktop"
+          data-rank={rank}
           className={`hidden lg:block bg-white rounded overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
             rank === 1
               ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'

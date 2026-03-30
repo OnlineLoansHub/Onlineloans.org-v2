@@ -14,6 +14,14 @@
   box-shadow: none;
 }
 
+/* v2: hide fixed header stack entirely */
+:global(body[data-comparison-variant='2']) {
+  /* Keep AdvertisingDisclosureBar visible, hide only the nav header. */
+  [data-site-top-chrome] header {
+    display: none !important;
+  }
+}
+
 /* —— Business desktop conversion layout (design v1) —— */
 .conversionHero {
   background: linear-gradient(165deg, #ecfdf5 0%, #f8fafc 38%, #ffffff 100%);

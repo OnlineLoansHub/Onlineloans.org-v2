@@ -3,6 +3,7 @@ import Image from 'next/image';
 import cls from './Hero.module.scss';
 import type { HeroConfig } from '@/data/productTypes';
 import type { ComparisonDesignVariant } from '@/lib/comparisonDesignVariant';
+import Logo from '@/components/ui/Logo/Logo';
 
 interface HeroProps {
   heroConfig: HeroConfig;
@@ -81,7 +82,7 @@ export default function Hero({
         <div className={cls.contentGrid}>
           <div className={cls.leftContent}>
             {/* Last Updated */}
-            {validDate && (
+            {designVariant !== '2' && validDate && (
               <div className={cls.lastUpdated}>
                 <svg
                   width="16"
@@ -104,6 +105,12 @@ export default function Hero({
                 Last Updated: <span className={cls.lastUpdatedDate}>{validDate}</span>
               </div>
             )}
+
+            {designVariant === '2' ? (
+              <div className={cls.fundV2LogoRow} aria-label="OnlineLoans.org">
+                <Logo text="OnlineLoans.org" textColor="rgba(255,255,255,0.95)" />
+              </div>
+            ) : null}
 
             {/* Main heading */}
             <h1 className={cls.title}>
@@ -167,13 +174,22 @@ export default function Hero({
               <p className={cls.subHeroText}>Find funding that fits your business</p>
             )}
 
+            {designVariant === '2' && validDate ? (
+              <div className={cls.fundV2MetaRow}>
+                <div className={cls.fundV2UpdatedBlock}>
+                  <span className={cls.fundV2UpdatedLabel}>Last Updated:</span>
+                  <span className={cls.fundV2UpdatedDate}>{validDate}</span>
+                </div>
+              </div>
+            ) : null}
+
             {showTrustBadges ? (
-              <div className={cls.trustBadges}>
+              <div className={designVariant === '2' ? cls.fundV2AuthorityBadges : cls.trustBadges}>
                 <Image
                   src={heroConfig.badgeImagePath}
                   alt="BBB and Trustpilot badges"
-                  width={350}
-                  height={53}
+                  width={designVariant === '2' ? 220 : 350}
+                  height={designVariant === '2' ? 34 : 53}
                   className={cls.trustBadgesImage}
                   priority
                   loading="eager"
