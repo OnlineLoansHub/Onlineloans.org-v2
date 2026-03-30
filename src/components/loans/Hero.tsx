@@ -86,8 +86,8 @@ export default function Hero({
       <div className={cls.container}>
         <div className={cls.contentGrid}>
           <div className={cls.leftContent}>
-            {/* Last Updated */}
-            {designVariant !== '2' && validDate && (
+            {/* Last Updated (legacy layout; omit for v2 + default which use the v2 meta block) */}
+            {designVariant !== '2' && designVariant !== 'default' && validDate && (
               <div className={cls.lastUpdated}>
                 <svg
                   width="16"
@@ -217,12 +217,18 @@ export default function Hero({
             ) : null}
 
             {showTrustBadges ? (
-              <div className={designVariant === '2' ? cls.fundV2AuthorityBadges : cls.trustBadges}>
+              <div
+                className={
+                  designVariant === '2' || designVariant === 'default'
+                    ? cls.fundV2AuthorityBadges
+                    : cls.trustBadges
+                }
+              >
                 <Image
                   src={heroConfig.badgeImagePath}
                   alt="BBB and Trustpilot badges"
-                  width={designVariant === '2' ? 220 : 350}
-                  height={designVariant === '2' ? 34 : 53}
+                  width={designVariant === '2' || designVariant === 'default' ? 220 : 350}
+                  height={designVariant === '2' || designVariant === 'default' ? 34 : 53}
                   className={cls.trustBadgesImage}
                   priority
                   loading="eager"
