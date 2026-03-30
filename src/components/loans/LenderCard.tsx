@@ -76,6 +76,7 @@ function LendziWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   const isMobile = size === 'mobile';
   const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
   const mainSize = baseSize + (isMobile ? 10 : 6);
+
   return (
     <span
       className="inline-flex items-center select-none"
@@ -122,6 +123,7 @@ function CardiffWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) 
   const isMobile = size === 'mobile';
   const baseSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
   const mainSize = baseSize + (isMobile ? 12 : 14);
+
   return (
     <span
       aria-label="Cardiff"
@@ -143,6 +145,7 @@ function CardiffWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) 
 function AdvanceFundsNetworkWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   const isMobile = size === 'mobile';
   const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+
   return (
     <div
       className="inline-flex flex-col leading-none select-none"
@@ -183,6 +186,7 @@ function AdvanceFundsNetworkWordmark({ size = 'desktop' }: { size?: 'mobile' | '
 function RokFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   const isMobile = size === 'mobile';
   const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+
   return (
     <div
       className="inline-flex flex-col items-center leading-none select-none"
@@ -222,6 +226,7 @@ function ForaFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'deskto
   const mainSize = baseSize + (isMobile ? 4 : 6);
   const foraPrimary = '#00097E';
   const foraAccent = '#2026FF';
+
   return (
     <div className="inline-flex items-end gap-2 select-none" aria-label="Fora Financial">
       <span
@@ -267,6 +272,7 @@ function ForaFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'deskto
 function UplyftCapitalWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop' }) {
   const isMobile = size === 'mobile';
   const mainSize = getWordmarkMainFontSize(isMobile ? 'mobile' : 'desktop');
+
   return (
     <div
       className="inline-flex flex-col items-center leading-none select-none"
@@ -316,6 +322,7 @@ function BrandWordmark({
   if (key === 'fora financial') return <ForaFinancialWordmark size={size} />;
   // businessLoansData uses "Uplyft" as the name
   if (key === 'uplyft' || key === 'uplyft capital') return <UplyftCapitalWordmark size={size} />;
+
   return null;
 }
 
@@ -349,18 +356,18 @@ type DesktopBullet =
 
 function asList(v: unknown): string[] {
   if (!v) return [];
-  if (Array.isArray(v)) return v.map(String).map((s) => s.trim()).filter(Boolean);
+  if (Array.isArray(v))
+    return v
+      .map(String)
+      .map((s) => s.trim())
+      .filter(Boolean);
+
   return [String(v).trim()].filter(Boolean);
 }
 
-function RestrictionBullet({
-  label,
-  items,
-}: {
-  label: string;
-  items: string[];
-}) {
+function RestrictionBullet({ label, items }: { label: string; items: string[] }) {
   const hasItems = items.length > 0;
+
   return (
     <span className="min-w-0">
       <span>{label} </span>
@@ -403,9 +410,10 @@ function pickDesktopBullets(lender: Brand): DesktopBullet[] {
   bullets.push({ type: 'restrictedStates', items: asList(lender.restrictedStates) });
 
   // Backfill from goodDetails if we still need more
-  for (const d of card.length ? card : lender.goodDetails ?? []) {
+  for (const d of card.length ? card : (lender.goodDetails ?? [])) {
     if (bullets.length >= 4) break;
-    if (!bullets.some((b) => b.type === 'text' && b.text === d)) bullets.push({ type: 'text', text: d });
+    if (!bullets.some((b) => b.type === 'text' && b.text === d))
+      bullets.push({ type: 'text', text: d });
   }
 
   // Backfill from qualifiers if we still need more
@@ -413,10 +421,12 @@ function pickDesktopBullets(lender: Brand): DesktopBullet[] {
     const revenue = humanizeMinRevenue(lender.minRevenue);
     if (revenue) bullets.push({ type: 'text', text: `Monthly revenue: ${revenue}` });
   }
+
   if (bullets.length < 4) {
     const time = humanizeMinTimeInBusiness(lender.minTimeInBusiness);
     if (time) bullets.push({ type: 'text', text: `Time in business: ${time}` });
   }
+
   if (bullets.length < 4) {
     const credit = humanizeMinCreditScore(lender.minCreditScore);
     if (credit) bullets.push({ type: 'text', text: `Min. credit score: ${credit}` });
@@ -532,9 +542,35 @@ export default function LenderCard({
   const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
+  const isV2 = comparisonDesignVariant === '2';
   const isLendzi = lender.id === 1 || lender.name.toLowerCase() === 'lendzi';
+  const v2HeadlineOptions = useMemo(
+    () => [
+      'Cash in the next 24hrs after approval',
+      'Grow your small business the right way',
+      'Lenders network competes for your business',
+      'Best for established businesses with consistent revenue',
+      'Top rated for ease & speed of funding process with personalized support',
+      'No fees, and no impact on your credit',
+      'Trusted by Thousands of Small Businesses Nationwide',
+    ],
+    []
+  );
+  const v2HeadlineMaxChars = 58;
+  const v2Highlight =
+    typeof lender.highlight === 'string' ? lender.highlight.trim() : '';
+  const v2HighlightSafe =
+    v2Highlight.length > 0 && v2Highlight.length <= v2HeadlineMaxChars
+      ? v2Highlight
+      : null;
+  const v2Headline =
+    v2HighlightSafe ??
+    v2HeadlineOptions[
+      Math.abs((typeof lender.id === 'number' ? lender.id : rank) * 97 + rank) % v2HeadlineOptions.length
+    ];
   const mobileLogoCentered = useMemo(() => {
     const key = lender.name.toLowerCase();
+
     return key === 'lendzi' || key === 'britecap' || key === 'cardiff';
   }, [lender.name]);
 
@@ -715,7 +751,9 @@ export default function LenderCard({
                       return;
                     }
 
-                    trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                    trackBrandClick(lender.name, pageName, impressionId, {
+                      comparisonDesignVariant,
+                    });
                     gtag_report_conversion();
                     window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                   }}
@@ -768,9 +806,10 @@ export default function LenderCard({
                   </div>
                 ) : lender.logo ? (
                   <div
-                    className={['relative w-[180px] h-[60px] overflow-visible', isLendzi ? 'mt-1' : ''].join(
-                      ' '
-                    )}
+                    className={[
+                      'relative w-[180px] h-[60px] overflow-visible',
+                      isLendzi ? 'mt-1' : '',
+                    ].join(' ')}
                   >
                     <Image
                       src={lender.logo}
@@ -784,7 +823,9 @@ export default function LenderCard({
                     />
                   </div>
                 ) : (
-                  <span className="font-semibold text-slate-900 text-base truncate">{lender.name}</span>
+                  <span className="font-semibold text-slate-900 text-base truncate">
+                    {lender.name}
+                  </span>
                 )}
               </div>
 
@@ -795,7 +836,9 @@ export default function LenderCard({
                       <span className="inline-flex items-center rounded-full border border-[#0e824c]/25 bg-[#0e824c]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0e824c]">
                         Best overall
                       </span>
-                      <span className="text-xs font-medium text-slate-600">Recommended for you</span>
+                      <span className="text-xs font-medium text-slate-600">
+                        Recommended for you
+                      </span>
                     </>
                   ) : null}
                 </div>
@@ -841,7 +884,9 @@ export default function LenderCard({
                   type="button"
                   className="group w-full min-h-[48px] px-5 rounded-lg bg-[#0e824c] text-white text-[15px] font-bold shadow-[0_4px_14px_rgba(14,130,76,0.35)] hover:bg-[#0c7344] hover:shadow-[0_6px_20px_rgba(14,130,76,0.42)] active:translate-y-px transition-all duration-200 flex items-center justify-center gap-1.5"
                   onClick={() => {
-                    trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                    trackBrandClick(lender.name, pageName, impressionId, {
+                      comparisonDesignVariant,
+                    });
                     gtag_report_conversion();
                     window.open(processedCtaUrl || '#', '_blank');
                   }}
@@ -867,7 +912,10 @@ export default function LenderCard({
 
                         return;
                       }
-                      trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+
+                      trackBrandClick(lender.name, pageName, impressionId, {
+                        comparisonDesignVariant,
+                      });
                       gtag_report_conversion();
                       window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                     }}
@@ -888,25 +936,33 @@ export default function LenderCard({
               <div className="mt-4 pl-1 sm:pl-2">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 text-sm">
                   <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wide">Time in business</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">
+                      Time in business
+                    </div>
                     <div className="font-semibold text-slate-900 mt-0.5">
                       {humanizeMinTimeInBusiness(lender.minTimeInBusiness) ?? '—'}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wide">Monthly revenue</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">
+                      Monthly revenue
+                    </div>
                     <div className="font-semibold text-slate-900 mt-0.5">
                       {humanizeMinRevenue(lender.minRevenue) ?? '—'}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wide">Min. credit</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">
+                      Min. credit
+                    </div>
                     <div className="font-semibold text-slate-900 mt-0.5">
                       {humanizeMinCreditScore(lender.minCreditScore) ?? '—'}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs text-slate-500 uppercase tracking-wide">Business bank acct.</div>
+                    <div className="text-xs text-slate-500 uppercase tracking-wide">
+                      Business bank acct.
+                    </div>
                     <div className="font-semibold text-slate-900 mt-0.5">
                       {(lender.businessBankAccountRequired ?? true) ? 'Required' : 'Not required'}
                     </div>
@@ -920,7 +976,9 @@ export default function LenderCard({
         <div
           data-lender-card="desktop"
           data-rank={rank}
-          className={`hidden lg:block bg-white rounded overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
+          className={`hidden lg:block bg-white overflow-visible relative isolate hover:z-50 ${homeCardMotionDesktop} ${
+            isV2 ? 'rounded-none' : 'rounded'
+          } ${
             rank === 1
               ? 'border-2 border-[#2a3d66]/70 hover:border-[var(--color-primary)]'
               : 'border-2 border-[#d4eaf2] hover:border-[var(--color-primary)]'
@@ -930,18 +988,37 @@ export default function LenderCard({
             <span className="text-white font-bold text-[15px] leading-none">{rank}</span>
           </div>
 
-          <div className="px-6 pt-5 pb-4">
-            <div className="grid grid-cols-[220px_1fr_240px] gap-6">
-              <div className="flex items-center justify-center">
+          <div className={isV2 ? 'px-7 pt-6 pb-5' : 'px-6 pt-5 pb-4'}>
+            <div
+              className={
+                isV2
+                  ? 'grid grid-cols-[240px_minmax(0,1fr)_260px] gap-x-10 gap-y-6 items-start'
+                  : 'grid grid-cols-[220px_1fr_240px] gap-6'
+              }
+            >
+              <div
+                className={
+                  isV2
+                    ? 'flex flex-col items-center justify-start gap-4 pt-1'
+                    : 'flex items-center justify-center'
+                }
+              >
                 {BrandWordmark({ lender, size: 'desktop' }) ? (
-                  <div className="w-[250px] h-[78px] flex items-center justify-center">
+                  <div
+                    className={
+                      isV2
+                        ? 'w-[230px] h-[74px] flex items-center justify-center'
+                        : 'w-[250px] h-[78px] flex items-center justify-center'
+                    }
+                  >
                     <BrandWordmark lender={lender} size="desktop" />
                   </div>
                 ) : lender.logo ? (
                   <div
-                    className={['relative w-[200px] h-[64px] overflow-visible', isLendzi ? 'mt-2' : ''].join(
-                      ' '
-                    )}
+                    className={[
+                      isV2 ? 'relative w-[210px] h-[66px] overflow-visible' : 'relative w-[200px] h-[64px] overflow-visible',
+                      isLendzi ? 'mt-2' : '',
+                    ].join(' ')}
                   >
                     <Image
                       src={lender.logo}
@@ -955,27 +1032,61 @@ export default function LenderCard({
                     />
                   </div>
                 ) : (
-                  <span className="font-semibold text-black text-lg truncate">{lender.name}</span>
+                  !isV2 ? (
+                    <span className="font-semibold text-black text-lg truncate">{lender.name}</span>
+                  ) : null
                 )}
+
+                {isV2 ? (
+                  <div className="flex items-start justify-center gap-3 w-full">
+                    <div className="text-[44px] font-extrabold text-black leading-none">
+                      {lender.ourScore.toFixed(1)}
+                    </div>
+
+                    <div className="flex flex-col items-end gap-1.5 pt-1">
+                      <StarRating score={lender.ourScore} />
+                      <div className="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 self-start">
+                        <span>
+                          {lender.ourScore >= 9
+                            ? 'Excellent'
+                            : lender.ourScore >= 8
+                              ? 'Great'
+                              : lender.ourScore >= 7
+                                ? 'Good'
+                                : 'Fair'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
               </div>
 
-              <div className="min-w-0 pt-1">
-                <div className="text-base font-semibold text-black">{lender.name}</div>
+              <div className={isV2 ? 'min-w-0 pt-0.5' : 'min-w-0 pt-1'}>
+                {!isV2 ? (
+                  <div className="text-base font-semibold text-black">{lender.name}</div>
+                ) : null}
 
-                <div className="mt-1 flex items-center gap-2 text-sm text-black">
-                  {typeof lender.reviewCount === 'number' && (
-                    <span className="font-medium text-black">
-                      {lender.reviewCount.toLocaleString()} reviews
+                {!isV2 ? (
+                  <div className="mt-1 flex items-center gap-2 text-sm text-black">
+                    {typeof lender.reviewCount === 'number' && (
+                      <span className="font-medium text-black">
+                        {lender.reviewCount.toLocaleString()} reviews
+                      </span>
+                    )}
+                    <span>by</span>
+                    <span className="inline-flex items-center gap-1 font-medium text-black">
+                      <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
+                      Trustpilot
                     </span>
-                  )}
-                  <span>by</span>
-                  <span className="inline-flex items-center gap-1 font-medium text-black">
-                    <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" />
-                    Trustpilot
-                  </span>
-                </div>
+                  </div>
+                ) : null}
 
-                <div className="mt-3 flex flex-col gap-2">
+                <div className={isV2 ? 'mt-2.5 flex flex-col gap-2.5' : 'mt-3 flex flex-col gap-2'}>
+                  {isV2 ? (
+                    <div className="font-bold text-slate-900 text-[15px] leading-snug whitespace-nowrap overflow-hidden text-ellipsis">
+                      {v2Headline}
+                    </div>
+                  ) : null}
                   {pickDesktopBullets(lender).map((b) => (
                     <div
                       key={
@@ -989,9 +1100,19 @@ export default function LenderCard({
                                 ? 'restrictedStates'
                                 : b.text
                       }
-                      className="flex items-start gap-2 text-sm text-black min-w-0"
+                      className={
+                        isV2
+                          ? 'flex items-start gap-2 text-[14px] leading-snug text-slate-800 min-w-0'
+                          : 'flex items-start gap-2 text-sm text-black min-w-0'
+                      }
                     >
-                      <Check className="w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0" />
+                      <Check
+                        className={
+                          isV2
+                            ? 'w-[15px] h-[15px] text-emerald-600 mt-0.5 flex-shrink-0'
+                            : 'w-4 h-4 text-emerald-600 mt-0.5 flex-shrink-0'
+                        }
+                      />
                       {b.type === 'loanAmount' ? (
                         <span className="truncate">
                           <span className="underline">Loan amount</span>
@@ -1011,49 +1132,81 @@ export default function LenderCard({
                 </div>
               </div>
 
-              <div className="flex h-full flex-col items-center justify-center gap-4">
-                <div className="flex items-start justify-center gap-2 w-full">
-                  <div className="text-4xl font-bold text-black leading-none">
-                    {lender.ourScore.toFixed(1)}
-                  </div>
+              <div
+                className={
+                  isV2
+                    ? 'flex h-full flex-col items-center justify-start gap-4 pt-1'
+                    : 'flex h-full flex-col items-center justify-center gap-4'
+                }
+              >
+                {!isV2 ? (
+                  <div className="flex items-start justify-center gap-2 w-full">
+                    <div className="text-4xl font-bold text-black leading-none">
+                      {lender.ourScore.toFixed(1)}
+                    </div>
 
-                  <div className="flex flex-col items-end gap-1 pt-0.5">
-                    <StarRating score={lender.ourScore} />
-                    <div className="inline-flex items-center gap-1 text-xs font-semibold text-black self-start">
-                      <span>
-                        {lender.ourScore >= 9
-                          ? 'Excellent'
-                          : lender.ourScore >= 8
-                            ? 'Great'
-                            : lender.ourScore >= 7
-                              ? 'Good'
-                              : 'Fair'}
-                      </span>
+                    <div className="flex flex-col items-end gap-1 pt-0.5">
+                      <StarRating score={lender.ourScore} />
+                      <div className="inline-flex items-center gap-1 text-xs font-semibold text-black self-start">
+                        <span>
+                          {lender.ourScore >= 9
+                            ? 'Excellent'
+                            : lender.ourScore >= 8
+                              ? 'Great'
+                              : lender.ourScore >= 7
+                                ? 'Good'
+                                : 'Fair'}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : null}
 
-                <div className="w-[200px] self-center flex flex-col items-center gap-2">
+                <div className={isV2 ? 'w-[220px] self-center flex flex-col items-center gap-3' : 'w-[200px] self-center flex flex-col items-center gap-2'}>
+                  {isV2 ? (
+                    <div className="flex flex-col items-center gap-1 text-center">
+                      <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-black">
+                        <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" aria-hidden />
+                        Trustpilot
+                      </div>
+                      {typeof lender.reviewCount === 'number' ? (
+                        <div className="text-sm text-slate-500 leading-none">
+                          (Over {Math.max(1, Math.round(lender.reviewCount / 1000))}k Reviews)
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                   <Button
                     variant="primary"
                     className={[
-                      'text-white font-semibold transition-all rounded-none group',
-                      '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
+                      isV2
+                        ? 'group w-full text-white font-extrabold tracking-wide transition-all rounded-none'
+                        : 'text-white font-semibold transition-all rounded-none group',
+                      isV2
+                        ? '!bg-[#142c3f] hover:!bg-[#102538] active:!bg-[#0e2030]'
+                        : '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
                       'transform-gpu will-change-transform',
                       'duration-200 ease-out',
-                      'hover:-translate-y-0.5 hover:scale-[1.02]',
-                      'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90',
-                      'h-10 w-[95%] text-sm whitespace-nowrap',
+                      isV2 ? 'hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0' : 'hover:-translate-y-0.5 hover:scale-[1.02]',
+                      isV2
+                        ? 'h-14 text-[16px] whitespace-nowrap shadow-[0_18px_34px_rgba(10,20,30,0.22)]'
+                        : 'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90 h-10 w-[95%] text-sm whitespace-nowrap',
                     ].join(' ')}
-                    style={{ margin: 0, border: 0, borderRadius: 0, fontSize: 14 }}
+                    style={
+                      isV2
+                        ? { margin: 0, border: 0, borderRadius: 0 }
+                        : { margin: 0, border: 0, borderRadius: 0, fontSize: 14 }
+                    }
                     onClick={() => {
-                      trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                      trackBrandClick(lender.name, pageName, impressionId, {
+                        comparisonDesignVariant,
+                      });
                       gtag_report_conversion();
                       window.open(processedCtaUrl || '#', '_blank');
                     }}
                   >
                     <span className="inline-flex items-center">
-                      View Rates
+                      {isV2 ? 'VISIT SITE' : 'View Rates'}
                       <ChevronsRight
                         className="ml-1 inline-block align-middle w-[1.05em] h-[1.05em] transition-transform duration-300 group-hover:translate-x-1"
                         strokeWidth={2.5}
@@ -1065,7 +1218,7 @@ export default function LenderCard({
                   {lender.websiteUrl && (
                     <a
                       href="#"
-                      className="text-xs text-black hover:underline"
+                      className={isV2 ? 'text-sm text-slate-500 hover:text-black' : 'text-xs text-black hover:underline'}
                       role="button"
                       onClick={(e) => {
                         e.preventDefault();
@@ -1075,7 +1228,9 @@ export default function LenderCard({
                           return;
                         }
 
-                        trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                        trackBrandClick(lender.name, pageName, impressionId, {
+                          comparisonDesignVariant,
+                        });
                         gtag_report_conversion();
                         window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
                       }}
