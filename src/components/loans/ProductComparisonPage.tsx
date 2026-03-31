@@ -23,7 +23,10 @@ interface FAQItem {
 
 type JsonObject = Record<string, unknown>;
 
-function buildInitialFilters(productConfig: { id: string; filterOrder: string[] }): Record<string, string> {
+function buildInitialFilters(productConfig: {
+  id: string;
+  filterOrder: string[];
+}): Record<string, string> {
   const initial: Record<string, string> = {};
   productConfig.filterOrder.forEach((key) => {
     initial[key] = 'all';
@@ -386,7 +389,9 @@ function ProductComparisonPageCore({
               onReset={handleReset}
               onShowMore={() => setDisplayCount((prev) => prev + 5)}
               hasMore={hasMore}
-              showAdvertisingDisclosure={showAdvertisingDisclosure}
+              showAdvertisingDisclosure={
+                showAdvertisingDisclosure && designVariant !== '4'
+              }
               advertisingDisclosureText={advertisingDisclosureText}
             />
           )}

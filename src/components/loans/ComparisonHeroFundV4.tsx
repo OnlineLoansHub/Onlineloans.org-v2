@@ -25,13 +25,6 @@ export default function ComparisonHeroFundV4({
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.leftColumn}>
-            <div className={styles.brandRow} aria-label="OnlineLoans.org">
-              <span className={styles.brandText}>
-                OnlineLoans<span className={styles.brandDot}>.</span>
-                <span className={styles.brandOrg}>org</span>
-              </span>
-            </div>
-
             <h1 id="comparison-hero-v4-title" className={styles.title}>
               {title}
             </h1>
