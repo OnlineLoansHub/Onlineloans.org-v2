@@ -168,6 +168,11 @@
   @media (min-width: 769px) {
     margin-bottom: 0.75rem;
   }
+
+  /* Desktop comparison shell: more air between wordmark and H1 */
+  @media (min-width: 1024px) {
+    margin-bottom: 1.625rem;
+  }
 }
 
 .logoLink {

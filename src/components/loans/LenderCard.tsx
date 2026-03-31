@@ -555,7 +555,10 @@ export default function LenderCard({
   const comparisonDesignVariant = useComparisonDesignVariant();
   const pathname = usePathname();
   const pageName = useMemo(() => getPageNameFromRoute(pathname || ''), [pathname]);
-  const isV2 = comparisonDesignVariant === '2' || comparisonDesignVariant === 'default';
+  const isV2 =
+    comparisonDesignVariant === '2' ||
+    comparisonDesignVariant === 'default' ||
+    comparisonDesignVariant === '4';
   const lenderNameKey = lender.name.trim().toLowerCase();
   const isLendzi = lender.id === 1 || lenderNameKey === 'lendzi';
   const isRokFinancial = lenderNameKey === 'rok financial';
