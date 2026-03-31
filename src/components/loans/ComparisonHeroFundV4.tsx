@@ -37,6 +37,18 @@ export default function ComparisonHeroFundV4({
       aria-labelledby="comparison-hero-v4-title"
       {...(hasBenefits ? { 'data-fund-v4-business': 'true' } : {})}
     >
+      <div className={styles.disclosureBar} role="note" aria-label="Advertising disclosure">
+        <div className={styles.disclosureInner}>
+          <p className={styles.disclosureText}>
+            The offers below and their placement are from companies from which we receive
+            compensation.{' '}
+            <Link href={URL_CONFIG.termsOfUse} className={styles.disclosureLink}>
+              Advertising Disclosure
+            </Link>
+          </p>
+        </div>
+      </div>
+
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.leftColumn}>
