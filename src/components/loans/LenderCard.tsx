@@ -196,10 +196,14 @@ function RokFinancialWordmark({ size = 'desktop' }: { size?: 'mobile' | 'desktop
       aria-label="ROK.biz"
       style={{ textAlign: 'center' }}
     >
-      <span style={{ fontWeight: 900, fontSize: mainSize, letterSpacing: '0.02em', color: '#f02028' }}>
+      <span
+        style={{ fontWeight: 900, fontSize: mainSize, letterSpacing: '0.02em', color: '#f02028' }}
+      >
         ROK
       </span>
-      <span style={{ fontWeight: 900, fontSize: bizSize, letterSpacing: '-0.01em', color: '#0b0f19' }}>
+      <span
+        style={{ fontWeight: 900, fontSize: bizSize, letterSpacing: '-0.01em', color: '#0b0f19' }}
+      >
         .biz
       </span>
     </div>
