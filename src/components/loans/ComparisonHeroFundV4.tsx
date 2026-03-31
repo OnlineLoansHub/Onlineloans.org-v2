@@ -64,24 +64,41 @@ export default function ComparisonHeroFundV4({
 
             <p className={styles.tagline}>{tagline}</p>
 
-            {hasBenefits && benefitChips ? (
-              <ul className={styles.benefitChips} aria-label="Key benefits">
-                {benefitChips.map((label) => (
-                  <li key={label} className={styles.benefitChip}>
-                    {label}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
             {showExplore ? <p className={styles.explore}>{exploreBlurb}</p> : null}
 
             {hasBenefits ? (
-              <div className={styles.metaRow}>
-                <div className={styles.updatedBlock}>
-                  <span className={styles.updatedLabel}>Last Updated</span>
-                  <span className={styles.updatedDate}>{validAsOf}</span>
+              <div className={styles.businessLowerGroup}>
+                <div className={styles.metaRow}>
+                  <div className={styles.updatedBlock}>
+                    <span className={styles.updatedLabel}>Last Updated</span>
+                    <span className={styles.updatedDate}>{validAsOf}</span>
+                  </div>
                 </div>
+
+                <div className={styles.fundCtaRow}>
+                  <Link
+                    href="https://apply.onlineloans.org/apply"
+                    className={styles.fundPrimaryCta}
+                  >
+                    Check your rates
+                    <span className={styles.fundCtaArrow} aria-hidden>
+                      →
+                    </span>
+                  </Link>
+                  <p className={styles.fundCtaNote}>
+                    Free to apply. Takes about <strong>2 minutes</strong>.
+                  </p>
+                </div>
+
+                {benefitChips ? (
+                  <ul className={styles.benefitChips} aria-label="Key benefits">
+                    {benefitChips.map((label) => (
+                      <li key={label} className={styles.benefitChip}>
+                        {label}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             ) : (
               <div className={styles.validWrap}>
