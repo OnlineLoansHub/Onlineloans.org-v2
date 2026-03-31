@@ -22,38 +22,3 @@ export function parseComparisonDesignVariantFromSearchParam(
 
   return ALLOWED.has(v) ? (v as ComparisonDesignVariantUrl) : 'default';
 }
-
-/** Pathnames that render `ProductComparisonPage` (used to scope `?v=4` chrome behavior). */
-const PRODUCT_COMPARISON_PATHNAMES = new Set<string>([
-  '/auto-loan/best-auto-loans',
-  '/business-loan/best-business-loans',
-  '/credit-score/credit-score-monitoring',
-  '/crypto-loans/best-crypto-loans',
-  '/gold-and-silver/best-gold-and-silver',
-  '/mortgage-loan/best-mortgage-loans',
-  '/personal-loan/best-personal-loans',
-  '/pet-insurance/best-pet-insurance',
-  '/student-loan/best-student-loans',
-]);
-
-function normalizePathname(pathname: string): string {
-  if (pathname.length > 1 && pathname.endsWith('/')) return pathname.slice(0, -1);
-
-  return pathname;
-}
-
-export function isProductComparisonPathname(pathname: string): boolean {
-  return PRODUCT_COMPARISON_PATHNAMES.has(normalizePathname(pathname));
-}
-
-/**
- * Hide global disclosure + navbar for Fund-style hero (`?v=4`) on comparison pages only.
- */
-export function shouldHideSiteTopChromeForComparison(
-  pathname: string,
-  vParam: string | null | undefined
-): boolean {
-  if (!isProductComparisonPathname(pathname)) return false;
-
-  return parseComparisonDesignVariantFromSearchParam(vParam) === '4';
-}

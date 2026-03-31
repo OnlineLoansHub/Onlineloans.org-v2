@@ -389,9 +389,7 @@ function ProductComparisonPageCore({
               onReset={handleReset}
               onShowMore={() => setDisplayCount((prev) => prev + 5)}
               hasMore={hasMore}
-              showAdvertisingDisclosure={
-                showAdvertisingDisclosure && designVariant !== '4'
-              }
+              showAdvertisingDisclosure={showAdvertisingDisclosure}
               advertisingDisclosureText={advertisingDisclosureText}
             />
           )}

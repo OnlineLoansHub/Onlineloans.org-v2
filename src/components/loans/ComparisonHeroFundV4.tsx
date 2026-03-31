@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { URL_CONFIG } from '@/lib/urlConfig';
 import styles from './ComparisonHeroFundV4.module.scss';
 
 export interface ComparisonHeroFundV4Props {
@@ -25,6 +27,12 @@ export default function ComparisonHeroFundV4({
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.leftColumn}>
+            <div className={styles.logoRow}>
+              <Link href={URL_CONFIG.main} className={styles.logoLink}>
+                <span className={styles.logoMark}>Onlineloans.org</span>
+              </Link>
+            </div>
+
             <h1 id="comparison-hero-v4-title" className={styles.title}>
               {title}
             </h1>
