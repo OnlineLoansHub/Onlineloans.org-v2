@@ -10,6 +10,11 @@ export interface ComparisonHeroFundV4Props {
   validAsOf: string;
   /** Fund-style supporting copy (e.g. business loans only). */
   exploreBlurb?: string;
+  /**
+   * When set (e.g. business loans desktop), matches default `Hero` fund V2 chips +
+   * title/tagline sizing from `/business-loan/best-business-loans`.
+   */
+  benefitChips?: string[];
   showTrustBadges?: boolean;
   badgeImagePath?: string;
 }
@@ -19,11 +24,19 @@ export default function ComparisonHeroFundV4({
   tagline,
   validAsOf,
   exploreBlurb,
+  benefitChips,
   showTrustBadges = false,
   badgeImagePath,
 }: ComparisonHeroFundV4Props) {
+  const hasBenefits = Boolean(benefitChips?.length);
+  const showExplore = Boolean(exploreBlurb) && !hasBenefits;
+
   return (
-    <section className={styles.hero} aria-labelledby="comparison-hero-v4-title">
+    <section
+      className={styles.hero}
+      aria-labelledby="comparison-hero-v4-title"
+      {...(hasBenefits ? { 'data-fund-v4-business': 'true' } : {})}
+    >
       <div className={styles.container}>
         <div className={styles.inner}>
           <div className={styles.leftColumn}>
@@ -39,11 +52,30 @@ export default function ComparisonHeroFundV4({
 
             <p className={styles.tagline}>{tagline}</p>
 
-            {exploreBlurb ? <p className={styles.explore}>{exploreBlurb}</p> : null}
+            {hasBenefits && benefitChips ? (
+              <ul className={styles.benefitChips} aria-label="Key benefits">
+                {benefitChips.map((label) => (
+                  <li key={label} className={styles.benefitChip}>
+                    {label}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
 
-            <div className={styles.validWrap}>
-              Valid as of <span className={styles.validDate}>{validAsOf}</span>
-            </div>
+            {showExplore ? <p className={styles.explore}>{exploreBlurb}</p> : null}
+
+            {hasBenefits ? (
+              <div className={styles.metaRow}>
+                <div className={styles.updatedBlock}>
+                  <span className={styles.updatedLabel}>Last Updated</span>
+                  <span className={styles.updatedDate}>{validAsOf}</span>
+                </div>
+              </div>
+            ) : (
+              <div className={styles.validWrap}>
+                Valid as of <span className={styles.validDate}>{validAsOf}</span>
+              </div>
+            )}
 
             {showTrustBadges && badgeImagePath ? (
               <div className={styles.trustBadges}>

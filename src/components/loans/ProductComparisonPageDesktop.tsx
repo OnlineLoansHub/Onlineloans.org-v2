@@ -165,7 +165,16 @@ export function ProductComparisonPageDesktop({
           title={fundV4Title}
           tagline={fundV4Tagline}
           validAsOf={lastUpdated}
-          exploreBlurb={fundV4ExploreBlurb}
+          exploreBlurb={productConfig.id === 'business-loans' ? undefined : fundV4ExploreBlurb}
+          benefitChips={
+            productConfig.id === 'business-loans'
+              ? [
+                  'No impact to credit score',
+                  'Compare lenders in minutes',
+                  'From $5,000 to $1M+',
+                ]
+              : undefined
+          }
           showTrustBadges={false}
         />
       ) : (
