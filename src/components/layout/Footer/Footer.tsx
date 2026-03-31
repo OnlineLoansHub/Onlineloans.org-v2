@@ -37,6 +37,10 @@ const topNavLinks: FooterLinkItem[] = [
     path: URL_CONFIG.partner,
   },
   {
+    title: 'Affiliate Program',
+    path: '/affiliates',
+  },
+  {
     title: 'Privacy Policy',
     path: URL_CONFIG.privacyPolicy,
   },
