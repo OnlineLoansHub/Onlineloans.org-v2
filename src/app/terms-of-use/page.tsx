@@ -19,7 +19,7 @@ export default function TermsOfUse() {
             ACCEPT THESE TERMS OF USE. IF YOU DO NOT ACCEPT THESE TERMS OF USE, PLEASE DO NOT USE THIS
             SITE. BY CONTINUING TO USE THIS WEBSITE YOU AGREE TO ABIDE, AND THAT YOU ARE BOUND, BY
             THESE TERMS AND CONDITIONS. THESE TERMS OF USE REGULATE YOUR USE OF THE SITE, ANY CONTENT
-            (SUCH AS TEXT, DATA, INFORMATION, GRAPHICS, OR PHOTOGRAPHS) THAT ONLINE LOANS ORG LTD (the
+            (SUCH AS TEXT, DATA, INFORMATION, GRAPHICS, OR PHOTOGRAPHS) THAT VELASA LTD (the
             &quot;COMPANY&quot;) MAY MAKE AVAILABLE THROUGH THE SITE (COLLECTIVELY, &quot;MATERIALS&quot;).
           </p>
           <p className={cls.paragraph}>
@@ -253,7 +253,7 @@ export default function TermsOfUse() {
             please provide written notice to the following address for notice of claims of infringement:
           </p>
           <p className={cls.paragraph}>
-            Online Loans Org Ltd<br />
+            Velasa LTD<br />
             Email:{' '}
             <a href="mailto:business@onlineloans.org" className={cls.link}>
               business@onlineloans.org

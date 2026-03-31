@@ -185,7 +185,10 @@ export const Footer = () => {
             </a>
           </div>
           <p className={cls.copyright}>
-            Copyright © 2009-2025 OnlineLoans.Org Ltd All Rights Reserved.
+            Copyright © 2009-2026 Velasa LTD. All Rights Reserved.
+          </p>
+          <p className={cls.copyright}>
+            OnlineLoans.org is operated by Velasa LTD.
           </p>
           <p className={cls.termsText}>
             By using our content, products & services you agree to our{' '}

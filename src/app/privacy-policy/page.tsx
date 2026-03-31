@@ -19,6 +19,7 @@ export default function PrivacyPolicy() {
             about any individual who uses our website, <a href="https://www.onlineloans.org" className={cls.link}>https://www.onlineloans.org</a> (the
             &quot;Website&quot;) and/or our services (the &quot;Services&quot;).
           </p>
+          <p className={cls.paragraph}>OnlineLoans.org is operated by Velasa LTD.</p>
           <p className={cls.paragraph}>
             This Privacy Policy applies to visitors to our site and the personnel of our business
             partners.
