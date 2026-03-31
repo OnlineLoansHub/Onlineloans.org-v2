@@ -4,7 +4,8 @@
 
   /* Query-param design variants (?v=2 | ?v=3): add overrides here or in product-specific modules */
   &[data-comparison-variant='2'],
-  &[data-comparison-variant='3'] {
+  &[data-comparison-variant='3'],
+  &[data-comparison-variant='4'] {
     isolation: isolate;
   }
 }

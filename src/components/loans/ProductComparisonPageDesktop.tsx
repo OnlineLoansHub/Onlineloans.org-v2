@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Settings } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import Hero from '@/components/loans/Hero';
+import ComparisonHeroFundV4 from '@/components/loans/ComparisonHeroFundV4';
 import LenderCard from '@/components/loans/LenderCard';
 import LenderDeepDiveSections, {
   useLenderDeepDiveScroll,
@@ -61,6 +62,7 @@ export function ProductComparisonPageDesktop({
 }: ProductComparisonPageDesktopProps) {
   const designVariant = useComparisonDesignVariant();
   const isConversionV1 = designVariant === '1';
+  const isFundHeroV4 = designVariant === '4';
   const heroCopy = useMemo(
     () => getComparisonConversionHeroCopy(productConfig.id, productConfig.displayName),
     [productConfig.displayName, productConfig.id]
@@ -84,6 +86,18 @@ export function ProductComparisonPageDesktop({
   const comparisonSubtitleSecondaryV2 = isFundHero
     ? undefined
     : comparisonSubtitleSecondary;
+  const fundV4Title =
+    productConfig.id === 'business-loans'
+      ? `Best Business Loans of ${comparisonLendersForMonthYear}`
+      : `Best ${productConfig.comparisonHeroHighlight ?? productConfig.displayName} of ${comparisonLendersForMonthYear}`;
+  const fundV4Tagline =
+    productConfig.id === 'business-loans'
+      ? 'Find funding that fits your business'
+      : 'Apply in minutes. Get funded fast.';
+  const fundV4ExploreBlurb =
+    productConfig.id === 'business-loans'
+      ? 'Explore the top business lenders and compare offers to find financing that fits your goals—all in one place.'
+      : undefined;
   const scrollToLender = useLenderDeepDiveScroll();
 
   const moreOptionsTitle = heroCopy.moreOptionsTitle ?? 'More financing options';
@@ -145,6 +159,14 @@ export function ProductComparisonPageDesktop({
           featuredLender={featuredLender}
           filteredLenderCount={filteredCount}
           heroCopy={heroCopy}
+        />
+      ) : isFundHeroV4 ? (
+        <ComparisonHeroFundV4
+          title={fundV4Title}
+          tagline={fundV4Tagline}
+          validAsOf={lastUpdated}
+          exploreBlurb={fundV4ExploreBlurb}
+          showTrustBadges={false}
         />
       ) : (
         <Hero
@@ -222,7 +244,9 @@ export function ProductComparisonPageDesktop({
 
                 {featuredLender && displayedLenders.length > 0 ? (
                   <div className={styles.midConversionCta}>
-                    <p className={styles.midConversionCtaTitle}>Still comparing? Lock in your top pick.</p>
+                    <p className={styles.midConversionCtaTitle}>
+                      Still comparing? Lock in your top pick.
+                    </p>
                     <div className="flex justify-center">
                       <BusinessLoanPrimaryCta
                         lender={featuredLender}

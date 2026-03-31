@@ -1,0 +1,261 @@
+/*
+ * Fund-style v4 hero: same asset as Fund, composition fixed by *layering*, not one wash.
+ * Problem this fixes: `cover` + ~50% position + a second full-screen navy gradient stacks two
+ * fades so the subject stays under navy and the photo reads as a sliver on the right.
+ * Here: solid navy + soft blend only in a middle band; photo anchored to the *right* so the
+ * subject lives in the clear photo column (like Fund’s ~40% right panel).
+ */
+.hero {
+  --fund-v4-navy: #0f243e;
+  /* Photo layer: `auto 100%` + `right center` = pinned to the right edge, no lateral nudge. */
+  --fund-v4-photo-anchor-x: right;
+  --fund-v4-photo-anchor-y: center;
+  /* Where the navy panel ends and the photo reads clearly (gradient stops). */
+  --fund-v4-fade-start: 40%;
+  --fund-v4-fade-mid: 54%;
+  --fund-v4-fade-end: 78%;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--fund-v4-navy);
+  color: #fff;
+  padding: 2.25rem 0 2.75rem;
+
+  @media (min-width: 769px) {
+    padding: 3rem 0 3.5rem;
+    min-height: 440px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-color: var(--fund-v4-navy);
+    /*
+     * Layer 1: readability gradient (single pass — no second ::after overlay).
+     * Layer 2: photo; `right center` pins the image flush to the positioning area’s right edge.
+     */
+    background-image:
+      linear-gradient(
+        90deg,
+        var(--fund-v4-navy) 0%,
+        var(--fund-v4-navy) var(--fund-v4-fade-start),
+        rgba(15, 36, 62, 0.88) var(--fund-v4-fade-mid),
+        rgba(15, 36, 62, 0.12) var(--fund-v4-fade-end),
+        transparent 92%
+      ),
+      url('/images/article/download.png');
+    background-repeat: no-repeat;
+    background-size:
+      100% 100%,
+      auto 100%;
+    background-position:
+      0 0,
+      var(--fund-v4-photo-anchor-x) var(--fund-v4-photo-anchor-y);
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    --fund-v4-fade-start: 38%;
+    --fund-v4-fade-mid: 52%;
+    --fund-v4-fade-end: 76%;
+  }
+
+  @media (min-width: 1440px) {
+    --fund-v4-fade-start: 36%;
+    --fund-v4-fade-mid: 50%;
+    --fund-v4-fade-end: 74%;
+  }
+
+  /* Subtle vignette on the photo edge only — avoids flattening the whole right side again. */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 62%,
+      rgba(8, 20, 36, 0.12) 88%,
+      rgba(8, 20, 36, 0.22) 100%
+    );
+  }
+
+  @media (width <= 768px) {
+    --fund-v4-photo-anchor-x: center;
+    --fund-v4-photo-anchor-y: top;
+
+    &::before {
+      background-image:
+        linear-gradient(
+          180deg,
+          var(--fund-v4-navy) 0%,
+          rgba(15, 36, 62, 0.94) 42%,
+          rgba(15, 36, 62, 0.55) 58%,
+          rgba(15, 36, 62, 0.2) 78%,
+          transparent 100%
+        ),
+        url('/images/article/download.png');
+      background-size:
+        100% 100%,
+        auto 100%;
+      background-position:
+        0 0,
+        center top;
+    }
+
+    &::after {
+      background: linear-gradient(
+        to top,
+        rgba(8, 20, 36, 0.28) 0%,
+        transparent 55%
+      );
+    }
+
+    min-height: 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-container-width);
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+
+  @media (min-width: 640px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+.inner {
+  @media (min-width: 769px) {
+    min-height: 340px;
+    display: flex;
+    align-items: stretch;
+  }
+}
+
+.leftColumn {
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+
+  @media (min-width: 769px) {
+    min-height: 340px;
+  }
+}
+
+.brandRow {
+  margin: 0 0 1.25rem;
+
+  @media (min-width: 769px) {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.brandText {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.brandDot {
+  opacity: 0.75;
+}
+
+.brandOrg {
+  color: rgba(255, 255, 255, 0.86);
+  font-weight: 700;
+}
+
+.title {
+  margin: 0 0 0.65rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+
+  @media (min-width: 640px) {
+    font-size: 2.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.tagline {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+
+  @media (min-width: 1024px) {
+    font-size: 1.2rem;
+    max-width: 32rem;
+  }
+}
+
+.explore {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 32rem;
+
+  @media (min-width: 1024px) {
+    font-size: 1.0625rem;
+  }
+}
+
+.validWrap {
+  margin-top: 1.5rem;
+  padding-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
+
+  @media (min-width: 769px) {
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+}
+
+.validDate {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.trustBadges {
+  margin-top: 1.25rem;
+
+  @media (width <= 768px) {
+    display: none;
+  }
+}
+
+.trustBadgesImage {
+  max-width: 220px;
+  height: auto;
+}
