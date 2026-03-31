@@ -38,6 +38,20 @@ body[data-comparison-variant='default'] [aria-label='Advertising disclosure'] {
   display: none !important;
 }
 
+/*
+ * Fund-style desktop hero (?v=4) on best business loans: hide disclosure + navbar.
+ * Desktop only (matches ProductComparisonPage desktop breakpoint).
+ */
+@media (min-width: 1024px) {
+  body[data-page='best-business-loans'][data-comparison-variant='4'] {
+    padding-top: 0 !important;
+  }
+
+  body[data-page='best-business-loans'][data-comparison-variant='4'] [data-site-top-chrome] {
+    display: none !important;
+  }
+}
+
 @media (width <= 768px) {
   body {
     padding-top: var(--site-fixed-top-height, var(--header-height-mobile));
