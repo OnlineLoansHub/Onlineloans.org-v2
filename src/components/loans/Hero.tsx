@@ -188,17 +188,19 @@ export default function Hero({
                   <li className={cls.fundV2Chip}>From $5,000 to $1M+</li>
                 </ul>
 
-                <div className={cls.fundV2CtaRow}>
-                  <Link href="https://apply.onlineloans.org/apply" className={cls.fundV2PrimaryCta}>
-                    Check your rates
-                    <span className={cls.fundV2CtaArrow} aria-hidden>
-                      →
-                    </span>
-                  </Link>
-                  <p className={cls.fundV2CtaNote}>
-                    Free to apply. Takes about <strong>2 minutes</strong>.
-                  </p>
-                </div>
+                {designVariant === '2' ? (
+                  <div className={cls.fundV2CtaRow}>
+                    <Link href="https://apply.onlineloans.org/apply" className={cls.fundV2PrimaryCta}>
+                      Check your rates
+                      <span className={cls.fundV2CtaArrow} aria-hidden>
+                        →
+                      </span>
+                    </Link>
+                    <p className={cls.fundV2CtaNote}>
+                      Free to apply. Takes about <strong>2 minutes</strong>.
+                    </p>
+                  </div>
+                ) : null}
 
                 {validDate ? (
                   <div className={cls.fundV2MetaRow}>

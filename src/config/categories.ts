@@ -32,6 +32,7 @@ export const CATEGORIES: CategoryItem[] = [
 /** Non-home header: four primary product links (flat nav, no dropdown). */
 export const HEADER_RELATED_NAV_LINKS: ReadonlyArray<{ title: string; href: string }> = [
   { title: 'Business Loans', href: '/business-loan/best-business-loans' },
+  { title: 'Personal Loans', href: '/personal-loan/best-personal-loans' },
   { title: 'Student Loans', href: '/student-loan/best-student-loans' },
   { title: 'Credit Repair', href: '/credit-score/credit-score-monitoring' },
   { title: 'Auto Loans', href: '/auto-loan/best-auto-loans' },

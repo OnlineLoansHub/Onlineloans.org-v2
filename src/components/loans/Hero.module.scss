@@ -55,6 +55,12 @@
   /* Fund.com-style split background: blue left + image right (full width). */
   @media (min-width: 769px) {
     background-color: #0b1f34;
+    /* Used to vertically center the left column between navbar + filters. */
+    --fund-v2-min-height: 520px;
+    --fund-v2-pad-top: 72px;
+    --fund-v2-pad-bottom: 92px;
+    /* Desktop filter bar overlaps hero by ~3.75rem on best-business-loans. */
+    --fund-v2-filter-overlap: 3.75rem;
     /* Give the background more vertical presence on desktop. */
     min-height: 520px;
     padding-top: 72px;
@@ -100,6 +106,7 @@
 
   /* Wider screens: show more of the subject (reduce zoom slightly). */
   @media (min-width: 1280px) {
+    --fund-v2-min-height: 560px;
     min-height: 560px;
     background-size:
       100% 100%,
@@ -113,6 +120,7 @@
 
   /* Ultra-wide: keep the subject anchored right and prevent over-cropping. */
   @media (min-width: 1600px) {
+    --fund-v2-min-height: 600px;
     min-height: 600px;
     background-size:
       100% 100%,
@@ -126,6 +134,19 @@
 
   /* Force readable text on the dark panel */
   @media (min-width: 769px) {
+    /*
+     * Vertically center the grid content in the *visible* hero band
+     * (exclude padding + the desktop filter overlap).
+     */
+    .container {
+      display: flex;
+      align-items: center;
+      min-height: calc(
+        var(--fund-v2-min-height) - var(--fund-v2-pad-top) - var(--fund-v2-pad-bottom) -
+          var(--fund-v2-filter-overlap)
+      );
+    }
+
     .contentGrid {
       display: grid;
       grid-template-columns: minmax(0, 560px) 1fr;

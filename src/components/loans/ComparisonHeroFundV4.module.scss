@@ -223,6 +223,7 @@
 
   @media (min-width: 769px) {
     min-height: 340px;
+    justify-content: center;
   }
 }
 
@@ -299,7 +300,7 @@
   margin-top: 18px;
 
   @media (min-width: 769px) {
-    margin-top: auto;
+    margin-top: 18px;
     padding-top: 0.5rem;
   }
 }

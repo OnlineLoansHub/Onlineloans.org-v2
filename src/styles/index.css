@@ -38,6 +38,11 @@ body[data-comparison-variant='default'] [aria-label='Advertising disclosure'] {
   display: none !important;
 }
 
+/* Default comparison pages: hide the navbar "Apply Now" link */
+body[data-comparison-variant='default'] [data-site-top-chrome] a[href='https://apply.onlineloans.org/apply'] {
+  display: none !important;
+}
+
 /*
  * Fund-style desktop hero (?v=4) on best business loans: hide disclosure + navbar.
  * Desktop only (matches ProductComparisonPage desktop breakpoint).
