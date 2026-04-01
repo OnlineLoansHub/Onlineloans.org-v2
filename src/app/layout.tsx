@@ -3,7 +3,6 @@ import { Poppins } from 'next/font/google';
 import Script from 'next/script';
 import { SiteTopChrome } from '@/components/layout/SiteTopChrome/SiteTopChrome';
 import { ExploreToggle } from '@/components/layout/ExploreToggle/ExploreToggle';
-import { SkipToContent } from '@/components/accessibility/SkipToContent';
 import { AccessibilityWidget } from '@/components/accessibility/AccessibilityWidget';
 import { DefaultStructuredData } from '@/components/seo/StructuredData';
 import { generateMetadata as generateSEOMetadata, DEFAULT_OG_IMAGE } from '@/lib/seo';
@@ -90,7 +89,6 @@ export default function RootLayout({
           <ExploreToggleProvider>
             <ImpressionTracker />
             <DefaultStructuredData />
-            <SkipToContent />
             <SiteTopChrome />
             {/* <LegacyBanner /> */}
             <main id="main-content" className="main-container">
