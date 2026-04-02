@@ -68,28 +68,6 @@ export default function ComparisonHeroFundV4({
 
             {hasBenefits ? (
               <div className={styles.businessLowerGroup}>
-                <div className={styles.metaRow}>
-                  <div className={styles.updatedBlock}>
-                    <span className={styles.updatedLabel}>Last Updated</span>
-                    <span className={styles.updatedDate}>{validAsOf}</span>
-                  </div>
-                </div>
-
-                <div className={styles.fundCtaRow}>
-                  <Link
-                    href="https://apply.onlineloans.org/apply"
-                    className={styles.fundPrimaryCta}
-                  >
-                    Check your rates
-                    <span className={styles.fundCtaArrow} aria-hidden>
-                      →
-                    </span>
-                  </Link>
-                  <p className={styles.fundCtaNote}>
-                    Free to apply. Takes about <strong>2 minutes</strong>.
-                  </p>
-                </div>
-
                 {benefitChips ? (
                   <ul className={styles.benefitChips} aria-label="Key benefits">
                     {benefitChips.map((label) => (
@@ -99,6 +77,28 @@ export default function ComparisonHeroFundV4({
                     ))}
                   </ul>
                 ) : null}
+
+                <div className={styles.metaRow}>
+                  <div className={styles.updatedBlock}>
+                    <span className={styles.updatedLabel}>Last Updated</span>
+                    <span className={styles.updatedDate}>{validAsOf}</span>
+                  </div>
+                </div>
+
+                {showTrustBadges && badgeImagePath ? (
+                  <div className={styles.trustBadges}>
+                    <Image
+                      src={badgeImagePath}
+                      alt="BBB and Trustpilot badges"
+                      width={220}
+                      height={34}
+                      className={styles.trustBadgesImage}
+                      priority
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  </div>
+                ) : null}
               </div>
             ) : (
               <div className={styles.validWrap}>
@@ -106,7 +106,7 @@ export default function ComparisonHeroFundV4({
               </div>
             )}
 
-            {showTrustBadges && badgeImagePath ? (
+            {!hasBenefits && showTrustBadges && badgeImagePath ? (
               <div className={styles.trustBadges}>
                 <Image
                   src={badgeImagePath}

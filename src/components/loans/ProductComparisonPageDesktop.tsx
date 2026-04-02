@@ -175,7 +175,8 @@ export function ProductComparisonPageDesktop({
                 ]
               : undefined
           }
-          showTrustBadges={false}
+          showTrustBadges
+          badgeImagePath={productConfig.hero.badgeImagePath}
         />
       ) : (
         <Hero
