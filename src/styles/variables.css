@@ -1,20 +1,26 @@
 :root {
   /* 🎨 Core Colors - 10 Total */
   /* Primary Colors */
-  --color-primary: #1f4f6e;
+  --color-primary: #0a2540;
   /* "org" in OnlineLoans.org logo — use for matching brand accents */
   --color-logo-org-green: #0e824c;
-  /* Primary action buttons / CTAs (same green as .org) */
-  --color-cta: var(--color-logo-org-green);
-  --color-cta-hover: #0b6e40;
-  --color-cta-active: #095c36;
+  /* Primary action buttons / CTAs */
+  --color-cta: #16ca92;
+  --color-cta-hover: #0e824c;
+  --color-cta-active: #0b6e40;
+  /* CTA elevation (trust + conversion) */
+  --color-cta-shadow:
+    0 6px 14px rgba(22, 202, 146, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+  --color-cta-shadow-hover: 0 10px 22px rgba(22, 202, 146, 0.35);
+  --color-cta-shadow-active: 0 3px 8px rgba(22, 202, 146, 0.2);
   --color-secondary: #006382;
-  --color-primary-dark: #1b425b;
-  --color-primary-darker: #123043;
+  --color-primary-dark: #081f36;
+  --color-primary-darker: #051628;
 
   /* Hero Background */
   /* Update these in ONE place to change hero gradients app-wide */
-  --hero-gradient: linear-gradient(131.14deg, #235675 26.69%, #8ebed5 131.72%);
+  --hero-gradient: linear-gradient(131.14deg, #0a2540 26.69%, #8ebed5 131.72%);
   /* Product-comparison hero: soft wash + diagonal accent from primary */
   --hero-comparison-accent-bg: linear-gradient(
     145deg,

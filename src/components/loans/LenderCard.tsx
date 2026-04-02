@@ -737,7 +737,8 @@ export default function LenderCard({
                 variant="primary"
                 className={[
                   'w-[95%] text-white font-semibold group rounded-none',
-                  '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
+                  '!bg-[var(--color-cta)] hover:!bg-[var(--color-cta-hover)] active:!bg-[var(--color-cta-active)]',
+                  '!shadow-[var(--color-cta-shadow)] hover:!shadow-[var(--color-cta-shadow-hover)] active:!shadow-[var(--color-cta-shadow-active)]',
                 ].join(' ')}
                 style={{
                   padding: '10px 11px',
@@ -808,14 +809,14 @@ export default function LenderCard({
           className={[
             'hidden lg:block rounded-lg overflow-visible relative isolate',
             conversionFeatured
-              ? 'border-2 border-[#0e824c]/40 bg-gradient-to-br from-emerald-50/95 to-white shadow-[0_12px_40px_rgba(14,130,76,0.12)] hover:shadow-[0_16px_48px_rgba(14,130,76,0.16)] transition-shadow duration-200'
+              ? 'border-2 border-[color-mix(in_srgb,var(--color-cta)_40%,transparent)] bg-gradient-to-br from-emerald-50/95 to-white shadow-[0_12px_40px_rgba(22,202,146,0.14)] hover:shadow-[0_16px_48px_rgba(22,202,146,0.2)] transition-shadow duration-200'
               : 'bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-200',
           ].join(' ')}
         >
           <div
             className={[
               'absolute top-0 left-0 z-10 flex h-9 w-9 items-center justify-center rounded-br',
-              conversionFeatured ? 'bg-[#0e824c]' : '!bg-[var(--color-primary)]',
+              conversionFeatured ? 'bg-[var(--color-cta)]' : '!bg-[var(--color-primary)]',
             ].join(' ')}
           >
             <span className="text-base font-bold leading-none text-white">{rank}</span>
@@ -857,7 +858,7 @@ export default function LenderCard({
                 <div className="mb-2 flex min-h-[2.625rem] flex-wrap items-center gap-x-3 gap-y-1.5">
                   {conversionFeatured ? (
                     <>
-                      <span className="inline-flex items-center rounded-full border border-[#0e824c]/25 bg-[#0e824c]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0e824c]">
+                      <span className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,var(--color-cta)_28%,transparent)] bg-[color-mix(in_srgb,var(--color-cta)_10%,transparent)] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[var(--color-cta-hover)]">
                         Best overall
                       </span>
                       <span className="text-xs font-medium text-slate-600">
@@ -888,7 +889,7 @@ export default function LenderCard({
                       key={`conv-${bi}-${b.type}`}
                       className="flex items-start gap-2 text-sm text-slate-800 min-w-0"
                     >
-                      <Check className="w-4 h-4 text-[#0e824c] mt-0.5 flex-shrink-0" aria-hidden />
+                      <Check className="w-4 h-4 text-[var(--color-cta)] mt-0.5 flex-shrink-0" aria-hidden />
                       {b.type === 'loanAmount' ? (
                         <span className="leading-snug">
                           <span className="font-medium">Loan amount:</span> {b.amount}
@@ -906,7 +907,7 @@ export default function LenderCard({
               <div className="flex flex-col items-stretch justify-start gap-3 pt-1 lg:self-stretch lg:border-l lg:border-slate-200/80 lg:pt-2 lg:pl-6 xl:pl-8">
                 <button
                   type="button"
-                  className="group w-full min-h-[48px] px-5 rounded-lg bg-[#0e824c] text-white text-[15px] font-bold shadow-[0_4px_14px_rgba(14,130,76,0.35)] hover:bg-[#0c7344] hover:shadow-[0_6px_20px_rgba(14,130,76,0.42)] active:translate-y-px transition-all duration-200 flex items-center justify-center gap-1.5"
+                  className="group w-full min-h-[48px] px-5 rounded-lg bg-[var(--color-cta)] text-white text-[15px] font-bold shadow-[var(--color-cta-shadow)] hover:bg-[var(--color-cta-hover)] hover:shadow-[var(--color-cta-shadow-hover)] active:bg-[var(--color-cta-active)] active:shadow-[var(--color-cta-shadow-active)] active:translate-y-px transition-all duration-200 flex items-center justify-center gap-1.5"
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId, {
                       comparisonDesignVariant,
@@ -928,7 +929,7 @@ export default function LenderCard({
                 {lender.websiteUrl ? (
                   <button
                     type="button"
-                    className="text-xs text-slate-600 hover:text-[#0e824c] underline underline-offset-2 text-center mt-1 pt-3 border-t border-slate-200/90 leading-normal"
+                    className="text-xs text-slate-600 hover:text-[var(--color-cta-hover)] underline underline-offset-2 text-center mt-1 pt-3 border-t border-slate-200/90 leading-normal"
                     onClick={(e) => {
                       e.preventDefault();
                       if (onReadMore) {
@@ -952,7 +953,7 @@ export default function LenderCard({
 
             <details className="mt-6 pt-5 border-t border-slate-200/90">
               <summary className="cursor-pointer list-none flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
-                <span className="text-[#0e824c] inline-block font-bold" aria-hidden>
+                <span className="text-[var(--color-cta)] inline-block font-bold" aria-hidden>
                   +
                 </span>
                 View requirements
@@ -1231,17 +1232,16 @@ export default function LenderCard({
                       isV2
                         ? 'group w-full text-white font-extrabold tracking-wide transition-all rounded-none'
                         : 'text-white font-semibold transition-all rounded-none group',
-                      isV2
-                        ? '!bg-[#142c3f] hover:!bg-[#102538] active:!bg-[#0e2030]'
-                        : '!bg-[var(--color-primary-dark)] hover:!bg-[var(--color-primary-darker)] active:!bg-[var(--color-primary-darker)]',
+                      '!bg-[var(--color-cta)] hover:!bg-[var(--color-cta-hover)] active:!bg-[var(--color-cta-active)]',
+                      '!shadow-[var(--color-cta-shadow)] hover:!shadow-[var(--color-cta-shadow-hover)] active:!shadow-[var(--color-cta-shadow-active)]',
                       'transform-gpu will-change-transform',
                       'duration-200 ease-out',
                       isV2
-                        ? 'hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0'
-                        : 'hover:-translate-y-0.5 hover:scale-[1.02]',
+                        ? 'hover:-translate-y-0.5 active:translate-y-0'
+                        : 'hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.99]',
                       isV2
-                        ? 'h-14 text-[16px] whitespace-nowrap shadow-[0_18px_34px_rgba(10,20,30,0.22)]'
-                        : 'hover:brightness-95 hover:shadow-lg active:translate-y-0 active:scale-[0.99] active:brightness-90 h-10 w-[95%] text-sm whitespace-nowrap',
+                        ? 'h-14 text-[16px] whitespace-nowrap'
+                        : 'hover:brightness-95 active:brightness-90 h-10 w-[95%] text-sm whitespace-nowrap',
                     ].join(' ')}
                     style={
                       isV2

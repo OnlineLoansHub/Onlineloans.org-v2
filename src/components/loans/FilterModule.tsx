@@ -332,7 +332,7 @@ export default function FilterModule({
               <div className="px-5 py-4 border-t border-slate-200 flex-shrink-0 bg-slate-50/50">
                 <Button
                   variant="primary"
-                  className="w-full text-white font-semibold py-3 rounded shadow-sm !bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]"
+                  className="w-full text-white font-semibold py-3 rounded shadow-sm"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
                   Show {resultCount} Results

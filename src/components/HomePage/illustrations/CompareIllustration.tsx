@@ -15,7 +15,7 @@ export function CompareIllustration() {
         width="40"
         height="50"
         rx="3"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2"
         fill="none"
       />
@@ -25,7 +25,7 @@ export function CompareIllustration() {
         width="40"
         height="10"
         rx="3"
-        fill="#235675"
+        fill="#0A2540"
         fillOpacity="0.1"
       />
 
@@ -36,7 +36,7 @@ export function CompareIllustration() {
         width="40"
         height="55"
         rx="3"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2"
         fill="none"
       />
@@ -46,15 +46,15 @@ export function CompareIllustration() {
         width="40"
         height="10"
         rx="3"
-        fill="#235675"
+        fill="#0A2540"
         fillOpacity="0.15"
       />
 
       {/* Comparison arrows - bidirectional */}
-      <path d="M55 55 L65 55" stroke="#235675" strokeWidth="2" strokeLinecap="round" />
+      <path d="M55 55 L65 55" stroke="#0A2540" strokeWidth="2" strokeLinecap="round" />
       <path
         d="M60 50 L65 55 L60 60"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -67,7 +67,7 @@ export function CompareIllustration() {
         y1="60"
         x2="90"
         y2="60"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeDasharray="2 2"
         strokeOpacity="0.4"
@@ -79,7 +79,7 @@ export function CompareIllustration() {
         y1="52"
         x2="42"
         y2="52"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -88,7 +88,7 @@ export function CompareIllustration() {
         y1="60"
         x2="38"
         y2="60"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -99,7 +99,7 @@ export function CompareIllustration() {
         y1="47"
         x2="102"
         y2="47"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -108,7 +108,7 @@ export function CompareIllustration() {
         y1="55"
         x2="100"
         y2="55"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -117,7 +117,7 @@ export function CompareIllustration() {
         y1="63"
         x2="98"
         y2="63"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />

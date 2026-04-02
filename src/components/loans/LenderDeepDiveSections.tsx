@@ -353,7 +353,7 @@ export default function LenderDeepDiveSections({ lenders }: { lenders: Brand[] }
               <div className="mt-6 pt-5 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
                 <Button
                   variant="primary"
-                  className="text-white font-semibold rounded-none sm:order-2 !bg-[var(--color-primary)] hover:!bg-[var(--color-primary-dark)] active:!bg-[var(--color-primary-darker)]"
+                  className="text-white font-semibold rounded-none sm:order-2"
                   style={{ borderRadius: 0 }}
                   onClick={() => {
                     trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });

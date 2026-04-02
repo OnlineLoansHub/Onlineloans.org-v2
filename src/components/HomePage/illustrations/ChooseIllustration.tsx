@@ -11,7 +11,7 @@ export function ChooseIllustration() {
       {/* Shield badge */}
       <path
         d="M60 25 L45 30 L45 50 C45 65 55 75 60 85 C65 75 75 65 75 50 L75 30 Z"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2"
         fill="none"
       />
@@ -19,7 +19,7 @@ export function ChooseIllustration() {
       {/* Checkmark inside shield */}
       <path
         d="M52 50 L58 56 L68 44"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -33,7 +33,7 @@ export function ChooseIllustration() {
         width="60"
         height="40"
         rx="3"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="2"
         fill="none"
       />
@@ -43,7 +43,7 @@ export function ChooseIllustration() {
         width="60"
         height="12"
         rx="3"
-        fill="#235675"
+        fill="#0A2540"
         fillOpacity="0.1"
       />
 
@@ -53,7 +53,7 @@ export function ChooseIllustration() {
         y1="88"
         x2="82"
         y2="88"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -62,7 +62,7 @@ export function ChooseIllustration() {
         y1="96"
         x2="75"
         y2="96"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />
@@ -71,7 +71,7 @@ export function ChooseIllustration() {
         y1="104"
         x2="70"
         y2="104"
-        stroke="#235675"
+        stroke="#0A2540"
         strokeWidth="1.5"
         strokeOpacity="0.3"
       />

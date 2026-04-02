@@ -14,9 +14,9 @@
   transition: all 0.2s;
 
   &.primary {
-    color: var(--color-white);
-    background-color: var(--color-primary);
-    box-shadow: 0 10px 20px color-mix(in srgb, var(--color-primary) 30%, transparent);
+    color: #ffffff;
+    background-color: var(--color-cta);
+    box-shadow: var(--color-cta-shadow);
     transition:
       background-color 0.2s ease,
       box-shadow 0.2s ease,
@@ -41,27 +41,27 @@
     }
 
     &:hover {
-      background-color: var(--color-primary-dark);
-      box-shadow: 0 12px 22px color-mix(in srgb, var(--color-primary-dark) 34%, transparent);
+      background-color: var(--color-cta-hover);
+      box-shadow: var(--color-cta-shadow-hover);
     }
 
     &:active {
-      background-color: var(--color-primary-darker);
+      background-color: var(--color-cta-active);
       transform: translateY(1px);
-      box-shadow: 0 6px 14px color-mix(in srgb, var(--color-primary-darker) 32%, transparent);
+      box-shadow: var(--color-cta-shadow-active);
     }
   }
 
   &.secondary {
-    color: var(--color-primary);
+    color: var(--color-cta-hover);
 
     &:hover {
-      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+      background-color: color-mix(in srgb, var(--color-cta) 14%, transparent);
     }
 
     &:active {
       color: var(--color-white);
-      background-color: var(--color-primary);
+      background-color: var(--color-cta-hover);
     }
   }
 

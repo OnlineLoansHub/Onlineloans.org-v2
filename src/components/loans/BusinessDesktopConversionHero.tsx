@@ -35,8 +35,9 @@ export function BusinessLoanPrimaryCta({
         type="button"
         disabled={!lender}
         className={[
-          'group w-full min-h-[48px] px-6 rounded-md bg-[#0e824c] text-white text-base font-bold',
-          'shadow-[0_4px_16px_rgba(14,130,76,0.38)] hover:bg-[#0c7344] hover:shadow-[0_6px_22px_rgba(14,130,76,0.45)]',
+          'group w-full min-h-[48px] px-6 rounded-md bg-[var(--color-cta)] text-white text-base font-bold',
+          'shadow-[var(--color-cta-shadow)] hover:bg-[var(--color-cta-hover)] hover:shadow-[var(--color-cta-shadow-hover)]',
+          'active:bg-[var(--color-cta-active)] active:shadow-[var(--color-cta-shadow-active)]',
           'active:translate-y-px transition-all duration-200 disabled:opacity-45 disabled:pointer-events-none',
           'flex items-center justify-center gap-1.5',
         ].join(' ')}
