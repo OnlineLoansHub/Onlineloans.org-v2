@@ -271,6 +271,15 @@
   }
 }
 
+/* Scroll target from Fund v4 mobile hero “Compare top lenders” */
+#comparison-lenders {
+  scroll-margin-top: 0.75rem;
+
+  @media (min-width: 1024px) {
+    scroll-margin-top: 4.5rem;
+  }
+}
+
 .mainContent {
   max-width: var(--max-container-width);
   margin-left: auto;
@@ -292,6 +301,13 @@
     margin-top: -3.75rem;
     position: relative;
     z-index: 1;
+  }
+}
+
+/* Breathing room after full-bleed Fund v4 hero on small screens (beats `.mainContent` padding-top) */
+.mainContent.mainContentAfterFundV4Hero {
+  @media (width <= 1023px) {
+    padding-top: 1.25rem;
   }
 }
 

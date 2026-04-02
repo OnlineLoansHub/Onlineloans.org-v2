@@ -16,6 +16,7 @@ import {
   BusinessLoanPrimaryCta,
 } from '@/components/loans/BusinessDesktopConversionHero';
 import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
+import { getComparisonHeroFundV4Props } from '@/lib/comparisonFundV4Hero';
 import { getComparisonConversionHeroCopy } from '@/lib/comparisonConversionHeroCopy';
 import type { Brand } from '@/data/brands';
 import type { ProductTypeConfig } from '@/data/productTypes';
@@ -86,18 +87,10 @@ export function ProductComparisonPageDesktop({
   const comparisonSubtitleSecondaryV2 = isFundHero
     ? undefined
     : comparisonSubtitleSecondary;
-  const fundV4Title =
-    productConfig.id === 'business-loans'
-      ? `Best Business Loans of ${comparisonLendersForMonthYear}`
-      : `Best ${productConfig.comparisonHeroHighlight ?? productConfig.displayName} of ${comparisonLendersForMonthYear}`;
-  const fundV4Tagline =
-    productConfig.id === 'business-loans'
-      ? 'Find funding that fits your business'
-      : 'Apply in minutes. Get funded fast.';
-  const fundV4ExploreBlurb =
-    productConfig.id === 'business-loans'
-      ? 'Explore the top business lenders and compare offers to find financing that fits your goals—all in one place.'
-      : undefined;
+  const fundV4HeroProps = useMemo(
+    () => getComparisonHeroFundV4Props(productConfig, lastUpdated),
+    [productConfig, lastUpdated]
+  );
   const scrollToLender = useLenderDeepDiveScroll();
 
   const moreOptionsTitle = heroCopy.moreOptionsTitle ?? 'More financing options';
@@ -161,23 +154,7 @@ export function ProductComparisonPageDesktop({
           heroCopy={heroCopy}
         />
       ) : isFundHeroV4 ? (
-        <ComparisonHeroFundV4
-          title={fundV4Title}
-          tagline={fundV4Tagline}
-          validAsOf={lastUpdated}
-          exploreBlurb={productConfig.id === 'business-loans' ? undefined : fundV4ExploreBlurb}
-          benefitChips={
-            productConfig.id === 'business-loans'
-              ? [
-                  'No impact to credit score',
-                  'Compare lenders in minutes',
-                  'From $5,000 to $1M+',
-                ]
-              : undefined
-          }
-          showTrustBadges
-          badgeImagePath={productConfig.hero.badgeImagePath}
-        />
+        <ComparisonHeroFundV4 {...fundV4HeroProps} />
       ) : (
         <Hero
           heroConfig={productConfig.hero}

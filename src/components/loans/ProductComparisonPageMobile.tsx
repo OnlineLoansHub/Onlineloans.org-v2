@@ -1,6 +1,8 @@
+import { useMemo } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button/Button';
 import Hero from '@/components/loans/Hero';
+import ComparisonHeroFundV4 from '@/components/loans/ComparisonHeroFundV4';
 import LenderCard from '@/components/loans/LenderCard';
 import LenderDeepDiveSections, {
   useLenderDeepDiveScroll,
@@ -13,6 +15,8 @@ import CrossPromo from '@/components/loans/CrossPromo';
 import { FAQAccordion } from '@/components/FAQAccordion/FAQAccordion';
 import type { Brand } from '@/data/brands';
 import type { ProductTypeConfig } from '@/data/productTypes';
+import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantContext';
+import { getComparisonHeroFundV4Props } from '@/lib/comparisonFundV4Hero';
 import styles from '@/app/business-loan/best-business-loans/page.module.scss';
 
 interface FAQItem {
@@ -59,6 +63,12 @@ export function ProductComparisonPageMobile({
   showAdvertisingDisclosure,
   advertisingDisclosureText,
 }: ProductComparisonPageMobileProps) {
+  const designVariant = useComparisonDesignVariant();
+  const isFundHeroV4 = designVariant === '4';
+  const fundV4HeroProps = useMemo(
+    () => getComparisonHeroFundV4Props(productConfig, lastUpdated),
+    [productConfig, lastUpdated]
+  );
   const comparisonMonth = new Date().toLocaleString('en-US', { month: 'long' });
   const comparisonTitlePrefix = 'Best ';
   const comparisonTitleHighlightText =
@@ -70,23 +80,36 @@ export function ProductComparisonPageMobile({
 
   return (
     <>
-      {showAdvertisingDisclosure && (
+      {showAdvertisingDisclosure && !isFundHeroV4 ? (
         <div className={styles.advertisingDisclosure}>
           <p className={styles.disclosureText}>{advertisingDisclosureText}</p>
         </div>
+      ) : null}
+
+      {isFundHeroV4 ? (
+        <ComparisonHeroFundV4
+          {...fundV4HeroProps}
+          primaryCta={{ label: 'Compare top lenders', scrollToId: 'comparison-lenders' }}
+        />
+      ) : (
+        <Hero
+          heroConfig={productConfig.hero}
+          validDate={lastUpdated}
+          comparisonTitlePrefix={comparisonTitlePrefix}
+          comparisonTitleHighlightText={comparisonTitleHighlightText}
+          comparisonTitleSuffix={comparisonTitleSuffix}
+          comparisonSubtitleSecondary={comparisonSubtitleSecondary}
+          showTrustBadges={false}
+        />
       )}
 
-      <Hero
-        heroConfig={productConfig.hero}
-        validDate={lastUpdated}
-        comparisonTitlePrefix={comparisonTitlePrefix}
-        comparisonTitleHighlightText={comparisonTitleHighlightText}
-        comparisonTitleSuffix={comparisonTitleSuffix}
-        comparisonSubtitleSecondary={comparisonSubtitleSecondary}
-        showTrustBadges={false}
-      />
-
-      <section className={styles.mainContent}>
+      <section
+        className={
+          isFundHeroV4
+            ? `${styles.mainContent} ${styles.mainContentAfterFundV4Hero}`
+            : styles.mainContent
+        }
+      >
         {/* Mobile Filter and Sort Row */}
         <div className={styles.mobileControlsRow}>
           <SortControl sortBy={sortBy} onSortChange={onSortChange} />
@@ -107,7 +130,7 @@ export function ProductComparisonPageMobile({
 
         <div className={styles.contentWrapper}>
           <main className={styles.mainArea}>
-            <div className={styles.lenderCardsContainer}>
+            <div className={styles.lenderCardsContainer} id="comparison-lenders">
               {displayedLenders.length > 0 ? (
                 displayedLenders.map((lender, index) => (
                   <LenderCard

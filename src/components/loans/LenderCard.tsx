@@ -560,6 +560,7 @@ export default function LenderCard({
     comparisonDesignVariant === '2' ||
     comparisonDesignVariant === 'default' ||
     comparisonDesignVariant === '4';
+  const isMobileFundV4 = comparisonDesignVariant === '4';
   const lenderNameKey = lender.name.trim().toLowerCase();
   const isLendzi = lender.id === 1 || lenderNameKey === 'lendzi';
   const isRokFinancial = lenderNameKey === 'rok financial';
@@ -642,132 +643,200 @@ export default function LenderCard({
           <span className="text-white font-bold text-sm">{rank}</span>
         </div>
 
-        {/* Main Content - Two Column Layout */}
-        <div className="p-4 pt-10 flex gap-3 items-stretch">
-          {/* Left Column */}
-          <div className="flex-[1.5] flex flex-col items-center min-h-0">
-            {/* Logo (top) */}
-            <div className="w-full h-14 flex justify-center flex-none">
-              {BrandWordmark({ lender, size: 'mobile' }) ? (
-                <div
-                  className={[
-                    'w-full h-full flex justify-center',
-                    mobileLogoCentered ? 'items-end pb-1' : 'items-start pt-1',
-                  ].join(' ')}
-                >
-                  <BrandWordmark lender={lender} size="mobile" />
-                </div>
-              ) : lender.logo ? (
-                <div className="relative w-full h-14">
-                  <Image
-                    src={lender.logo}
-                    alt={lender.name}
-                    fill
-                    className={['object-contain'].join(' ')}
-                    sizes="(max-width: 768px) 100px, 150px"
-                    priority={rank <= 3}
-                    loading={rank <= 3 ? 'eager' : 'lazy'}
-                    fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
-                  />
-                </div>
-              ) : (
-                <span className="font-bold text-black text-base text-center">{lender.name}</span>
-              )}
-            </div>
-
-            {/* Fixed whitespace between logo and amount */}
-            <div className="h-6" aria-hidden />
-
-            {/* Amount pinned to top of its section */}
-            <div className="w-full flex-none">
-              {lender.amount && amountLabel && (
-                <div className="text-center lg:hidden">
-                  <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
-                  <p className="text-2xl font-bold text-black">{lender.amount}</p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Vertical Separator */}
-          <div className="w-px bg-slate-200" />
-
-          {/* Right Column */}
-          <div className="flex-[1.2] flex flex-col items-center min-w-0">
-            {/* Score (top) */}
-            <div className="flex flex-col items-center gap-1.5">
-              <div className="text-4xl font-bold text-black leading-none">
-                {lender.ourScore.toFixed(1)}
+        {/* Main Content — v4 mobile: full-width CTA row below logo/score; legacy: two-column + CTA in right rail */}
+        <div
+          className={
+            isMobileFundV4
+              ? 'p-4 pt-10 flex flex-col gap-4'
+              : 'p-4 pt-10 flex gap-3 items-stretch'
+          }
+        >
+          <div
+            className={
+              isMobileFundV4 ? 'flex gap-3 items-stretch w-full min-w-0' : 'contents'
+            }
+          >
+            {/* Left Column */}
+            <div className="flex-[1.5] flex flex-col items-center min-h-0 min-w-0">
+              {/* Logo (top) */}
+              <div className="w-full h-14 flex justify-center flex-none">
+                {BrandWordmark({ lender, size: 'mobile' }) ? (
+                  <div
+                    className={[
+                      'w-full h-full flex justify-center',
+                      mobileLogoCentered ? 'items-end pb-1' : 'items-start pt-1',
+                    ].join(' ')}
+                  >
+                    <BrandWordmark lender={lender} size="mobile" />
+                  </div>
+                ) : lender.logo ? (
+                  <div className="relative w-full h-14">
+                    <Image
+                      src={lender.logo}
+                      alt={lender.name}
+                      fill
+                      className={['object-contain'].join(' ')}
+                      sizes="(max-width: 768px) 100px, 150px"
+                      priority={rank <= 3}
+                      loading={rank <= 3 ? 'eager' : 'lazy'}
+                      fetchPriority={rank === 1 ? 'high' : rank <= 3 ? 'auto' : 'low'}
+                    />
+                  </div>
+                ) : (
+                  <span className="font-bold text-black text-base text-center">{lender.name}</span>
+                )}
               </div>
 
-              <div className="flex items-center gap-0">
-                {[...Array(5)].map((_, i) => {
-                  const starValue = (lender.ourScore / 10) * 5;
-                  const isFilled = i < Math.floor(starValue);
+              {/* Fixed whitespace between logo and amount */}
+              <div className="h-6" aria-hidden />
 
-                  return (
-                    <svg
-                      key={i}
-                      className="w-4 h-4"
-                      viewBox="0 0 24 24"
-                      fill={isFilled ? '#00B67A' : '#dcdce6'}
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  );
-                })}
+              {/* Amount pinned to top of its section */}
+              <div className="w-full flex-none">
+                {lender.amount && amountLabel && (
+                  <div className="text-center lg:hidden">
+                    <p className="text-xs text-black mb-1 font-medium">{amountLabel}</p>
+                    <p className="text-2xl font-bold text-black">{lender.amount}</p>
+                  </div>
+                )}
               </div>
+            </div>
 
-              <div className="flex items-center gap-1">
-                <p className="text-xs text-black">Our score</p>
-                <div className="relative group">
-                  <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
-                    <Info className="w-3.5 h-3.5 text-black" />
-                  </button>
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
-                    Our score combines Trustpilot ratings, brand reputation, and popularity to give
-                    you a comprehensive view of each lender's quality and reliability.
+            {/* Vertical Separator */}
+            <div className="w-px shrink-0 self-stretch bg-slate-200" />
+
+            {/* Right Column — score (+ legacy CTA in-rail); v4: vertically center ranking vs logo/amount column */}
+            <div
+              className={[
+                'flex-[1.2] flex flex-col items-center min-w-0',
+                isMobileFundV4 ? 'self-stretch justify-center' : 'min-h-0',
+              ].join(' ')}
+            >
+              {/* Score */}
+              <div className="flex flex-col items-center gap-1.5 shrink-0">
+                <div className="text-4xl font-bold text-black leading-none">
+                  {lender.ourScore.toFixed(1)}
+                </div>
+
+                <div className="flex items-center gap-0">
+                  {[...Array(5)].map((_, i) => {
+                    const starValue = (lender.ourScore / 10) * 5;
+                    const isFilled = i < Math.floor(starValue);
+
+                    return (
+                      <svg
+                        key={i}
+                        className="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill={isFilled ? '#00B67A' : '#dcdce6'}
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    );
+                  })}
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <p className="text-xs text-black">Our score</p>
+                  <div className="relative group">
+                    <button className="rounded-full p-0.5 hover:bg-slate-100 transition-colors">
+                      <Info className="w-3.5 h-3.5 text-black" />
+                    </button>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 text-white text-xs rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 max-w-xs">
+                      Our score combines Trustpilot ratings, brand reputation, and popularity to give
+                      you a comprehensive view of each lender's quality and reliability.
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* CTA pinned to bottom (align with left amount) */}
-            <div className="mt-auto w-full flex flex-col items-center gap-2 pb-1">
+              {!isMobileFundV4 ? (
+                <div className="mt-auto w-full flex flex-col items-center gap-2 pb-1">
+                  <Button
+                    variant="primary"
+                    className={[
+                      'w-[95%] self-center text-white font-semibold group rounded-none',
+                      '!bg-[var(--color-cta)] hover:!bg-[var(--color-cta-hover)] active:!bg-[var(--color-cta-active)]',
+                      '!shadow-[var(--color-cta-shadow)] hover:!shadow-[var(--color-cta-shadow-hover)] active:!shadow-[var(--color-cta-shadow-active)]',
+                    ].join(' ')}
+                    style={{
+                      padding: '10px 11px',
+                      borderRadius: 0,
+                      fontSize: '14px',
+                      height: 'auto',
+                      fontWeight: '700',
+                    }}
+                    onClick={() => {
+                      trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
+                      gtag_report_conversion();
+                      window.open(processedCtaUrl || '#', '_blank');
+                    }}
+                  >
+                    <span className="inline-flex items-center">
+                      EXPLORE
+                      <ChevronsRight
+                        className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
+                        strokeWidth={2.5}
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Button>
+
+                  {lender.websiteUrl ? (
+                    <a
+                      href="#"
+                      className="text-[11px] text-black hover:underline block text-center"
+                      role="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (onReadMore) {
+                          onReadMore(lender);
+
+                          return;
+                        }
+
+                        trackBrandClick(lender.name, pageName, impressionId, {
+                          comparisonDesignVariant,
+                        });
+                        gtag_report_conversion();
+                        window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                      }}
+                    >
+                      Or read more
+                    </a>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </div>
+
+          {isMobileFundV4 ? (
+            <div className="flex w-full min-w-0 flex-col items-stretch gap-2 pb-1">
               <Button
                 variant="primary"
                 className={[
-                  'w-[95%] text-white font-semibold group rounded-none',
-                  '!bg-[var(--color-cta)] hover:!bg-[var(--color-cta-hover)] active:!bg-[var(--color-cta-active)]',
-                  '!shadow-[var(--color-cta-shadow)] hover:!shadow-[var(--color-cta-shadow-hover)] active:!shadow-[var(--color-cta-shadow-active)]',
+                  cardStyles.desktopCardCta,
+                  'group !flex w-full max-w-full min-h-[48px] text-white transition-[transform,box-shadow] duration-200 ease-out',
+                  'transform-gpu will-change-transform hover:-translate-y-0.5',
                 ].join(' ')}
-                style={{
-                  padding: '10px 11px',
-                  borderRadius: 0,
-                  fontSize: '14px',
-                  height: 'auto',
-                  fontWeight: '700',
-                }}
+                style={{ margin: 0, border: 0, width: '100%', maxWidth: '100%' }}
                 onClick={() => {
                   trackBrandClick(lender.name, pageName, impressionId, { comparisonDesignVariant });
                   gtag_report_conversion();
                   window.open(processedCtaUrl || '#', '_blank');
                 }}
               >
-                <span className="inline-flex items-center">
-                  EXPLORE
-                  <ChevronsRight
-                    className="ml-1 w-[16px] h-[16px] transition-transform duration-300 group-hover:translate-x-1"
-                    strokeWidth={2.5}
-                    aria-hidden="true"
-                  />
-                </span>
+                <span className="text-center leading-snug text-balance">See if you qualify</span>
+                <ChevronsRight
+                  className="h-[1.125rem] w-[1.125rem] shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                />
               </Button>
 
               {lender.websiteUrl ? (
                 <a
                   href="#"
-                  className="text-[11px] text-black hover:underline"
+                  className="block text-center text-sm text-slate-500 hover:text-black"
                   role="button"
                   onClick={(e) => {
                     e.preventDefault();
@@ -788,7 +857,7 @@ export default function LenderCard({
                 </a>
               ) : null}
             </div>
-          </div>
+          ) : null}
         </div>
 
         {/* Footer Strip - Only for Rank 1 (mobile) */}

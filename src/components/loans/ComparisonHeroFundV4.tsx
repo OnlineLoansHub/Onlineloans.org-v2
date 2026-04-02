@@ -3,6 +3,12 @@ import Link from 'next/link';
 import { URL_CONFIG } from '@/lib/urlConfig';
 import styles from './ComparisonHeroFundV4.module.scss';
 
+export interface ComparisonHeroFundV4PrimaryCta {
+  label: string;
+  /** Element `id` to scroll into view (e.g. `comparison-lenders`). */
+  scrollToId: string;
+}
+
 export interface ComparisonHeroFundV4Props {
   title: string;
   tagline: string;
@@ -17,6 +23,8 @@ export interface ComparisonHeroFundV4Props {
   benefitChips?: string[];
   showTrustBadges?: boolean;
   badgeImagePath?: string;
+  /** In-hero CTA (e.g. mobile v4: scroll to lender list). */
+  primaryCta?: ComparisonHeroFundV4PrimaryCta;
 }
 
 export default function ComparisonHeroFundV4({
@@ -27,6 +35,7 @@ export default function ComparisonHeroFundV4({
   benefitChips,
   showTrustBadges = false,
   badgeImagePath,
+  primaryCta,
 }: ComparisonHeroFundV4Props) {
   const hasBenefits = Boolean(benefitChips?.length);
   const showExplore = Boolean(exploreBlurb) && !hasBenefits;
@@ -118,6 +127,22 @@ export default function ComparisonHeroFundV4({
                   loading="eager"
                   fetchPriority="high"
                 />
+              </div>
+            ) : null}
+
+            {primaryCta ? (
+              <div className={styles.primaryCtaWrap}>
+                <button
+                  type="button"
+                  className={styles.primaryCta}
+                  onClick={() => {
+                    document
+                      .getElementById(primaryCta.scrollToId)
+                      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }}
+                >
+                  {primaryCta.label}
+                </button>
               </div>
             ) : null}
           </div>
