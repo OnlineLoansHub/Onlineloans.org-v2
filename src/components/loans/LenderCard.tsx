@@ -13,6 +13,7 @@ import { useComparisonDesignVariant } from '@/contexts/ComparisonDesignVariantCo
 import { trackBrandClick, getPageNameFromRoute } from '@/lib/impression';
 import { gtag_report_conversion } from '@/lib/googleAds';
 import { processCtaUrl } from '@/lib/processCtaUrl';
+import cardStyles from './LenderCard.module.scss';
 
 interface LenderCardProps {
   lender: Brand;
@@ -823,7 +824,7 @@ export default function LenderCard({
           </div>
 
           <div className="px-6 pb-6 pt-8 sm:px-8 lg:pt-9">
-            <div className="grid grid-cols-[minmax(200px,230px)_minmax(0,1fr)_280px] items-start gap-x-8 gap-y-6 xl:grid-cols-[minmax(210px,240px)_minmax(0,1fr)_300px] xl:gap-x-12">
+            <div className="grid grid-cols-[minmax(200px,230px)_minmax(0,1fr)_280px] items-stretch gap-x-8 gap-y-6 xl:grid-cols-[minmax(210px,240px)_minmax(0,1fr)_300px] xl:gap-x-12">
               <div className="flex min-h-[4.5rem] items-center justify-center pt-1">
                 {BrandWordmark({ lender, size: 'desktop' }) ? (
                   <div className="w-[220px] h-[72px] flex items-center justify-center">
@@ -904,28 +905,36 @@ export default function LenderCard({
                 </ul>
               </div>
 
-              <div className="flex flex-col items-stretch justify-start gap-3 pt-1 lg:self-stretch lg:border-l lg:border-slate-200/80 lg:pt-2 lg:pl-6 xl:pl-8">
-                <button
-                  type="button"
-                  className="group w-full min-h-[48px] px-5 rounded-lg bg-[var(--color-cta)] text-white text-[15px] font-bold shadow-[var(--color-cta-shadow)] hover:bg-[var(--color-cta-hover)] hover:shadow-[var(--color-cta-shadow-hover)] active:bg-[var(--color-cta-active)] active:shadow-[var(--color-cta-shadow-active)] active:translate-y-px transition-all duration-200 flex items-center justify-center gap-1.5"
-                  onClick={() => {
-                    trackBrandClick(lender.name, pageName, impressionId, {
-                      comparisonDesignVariant,
-                    });
-                    gtag_report_conversion();
-                    window.open(processedCtaUrl || '#', '_blank');
-                  }}
-                >
-                  Check your rates
-                  <ChevronsRight
-                    className="w-[1.1em] h-[1.1em] shrink-0 transition-transform group-hover:translate-x-0.5"
-                    strokeWidth={2.5}
-                    aria-hidden
-                  />
-                </button>
-                <p className="text-center text-[11px] text-slate-500 leading-snug px-0.5">
-                  Takes 60 seconds · No credit impact
-                </p>
+              <div className="flex h-full min-h-0 w-full min-w-0 flex-col items-stretch justify-center gap-3 lg:border-l lg:border-slate-200/80 lg:pl-6 xl:pl-8">
+                <div className="mx-auto flex w-full max-w-[208px] flex-col gap-1.5">
+                  <button
+                    type="button"
+                    className={[
+                      cardStyles.desktopCardCta,
+                      'group w-full text-white transition-[transform,box-shadow] duration-200 ease-out',
+                      'transform-gpu will-change-transform',
+                      'hover:-translate-y-0.5',
+                    ].join(' ')}
+                    style={{ margin: 0, border: 0 }}
+                    onClick={() => {
+                      trackBrandClick(lender.name, pageName, impressionId, {
+                        comparisonDesignVariant,
+                      });
+                      gtag_report_conversion();
+                      window.open(processedCtaUrl || '#', '_blank');
+                    }}
+                  >
+                    <span className="whitespace-nowrap">Check your rates</span>
+                    <ChevronsRight
+                      className="h-[1.125rem] w-[1.125rem] shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                      strokeWidth={2.5}
+                      aria-hidden
+                    />
+                  </button>
+                  <p className="text-center text-[11px] text-slate-500 leading-snug">
+                    Takes 60 seconds · No credit impact
+                  </p>
+                </div>
                 {lender.websiteUrl ? (
                   <button
                     type="button"
@@ -1017,7 +1026,7 @@ export default function LenderCard({
             <div
               className={
                 isV2
-                  ? 'grid grid-cols-[240px_minmax(0,1fr)_260px] gap-x-10 gap-y-6 items-start'
+                  ? 'grid grid-cols-[240px_minmax(0,1fr)_260px] gap-x-10 gap-y-6 items-stretch'
                   : 'grid grid-cols-[220px_1fr_240px] gap-6'
               }
             >
@@ -1179,12 +1188,12 @@ export default function LenderCard({
               <div
                 className={
                   isV2
-                    ? 'flex h-full flex-col items-center justify-start gap-4 pt-1'
-                    : 'flex h-full flex-col items-center justify-center gap-4'
+                    ? 'flex h-full min-h-0 w-full min-w-0 flex-col items-stretch justify-center gap-4'
+                    : 'flex h-full w-full min-w-0 flex-col items-stretch justify-center gap-4'
                 }
               >
                 {!isV2 ? (
-                  <div className="flex items-start justify-center gap-2 w-full">
+                  <div className="flex w-full items-start justify-center gap-2 self-center">
                     <div className="text-4xl font-bold text-black leading-none">
                       {lender.ourScore.toFixed(1)}
                     </div>
@@ -1206,93 +1215,75 @@ export default function LenderCard({
                   </div>
                 ) : null}
 
-                <div
-                  className={
-                    isV2
-                      ? 'w-[220px] self-center flex flex-col items-center gap-3'
-                      : 'w-[200px] self-center flex flex-col items-center gap-2'
-                  }
-                >
+                <div className="flex w-full max-w-full flex-col gap-2">
                   {isV2 ? (
-                    <div className="flex flex-col items-center gap-1 text-center">
-                      <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-black">
-                        <Star className="w-4 h-4 fill-emerald-500 text-emerald-500" aria-hidden />
+                    <div className="flex flex-col items-center gap-0.5 text-center">
+                      <div className="inline-flex items-center gap-1 text-xs font-semibold text-slate-800">
+                        <Star className="h-3 w-3 fill-emerald-500 text-emerald-500" aria-hidden />
                         Trustpilot
                       </div>
                       {typeof lender.reviewCount === 'number' ? (
-                        <div className="text-sm text-slate-500 leading-none">
+                        <div className="text-[11px] leading-tight text-slate-500">
                           (Over {Math.max(1, Math.round(lender.reviewCount / 1000))}k Reviews)
                         </div>
                       ) : null}
                     </div>
                   ) : null}
-                  <Button
-                    variant="primary"
-                    className={[
-                      isV2
-                        ? 'group w-full text-white font-extrabold tracking-wide transition-all rounded-none'
-                        : 'text-white font-semibold transition-all rounded-none group',
-                      '!bg-[var(--color-cta)] hover:!bg-[var(--color-cta-hover)] active:!bg-[var(--color-cta-active)]',
-                      '!shadow-[var(--color-cta-shadow)] hover:!shadow-[var(--color-cta-shadow-hover)] active:!shadow-[var(--color-cta-shadow-active)]',
-                      'transform-gpu will-change-transform',
-                      'duration-200 ease-out',
-                      isV2
-                        ? 'hover:-translate-y-0.5 active:translate-y-0'
-                        : 'hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-[0.99]',
-                      isV2
-                        ? 'h-14 text-[16px] whitespace-nowrap'
-                        : 'hover:brightness-95 active:brightness-90 h-10 w-[95%] text-sm whitespace-nowrap',
-                    ].join(' ')}
-                    style={
-                      isV2
-                        ? { margin: 0, border: 0, borderRadius: 0 }
-                        : { margin: 0, border: 0, borderRadius: 0, fontSize: 14 }
-                    }
-                    onClick={() => {
-                      trackBrandClick(lender.name, pageName, impressionId, {
-                        comparisonDesignVariant,
-                      });
-                      gtag_report_conversion();
-                      window.open(processedCtaUrl || '#', '_blank');
-                    }}
-                  >
-                    <span className="inline-flex items-center">
-                      {isV2 ? 'VISIT SITE' : 'View Rates'}
-                      <ChevronsRight
-                        className="ml-1 inline-block align-middle w-[1.05em] h-[1.05em] transition-transform duration-300 group-hover:translate-x-1"
-                        strokeWidth={2.5}
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </Button>
-
-                  {lender.websiteUrl && (
-                    <a
-                      href="#"
-                      className={
-                        isV2
-                          ? 'text-sm text-slate-500 hover:text-black'
-                          : 'text-xs text-black hover:underline'
-                      }
-                      role="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (onReadMore) {
-                          onReadMore(lender);
-
-                          return;
-                        }
-
+                  <div className="mx-auto flex w-full max-w-[208px] flex-col gap-1.5">
+                    <Button
+                      variant="primary"
+                      className={[
+                        cardStyles.desktopCardCta,
+                        'group w-full text-white transition-[transform,box-shadow] duration-200 ease-out',
+                        'transform-gpu will-change-transform',
+                        'hover:-translate-y-0.5',
+                      ].join(' ')}
+                      style={{ margin: 0, border: 0 }}
+                      onClick={() => {
                         trackBrandClick(lender.name, pageName, impressionId, {
                           comparisonDesignVariant,
                         });
                         gtag_report_conversion();
-                        window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                        window.open(processedCtaUrl || '#', '_blank');
                       }}
                     >
-                      Or read more
-                    </a>
-                  )}
+                      <span className="whitespace-nowrap">{isV2 ? 'VISIT SITE' : 'View Rates'}</span>
+                      <ChevronsRight
+                        className="h-[1.125rem] w-[1.125rem] shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+                        strokeWidth={2.5}
+                        aria-hidden="true"
+                      />
+                    </Button>
+
+                    {lender.websiteUrl ? (
+                      <a
+                        href="#"
+                        className={[
+                          isV2
+                            ? 'text-sm text-slate-500 hover:text-black'
+                            : 'text-xs text-black hover:underline',
+                          'block text-center',
+                        ].join(' ')}
+                        role="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (onReadMore) {
+                            onReadMore(lender);
+
+                            return;
+                          }
+
+                          trackBrandClick(lender.name, pageName, impressionId, {
+                            comparisonDesignVariant,
+                          });
+                          gtag_report_conversion();
+                          window.open(lender.websiteUrl, '_blank', 'noopener,noreferrer');
+                        }}
+                      >
+                        Or read more
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>
