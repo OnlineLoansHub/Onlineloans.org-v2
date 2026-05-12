@@ -58,7 +58,8 @@ export function generateMetadata({
   modifiedTime?: string;
 }): Metadata {
   // Ensure canonical URL is always a full absolute URL
-  const canonicalUrl = path ? getCanonicalUrl(path) : SITE_URL;
+  // For the homepage (path '/'), use trailing slash to match server redirect behavior
+  const canonicalUrl = path ? getCanonicalUrl(path) : `${SITE_URL}/`;
 
   // Ensure image URL is absolute
   const ogImage = image

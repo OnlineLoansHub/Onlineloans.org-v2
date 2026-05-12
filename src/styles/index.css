@@ -138,3 +138,16 @@ body[data-page='best-business-loans'][data-comparison-variant='4'] [data-site-to
 .animate-wiggle {
   animation: wiggle 0.6s ease-in-out;
 }
+
+/* Visually hidden — accessible to screen readers and search engine crawlers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

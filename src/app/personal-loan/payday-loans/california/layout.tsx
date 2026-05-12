@@ -5,7 +5,7 @@ const publishedDate = new Date('2025-01-15');
 const modifiedDate = new Date();
 
 export const metadata: Metadata = generateSEOMetadata({
-  title: 'California Payday Loans 2025 - Laws & Providers',
+  title: 'California Payday Loans 2026 – Laws & Lenders',
   description:
     'Complete guide to payday loans in California. Learn about state laws, legality, fees, and compare the best online payday loan providers.',
   keywords:
