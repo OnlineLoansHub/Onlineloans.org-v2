@@ -10,9 +10,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Homepage — trailing slash matches server redirect and canonical tag
     {
       url: `${baseUrl}/`,
-      lastModified: new Date('2025-12-25'),
+      lastModified: new Date('2026-05-12'),
       changeFrequency: 'weekly',
       priority: 1.0,
+    },
+    // Auto Loans — index
+    {
+      url: `${baseUrl}/auto-loan`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     // Business Loans
     {
@@ -54,7 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Personal Loans
     {
       url: `${baseUrl}/personal-loan`,
-      lastModified: new Date('2025-12-08'),
+      lastModified: new Date('2026-05-12'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
@@ -101,42 +108,78 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    // Student Loans
+    // Student Loans — index
+    {
+      url: `${baseUrl}/student-loan`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/student-loan/best-student-loans`,
       lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    // Mortgage Loans
+    // Mortgage Loans — index
+    {
+      url: `${baseUrl}/mortgage-loan`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     {
       url: `${baseUrl}/mortgage-loan/best-mortgage-loans`,
       lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    // Crypto Loans
+    // Crypto Loans — index
+    {
+      url: `${baseUrl}/crypto-loans`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/crypto-loans/best-crypto-loans`,
       lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    // Credit Score
+    // Credit Score — index
+    {
+      url: `${baseUrl}/credit-score`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/credit-score/credit-score-monitoring`,
       lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    // Pet Insurance
+    // Pet Insurance — index
+    {
+      url: `${baseUrl}/pet-insurance`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/pet-insurance/best-pet-insurance`,
       lastModified: new Date('2025-12-25'),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    // Gold and Silver
+    // Gold and Silver — index
+    {
+      url: `${baseUrl}/gold-and-silver`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/gold-and-silver/best-gold-and-silver`,
       lastModified: new Date('2025-12-25'),

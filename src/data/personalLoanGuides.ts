@@ -44,5 +44,14 @@ export const personalLoanGuides: PersonalLoanGuide[] = [
     href: '/personal-loan/payday-loans/california',
     category: 'Guides',
   },
+  {
+    id: '600-credit-score-guide',
+    title: 'How to Get a Personal Loan with a 600 Credit Score in 2026',
+    description:
+      'Complete guide for fair-credit borrowers. Learn which lenders accept a 600 credit score, what APR to expect, how to apply step-by-step, and how to improve your score to unlock better rates.',
+    href: '/personal-loan/600-credit-score-guide',
+    coverLabel: '600 Credit Score Guide',
+    category: 'Guides',
+  },
   // Add more guides here as they are created
 ];
