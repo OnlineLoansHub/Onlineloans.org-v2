@@ -1,19 +1,34 @@
 # https://www.robotstxt.org/robotstxt.html
+
+# Standard crawlers
 User-agent: *
 Allow: /
-
-# Disallow static HTML files to prevent duplicate content
 Disallow: /business-loan/construction-funding/*/index.html
 Disallow: /business-loan/restaurant-funding/*/index.html
 Disallow: /redirect/
 
-# Disallow admin and private areas (if any)
-# Disallow: /admin/
-# Disallow: /api/
+# AI search citation crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Training-only scrapers — blocked (no citation value)
+User-agent: CCBot
+Disallow: /
 
 # Sitemap
 Sitemap: https://www.onlineloans.org/sitemap.xml
-
-# Crawl-delay (optional, adjust as needed)
-# Crawl-delay: 1
-

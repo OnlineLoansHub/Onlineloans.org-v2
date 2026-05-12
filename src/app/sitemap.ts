@@ -88,6 +88,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/personal-loan/600-credit-score-guide`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     // Auto Loans
     {
       url: `${baseUrl}/auto-loan/best-auto-loans`,
